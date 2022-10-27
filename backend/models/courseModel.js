@@ -30,6 +30,7 @@ const courseSchema = mongoose.Schema({
     instructor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Instructor',
+        required:[true,"Set the instructor id"]
     },
     subtitles: {
         type: Array,
@@ -39,13 +40,16 @@ const courseSchema = mongoose.Schema({
     numofenrolledstudents: {
         type: Number,
         default: 0,
+        
     },
     previewvideolink: {
         type: String,
+        required: [true, 'Please add a preview video'],
     },
     discount: {
         type: Number,
         default: 0,
+        required: [true, 'Please add subtitles'],
     },
 
 
