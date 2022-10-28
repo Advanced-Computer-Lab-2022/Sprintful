@@ -51,21 +51,28 @@ const filterMyCourses=asyncHandler(async(req,res)=>{
      
     //Saving the id of the instructor 
     const instructorId='635a591011ecdc081ce890f7'
-    const subject=req.params.subject
-    const MaxPrice =req.params.price
-    const queriedCourses=await Course.find({instructor:instructorId,$or:[]})
-
-
-
-
-
-
-
-
+    //Getting the subject and price according the user's choice 
+    const subjectName=req.params.subject
+    const MaxPriceamount =req.params.price
+    //Searching for the title of courses of this instructor himself whose its subject = the specified subject in filter or its price <= the specified price  ($lte)
+      //for a free course 
+       if(MaxPriceamount=='Free'){
+        const queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:0}]},'-_id title')
+       }
+     //for a paid course 
+       else{
+        const queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:{$lte:MaxPriceamount} }]},'-_id title')
+  
+        }
+    //checking for any results 
+    if (queriedCourses.length===0){
+     return res.json({message :"No courses with these choices are found "})
+    }
+    res.status(200).json(queriedCourses)
 })
 
 
 
 
 
-module.exports = { viewMyCourses,viewCourses ,addCourse};
+module.exports = { filterMyCourses,viewMyCourses,viewCourses ,addCourse};
