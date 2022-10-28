@@ -20,24 +20,9 @@ const getCourseById = asyncHandler(async (req, res) => {
 // @route   GET /api/courses
 // @access  Public
 const getCourses = asyncHandler(async (req, res) => { 
-    const courses = await Course.find({})
-    if (courses) {
-        // exclude the price parameter
-        res.json(courses.map(course => { 
-            return {
-                _id: course._id,
-                name: course.name,
-                description: course.description,
-                image: course.image,
-                category: course.category,
-                instructor: course.instructor,
-                rating: course.rating,
-                numReviews: course.numReviews,
-                reviews: course.reviews,
-                createdAt: course.createdAt,
-                updatedAt: course.updatedAt
-            }
-        }))
+    const courses = await Course.find({}).select('-price')
+    if(courses) {
+        res.json(courses)
     } else {
         res.status(404)
         throw new Error('Courses not found')
