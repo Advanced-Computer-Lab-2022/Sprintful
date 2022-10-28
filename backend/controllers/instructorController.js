@@ -29,8 +29,15 @@ const addCourse = asyncHandler(async (req,res)=>{
     //put the static id in lines 
 })
 
-//Method for getting titles of courses given by the instructor himself 
-//const viewMyCourses;
+//Method for getting titles of courses given by the instructor himself (Requirement #)
+const viewMyCourses=asyncHandler(async(req,res)=>{
+    //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
+    const myCoursesDocuments=await Course.find({instructor :'635a591011ecdc081ce890f7'},'title').exec()
+    res.json(myCoursesDocuments)
+
+    //while loop in Javascript to put titles' values in an array to be able to work with them in Frontend
+    
+});
 
 
 
