@@ -36,9 +36,9 @@ const addCourse = asyncHandler(async (req,res)=>{
 
 const viewMyCourses=asyncHandler(async(req,res)=>{
     //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
-    const myCoursesDocuments=await Course.find({instructor :'635a591011ecdc081ce890f7'},'title').exec()
+    const myCoursesDocuments=await Course.find({instructor :'635a591011ecdc081ce890f7'},'-_id title').exec()
     if(myCoursesDocuments.length===0){
-        res.status(200).json({message :"No Courses to display !"})
+      return  res.status(200).json({message :"No Courses to display !"})  //return is used to tell it do not complete the rest of function
     }
     res.status(200).json(myCoursesDocuments)
 
@@ -46,8 +46,23 @@ const viewMyCourses=asyncHandler(async(req,res)=>{
 
 });
 
-//Method for filtering the courses 
+//Function for filtering the courses of the instructor himself based on subject or price  
+const filterMyCourses=asyncHandler(async(req,res)=>{
+     
+    //Saving the id of the instructor 
+    const instructorId='635a591011ecdc081ce890f7'
+    const subject=req.params.subject
+    const MaxPrice =req.params.price
+    const queriedCourses=await Course.find({instructor:instructorId,$or:[]})
 
+
+
+
+
+
+
+
+})
 
 
 
