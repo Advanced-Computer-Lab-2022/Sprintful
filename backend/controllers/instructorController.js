@@ -37,12 +37,16 @@ const addCourse = asyncHandler(async (req,res)=>{
 const viewMyCourses=asyncHandler(async(req,res)=>{
     //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
     const myCoursesDocuments=await Course.find({instructor :'635a591011ecdc081ce890f7'},'title').exec()
+    if(myCoursesDocuments.length===0){
+        res.status(200).json({message :"No Courses to display !"})
+    }
     res.status(200).json(myCoursesDocuments)
 
     //while loop in Javascript to put titles' values in an array to be able to work with them in Frontend
 
 });
 
+//Method for filtering the courses 
 
 
 
