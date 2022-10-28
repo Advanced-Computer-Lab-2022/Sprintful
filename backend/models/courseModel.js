@@ -49,7 +49,7 @@ const courseSchema = mongoose.Schema({
     },
 
 
-},{
+}, {
     timestamps: true
 })
 
