@@ -13,14 +13,17 @@ const viewCourses = asyncHandler(async(req,res)=>{
 })
 const addCourse = asyncHandler(async (req,res)=>{
     // construct an object to add to the db
+    //const discount =(req.body.discount)/100
     const newCourse = new Course({
         title: req.body.title,
         subject:req.body.subject,
         price: req.body.price,
         totalhours: req.body.totalhours,
         shortsummary: req.body.shortsummary,
-        instructor:'635a591011ecdc081ce890f7',
-        previewvideolink:req.body.previewvideolink
+        instructor:'635a591011ecdc081ce890f7'    ,                              //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116
+
+        previewvideolink:req.body.previewvideolink ,
+        discount:req.body.discount
 
         ,  //put a static id for the instructor for sprint 1
        // subtitles: req.body.subtitles
@@ -35,7 +38,7 @@ const addCourse = asyncHandler(async (req,res)=>{
     //Saving the instructor reference id 
     //Getting the courses array and putting the neew course's id in this Instructor courses array
    const newCoursesList=((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
-   const updatedcoursesArray=await Instructor.findByIdAndUpdate('635a591011ecdc081ce890f7',{courses:newCoursesList}).exec();
+   const updatedcoursesArray=await Instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7',{courses:newCoursesList}).exec();
     //put the static id in lines 
     res.json(newCourse)
 })
@@ -67,12 +70,13 @@ const filterMyCourses=asyncHandler(async(req,res)=>{
     const MaxPriceamount =req.query.price
     //Searching for the title of courses of this instructor himself whose its subject = the specified subject in filter or its price <= the specified price  ($lte)
       //for a free course 
+      let queriedCourses=[]
        if(MaxPriceamount=='Free'){
-        const queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:0}]},'-_id title')
+         queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:0}]},'-_id title')
        }
      //for a paid course 
        else{  
-        const queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:{$lte:MaxPriceamount} }]},'-_id title')
+         queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:{$lte:MaxPriceamount} }]},'-_id title')
   
         }
     //checking for any results 
@@ -188,6 +192,7 @@ else(
 //add it to the subtitle coolections (.save())
 
 //add its id to to the specified course's array of subtitles (array of subtitles' ids)
+
 
 
 
