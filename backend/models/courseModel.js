@@ -34,7 +34,8 @@ const courseSchema = mongoose.Schema({
     },
     subtitles: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Subtitle'
+        ref: 'Subtitle',
+        default:[],
     }],
     numofenrolledstudents: {
         type: Number,
