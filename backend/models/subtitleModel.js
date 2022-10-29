@@ -16,6 +16,14 @@ const subtitleSchema = mongoose.Schema({
         ref: 'Course',
         required:[true,"Set Course id"] 
     },
+
+    content :{
+        type:String,
+        default:""
+    },
+    
+    
+    
          
     }, {timestamps: true
         })
