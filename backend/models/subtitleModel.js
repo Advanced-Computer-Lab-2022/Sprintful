@@ -19,9 +19,15 @@ const subtitleSchema = mongoose.Schema({
 
     content :{
         type:String,
-        default:""
+        default:"",
     },
     
+    tasks :[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Task',
+        default :[],
+    }],
+
     
     
          

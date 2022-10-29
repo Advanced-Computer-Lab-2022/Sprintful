@@ -3,7 +3,7 @@ const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
 const Instructor =require('../models/instructorModel')
 const Subtitle=require('../models/subtitleModel')
-
+const Task=require('../models/taskModel')
 
 
 
@@ -18,20 +18,26 @@ const addCourse = asyncHandler(async (req,res)=>{
         subject:req.body.subject,
         price: req.body.price,
         totalhours: req.body.totalhours,
-        rating: req.body.rating,
         shortsummary: req.body.shortsummary,
-        instructor:'635a591011ecdc081ce890f7'
+        instructor:'635a591011ecdc081ce890f7',
+        previewvideolink:req.body.previewvideolink
+
         ,  //put a static id for the instructor for sprint 1
        // subtitles: req.body.subtitles
     });
-    newCourse.save().then(course => res.json(course)); // it is now in mem , save it to db
+    //newCourse.save().then(course => res.json(course)); // it is now in mem , save it to db
+    newCourse.save(function(err){
+        if (err){
+            console.log(err);
+        }})
     //putting the course id into an array newcourseid
-    let newcourseid=[newCourse._id]; 
+    const newcourseid=[newCourse._id]; 
     //Saving the instructor reference id 
     //Getting the courses array and putting the neew course's id in this Instructor courses array
-   let newCoursesList=(await Instructor.findById('635a591011ecdc081ce890f7').courses).concat(newcourseid); //.concat concatenates the new array
+   const newCoursesList=((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
    const updatedcoursesArray=await Instructor.findByIdAndUpdate('635a591011ecdc081ce890f7',{courses:newCoursesList}).exec();
     //put the static id in lines 
+    res.json(newCourse)
 })
 
 
@@ -85,7 +91,7 @@ const addSubtitle=asyncHandler(async (req,res)=>{
 
                                                         
 //attribute for subtitles (req.body) and course id from params
-const courseid=req.params.courseid   //getting the id of the course 
+const courseid=req.params.courseid   //getting the id of the course  //we can send it as in body req.body
 const title=req.body.title
 const totalHours =req.body.totalHours
 
@@ -104,17 +110,51 @@ subtitle.save(function(err){
     }})
 
 //test
-res.json(subtitle)
+
 
 //add its id to to the specified course's array of subtitles (array of subtitles' ids)
 const newSubtitleid=[subtitle._id]
-const newSubtitleArray=await Course.findById(courseid).subtitles.exec().concat(newSubtitleid)
+const newSubtitleArray=(await Course.findById(courseid)).subtitles.concat(newSubtitleid)
 
 const updateCourseSubtitles=await Course.findByIdAndUpdate(courseid,{subtitles:newSubtitleArray},{new :true})
-res.json(updateCourseSubtitles)
-
+//res.json(updateCourseSubtitles)
+res.json(subtitle)
 
 } )
+
+
+const addTask =asyncHandler(async (req,res)=>{
+    const Instructorid='635a591011ecdc081ce890f7'
+
+    //attributes of task 
+    const title=req.body.title
+    const subtitleid=req.params.subtitleid    //getting the id of the course  //we can send it as in body req.body
+
+    const task=new Task({
+        title:title,
+        subtitle:subtitleid
+    
+    
+    })
+    //add it to the subtitle coolections (.save())
+    task.save(function(err){
+        if (err){
+            console.log(err);
+        }})
+    
+    //test
+    //res.json(task)
+
+    const newTaskid=[task._id]
+    const newTaskArray=(await Subtitle.findById(subtitleid)).tasks.concat(newTaskid)
+    
+    const updateSubtitlesTasks=await Subtitle.findByIdAndUpdate(subtitleid,{tasks:newTaskArray},{new :true})
+   // res.json(updateSubtitlesTasks)
+    
+    res.json(task)
+
+
+})
 
 
 /*
@@ -153,4 +193,4 @@ else(
 
 
 
-module.exports = { addSubtitle,filterMyCourses,viewMyCourses,viewCourses ,addCourse};
+module.exports = {addTask,addSubtitle,filterMyCourses,viewMyCourses,viewCourses ,addCourse};
