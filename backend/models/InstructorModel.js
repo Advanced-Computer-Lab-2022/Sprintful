@@ -45,6 +45,4 @@ const instructorSchema = mongoose.Schema({
     timestamps: true
 })
 
-
-
 module.exports = mongoose.model('Instructor', instructorSchema)
