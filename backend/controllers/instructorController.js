@@ -71,7 +71,7 @@ const filterMyCourses=asyncHandler(async(req,res)=>{
     //Searching for the title of courses of this instructor himself whose its subject = the specified subject in filter or its price <= the specified price  ($lte)
       //for a free course 
       let queriedCourses=[]
-       if(MaxPriceamount=='Free'){
+       if(MaxPriceamount==0){
          queriedCourses=await Course.find({instructor:instructorId,$or:[{subject:subjectName},{price:0}]},'-_id title')
        }
      //for a paid course 
