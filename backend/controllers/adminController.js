@@ -4,8 +4,6 @@ const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const { model } = require('mongoose')
 const Admin = require('../models/adminModel')
-const Instructor = require('../models/InstructorModel')
-const CorporateTrainee = require('../models/corporateTraineeModel')
 
 
 const getAdmin = asyncHandler(async (req, res) => {
@@ -78,71 +76,6 @@ const createAdmin = asyncHandler(async (req, res) => {
     }
 })
 
-//module.exports = { createAdmin }
-
-const createInstructor = asyncHandler(async (req, res) => { 
-    const { username, password } = req.body
-
-    const instructorExists = await Instructor.findOne({ username })
-
-    if (instructorExists) {
-        res.status(400)
-        throw new Error('Instructor already exists')
-    }
-    // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password,salt)
-
-    const instructor = await Instructor.create({
-        username,
-        password: hashedPassword
-    })
-
-    if (instructor) {
-        res.status(201).json({
-            _id: instructor._id,
-            username: instructor.username,
-            password: instructor.password,
-            token: generateToken(instructor._id)
-        })
-    } else {
-        res.status(400)
-        throw new Error('Invalid instructor data')
-    }
-})
-
-
-const createCorporateTrainee = asyncHandler(async (req, res) => { 
-    const { username, password } = req.body
-
-    const corporateTraineeExists = await CorporateTrainee.findOne({ username })
-
-    if (corporateTraineeExists) {
-        res.status(400)
-        throw new Error('Corporate Trainee already exists')
-    }
-    // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password,salt)
-
-    const corporateTrainee = await CorporateTrainee.create({
-        username,
-        password: hashedPassword
-    })
-
-    if (corporateTrainee) {
-        res.status(201).json({
-            _id: corporateTrainee._id,
-            username: corporateTrainee.username,
-            password: corporateTrainee.password,
-            token: generateToken(corporateTrainee._id)
-
-        })
-    } else {
-        res.status(400)
-        throw new Error('Invalid Corporate Trainee data')
-    }
-})
 
 // Generate JWT
 const generateToken =(id) =>{
@@ -151,4 +84,4 @@ const generateToken =(id) =>{
     })
 }
 
-module.exports = {createInstructor, createAdmin, createCorporateTrainee ,loginAdmin, getAdmin}
+module.exports = { createAdmin,loginAdmin, getAdmin}
