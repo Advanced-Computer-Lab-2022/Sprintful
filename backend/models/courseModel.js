@@ -29,27 +29,31 @@ const courseSchema = mongoose.Schema({
     },
     instructor: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Instructor',
+        ref: 'Instructor',                                 //we do not need to import Insrtuctor model to be able to write this line
+        required:[true,"Set the instructor id"]
     },
-    subtitles: {
-        type: Array,
-        default: [],
-        required: [true, 'Please add subtitles'],
-    },
+    subtitles: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Subtitle',
+        default:[],
+    }],
     numofenrolledstudents: {
         type: Number,
         default: 0,
+        
     },
     previewvideolink: {
         type: String,
+        required: [true, 'Please add a preview video'],
     },
     discount: {
         type: Number,
         default: 0,
+        required: [true, 'Please add subtitles'],
     },
 
 
-},{
+}, {
     timestamps: true
 })
 

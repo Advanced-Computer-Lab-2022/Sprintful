@@ -44,6 +44,9 @@ const loginAdmin =asyncHandler (async(req,res)=>{
 //res.status(200).json(admins)
 
 
+// @desc Set admin
+// @route POST /api/admin
+// @access Private
 const createAdmin = asyncHandler(async (req, res) => { 
     const { username, password } = req.body
 
