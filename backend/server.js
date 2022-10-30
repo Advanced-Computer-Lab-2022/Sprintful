@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: false })) // This is a middleware functio
 
 app.use('/api/admin', require('./routes/adminRoutes'))
 app.use('/api/courses', require('./routes/courseRoutes'))
-app.use('/api/instructor',require('./routes/instructorRoutes'))
+// app.use('/api/instructor',require('./routes/instructorRoutes'))
 app.use('/api/guest',require('./routes/guestRoutes'))
 app.use('/api/corporateTrainee',require('./routes/corporateTraineeRoutes'))
 app.use('/api/individualTrainee', require('./routes/individualTraineeRoutes'))
