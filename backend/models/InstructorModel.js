@@ -14,12 +14,9 @@ const instructorSchema = mongoose.Schema({
     },
     firstName: {
         type: String,
-
-
     },
     lastName: {
         type: String,
-
     },
     email: {
         type: String,
@@ -31,8 +28,10 @@ const instructorSchema = mongoose.Schema({
     },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
-    }],
+        ref: 'Course',
+        default:[],
+    }]
+    ,
     reviews: {
         type: Array,
         default: [],
@@ -44,7 +43,5 @@ const instructorSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
-
-
 
 module.exports = mongoose.model('Instructor', instructorSchema)
