@@ -1,15 +1,8 @@
 const asyncHandler = require('express-async-handler')
-const { builtinModules } = require('module')
-const Course = require('../models/courseModel')
 const { appendFile } = require('fs')
 const { builtinModules } = require('module')
 const courseModel = require('../models/courseModel.js')
 const instructor = require('../models/instructorModel.js')
-
-const viewCourses = asyncHandler(async(req,res)=>{
-    const course =await Course.find({},'title totalhours rating price')
-    res.status(200).json(course)
-})
 
 // Search for a course based on course title or subject or instructor
 const searchCourse= asyncHandler(async (req,res) => {
@@ -52,18 +45,4 @@ const filterSubjectRating= asyncHandler(async (req,res) => {
     }
 })
 
-//filter the courses based on price (price can be FREE)
-const filterPrice= asyncHandler(async (req,res) => {
-    const price = req.query.price;
-        const result = await courseModel.find({price: {$lte: price}});
-        if(result.length>0){
-            res.status(200).json(result);
-        }
-        else{
-            res.status(400).json({error:"No course found"});
-        }
-
-})
-
-
-module.exports = {viewCourses, searchCourse, filterSubjectRating, filterPrice}
+module.exports = {searchCourse,filterSubjectRating}
