@@ -5,7 +5,7 @@ const Course = require('../models/courseModel')
 // @desc    Get course by id
 // @route   GET /api/courses/:id
 // @access  Public
-const getCourseById = asyncHandler(async (req, res) => { 
+const getCourseById = asyncHandler(async (req, res) => {
     const course = await Course.findById(req.params.id)
 
     if (course) {
@@ -19,9 +19,9 @@ const getCourseById = asyncHandler(async (req, res) => {
 // @desc    Get all courses
 // @route   GET /api/courses
 // @access  Public
-const corporateGetCourses = asyncHandler(async (req, res) => { 
+const corporateGetCourses = asyncHandler(async (req, res) => {
     const courses = await Course.find({}).select('-price')
-    if(courses) {
+    if (courses) {
         res.json(courses)
     } else {
         res.status(404)
@@ -29,9 +29,9 @@ const corporateGetCourses = asyncHandler(async (req, res) => {
     }
 })
 
-const getCourses = asyncHandler(async (req, res) => { 
+const getCourses = asyncHandler(async (req, res) => {
     const courses = await Course.find({})
-    if(courses) {
+    if (courses) {
         res.json(courses)
     } else {
         res.status(404)
@@ -49,32 +49,33 @@ const instructorViewCourses = asyncHandler(async (req, res) => {
 // @route POST /api/courses
 // @access Private
 
-const addCourse = asyncHandler(async (req,res)=>{
+const addCourse = asyncHandler(async (req, res) => {
     // construct an object to add to the db
     //const discount =(req.body.discount)/100
     const newCourse = new Course({
         title: req.body.title,
-        subject:req.body.subject,
+        subject: req.body.subject,
         price: req.body.price,
         totalhours: req.body.totalhours,
         shortsummary: req.body.shortsummary,
-        instructor:'635a591011ecdc081ce890f7',                              //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116
-        previewvideolink:req.body.previewvideolink,
+        instructor: '635a591011ecdc081ce890f7',                              //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116
+        previewvideolink: req.body.previewvideolink,
         discount: req.body.discount,
         //put a static id for the instructor for sprint 1
-       // subtitles: req.body.subtitles
+        // subtitles: req.body.subtitles
     });
     //newCourse.save().then(course => res.json(course)); // it is now in mem , save it to db
-    newCourse.save(function(err){
-        if (err){
+    newCourse.save(function (err) {
+        if (err) {
             console.log(err);
-        }})
+        }
+    })
     //putting the course id into an array newcourseid
-    const newcourseid=[newCourse._id]; 
+    const newcourseid = [newCourse._id];
     //Saving the instructor reference id 
     //Getting the courses array and putting the neew course's id in this Instructor courses array
-   const newCoursesList=((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
-   const updatedcoursesArray=await Instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7',{courses:newCoursesList}).exec();
+    const newCoursesList = ((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
+    const updatedcoursesArray = await Instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
     //put the static id in lines 
     res.json(newCourse)
 })
@@ -124,6 +125,70 @@ const filterMyCourses = asyncHandler(async (req, res) => {
 })
 
 
+// Search for a course based on course title or subject or instructor
+const searchCourse= asyncHandler(async (req,res) => {
+    const title = req.query.title;
+    const subject = req.query.subject;
+    const instructorName = req.query.instructor;
+    const instructorId = await instructor.find({name:instructorName}).select('_id');
+
+   let result
+    if(subject == null && instructorName == null){
+        result = await courseModel.find({title: title});
+        res.json(result);
+    } else if(title == null && instructorName == null){
+        result = await courseModel.find({subject: subject});
+        res.json(result);
+    } else if(title == null && subject == null){
+        result = await courseModel.find({instructor: instructorId});
+        res.json(result);
+    } else {
+        res.status(400).json({error:"No course found"});
+    }
+}) 
+
+//filter the courses based on a subject and/or rating
+
+const filterSubjectRating = asyncHandler(async (req, res) => {
+    const subject = req.query.subject;
+    const rating = req.query.rating;
+    //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
+
+    const result = await courseModel.find({ subject: subject });
+    const result2 = await courseModel.find({ rating: rating });
+    const final = result.concat(result2);
+
+    if (final.length > 0) {
+        res.status(200).json(final);
+    }
+
+    else {
+        res.status(400).json({ error: "No course found" });
+    }
+})
+
+//filter the courses based on price (price can be FREE)
+const filterPrice = asyncHandler(async (req, res) => {
+    const price = req.query.price;
+    // if(price == "FREE"){
+    //     const result = await courseModel.find({price:0}); 
+    //     if(result.length>0){
+    //         res.status(200).json(result);
+    //     }
+    //     else{
+    //         res.status(400).json({error:"No course found"});
+    //     } 
+    // }
+    // else{
+    const result = await courseModel.find({ price: { $lte: price } });
+    if (result.length > 0) {
+        res.status(200).json(result);
+    }
+    else {
+        res.status(400).json({ error: "No course found" });
+    }
+})
+
 module.exports = {
     getCourseById,
     getCourses,
@@ -132,4 +197,7 @@ module.exports = {
     filterMyCourses,
     instructorViewCourses,
     corporateGetCourses,
+    searchCourse,
+    filterSubjectRating,
+    filterPrice
 }
