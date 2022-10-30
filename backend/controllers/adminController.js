@@ -2,6 +2,9 @@ const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const Admin = require('../models/adminModel')
 
+// @desc Set admin
+// @route POST /api/admin
+// @access Private
 const createAdmin = asyncHandler(async (req, res) => { 
     const { username, password } = req.body
 
