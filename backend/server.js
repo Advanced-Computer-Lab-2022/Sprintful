@@ -9,12 +9,14 @@ connectDB()
 
 
 const app = express();
+app.use(errorHandler)
 
 app.use(express.json()) // This is a middleware function that allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: false })) // This is a middleware function that allows us to accept form data
-app.use(errorHandler)
+// app.use(express.params) // This is a middleware function that allows us to accept params
 
 app.use('/api/admin', require('./routes/adminRoutes'))
+app.use('/api/courses', require('./routes/courseRoutes'))
 
 app.use('/api/instructor',require('./routes/instructorRoutes'))
 app.use('/api/guest',require('./routes/guestRoutes'))
