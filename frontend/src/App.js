@@ -1,32 +1,44 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
-import Header from "./components/Header";
-import Dashboard from './pages/Dashboard'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import CreateAdmin from "./pages/CreateAdmin";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+//import Home from './pages/Home'
+//import Navbar from './components/Navbar'
+//import AdminForm from './components/AdminForm';
+import InstructorForm from './components/InstructorForm'
+
 
 function App() {
   return (
-    <>
-      <Router>
-        <div className='container'>
-          <Header />
+    <div className="App">
+      <BrowserRouter>
+        <div className="pages">
           <Routes>
-            <Route path='/' element={<Dashboard />} />
-            <Route path='/createadmin' element={<CreateAdmin />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
+            <Route
+              extact path ="/api/admin/createInstructor"
+              element={<InstructorForm/>}
+            />
           </Routes>
         </div>
-      </Router>
-      <ToastContainer />
-
-
-    </>
+      </BrowserRouter>
+    </div>
 
   );
 }
 
 export default App;
+
+
+
+
+
+/*
+<Router>
+        <div className='container'>
+          <Header />
+          <Routes>
+            <Route pathexact ='/' element={<Dashboard />} />
+            <Route pathexact='/createadmin' element={<CreateAdmin />} />
+            <Route pathexact='/login' element={<Login />} />
+            <Route pathexact='/register' element={<Register />} />
+          </Routes>
+        </div>
+      </Router>*/
+
