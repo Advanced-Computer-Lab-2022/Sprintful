@@ -3,12 +3,12 @@ const colors = require('colors')
 const dotenv = require('dotenv').config()
 const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
-const port = process.env.PORT || 6000
+const port = process.env.PORT || 5000
 
 connectDB()
 
+
 const app = express();
-app.use(errorHandler)
 
 app.use(express.json()) // This is a middleware function that allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: false })) // This is a middleware function that allows us to accept form data
@@ -22,7 +22,6 @@ app.use('/api/corporateTrainee',require('./routes/corporateTraineeRoutes'))
 app.use('/api/individualTrainee', require('./routes/individualTraineeRoutes'))
 app.use('/api/subtitles', require('./routes/subtitleRoutes'))
 app.use('/api/tasks', require('./routes/taskRoutes'))
-
 
 
 app.listen(port, () => { 

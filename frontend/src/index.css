@@ -78,6 +78,43 @@ input {
   width: 100%;
   border: 1px solid #ddd;
   border-radius: 4px;
+  font-family: "Poppins";
+}
+header {
+  background: #fff;
+}
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+header a {
+  color: #333;
+  text-decoration: none;
+}
+.pages{
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+
+
+/* Register Form Styling*/
+
+label, input {
+  display: block;
+}
+input {
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   box-sizing: border-box;
 }
 form button {
@@ -106,7 +143,6 @@ form{
 
 }
 
-
 .create {
   max-width: 400px;
   margin: 0 auto;
@@ -120,6 +156,23 @@ form{
   font-size: 20px;
   color: #f1356d;
   margin-bottom: 30px;
+}
+form button {
+  background: var(--primary);
+  border: 0;
+  color: #fff;
+  padding: 10px;
+  font-family: "Poppins";
+  border-radius: 4px;
+  cursor: pointer;
+}
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
 }
 .create input, .create textarea, .create select {
   width: 100%;
@@ -137,3 +190,5 @@ form{
   border-radius: 8px;
   cursor: pointer;
 }
+
+

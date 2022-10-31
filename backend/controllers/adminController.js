@@ -48,15 +48,25 @@ const loginAdmin =asyncHandler (async(req,res)=>{
 const createAdmin = asyncHandler(async (req, res) => { 
     const { username, password } = req.body
 
-    const adminExists = await Admin.findOne({ username })
+   const adminExists = await Admin.findOne({ username })
 
-    if (adminExists) {
+   if (adminExists) {
         res.status(400)
         throw new Error('Admin already exists')
     }
+   /* const newAdmin = new Admin({
+        username: req.body.username,
+        password:req.body.password});
+
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password,salt)
 
+    newAdmin.save(function(err){
+        if (err){
+            console.log(err);
+        }})
+        const newadminid=[newAdmin._id];  */
+    
     const admin = await Admin.create({
         username,
         password : hashedPassword
@@ -77,7 +87,7 @@ const createAdmin = asyncHandler(async (req, res) => {
 })
 
 
-// Generate JWT
+//Generate JWT
 const generateToken =(id) =>{
     return jwt.sign({id }, process.env.JWT_SECRET, {
         expiresIn: '365d',
