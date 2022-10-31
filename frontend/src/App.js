@@ -1,18 +1,11 @@
-import {BrowserRouter,Routes,Route,Switch} from 'react-router-dom'
+// import JSONDATA from "./MOCK_DATA.json"
+import "./App.css"
+import Searchbar from "./components/SearchBar";
 function App() {
-  return (
-    <Router>
-    <div className="App">
-      <Navbar/>
-      <div className='content'>
-        <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+  return(
+    <div classname="App">
+      <Searchbar placeholder="Enter a course title or subject or instructor ..." />
     </div>
-    </Router>
   );
 }
 
