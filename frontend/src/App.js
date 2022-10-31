@@ -1,18 +1,25 @@
-import {BrowserRouter,Routes,Route,Switch} from 'react-router-dom'
+import {BrowserRouter ,Routes,Route} from 'react-router-dom'
+
+
+//pages and Components
+//import Home from './pages/Home'
+import CourseForm from './components/CourseForm';
+
+
+
 function App() {
   return (
-    <Router>
+   
     <div className="App">
-      <Navbar/>
-      <div className='content'>
-        <Switch>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
+      <BrowserRouter>
+      <div className='pages'>
+        <Routes>
+          <Route exact path="/api/courses/"  element={ <CourseForm />} />
+        </Routes>
       </div>
+      </BrowserRouter>
     </div>
-    </Router>
+  
   );
 }
 
