@@ -31,8 +31,10 @@ const instructorSchema = mongoose.Schema({
     },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course'
-    }],
+        ref: 'Course',
+        default:[],
+    }]
+    ,
     reviews: {
         type: Array,
         default: [],
