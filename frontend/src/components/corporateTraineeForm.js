@@ -1,19 +1,19 @@
 import { useState } from "react"
 
-const corporateTraineeForm = () => {
+const CorporateTraineeForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
-        e.preventdefault()
+        //e.preventdefault()
 
         const newUser = {username, password}
-        const response = await fetch('/api/admin/corporateTrainee', {
+        const response = await fetch('/api/corporateTrainee/createCorporateTrainee', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {
-                'Content-Type' : 'application*json'
+                'Content-Type' : 'application/json'
             }
         })
         const json = await response.json()
@@ -32,25 +32,23 @@ const corporateTraineeForm = () => {
     return (
         <form className="create" onSubmit={handleSubmit}> 
             <h3> Add a new User </h3>
+                 <label>User name:</label>
+                    <input 
+                    type="text"
+                    onChange={(e) => setUsername(e.target.value)}
+                    value={username}/>
+                 <label>Password:</label>
+                    <input 
+                    type="text"
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}/>
 
-            <label>User name:</label>
-            <input 
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}/>
-
-             <label>Password:</label>
-            <input 
-                type="text"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}/>
-
-           <button> Create </button> 
-           {error && <div className="error">{error}</div>}
+                <button> Create </button> 
+           {/* {error && <div className="error">{error}</div>} */}
         </form>
 
     )
 }
 
 
-export default corporateTraineeForm
+export default CorporateTraineeForm

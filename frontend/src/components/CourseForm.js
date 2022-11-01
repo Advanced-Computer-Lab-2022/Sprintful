@@ -3,10 +3,6 @@ import { useState } from "react"
 
 const CourseForm =() =>{
 
-
-
-
-
 const[title,setTitle]=useState('') 
 const [price ,setPrice]=useState('')
 const [totalhours,setTotalHours]=useState('')
@@ -16,7 +12,7 @@ const [discount,setDiscount]=useState('')
 const [subject,setSubject]=useState('Computer Science')
 
 const handleSubmit= async (e)=>{
-    e.preventDefault()
+    // e.preventDefault()
    const Course ={
    title,
    subject,
@@ -109,11 +105,7 @@ return (
                    <option value="Physics">Physics</option>
                    <option value="Business Adminstration">Business Adminstration</option>
                 </select>
-
-
-
-
-        <button>Add Course for Now !</button>
+              <button>Add Course for Now !</button>
     </form>
 
     </div>     

@@ -6,7 +6,7 @@ const AdminForm = () => {
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
-        e.preventdefault()
+       // e.preventdefault()
 
         const NewUser = {username, password}
         const response = await fetch('/api/admin/', {
@@ -16,7 +16,7 @@ const AdminForm = () => {
                 'Content-Type' : 'application/json'
             }
         })
-        const json = await response.json()
+        const json = await  response.json()
         console.log('New admin was added', json)
             setUsername('')
             setPassword('')
@@ -34,27 +34,23 @@ const AdminForm = () => {
 
     return (
         <div className="create">
-        <form onSubmit={handleSubmit}> 
-            <h3> Add a new User </h3>
+            <form onSubmit={handleSubmit}> 
+                <h3> Add a new User </h3>
+                    <label>User name:</label>
+                        <input 
+                        type="text"
+                        onChange={(e) => setUsername(e.target.value)}
+                        value={username}/>
 
-            <label>User name:</label>
-            <input 
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-                value={username}/>
+                     <label>Password:</label>
+                        <input 
+                        type="text"
+                        onChange={(e) => setPassword(e.target.value)}
+                        value={password}/>
 
-             <label>Password:</label>
-            <input 
-                type="text"
-                onChange={(e) => setPassword(e.target.value)}
-                value={password}/>
-
-           <button> Create </button> 
-             {error && <div className="error">{error}</div>}
-        </form>
+                     <button> Create </button> 
+            </form>
         </div>
     )
 }
-
-
 export default AdminForm

@@ -54,18 +54,8 @@ const createAdmin = asyncHandler(async (req, res) => {
         res.status(400)
         throw new Error('Admin already exists')
     }
-   /* const newAdmin = new Admin({
-        username: req.body.username,
-        password:req.body.password});
-
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(password,salt)
-
-    newAdmin.save(function(err){
-        if (err){
-            console.log(err);
-        }})
-        const newadminid=[newAdmin._id];  */
     
     const admin = await Admin.create({
         username,

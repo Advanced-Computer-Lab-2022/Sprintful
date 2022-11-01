@@ -3,7 +3,8 @@ import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
-
+import CorporateTraineeForm from './components/CorporateTraineeForm';
+import AdminForm from './components/AdminForm'
 
 function App() {
   return (
@@ -16,8 +17,16 @@ function App() {
                   <Searchbar placeholder="Enter a course title or subject or instructor ..." />
                 } />
                 <Route
+                  extact path="/api/admin/"
+                  element={<AdminForm/>}
+                />
+                 <Route
                   extact path="/api/admin/createInstructor"
-                  element={<InstructorForm />}
+                  element={<InstructorForm/>}
+                />
+                 <Route
+                  extact path="/api/admin/createCorporateTrainee"
+                  element={< CorporateTraineeForm/>}
                 />
               </Routes>
             </div>

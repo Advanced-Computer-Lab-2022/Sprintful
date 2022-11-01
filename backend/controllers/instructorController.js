@@ -1,4 +1,6 @@
 const asyncHandler = require('express-async-handler')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
 const Instructor = require('../models/instructorModel')

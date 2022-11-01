@@ -6,10 +6,10 @@ const InstructorForm = () => {
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
-        e.preventdefault()
+        // e.preventdefault()
 
         const newUser = {username, password}
-        const response = await fetch('/api/admin/createInstructor', {
+        const response = await fetch('/api/instructor/createInstructor', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {
@@ -46,7 +46,7 @@ const InstructorForm = () => {
                 value={password}/>
 
            <button> Create </button> 
-           {error && <div className="error">{error}</div>}
+           {/* {error && <div className="error">{error}</div>} */}
         </form>
 
     )
