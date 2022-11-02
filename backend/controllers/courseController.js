@@ -7,7 +7,6 @@ const Course = require('../models/courseModel')
 // @access  Public
 const getCourseById = asyncHandler(async (req, res) => {
     const course = await Course.findById(req.params.id)
-
     if (course) {
         res.json(course)
     } else {

@@ -3,8 +3,8 @@ const router = express.Router({ mergeParams: true })
 const { getCourseById, getCourses,corporateGetCourses, addCourse, instructorCourses, filterMyCourses, searchCourse, filterSubjectRating, filterPrice} = require('../controllers/courseController')
 
 router.get('/search', searchCourse)
-router.route('/:id').get(getCourseById) // get course by id
-router.route('/').get(getCourses) // get all courses
+router.get('/:id',getCourseById) // get course by id
+router.get('/',getCourses) // get all courses
 router.route('/corporate').get(corporateGetCourses) // get all courses for corporate
 router.post('/', addCourse) 
 router.get('/instructor/:id', instructorCourses) // get all courses for instructor
