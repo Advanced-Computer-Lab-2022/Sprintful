@@ -8,12 +8,10 @@ function App() {
      <BrowserRouter>
         <div className='container'>
         <Routes>
-        <Route  path='/courses/:id' element={<Course/>}/>    
+        <Route  path='/courses/:id' element={<Course />}/>    
       </Routes>
       </div>
       </BrowserRouter>
-
-
     </div>
 
   );
