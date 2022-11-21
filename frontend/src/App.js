@@ -3,7 +3,7 @@ import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
-import CorporateTraineeForm from './components/CorporateTraineeForm';
+import CorporateTraineeForm from './components/corporateTraineeForm';
 import AdminForm from './components/AdminForm'
 
 function App() {
