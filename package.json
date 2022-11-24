@@ -20,13 +20,22 @@
   },
   "homepage": "https://github.com/Advanced-Computer-Lab-2022/Sprintful#readme",
   "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@mui/icons-material": "^5.10.15",
+    "@mui/material": "^5.10.15",
+    "axios": "^1.2.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-async-handler": "^1.2.0",
+    "git": "^0.1.5",
+    "hit": "^0.0.3",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.0"
+    "mongoose": "^6.7.3",
+    "mui": "^0.0.1",
+    "react": "^18.2.0"
   },
   "devDependencies": {
     "concurrently": "^7.5.0",
