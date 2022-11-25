@@ -20,6 +20,7 @@ const instructorSchema = mongoose.Schema({
     },
     email: {
         type: String,
+        required: [true, 'e.g. name@gmail.com'],
     },
     rating: {
         type: Number,
