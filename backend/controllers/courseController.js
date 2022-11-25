@@ -76,7 +76,7 @@ const addCourse = asyncHandler(async (req, res) => {
     //Saving the instructor reference id 
     //Getting the courses array and putting the neew course's id in this Instructor courses array
     const newCoursesList = ((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
-    const updatedcoursesArray = await Instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
+    const updatedcoursesArray = await Instructor.findByIdAndUpdate('635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
     //put the static id in lines 
     res.json(newCourse)
 })
