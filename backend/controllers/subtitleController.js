@@ -13,12 +13,13 @@ const addSubtitle = asyncHandler(async (req, res) => {
     const courseid = req.params.courseid   //getting the id of the course  //we can send it as in body req.body
     const title = req.body.title
     const totalHours = req.body.totalHours
-
+    const  content =req.body.content 
     //Create the subtitle
     const subtitle = new Subtitle({
         title: title,
         totalHours: totalHours,
-        course: courseid
+        course: courseid,
+        content:content
 
 
     })
