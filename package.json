@@ -32,6 +32,7 @@
     "express-async-handler": "^1.2.0",
     "git": "^0.1.5",
     "hit": "^0.0.3",
+    "install": "^0.13.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.3",
     "mui": "^0.0.1",
