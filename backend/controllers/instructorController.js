@@ -9,6 +9,7 @@ const Task = require('../models/taskModel')
 const { appendFile } = require('fs')
 const courseModel = require('../models/courseModel.js')
 const instructor = require('../models/instructorModel.js')
+const { ResetTvOutlined } = require('@mui/icons-material')
 
 
 const createInstructor = asyncHandler(async (req, res) => { 
@@ -42,6 +43,30 @@ const createInstructor = asyncHandler(async (req, res) => {
     }
 })
 
+//edit his/her mini biography or email
+/*const editBioEmail = asyncHandler(async(req,res) =>{
+    const email=req.body.email;
+    const biography= req.body.biography;
+    const userId='635a591011ecdc081ce890f7';
+    Instructor.findByIdAndUpdate(userId, {email: email}, {biography: biography});
+    res.json({message: 'success'});
+})*/
 
+//app.put('/update/:id', 
+const editBioEmail= asyncHandler((req, res) => {
+  const email=req.body.email;
+  const biography= req.body.biography;
+    //const update = { price: 800 };
+    //const course = require('./courseSchema');
+   Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', {email: email}, {biography: biography}, function (err, docs) {
+    if (err){
+        res.json({message: 'error'});
+    }
+    else{
+        res.json(docs);
+    }});
+  
+   //.then(result=> res.send(result))
+  });
 
-module.exports = {createInstructor}
+module.exports = {createInstructor, editBioEmail}
