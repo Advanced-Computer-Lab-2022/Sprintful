@@ -28,6 +28,7 @@ function App() {
                   extact path="/api/admin/createCorporateTrainee"
                   element={< CorporateTraineeForm/>}
                 />
+                
               </Routes>
             </div>
           </BrowserRouter>
