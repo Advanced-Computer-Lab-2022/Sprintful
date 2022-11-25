@@ -5,7 +5,7 @@ import "./App.css"
 import Searchbar from "./components/SearchBar";
 function App() {
   return(
-    <div classname="App">
+    <div className="App">
       <BrowserRouter>
       <div className='pages'>
         <Routes>

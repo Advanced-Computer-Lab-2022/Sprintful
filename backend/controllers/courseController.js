@@ -1,7 +1,8 @@
 const asyncHandler = require('express-async-handler')
 // const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
-
+const Instructor = require('../models/InstructorModel')
+var ObjectId = require('mongodb').ObjectID;
 // @desc    Get course by id
 // @route   GET /api/courses/:id
 // @access  Public
@@ -37,6 +38,7 @@ const getCourses = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Courses not found')
     }
+
 })
 
 const instructorViewCourses = asyncHandler(async (req, res) => {
@@ -58,7 +60,7 @@ const addCourse = asyncHandler(async (req, res) => {
         price: req.body.price,
         totalhours: req.body.totalhours,
         shortsummary: req.body.shortsummary,
-        instructor: '635a591011ecdc081ce890f7',                              //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116
+        instructor: '635a591011ecdc081ce890f7',   //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116
         previewvideolink: req.body.previewvideolink,
         discount: req.body.discount,
         //put a static id for the instructor for sprint 1
@@ -130,17 +132,16 @@ const searchCourse= asyncHandler(async (req,res) => {
     const title = req.query.title;
     const subject = req.query.subject;
     const instructorName = req.query.instructor;
-    const instructorId = await instructor.find({name:instructorName}).select('_id');
-
    let result
     if(subject == null && instructorName == null){
-        result = await courseModel.find({title: title});
+        result = await Course.find({title: title});
         res.json(result);
     } else if(title == null && instructorName == null){
-        result = await courseModel.find({subject: subject});
+        result = await Course.find({subject: subject});
         res.json(result);
     } else if(title == null && subject == null){
-        result = await courseModel.find({instructor: instructorId});
+        const instructorId = await Instructor.find({name:instructorName}).select('_id');
+        result = await Course.find({instructor: instructorId});
         res.json(result);
     } else {
         res.status(400).json({error:"No course found"});
@@ -152,10 +153,10 @@ const searchCourse= asyncHandler(async (req,res) => {
 const filterSubjectRating = asyncHandler(async (req, res) => {
     const subject = req.query.subject;
     const rating = req.query.rating;
-    //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
+    //const course = await Course.find({$or:[{subject:subject},{rating:rating}]});
 
-    const result = await courseModel.find({ subject: subject });
-    const result2 = await courseModel.find({ rating: rating });
+    const result = await Course.find({ subject: subject });
+    const result2 = await Course.find({ rating: rating });
     const final = result.concat(result2);
 
     if (final.length > 0) {
@@ -171,7 +172,7 @@ const filterSubjectRating = asyncHandler(async (req, res) => {
 const filterPrice = asyncHandler(async (req, res) => {
     const price = req.query.price;
     // if(price == "FREE"){
-    //     const result = await courseModel.find({price:0}); 
+    //     const result = await Course.find({price:0}); 
     //     if(result.length>0){
     //         res.status(200).json(result);
     //     }
@@ -180,7 +181,7 @@ const filterPrice = asyncHandler(async (req, res) => {
     //     } 
     // }
     // else{
-    const result = await courseModel.find({ price: { $lte: price } });
+    const result = await Course.find({ price: { $lte: price } });
     if (result.length > 0) {
         res.status(200).json(result);
     }

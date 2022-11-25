@@ -1,12 +1,12 @@
 const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
-const Instructor = require('../models/instructorModel')
+const Instructor = require('../models/InstructorModel')
 const Subtitle = require('../models/subtitleModel')
 const Task = require('../models/taskModel')
 const { appendFile } = require('fs')
 const courseModel = require('../models/courseModel.js')
-const instructor = require('../models/instructorModel.js')
+// const instructor = require('../models/InstructorModel.js')
 
 
 const createInstructor = asyncHandler(async (req, res) => { 
