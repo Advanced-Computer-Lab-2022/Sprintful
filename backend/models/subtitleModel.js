@@ -27,8 +27,15 @@ const subtitleSchema = mongoose.Schema({
         ref: 'Task',
         default :[],
     }],
-
+   
+    youtubevideo :{ type :String,
+                    default :"",
+    },
     
+    videoDescription :{type :String ,
+                       default:"",
+
+    }
     
          
     }, {timestamps: true

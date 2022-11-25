@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import {useHistory} from "react-router-dom";
 
 const CourseForm =() =>{
 
@@ -42,7 +42,8 @@ const handleSubmit= async (e)=>{
    setShortSummary('')
    setPreviewVideoLink('')
    setDiscount('')
-
+   
+   
 
 }
 
