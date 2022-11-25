@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 // const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
+const Instructor=require('../models/InstructorModel')
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
