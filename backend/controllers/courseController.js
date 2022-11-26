@@ -6,7 +6,7 @@ const Course = require('../models/courseModel')
 // @route   GET /api/courses/:id
 // @access  Public
 const getCourseById = asyncHandler(async (req, res) => {
-    const course = await Course.findById(req.params.id)
+    const course = await Course.findById(req.query.id)
 
     if (course) {
         res.json(course)

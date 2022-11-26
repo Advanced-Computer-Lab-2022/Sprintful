@@ -6,9 +6,9 @@ function App() {
   return (
     <>
       <Router>
-        <div className='container'>
-          <Course />
-        </div>
+        <Routes>
+        <Route path="/api/courses/" element={<Course />} />
+        </Routes>
       </Router>
     </>
 
