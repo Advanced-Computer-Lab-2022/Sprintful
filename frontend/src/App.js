@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Routes, Route, Switch } from 'react-router-dom'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Course from './pages/Course'
 
 function App() {
   return (
     <>
-      <Router>
+      <BrowserRouter>
         <Routes>
-        <Route path="/api/courses/" element={<Course />} />
+          <Route path="/api/courses/" element={<Course />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
 
   );
