@@ -8,7 +8,7 @@ const questionSchema = mongoose.Schema({
 
     number: {
         type: Number,
-yy    },
+    },
     // Array of 4 choices
     choices: [{
         type: mongoose.Schema.Types.ObjectId,

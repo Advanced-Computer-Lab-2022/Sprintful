@@ -4,7 +4,6 @@ const taskSchema = mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Please add a title for this subtitle'],
-
     },
     // Array of Questions
     questions: [{
@@ -16,14 +15,15 @@ const taskSchema = mongoose.Schema({
     subtitle: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Subtitle',
-        required: [true, "Set Subtitle id"]
+    },
+    course: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course',
     },
 
 
 }, {
     timestamps: true
 })
-
-
 
 module.exports = mongoose.model('Task', taskSchema)
