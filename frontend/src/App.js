@@ -12,6 +12,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <div className='pages'>
+              {/* <Routes> react-routes */}
               <Routes>
                 <Route exact path="/api/courses/" element={<CourseForm />} />
                 <Route exact path="/api/courses/search" element={
