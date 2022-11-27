@@ -1,4 +1,6 @@
 import { useState } from "react"
+import { useParams } from "react-router-dom";
+import axios from 'axios;'
 
 
 
@@ -10,6 +12,30 @@ const SubtitleForm =()=>{
 
 
 
+    //Handling adding another subtitle
+    const handleAddAnotherSubtitle=async(e)=>{
+      //getting the course id from the URL /:courseid
+      const {course}=useParams();
+
+      const subtitle={title:title ,totalHours:totalHours,course:course,content:content}
+
+      const response=await axios.post(`/addSubtitle/${course}`,subtitle)
+
+      if(response.ok){
+        console.log("subtitle added",response.data)
+        setTitle('');
+        setTotalHours('');
+        setContent('');
+      }
+
+     /* else{
+        console.log("ERROR")
+      } */
+
+    }
+
+
+
 
 
 
@@ -18,7 +44,7 @@ const SubtitleForm =()=>{
 
     return (
         <div className="create">
-        <form >  
+        <form  onSubmit={handleAddAnotherSubtitle}>  
              <h3>Add a new Subtitle</h3>
              <label>Title:</label>
                <input 
@@ -46,7 +72,7 @@ const SubtitleForm =()=>{
                <p>You can skip the content now and fill it later </p>  
 
 
-               <button onClick={handleAddAnotherSubtitle}> Save & Add Another Subtitle</button>
+               <button > Save & Add Another Subtitle</button>
 
                     
     </form>
