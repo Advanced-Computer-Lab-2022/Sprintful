@@ -19,7 +19,7 @@ const SubtitleForm =()=>{
    
 
       const subtitle={title:title ,totalHours:totalHours,course:courseid,content:content}
-      console.log("HERE");
+     
 
       const response=await axios.post(`/api/subtitles/addSubtitle/${courseid}`,subtitle)
 
@@ -42,7 +42,7 @@ const SubtitleForm =()=>{
       //submitting the subtitle Normally (same as handleAddAnotheSubtitle)
      const subtitle={title:title ,totalHours:totalHours,course:courseid,content:content}
 
-      const response=await axios.post(`http://localhost:5000/api/subtitles/addSubtitle/${courseid}`,subtitle)
+      const response=await axios.post(`/api/subtitles/addSubtitle/${courseid}`,subtitle)
 
       if(response.ok){
         console.log("subtitle added",response.data)
@@ -101,7 +101,7 @@ const SubtitleForm =()=>{
 
 
   
-            {/* <button onClick={handleDone}>Done</button>  */}
+             <button onClick={handleDone}>Done</button>  
 
       </div>
       
