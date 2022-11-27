@@ -9,7 +9,7 @@ import SubtitleForm from './components/SubtitleForm';
 
 function App() {
   return (
-    <div classname="App">
+    <div className="App">
       <BrowserRouter>
         <div className='pages'>
               <Routes>
