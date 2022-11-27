@@ -37,11 +37,11 @@ const SubtitleForm =()=>{
     //Handling done with the Subtitles 
     const handleDone= async()=>{
       //submitting the subtitle Normally (same as handleAddAnotheSubtitle)
-      const {course}=useParams();
+      const {courseid}=useParams();
 
       const subtitle={title:title ,totalHours:totalHours,course:course,content:content}
 
-      const response=await axios.post(`/addSubtitle/${course}`,subtitle)
+      const response=await axios.post(`/addSubtitle/${courseid}`,subtitle)
 
       if(response.ok){
         console.log("subtitle added",response.data)
@@ -50,7 +50,7 @@ const SubtitleForm =()=>{
         setContent('');
       }
 
-     //Redirecting to the course view page 
+     //Redirecting to the course view page  //take course id from url params in order to redirect to the course view page 
 
     }
 
@@ -100,7 +100,7 @@ const SubtitleForm =()=>{
 
 
   
-            <button onclick={()=>{handleDone}}>Done</button>  //take course id from url params in order to redirect to the course view page 
+            <button onclick={()=>{handleDone}}>Done</button> 
 
       </div>
       

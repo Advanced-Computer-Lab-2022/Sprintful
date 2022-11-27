@@ -5,6 +5,7 @@ import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
 import CorporateTraineeForm from './components/corporateTraineeForm';
 import AdminForm from './components/AdminForm'
+import SubtitleForm from './components/SubtitleForm';
 
 function App() {
   return (
@@ -27,6 +28,11 @@ function App() {
                  <Route
                   extact path="/api/admin/createCorporateTrainee"
                   element={< CorporateTraineeForm/>}
+                />
+
+                <Route 
+                exact path ="/addSubtitle/:courseid"
+                element={<SubtitleForm/>}
                 />
                 
               </Routes>
