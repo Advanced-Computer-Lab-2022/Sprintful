@@ -46,7 +46,7 @@ const SubtitleForm =()=>{
 
       // if(response.ok){
         
-      //   setTitle('');
+      //   setTitle(''); 
       //   setTotalHours('');
       //   setContent('');
       // }
