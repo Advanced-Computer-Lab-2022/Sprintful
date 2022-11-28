@@ -1,5 +1,5 @@
 import { useState } from "react"
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 const CourseForm =() =>{
 
@@ -36,8 +36,10 @@ const handleSubmit= async (e)=>{
    })
 
 
-   const json =response.json()
-   const courseid=json.id;
+   const json =await response.json()
+    if(response.ok){
+
+   const courseid=json._id;
    console.log('Course added ',json)
 
    
@@ -49,12 +51,13 @@ const handleSubmit= async (e)=>{
    setShortSummary('')
    setPreviewVideoLink('')
    setDiscount('')
+
    navigate(`/addSubtitle/${courseid}`);
   //  navigate('/api/admin/createInstructor');
    navigate(0);
   //  navigate(`/addSubtitle/${courseid}`);
 
-
+    }
 
 }
 
