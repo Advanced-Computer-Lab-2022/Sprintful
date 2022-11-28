@@ -44,12 +44,17 @@ const SubtitleForm =()=>{
 
       const response=await axios.post(`/api/subtitles/addSubtitle/${courseid}`,subtitle)
 
-      if(response.ok){
-        console.log("subtitle added",response.data)
-        setTitle('');
+      // if(response.ok){
+        
+      //   setTitle('');
+      //   setTotalHours('');
+      //   setContent('');
+      // }
+ 
+      console.log("subtitle added",response.data)
+      setTitle('');
         setTotalHours('');
         setContent('');
-      }
 
      //Redirecting to the course view page  //take course id from url params in order to redirect to the course view page 
 
