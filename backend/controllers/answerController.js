@@ -29,6 +29,23 @@ const addAnswer = asyncHandler(async (req, res) => {
     }
 })
 
+const getAnswer = asyncHandler(async (req, res) => {
+    const answer = await Answer.findOne({
+        question: req.query.questionid,
+        corporate: req.query.corporateid,
+        individual: req.query.individualid
+    })
+    
+    if (answer) {
+        res.json(answer)
+    }
+    else {
+        res.status(404)
+        throw new Error('Answer not found')
+    }
+ })
+ 
 
 
-module.exports = { addAnswer }
+
+module.exports = { addAnswer, getAnswer }
