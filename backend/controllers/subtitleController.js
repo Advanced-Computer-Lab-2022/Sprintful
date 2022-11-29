@@ -39,4 +39,24 @@ const addSubtitle = asyncHandler(async (req, res) => {
 
 })
 
-module.exports = { addSubtitle}
+const addYoutubeLinkAndDescript =asyncHandler(async (req,res)=>{
+ const subtitle_id=req.params.subtitleid  ;
+  const videoLink =req.body.youtubevideo;
+  const videoDescription=req.body.videoDescription;
+  const update ={youtubevideo:videoLink ,videoDescription:videoDescription};
+
+  const subtitleupdated=await Subtitle.findOneAndUpdate({_id :subtitle_id },update,{new : true});
+  if(subtitleupdated){
+  res.json(subtitleupdated);
+  }
+  else{
+    res.json({message:"This subtitle is not found"})
+  }
+
+
+
+
+})
+
+
+module.exports = { addSubtitle,addYoutubeLinkAndDescript}
