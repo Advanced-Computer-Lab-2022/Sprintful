@@ -6,8 +6,11 @@ function Quiz() {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
+  const [questions, setQuestions] = useState([]);
+  
+  
 
-  const questions = [
+  const questionss = [
     {
       text: "What is the capital of America?",
       options: [
