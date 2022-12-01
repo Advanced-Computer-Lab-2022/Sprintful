@@ -22,9 +22,6 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     },
 }));
 
-
-// import CourseDetails from '../components/CourseDetails';
-
 const Course = () => {
     const [course, setCourse] = useState("");
 

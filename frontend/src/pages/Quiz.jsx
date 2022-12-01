@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useEffect } from 'react';
+import axios from 'axios';
+
 import "./Quiz.css";
 
 function Quiz() {
@@ -6,57 +9,25 @@ function Quiz() {
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
-  const [questions, setQuestions] = useState([]);
-  
-  
+  const [questions, setQuestions] = useState(null);
 
-  const questionss = [
-    {
-      text: "What is the capital of America?",
-      options: [
-        { id: 0, text: "New York City", isCorrect: false },
-        { id: 1, text: "Boston", isCorrect: false },
-        { id: 2, text: "Santa Fe", isCorrect: false },
-        { id: 3, text: "Washington DC", isCorrect: true },
-      ],
-    },
-    {
-      text: "What year was the Constitution of America written?",
-      options: [
-        { id: 0, text: "1787", isCorrect: true },
-        { id: 1, text: "1776", isCorrect: false },
-        { id: 2, text: "1774", isCorrect: false },
-        { id: 3, text: "1826", isCorrect: false },
-      ],
-    },
-    {
-      text: "Who was the second president of the US?",
-      options: [
-        { id: 0, text: "John Adams", isCorrect: true },
-        { id: 1, text: "Paul Revere", isCorrect: false },
-        { id: 2, text: "Thomas Jefferson", isCorrect: false },
-        { id: 3, text: "Benjamin Franklin", isCorrect: false },
-      ],
-    },
-    {
-      text: "What is the largest state in the US?",
-      options: [
-        { id: 0, text: "California", isCorrect: false },
-        { id: 1, text: "Alaska", isCorrect: true },
-        { id: 2, text: "Texas", isCorrect: false },
-        { id: 3, text: "Montana", isCorrect: false },
-      ],
-    },
-    {
-      text: "Which of the following countries DO NOT border the US?",
-      options: [
-        { id: 0, text: "Canada", isCorrect: false },
-        { id: 1, text: "Russia", isCorrect: true },
-        { id: 2, text: "Cuba", isCorrect: true },
-        { id: 3, text: "Mexico", isCorrect: false },
-      ],
-    },
-  ];
+  const params = new URLSearchParams(window.location.search);
+  const taskid = params.get('taskid');
+
+  useEffect(() => {
+    const fetchData = async () => {
+     await axios.get(`http://localhost:5000/api/questions/getQuestions?taskid=${taskid}`)
+
+        .then((res) => {
+          console.log(res.data);
+          setQuestions(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    fetchData();
+  }, []);
 
   // Helper Functions
 
@@ -82,13 +53,16 @@ function Quiz() {
   };
 
   return (
-    <div className="Quiz">
+    <div>
+      {questions && ( 
+      
+      <div className="Quiz">
+      
       {/* 1. Header  */}
-      <h1>USA Quiz 🇺🇸</h1>
+      <h1>Task </h1>
 
       {/* 2. Current Score  */}
       <h2>Score: {score}</h2>
-
       {/* 3. Show results or show the question game  */}
       {showResults ? (
         /* 4. Final Results */
@@ -98,33 +72,40 @@ function Quiz() {
             {score} out of {questions.length} correct - (
             {(score / questions.length) * 100}%)
           </h2>
-          <button onClick={() => restartGame()}>Restart game</button>
+          <button onClick={() => restartGame()}>Retake task</button>
         </div>
       ) : (
         /* 5. Question Card  */
+
         <div className="question-card">
           {/* Current Question  */}
           <h2>
             Question: {currentQuestion + 1} out of {questions.length}
-          </h2>
-          <h3 className="question-text">{questions[currentQuestion].text}</h3>
+            </h2>
+            
+          <h3 className="question-text">{questions[currentQuestion].title}</h3>
+          {/* <h3 className="question-text">{questions[currentQuestion].title}</h3> */}
 
-          {/* List of possible answers  */}
-          <ul>
-            {questions[currentQuestion].options.map((option) => {
+            {/* List of possible answers  */}
+            <ul>
+            {questions[currentQuestion].choices.map((choice) => {
               return (
                 <li
-                  key={option.id}
-                  onClick={() => optionClicked(option.isCorrect)}
+                  key={choice._id}
+                  onClick={() => optionClicked(choice.isCorrect)}
                 >
-                  {option.text}
+                  {choice.text}
                 </li>
               );
             })}
           </ul>
         </div>
       )}
+
     </div>
+      )}
+    </div>
+    
   );
 }
 
