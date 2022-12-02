@@ -190,5 +190,18 @@ div.error {
   border-radius: 8px;
   cursor: pointer;
 }
+ /* watch button styleing */
 
-
+button {
+  background: #f1356d;
+  color: #fff;
+  /* position: absolute; 
+  bottom: 490px; */
+  /*  */
+  left: 5px; 
+  top: 1px;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+}

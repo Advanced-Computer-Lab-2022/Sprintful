@@ -7,7 +7,7 @@ function Searchbar({placeholder}){
     const [filterData,setFilterData]=useState([]);
     useEffect( ()=>{
         const fecthCourses =async () =>{
-            const response =await fetch('/api/courses/')
+            const response =await fetch('/api/courses/search')
             const json = await response.json()
 
             if(response.ok){
