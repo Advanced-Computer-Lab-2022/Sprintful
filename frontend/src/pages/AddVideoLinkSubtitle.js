@@ -10,7 +10,7 @@ const AddVideoLinkSubtitle=()=>{
         const[youtubeVideo,setYoutubeVideo]=useState("");
         const[videoDescription,setVideoDescription]=useState("");
         const{subtitleid}=useParams(); //{subtitleid}-->destructuring
-
+          //functions
         const handleSubmit=async(e)=>{
             const update ={youtubevideo:youtubeVideo ,videoDescription:videoDescription}
          
@@ -32,7 +32,7 @@ const AddVideoLinkSubtitle=()=>{
                     <label>Video Link :</label>
                     <input 
                     type="text"
-                    onChange={(e)=>{setYoutubevideo(e.target.value)}}
+                    onChange={(e)=>{setYoutubeVideo(e.target.value)}}
                     value={youtubeVideo}  
                      />
 
@@ -58,3 +58,5 @@ const AddVideoLinkSubtitle=()=>{
     );
 
 }
+
+export default  AddVideoLinkSubtitle
