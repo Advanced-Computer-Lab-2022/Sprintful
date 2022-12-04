@@ -16,8 +16,8 @@ const AddVideoLinkSubtitle=()=>{
          
             const response=await axios.patch(`/api/subtitles/addVideoLink/${subtitleid}`,update);
             console.log("subtitle Updated",response.data)
-            setYoutubeVideo("");
-            setVideoDescription("");
+               setYoutubeVideo("");
+               setVideoDescription("");
         }  
    
    
