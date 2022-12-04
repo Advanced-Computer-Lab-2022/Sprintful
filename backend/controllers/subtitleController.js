@@ -54,10 +54,27 @@ const addYoutubeLinkAndDescript =asyncHandler(async (req,res)=>{
     res.json({message:"This subtitle is not found"})
   }
 
+  
 
 
 
 })
 
+const getSubtitle=asyncHandler(async(req,res)=>{
+    const subtitleid=req.params.subtitleid;
 
-module.exports = { addSubtitle,addYoutubeLinkAndDescript}
+    const subtitle=await Subtitle.findById(subtitleid).exec();
+   
+    res.json(subtitle);
+
+}
+    
+    
+    
+    
+    
+    
+ )
+
+
+module.exports = { addSubtitle,addYoutubeLinkAndDescript,getSubtitle}
