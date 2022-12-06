@@ -1,6 +1,8 @@
 const asyncHandler = require('express-async-handler')
 // const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
+const Instructor = require('../models/InstructorModel')
+var mongoose = require('mongoose');
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
@@ -58,26 +60,33 @@ const addCourse = asyncHandler(async (req, res) => {
         price: req.body.price,
         totalhours: req.body.totalhours,
         shortsummary: req.body.shortsummary,
-        instructor: '635a591011ecdc081ce890f7',                              //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116
+        instructor: req.query.id ,    //'635a591011ecdc081ce890f7'  //635a5a8b2a5fa2d4c62ce116 //mongoose.Types.ObjectId( '635a591011ecdc081ce890f7')
         previewvideolink: req.body.previewvideolink,
         discount: req.body.discount,
         //put a static id for the instructor for sprint 1
         // subtitles: req.body.subtitles
     });
     //newCourse.save().then(course => res.json(course)); // it is now in mem , save it to db
-    newCourse.save(function (err) {
-        if (err) {
-            console.log(err);
-        }
-    })
+    const contract = (await Instructor.findById(req.query.id)).contract
+    if(contract){
+        newCourse.save(function (err) {
+            if (err) {
+                console.log(err);
+            }
+        })
+    }
+    
     //putting the course id into an array newcourseid
     const newcourseid = [newCourse._id];
     //Saving the instructor reference id 
     //Getting the courses array and putting the neew course's id in this Instructor courses array
-    const newCoursesList = ((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
-    const updatedcoursesArray = await Instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
+    const newCoursesList = ((await Instructor.findById(req.query.id )).courses).concat(newcourseid); //.concat concatenates the new array
+    const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id , { courses: newCoursesList }).exec();
+    // const contract = (await Instructor.findById(req.query.id)).contract
     //put the static id in lines 
-    res.json(newCourse)
+    res.json([newCourse,contract])
+    // res.json(contract)
+
 })
 
 // @desc GET courses by instructor

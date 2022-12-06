@@ -1,6 +1,5 @@
 import { useState } from "react"
-
-
+import axios from 'axios';
 const CourseForm =() =>{
 
 const[title,setTitle]=useState('') 
@@ -10,30 +9,59 @@ const [shortsummary,setShortSummary]=useState('')
 const[previewvideolink,setPreviewVideoLink]=useState('')
 const [discount,setDiscount]=useState('')
 const [subject,setSubject]=useState('Computer Science')
-
+const [contract,setContract] =useState(true)
 const handleSubmit= async (e)=>{
-    // e.preventDefault()
-   const Course ={
-   title,
-   subject,
-   price,
-   totalhours,
-   shortsummary,
-   previewvideolink,
-   discount,}
+    e.preventDefault()
+  //  const Course ={
+  //  title,
+  //  subject,
+  //  price,
+  //  totalhours,
+  //  shortsummary,
+  //  previewvideolink,
+  //  discount}
 
   //Route  /api/courses/
-
-   const response = await fetch('/api/courses/',{
-    method:'POST',
-    body :JSON.stringify(Course),
-    headers :{
-        'Content-Type':'application/json'
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
     }
-   })
+  };
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+   console.log(id)
+    axios.post(`http://localhost:7000/api/courses?id=${id}`, { //?id=${id}
+      title: title ,
+      subject: subject,
+      price: price,
+      totalhours: totalhours,
+      shortsummary: shortsummary,
+      instructor: id,
+      previewvideolink: previewvideolink,
+      discount: discount
 
-   const json =response.json()
-   console.log('Course added ',json)
+    },axiosConfig)
+    .then(function (response) {
+      // console.log(response);
+      // console.log('Course added ',response.data)
+      console.log(response.data[0])
+      console.log(response.data[1])
+      // contract =response.data[1];
+      setContract(response.data[1])
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  //  const response = await fetch(`/api/courses?id=${id}`,{
+  //   method:'POST',
+  //   body :JSON.stringify(Course),
+  //   headers :{
+  //       'Content-Type':'application/json'
+  //   }
+  //  })
+
 
    setTitle('')
    setPrice('')
@@ -46,13 +74,9 @@ const handleSubmit= async (e)=>{
 
 }
 
-
-
-
 return (
-
-  <div className="create">
-    <form onSubmit={handleSubmit}>  
+ <div className="create">
+    { <form onSubmit={handleSubmit}>  
          <h3>Add a new Course</h3>
             <label>Course Title:</label>
                <input 
@@ -106,13 +130,13 @@ return (
                    <option value="Business Adminstration">Business Adminstration</option>
                 </select>
               <button>Add Course for Now !</button>
-    </form>
+    </form>}
+    { !contract &&<p className="contractError">Please accept our terms and conditions to add courses</p> 
 
-    </div>     
+    }
 
-  
-
-
+    </div>
+     
 
 )
 

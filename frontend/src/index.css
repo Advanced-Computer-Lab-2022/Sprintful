@@ -189,6 +189,13 @@ div.error {
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
+  position: absolute;
+  right:100px;
+  bottom:-60px;
 }
 
+.create p{
+  position: absolute;
+  top:660px;
+}
 
