@@ -1,0 +1,54 @@
+.container ol li{
+    font-size: 1em;
+    color: #2d2c2c;
+}
+
+h1{
+    color:darkcyan;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+}
+
+.start{
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+    
+}
+
+.start .btn{
+    padding: .2em 1.7em;
+    border: none;
+    border-radius: .1em;
+    font-size: 1.2em;
+    color: #202020;
+    text-decoration: none;
+    background-color: #a3a39d;
+}
+
+#form{
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#form .userid{
+    padding: .7em 2em;
+    width: 60%;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    align-self: center;
+}
+
+select{
+    padding: .7em 2em;
+    width: 60%;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    align-self: center;
+}

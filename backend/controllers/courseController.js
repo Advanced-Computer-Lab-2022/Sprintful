@@ -1,18 +1,43 @@
 const asyncHandler = require('express-async-handler')
 // const { builtinModules } = require('module')
-const Course = require('../models/courseModel')
+const Course = require('../models/courseModel.js')
+const instructor = require('../models/instructorModel.js')
+const subtitle = require('../models/subtitleModel.js')
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
 // @access  Public
+const getSubtitles = asyncHandler(async (req, res) => {
+    const courseId = req.query.courseId;
+    //console.log(courseId)
+    const course = await Course.find({_id:courseId});
+    const subtitleIds = course[0].subtitles
+    //console.log(course)
+    const result = []
+    let subtitleDetails = []
+    
+        //console.log("course subtitles")
+         //console.log(subtitleIds)
+        // res.json(course.subtitles);
+        for(let i=0; i<subtitleIds.length; i++){
+            subtitleDetails = await subtitle.findById(subtitleIds[i])
+            result.push(subtitleDetails.title)
+            //console.log("SUBTITLE")
+
+            //console.log(result[i])
+        }
+         res.json(result);
+    }
+)
+
+
 const getCourseById = asyncHandler(async (req, res) => {
     const course = await Course.findById(req.params.id)
 
     if (course) {
         res.json(course)
     } else {
-        res.status(404)
-        throw new Error('Course not found')
+        res.status(400).json({ error: "No course found cid" });
     }
 })
 
@@ -24,8 +49,7 @@ const corporateGetCourses = asyncHandler(async (req, res) => {
     if (courses) {
         res.json(courses)
     } else {
-        res.status(404)
-        throw new Error('Courses not found')
+        res.status(400).json({ error: "No course found" });
     }
 })
 
@@ -74,8 +98,8 @@ const addCourse = asyncHandler(async (req, res) => {
     const newcourseid = [newCourse._id];
     //Saving the instructor reference id 
     //Getting the courses array and putting the neew course's id in this Instructor courses array
-    const newCoursesList = ((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
-    const updatedcoursesArray = await Instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
+    const newCoursesList = ((await instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
+    const updatedcoursesArray = await instructor.findByIdAndUpdate('6635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
     //put the static id in lines 
     res.json(newCourse)
 })
@@ -126,26 +150,48 @@ const filterMyCourses = asyncHandler(async (req, res) => {
 
 
 // Search for a course based on course title or subject or instructor
+// const searchCourse= asyncHandler(async (req,res) => {
+//     const title = req.query.title;
+//     const subject = req.query.subject;
+//     const instructorName = req.query.instructor;
+//     const instructorId = await instructor.find({name:instructorName}).select('_id');
+
+//    let result
+//     if(subject == null && instructorName == null){
+//         result = await Course.find({title: title});
+//         res.json(result);
+//     } else if(title == null && instructorName == null){
+//         result = await Course.find({subject: subject});
+//         res.json(result);
+//     } else if(title == null && subject == null){
+//         result = await Course.find({instructor: instructorId});
+//         res.json(result);
+//     } else {
+//         res.status(400).json({error:"No course found"});
+//     }
+// }) 
+
 const searchCourse= asyncHandler(async (req,res) => {
     const title = req.query.title;
     const subject = req.query.subject;
-    const instructorName = req.query.instructor;
-    const instructorId = await instructor.find({name:instructorName}).select('_id');
+    const firstName = req.query.first;
+    const lastName = req.query.last;
 
    let result
-    if(subject == null && instructorName == null){
-        result = await courseModel.find({title: title});
+    if(subject == null && firstName == null && lastName ==null){
+        result = await Course.find({title: title});
         res.json(result);
-    } else if(title == null && instructorName == null){
-        result = await courseModel.find({subject: subject});
+    } else if(title == null && firstName == null && lastName ==null){
+        result = await Course.find({subject: subject});
         res.json(result);
     } else if(title == null && subject == null){
-        result = await courseModel.find({instructor: instructorId});
+        const instructorId = await instructor.find({firstName:firstName,lastName:lastName}).select('_id').exec();
+        result = await Course.find({instructor: instructorId});
         res.json(result);
     } else {
         res.status(400).json({error:"No course found"});
     }
-}) 
+})
 
 //filter the courses based on a subject and/or rating
 
@@ -154,8 +200,8 @@ const filterSubjectRating = asyncHandler(async (req, res) => {
     const rating = req.query.rating;
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
 
-    const result = await courseModel.find({ subject: subject });
-    const result2 = await courseModel.find({ rating: rating });
+    const result = await Course.find({ subject: subject });
+    const result2 = await Course.find({ rating: rating });
     const final = result.concat(result2);
 
     if (final.length > 0) {
@@ -180,13 +226,20 @@ const filterPrice = asyncHandler(async (req, res) => {
     //     } 
     // }
     // else{
-    const result = await courseModel.find({ price: { $lte: price } });
+    const result = await Course.find({ price: { $lte: price } });
     if (result.length > 0) {
         res.status(200).json(result);
     }
     else {
         res.status(400).json({ error: "No course found" });
     }
+})
+
+//get subtitle id from title
+const getSubtitleId = asyncHandler(async (req, res) => {
+    const title = req.query.title;
+    const result = await subtitle.find({ title: title }).select('_id');
+    res.status(200).json(result);
 })
 
 module.exports = {
@@ -199,5 +252,7 @@ module.exports = {
     corporateGetCourses,
     searchCourse,
     filterSubjectRating,
-    filterPrice
+    filterPrice,
+    getSubtitles,
+    getSubtitleId
 }
