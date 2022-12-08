@@ -78,3 +78,5 @@ const SubtitlePageInst= ()=>{
 
 
 }
+
+export default SubtitlePageInst ;

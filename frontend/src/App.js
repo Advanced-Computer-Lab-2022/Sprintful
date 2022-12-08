@@ -7,6 +7,7 @@ import CorporateTraineeForm from './components/corporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
+import SubtitlePageInst from './pages/SubtitlePageInst';
 
 function App() {
   return (
@@ -41,7 +42,11 @@ function App() {
                   extact path="/api/subtitles/addVideoLink/:subtitleid"
                   element={<AddVideoLinkSubtitle/>}
                 />
-                
+
+                <Route 
+                  exact path="/api/subtitles/:courseid/:subtitleid/Instructor"
+                  element={<SubtitlePageInst/>}
+                />
               </Routes>
             </div>
           </BrowserRouter>
