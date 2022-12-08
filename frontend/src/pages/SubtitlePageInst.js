@@ -28,7 +28,7 @@ const SubtitlePageInst= ()=>{
         setTitle(subtitle.title);
         setTotalHours(subtitle.totalHours );
         setVideoLink(subtitle.youtubevideo);
-        setvideoDescription(subtitle.videoDescription)
+        setVideoDescription(subtitle.videoDescription)
     }
 
 // useEffect for fetching the data in the very 1st render 
