@@ -32,7 +32,7 @@ const SubtitlePageInst= ()=>{
     }
 
 // useEffect for fetching the data in the very 1st render 
-    useEffect(fetchdata,[]);
+    useEffect(()=>{fetchdata();},[]);
 
 
     //title
