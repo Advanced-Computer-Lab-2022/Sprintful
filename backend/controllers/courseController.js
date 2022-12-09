@@ -1,4 +1,5 @@
 const asyncHandler = require('express-async-handler')
+const courseModel = require('../models/courseModel')
 // const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
 
@@ -6,7 +7,7 @@ const Course = require('../models/courseModel')
 // @route   GET /api/courses/:id
 // @access  Public
 const getCourseById = asyncHandler(async (req, res) => {
-    const course = await Course.findById(req.params.id)
+     const course = await Course.findById(req.params.id)
 
     if (course) {
         res.json(course)
@@ -14,7 +15,7 @@ const getCourseById = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Course not found')
     }
-})
+ })
 
 // @desc    Get all courses
 // @route   GET /api/courses
@@ -189,6 +190,128 @@ const filterPrice = asyncHandler(async (req, res) => {
     }
 })
 
+
+//add a review on a course
+
+const addCourseReview = asyncHandler( async (req, res, next) => {
+    const { rating, comment, courseId} = req.body;
+    console.log("I am woring");
+    const review = {
+       // user: req.user._id,    //no authentication 
+        //name: req.user.name,
+        rating: Number (rating),
+        comment
+
+    }
+    const course = await Course.findById(courseId);
+    /*const isReviewed = course.reviews.find(    //No authentication baby
+        r => r.user.toString() === req.user._id.toString()
+    )
+
+    if(isReviewed){ 
+        course.reviews.array.forEach(review => {
+            if(review.user.toString() === req.user._id.toString()) {
+                review.review = comment;
+                review.rating = rating;
+            }    
+        });
+    }*/
+        //in else part
+        course.reviews.push(comment);
+        course.numofReviews = course.reviews.length;
+        //review.rating = Number (rating);
+        course.ratingsArray.push(rating);
+
+        //course.rating = (ratingsArray / ratingsArray.length) * ratingsArray.length;
+
+            var total = 0;
+            for(var i = 0; i < course.ratingsArray.length; i++) {
+                total += course.ratingsArray[i];
+            }
+            var avg = total / course.ratingsArray.length; 
+        course.rating = avg;    
+        console.log(avg);
+        console.log(course.rating);
+    //course.rating = course.reviews.reduce((acc, item) => item.rating + acc, 0) / course.reviews.length
+   /* const updatedCurrentRating = await Course.findOneAndUpdate(
+        { _id: req.params.courseId },
+        [{$set: { rating: { $avg: 'rating.star' } }}],
+        {
+           new: true,
+           useFindAndModify: true
+        });
+    console.log(updatedCurrentRating);
+*/
+    await course.save({ validateBeforeSave: false});
+
+    res.status(200).json({
+        success: true
+    })
+})
+//Not working and I am about to lose my mind, no idea whyyyyyyyyyyyyyyyyyyyyy
+const getCourseReviews = asyncHandler(async (req, res) => {
+    const course = await Course.findById(req.params.id)
+
+   /* if (course) {
+        res.json(course)
+    } else {
+        res.status(404)
+        throw new Error('Course not found')
+    }*/
+
+    //let course;
+    for(var i = 0; i < courseModel.length; i++) {
+        if(courseModel[i]._id == "6385c9f46f6bb55a030163d4"){
+            console.log("I am working 0");
+             course = courseModel[i];
+        }
+    }
+    //const courseId = req.body;
+    //console.log("I am working 0");
+    //const course = await courseModel.findById(courseId);
+    //const course = await Course.findById('6385c9f46f6bb55a030163d4')
+    console.log("I am working 1");
+    let allReviews
+    let rating
+    console.log("I am working 2");
+        allReviews = await course.reviews;
+        console.log("I am working 3");
+        res.json(allReviews);
+        rating = await course.rating;
+        console.log("I am working 4");
+        res.json(rating);
+        console.log("I am working 5");
+        if (allReviews.length > 0 && rating > 0) {
+            res.status(200).json(result);
+        }
+        else {
+            res.status(400).json({ error: "No reviews found" });
+        }
+    })
+
+    const getCourseRating = asyncHandler(async (req, res) => {
+        console.log("I am working 0");
+        const course = await Course.findById('6385c9f46f6bb55a030163d4')
+        console.log("I am working 1");
+        let allReviews
+        let rating
+        console.log("I am working 2");
+            allReviews = await course.reviews;
+            console.log("I am working 3");
+            rating = await course.rating;
+            console.log("I am working 4");  
+            if (allReviews.length > 0 && rating > 0) {
+                res.status(200).json(rating);
+            }
+            else {
+                res.status(400).json({ error: "No reviews found" });
+            }
+            console.log("I am working 5");
+            console.log(allReviews);
+            console.log(rating);
+    })
+
+
 module.exports = {
     getCourseById,
     getCourses,
@@ -199,5 +322,6 @@ module.exports = {
     corporateGetCourses,
     searchCourse,
     filterSubjectRating,
-    filterPrice
+    filterPrice, addCourseReview, getCourseReviews,
+    getCourseRating
 }

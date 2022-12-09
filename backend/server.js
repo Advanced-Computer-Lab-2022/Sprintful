@@ -1,14 +1,17 @@
 const express = require('express');
 const colors = require('colors')
-const dotenv = require('dotenv').config()
+const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware')
-const connectDB = require('./config/db')
-const port = process.env.PORT || 6000
+const connectDB = require('./config/db');
+const port = process.env.PORT || 5000
 
 connectDB()
 
+var cors = require('cors')
+
 
 const app = express();
+app.use(cors())
 
 app.use(express.json()) // This is a middleware function that allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: false })) // This is a middleware function that allows us to accept form data

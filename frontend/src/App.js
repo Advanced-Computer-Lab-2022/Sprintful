@@ -5,10 +5,12 @@ import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
 import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
+import InstructorProfile from './components/InstructorProfile';
+import RateInstructor from './components/RateInstructor';
 
 function App() {
   return (
-    <div classname="App">
+    //<div className="App">
       <BrowserRouter>
         <div className='pages'>
               <Routes>
@@ -28,10 +30,18 @@ function App() {
                   extact path="/api/admin/createCorporateTrainee"
                   element={< CorporateTraineeForm/>}
                 />
+                <Route
+                  extact path="/api/instructor/getProfile"
+                  element={<InstructorProfile/>}
+                />
+              <Route
+                  extact path="/api/instructor/rate"
+                  element={<RateInstructor/>}
+                />
               </Routes>
             </div>
           </BrowserRouter>
-        </div>
+        //</div>
 )}
 
 export default App;
