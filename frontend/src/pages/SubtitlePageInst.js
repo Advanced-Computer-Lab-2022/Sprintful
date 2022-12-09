@@ -19,7 +19,7 @@ const SubtitlePageInst= ()=>{
 
     //params 
     const params=useParams();
-    const courseid=params.courseid;
+    //const courseid=params.courseid;
     const subtitleid=params.subtitleid;
 
 
@@ -27,7 +27,7 @@ const SubtitlePageInst= ()=>{
     const fetchdata=async()=>{
     
         
-        const response =await axios.get(`/api/subtitles/${courseid}/${subtitleid}`)
+        const response =await axios.get(`/api/subtitles/${subtitleid}`)
         const subtitle=response.data;
         setContent(subtitle.content);
         setTitle(subtitle.title);
