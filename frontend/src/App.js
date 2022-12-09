@@ -5,8 +5,6 @@ import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
-import CorporateTraineeForm from './components/corporateTraineeForm';
-import AdminForm from './components/AdminForm';
 import Navbar2 from './components/Navbar2';
 import MyCourses from './pages/MyCourses';
 import Home2 from './pages/Home2';
