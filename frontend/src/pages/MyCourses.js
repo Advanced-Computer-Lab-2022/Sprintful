@@ -30,28 +30,28 @@ const Course = () => {
     console.log(id);
 
     useEffect(() => {
-        const request1 = axios.get(`http://localhost:7000/api/courses/corporate/myCourses?id=${id}`)
-        const request2 = axios.get(`http://localhost:7000/api/courses/individual/myCourses?id=${id}`)
-        axios.all([request1,request2])
-        .then(
-            axios.spread((...responses) => {
-              const req1 = responses[0];
-              const req2 = responses[1];
-        
-              // use/access the results
-              console.log(req1, req2);
-              if(req1.data!='')
-                setCourse(req1.data);
-              else if(req2.data!=''){
-                setCourse(req2.data);
-              }
+        const request1 = axios.get(`http://localhost:5000/api/courses/corporate/myCourses?id=${id}`)
+        const request2 = axios.get(`http://localhost:5000/api/courses/individual/myCourses?id=${id}`)
+        axios.all([request1, request2])
+            .then(
+                axios.spread((...responses) => {
+                    const req1 = responses[0];
+                    const req2 = responses[1];
 
-            })
-          )
-          .catch(errors => {
-            // react on errors.
-            console.error(errors);
-          });
+                    // use/access the results
+                    console.log(req1, req2);
+                    if (req1.data != '')
+                        setCourse(req1.data);
+                    else if (req2.data != '') {
+                        setCourse(req2.data);
+                    }
+
+                })
+            )
+            .catch(errors => {
+                // react on errors.
+                console.error(errors);
+            });
     }, []);
     return (
 
@@ -70,18 +70,18 @@ const Course = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {course && course.map( (course)=> (
+                    {course && course.map((course) => (
                         <TableRow>
-                        <TableCell align="center">{course.title}</TableCell>
-                        <TableCell align="center">{course.subject}</TableCell>
-                        <TableCell align="center">{course.totalhours}</TableCell>
-                        <TableCell align="center">{course.price}</TableCell>
-                        <TableCell align="center">{course.rating}</TableCell>
-                        <TableCell align="center">{course.shortsummary}</TableCell>
-                        <TableCell align="center">{<button type="button" class="button" onClick={ ()=> window.location.href=`/Video?link=${course.previewvideolink}`}> Watch </button> } </TableCell>
-                        <TableCell align="center">{course.discount}</TableCell>
+                            <TableCell align="center">{course.title}</TableCell>
+                            <TableCell align="center">{course.subject}</TableCell>
+                            <TableCell align="center">{course.totalhours}</TableCell>
+                            <TableCell align="center">{course.price}</TableCell>
+                            <TableCell align="center">{course.rating}</TableCell>
+                            <TableCell align="center">{course.shortsummary}</TableCell>
+                            <TableCell align="center">{<button type="button" class="button" onClick={() => window.location.href = `/Video?link=${course.previewvideolink}`}> Watch </button>} </TableCell>
+                            <TableCell align="center">{course.discount}</TableCell>
 
-                    </TableRow>
+                        </TableRow>
                     ))}
                 </TableBody>
             </Table>
