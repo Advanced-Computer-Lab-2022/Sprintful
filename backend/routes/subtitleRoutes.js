@@ -4,5 +4,5 @@ const { addSubtitle ,addYoutubeLinkAndDescript,getSubtitle} = require('../contro
 
 router.post('/addSubtitle/:courseid',addSubtitle)
 router.patch('/addVideoLink/:subtitleid',addYoutubeLinkAndDescript)
-router.get('/:courseid/:subtitleid',getSubtitle)
+router.get('/:subtitleid',getSubtitle)
 module.exports = router;
