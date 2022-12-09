@@ -3,9 +3,15 @@ const colors = require('colors')
 const dotenv = require('dotenv').config();
 const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
+<<<<<<< HEAD
 const port = process.env.PORT || 5000
 const cors = require("cors")
 const connectDB = require('./config/db');
+||||||| 8fbd869
+const port = process.env.PORT || 6000
+=======
+const port = process.env.PORT || 5000
+>>>>>>> Reem.sprint2
 
 connectDB()
  
