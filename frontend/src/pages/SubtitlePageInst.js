@@ -1,16 +1,21 @@
 import axios from "axios";
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
+import {useNavigate} from "react-router";
 
 
 
 
 const SubtitlePageInst= ()=>{
+    //states
     const[content,setContent]=useState('');
     const [title,setTitle]=useState('')
     const [totalHours,setTotalHours]=useState(0);
     const [videoLink,setVideoLink]=useState("");
     const [videoDescription,setVideoDescription]=useState("");
+
+    //useNavigate
+    const navigate =useNavigate();
 
     //params 
     const params=useParams();
@@ -35,6 +40,14 @@ const SubtitlePageInst= ()=>{
     useEffect(()=>{fetchdata();},[]);
 
 
+    //Handling Navigation to Adding videoLink and Video Description to a Subtitle
+    const handleAddVideoLink=()=>{
+        navigate(`/api/subtitles/addVideoLink/${subtitleid}`)
+        navigate(0)
+
+    }
+
+
     //title
     // let title='';
     // //content 
@@ -51,7 +64,7 @@ const SubtitlePageInst= ()=>{
 
     return (
 
-    <div>
+    <div className="create">
         <h2>{title}</h2>
         <label>Total hours : {totalHours}</label>
         <h3>Subtitle Content :</h3>
@@ -63,8 +76,10 @@ const SubtitlePageInst= ()=>{
         <a href={videoLink}>Click to view Youtube Video</a>
 
         <label>Video Description :</label>
-        <br></br>
+        
         <p>{videoDescription}</p>
+
+        <button onClick={handleAddVideoLink}>Add video Link and Description </button>
 
 
 
