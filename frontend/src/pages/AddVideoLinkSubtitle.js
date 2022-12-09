@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {useParams } from "react-router-dom";
+import {useNavigate} from "react-router";
 import axios from 'axios';
 
 
@@ -10,6 +11,11 @@ const AddVideoLinkSubtitle=()=>{
         const[youtubeVideo,setYoutubeVideo]=useState("");
         const[videoDescription,setVideoDescription]=useState("");
         const{subtitleid}=useParams(); //{subtitleid}-->destructuring
+
+        //useNavigate
+        const navigate=useNavigate();
+
+
           //functions
         const handleSubmit=async(e)=>{
             const update ={youtubevideo:youtubeVideo ,videoDescription:videoDescription}
@@ -18,6 +24,11 @@ const AddVideoLinkSubtitle=()=>{
             console.log("subtitle Updated",response.data)
                setYoutubeVideo("");
                setVideoDescription("");
+
+               navigate(`/api/subtitles/:subtitleid/Instructor`);
+               navigate(0);
+
+
         }  
    
    
