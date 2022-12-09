@@ -11,7 +11,6 @@ const courseModel = require('../models/courseModel.js')
 const Question = require('../models/questionModel.js')
 //const Choice = require('../models/choiceSchema.js')
 const instructor = require('../models/instructorModel.js')
-const { ResetTvOutlined } = require('@mui/icons-material')
 
 const createInstructor = asyncHandler(async (req, res) => {
     const { username, password } = req.body
@@ -243,4 +242,3 @@ const getInstructorProfile = asyncHandler(async (req, res) => {
 })
 
 module.exports = { createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile }
-module.exports = {createInstructor, editBioEmail}

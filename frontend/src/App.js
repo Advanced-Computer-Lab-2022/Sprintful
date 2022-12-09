@@ -14,7 +14,6 @@ import Video from "./pages/Video";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import InstructorForm from './components/InstructorForm';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
@@ -22,7 +21,6 @@ import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
 import SubtitlePageInst from './pages/SubtitlePageInst';
-import AdminForm from './components/AdminForm';
 import React from "react";
 import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
@@ -45,7 +43,7 @@ function App() {
               element={<SubtitleForm />}
             />
             <Route
-              extact path="/api/subtitles/addVideoLink/:subtitleid"
+              exact path="/api/subtitles/addVideoLink/:subtitleid"
               element={<AddVideoLinkSubtitle />}
             />
             <Route
@@ -56,23 +54,23 @@ function App() {
             {/* Nada */}
 
             <Route
-              extact path="/api/admin/"
+              exact path="/api/admin/"
               element={<AdminForm />}
             />
             <Route
-              extact path="/api/admin/createInstructor"
+              exact path="/api/admin/createInstructor"
               element={<InstructorForm />}
             />
             <Route
-              extact path="/api/admin/createCorporateTrainee"
+              exact path="/api/admin/createCorporateTrainee"
               element={< CorporateTraineeForm />}
             />
             <Route
-              extact path="/api/instructor/getProfile"
+              exact path="/api/instructor/getProfile"
               element={<InstructorProfile />}
             />
             <Route
-              extact path="/api/instructor/rate"
+              exact path="/api/instructor/rate"
               element={<RateInstructor />}
             />
 
@@ -90,7 +88,7 @@ function App() {
             {/* Somaya */}
 
             <Route
-              extact path="/api/courses/filterPrice"
+              exact path="/api/courses/filterPrice"
               element={<FilterPrice />}
             />
 
@@ -103,22 +101,24 @@ function App() {
               path="/addTask/questions"
               element={<AddQuestion />}
             />
+
             {/* Hoda */}
+
             <Route
               exact path="/api/courses/search"
               element={
                 <Searchbar placeholder="Enter a course title or subject or instructor ..." />}
             />
             <Route
-              extact path="/"
+              exact path="/"
               element={[<Navbar2 />, <Home2 />]}
             />
             <Route
-              extact path="/about"
+              exact path="/about"
               element={[<Navbar2 />, <About />]}
             />
             <Route
-              extact path="/myCourses"
+              exact path="/myCourses"
               element={[<Navbar2 />, <MyCourses />]}
             />
             <Route
