@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import {useNavigate} from "react-router";
 
 const CourseForm =() =>{
 
@@ -11,8 +11,11 @@ const[previewvideolink,setPreviewVideoLink]=useState('')
 const [discount,setDiscount]=useState('')
 const [subject,setSubject]=useState('Computer Science')
 
+
+const navigate=useNavigate();
+
 const handleSubmit= async (e)=>{
-    // e.preventDefault()
+    e.preventDefault()
    const Course ={
    title,
    subject,
@@ -32,8 +35,14 @@ const handleSubmit= async (e)=>{
     }
    })
 
-   const json =response.json()
+
+   const json =await response.json()
+    if(response.ok){
+
+   const courseid=json._id;
    console.log('Course added ',json)
+
+   
 
    setTitle('')
    setPrice('')
@@ -43,9 +52,14 @@ const handleSubmit= async (e)=>{
    setPreviewVideoLink('')
    setDiscount('')
 
+   navigate(`/addSubtitle/${courseid}`);
+  //  navigate('/api/admin/createInstructor');
+   navigate(0);
+  //  navigate(`/addSubtitle/${courseid}`);
+
+    }
 
 }
-
 
 
 
@@ -105,7 +119,7 @@ return (
                    <option value="Physics">Physics</option>
                    <option value="Business Adminstration">Business Adminstration</option>
                 </select>
-              <button>Add Course for Now !</button>
+              <button>Add Subtitle</button>
     </form>
 
     </div>     

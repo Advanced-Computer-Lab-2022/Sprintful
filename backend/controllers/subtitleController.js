@@ -13,12 +13,13 @@ const addSubtitle = asyncHandler(async (req, res) => {
     const courseid = req.params.courseid   //getting the id of the course  //we can send it as in body req.body
     const title = req.body.title
     const totalHours = req.body.totalHours
-
+    const  content =req.body.content 
     //Create the subtitle
     const subtitle = new Subtitle({
         title: title,
         totalHours: totalHours,
-        course: courseid
+        course: courseid,
+        content:content
 
 
     })
@@ -38,4 +39,42 @@ const addSubtitle = asyncHandler(async (req, res) => {
 
 })
 
-module.exports = { addSubtitle}
+const addYoutubeLinkAndDescript =asyncHandler(async (req,res)=>{
+ const subtitle_id=req.params.subtitleid  ;
+  const videoLink =req.body.youtubevideo;
+  const videoDescription=req.body.videoDescription;
+  const update ={youtubevideo:videoLink ,videoDescription:videoDescription};
+
+  const subtitleupdated=await Subtitle.findOneAndUpdate({_id :subtitle_id },update,{new : true});
+  if(subtitleupdated){
+  res.json(subtitleupdated);
+  }
+  
+  else{
+    res.json({message:"This subtitle is not found"})
+  }
+
+  
+
+
+
+})
+
+const getSubtitle=asyncHandler(async(req,res)=>{
+    const subtitleid=req.params.subtitleid;
+
+    const subtitle=await Subtitle.findById(subtitleid).exec();
+   
+    res.json(subtitle);
+
+}
+    
+    
+    
+    
+    
+    
+ )
+
+
+module.exports = { addSubtitle,addYoutubeLinkAndDescript,getSubtitle}

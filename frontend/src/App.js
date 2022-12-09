@@ -19,6 +19,9 @@ import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
 import RateInstructor from './components/RateInstructor';
+import SubtitleForm from './components/SubtitleForm';
+import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
+import SubtitlePageInst from './pages/SubtitlePageInst';
 
 function App() {
   return (
@@ -70,10 +73,24 @@ function App() {
               extact path="/api/instructor/rate"
               element={<RateInstructor />}
             />
+            <Route
+              exact path="/addSubtitle/:courseid"
+              element={<SubtitleForm />}
+            />
+
+            <Route
+              extact path="/api/subtitles/addVideoLink/:subtitleid"
+              element={<AddVideoLinkSubtitle />}
+            />
+
+            <Route
+              exact path="/api/subtitles/:subtitleid/Instructor"
+              element={<SubtitlePageInst />}
+            />
           </Routes>
         </div>
-      </BrowserRouter >
-    </div >
+      </BrowserRouter>
+    </div>
   )
 }
 
