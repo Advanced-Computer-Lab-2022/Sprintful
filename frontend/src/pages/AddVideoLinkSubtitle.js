@@ -10,8 +10,8 @@ const AddVideoLinkSubtitle=()=>{
          //youtubevideo -> video Link
         const[youtubeVideo,setYoutubeVideo]=useState("");
         const[videoDescription,setVideoDescription]=useState("");
-        const{subtitleid}=useParams(); //{subtitleid}-->destructuring
-
+        //const{subtitleid}=useParams(); //{subtitleid}-->destructuring
+        const subtitleid=useParams().subtitleid;
         //useNavigate
         const navigate=useNavigate();
 
@@ -25,7 +25,7 @@ const AddVideoLinkSubtitle=()=>{
                setYoutubeVideo("");
                setVideoDescription("");
 
-               navigate(`/api/subtitles/:subtitleid/Instructor`);
+               navigate(`/api/subtitles/${subtitleid}/Instructor`);
                navigate(0);
 
 
