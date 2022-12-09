@@ -1,13 +1,13 @@
 const asyncHandler = require('express-async-handler')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
-const Instructor = require('../models/instructorModel')
+const Instructor = require('../models/InstructorModel')
 const Subtitle = require('../models/subtitleModel')
 const Task = require('../models/taskModel')
 const { appendFile } = require('fs')
 const courseModel = require('../models/courseModel.js')
-const instructor = require('../models/instructorModel.js')
-
 
 const createInstructor = asyncHandler(async (req, res) => { 
     const { username, password } = req.body

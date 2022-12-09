@@ -1,10 +1,15 @@
 const asyncHandler = require('express-async-handler')
+const req = require('express/lib/request')
 // const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
+const Instructor = require('../models/InstructorModel')
+const CorporateTrainee = require('../models/corporateTraineeModel')
+const IndividualTrainee = require('../models/individualTraineeModel')
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
 // @access  Public
+
 const getCourseById = asyncHandler(async (req, res) => {
     const course = await Course.findById(req.query.id)
 
@@ -19,6 +24,8 @@ const getCourseById = asyncHandler(async (req, res) => {
 // @desc    Get all courses
 // @route   GET /api/courses
 // @access  Public
+
+// search for all courses for corporate
 const corporateGetCourses = asyncHandler(async (req, res) => {
     const courses = await Course.find({}).select('-price')
     if (courses) {
@@ -29,6 +36,7 @@ const corporateGetCourses = asyncHandler(async (req, res) => {
     }
 })
 
+// search for all courses except for corporate and instructor
 const getCourses = asyncHandler(async (req, res) => {
     const courses = await Course.find({})
     if (courses) {
@@ -39,6 +47,7 @@ const getCourses = asyncHandler(async (req, res) => {
     }
 })
 
+// search for all courses for instructor
 const instructorViewCourses = asyncHandler(async (req, res) => {
     const course = await Course.find({}, 'title totalhours rating price')
     res.status(200).json(course)
@@ -49,6 +58,7 @@ const instructorViewCourses = asyncHandler(async (req, res) => {
 // @route POST /api/courses
 // @access Private
 
+// for instructor
 const addCourse = asyncHandler(async (req, res) => {
     // construct an object to add to the db
     //const discount =(req.body.discount)/100
@@ -95,6 +105,50 @@ const instructorCourses = asyncHandler(async (req, res) => {
     //while loop in Javascript to put titles' values in an array to be able to work with them in Frontend
 });
 
+const CorporateCourses = asyncHandler(async (req, res) => {
+    //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
+    const myCoursesDocuments = await CorporateTrainee.find({ _id: req.query.id }, '-_id courses' ).exec()
+    let coursesIds;
+    let flatArray;
+    console.log(myCoursesDocuments)
+    if(myCoursesDocuments[0]!=null){
+         coursesIds = myCoursesDocuments[0].courses
+         const courses =[]
+        for (let i = 0; i < coursesIds.length; i++) {
+             courses[i]=(await Course.find( {_id: coursesIds[i]} ) )// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+        }
+         flatArray = [].concat.apply([], courses);
+    }
+    // const courses = coursesIds.map( (course) => {
+        
+
+    // if (courses.length === 0) {
+    //     return res.status(200).json({ message: "No Courses to display !" })  //return is used to tell it do not complete the rest of function
+    // }
+    console.log(flatArray)
+    res.status(200).json(flatArray)
+    //while loop in Javascript to put titles' values in an array to be able to work with them in Frontend
+});
+
+
+const IndividualCourses = asyncHandler(async (req, res) => {
+    //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
+    const myCoursesDocuments = await IndividualTrainee.find({ _id: req.query.id }, '-_id courses' ).exec()
+    let coursesIds;
+    let flatArray;
+    console.log(myCoursesDocuments)
+    if(myCoursesDocuments[0]!=null){
+         coursesIds = myCoursesDocuments[0].courses
+         const courses =[]
+        for (let i = 0; i < coursesIds.length; i++) {
+             courses[i]=(await Course.find( {_id: coursesIds[i]} ) )// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+        }
+         flatArray = [].concat.apply([], courses);
+    }
+    console.log(flatArray)
+    res.status(200).json(flatArray)
+    //while loop in Javascript to put titles' values in an array to be able to work with them in Frontend
+});
 // @desc GET filtered courses by subject and price
 // @route GET /api/courses/instructor/filterMyCourses
 // @access Private
@@ -129,18 +183,19 @@ const filterMyCourses = asyncHandler(async (req, res) => {
 const searchCourse= asyncHandler(async (req,res) => {
     const title = req.query.title;
     const subject = req.query.subject;
-    const instructorName = req.query.instructor;
-    const instructorId = await instructor.find({name:instructorName}).select('_id');
+    const firstName = req.query.first;
+    const lastName = req.query.last;
 
    let result
-    if(subject == null && instructorName == null){
-        result = await courseModel.find({title: title});
+    if(subject == null && firstName == null && lastName ==null){
+        result = await Course.find({title: title});
         res.json(result);
-    } else if(title == null && instructorName == null){
-        result = await courseModel.find({subject: subject});
+    } else if(title == null && firstName == null && lastName ==null){
+        result = await Course.find({subject: subject});
         res.json(result);
     } else if(title == null && subject == null){
-        result = await courseModel.find({instructor: instructorId});
+        const instructorId = await Instructor.find({firstName:firstName,lastName:lastName}).select('_id').exec();
+        result = await Course.find({instructor: instructorId});
         res.json(result);
     } else {
         res.status(400).json({error:"No course found"});
@@ -154,8 +209,8 @@ const filterSubjectRating = asyncHandler(async (req, res) => {
     const rating = req.query.rating;
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
 
-    const result = await courseModel.find({ subject: subject });
-    const result2 = await courseModel.find({ rating: rating });
+    const result = await Course.find({ subject: subject });
+    const result2 = await Course.find({ rating: rating });
     const final = result.concat(result2);
 
     if (final.length > 0) {
@@ -180,7 +235,7 @@ const filterPrice = asyncHandler(async (req, res) => {
     //     } 
     // }
     // else{
-    const result = await courseModel.find({ price: { $lte: price } });
+    const result = await Course.find({ price: { $lte: price } });
     if (result.length > 0) {
         res.status(200).json(result);
     }
@@ -199,5 +254,7 @@ module.exports = {
     corporateGetCourses,
     searchCourse,
     filterSubjectRating,
-    filterPrice
+    filterPrice,
+    CorporateCourses,
+    IndividualCourses
 }

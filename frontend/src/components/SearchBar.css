@@ -1,0 +1,68 @@
+.searchInputs{
+    margin-top: 105px;
+    display: flex;
+}
+
+.search Input{
+    background-color:white;
+    /* border: 0; */
+    position: relative;
+    left:30px;
+    border-radius: 2px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    font-size: 18px;
+    padding: 15px;
+    height: 10px;
+    width: 350px;
+}
+
+.searchIcon {
+    position: relative;
+    right: 15px;
+    top: 8px;
+    height: 30px;
+    width: 30px;
+    background-color: white;
+    display:flex;
+    place-items: center;
+}
+
+input:focus {
+    outline: none;
+}
+
+.searchIcon svg {
+    font-size: 35px;
+}
+.box {
+    text-align: left;
+    border: black ridge 1px;
+    border-radius: 10px;
+    margin: 30px;
+    width: 20rem;
+    padding-left: 10px;
+  }
+.courses {
+    position: relative;
+    left:30px;
+    margin-top: 10px;
+    width: 380px;
+    height: 430px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+  }
+  button {
+    position:relative;
+    left: 150px;
+    bottom: 10px;
+  }
+  a:hover {
+    background-color: lightgrey;
+  }
+  
+  #clearBtn {
+    cursor: pointer;
+  }
