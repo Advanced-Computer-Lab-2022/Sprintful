@@ -5,11 +5,9 @@ const questionSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please add a title for this question'],
     },
-
     number: {
         type: Number,
     },
-    // Array of 4 choices
     choices: [{
         text: String,
         isCorrect: Boolean,
@@ -23,7 +21,5 @@ const questionSchema = mongoose.Schema({
 }, {
     timestamps: true
 })
-
-
 
 module.exports = mongoose.model('Question', questionSchema)

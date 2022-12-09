@@ -6,10 +6,35 @@ const Course = require('../models/courseModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const Instructor = require('../models/instructorModel')
+const subtitle = require('../models/subtitleModel.js')
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
 // @access  Public
+
+const getSubtitles = asyncHandler(async (req, res) => {
+    const courseId = req.query.courseId;
+    //console.log(courseId)
+    const course = await Course.find({_id:courseId});
+    const subtitleIds = course[0].subtitles
+    //console.log(course)
+    const result = []
+    let subtitleDetails = []
+    
+        //console.log("course subtitles")
+         //console.log(subtitleIds)
+        // res.json(course.subtitles);
+        for(let i=0; i<subtitleIds.length; i++){
+            subtitleDetails = await subtitle.findById(subtitleIds[i])
+            result.push(subtitleDetails.title)
+            //console.log("SUBTITLE")
+
+            //console.log(result[i])
+        }
+         res.json(result);
+    }
+)
+
 
 const getCourseById = asyncHandler(async (req, res) => {
     const course = await Course.findById(req.query.id)
@@ -17,8 +42,7 @@ const getCourseById = asyncHandler(async (req, res) => {
     if (course) {
         res.json(course)
     } else {
-        res.status(404)
-        throw new Error('Course not found')
+        res.status(400).json({ error: "No course found cid" });
     }
 })
 
@@ -32,8 +56,7 @@ const corporateGetCourses = asyncHandler(async (req, res) => {
     if (courses) {
         res.json(courses)
     } else {
-        res.status(404)
-        throw new Error('Courses not found')
+        res.status(400).json({ error: "No course found" });
     }
 })
 
@@ -179,20 +202,18 @@ const filterMyCourses = asyncHandler(async (req, res) => {
     res.status(200).json(queriedCourses)
 })
 
-
-// Search for a course based on course title or subject or instructor
-const searchCourse = asyncHandler(async (req, res) => {
+const searchCourse= asyncHandler(async (req,res) => {
     const title = req.query.title;
     const subject = req.query.subject;
     const firstName = req.query.first;
     const lastName = req.query.last;
 
-    let result
-    if (subject == null && firstName == null && lastName == null) {
-        result = await Course.find({ title: title });
+   let result
+    if(subject == null && firstName == null && lastName ==null){
+        result = await Course.find({title: title});
         res.json(result);
-    } else if (title == null && firstName == null && lastName == null) {
-        result = await Course.find({ subject: subject });
+    } else if(title == null && firstName == null && lastName ==null){
+        result = await Course.find({subject: subject});
         res.json(result);
     } else if (title == null && subject == null) {
         const instructorId = await Instructor.find({ firstName: firstName, lastName: lastName }).select('_id').exec();
@@ -226,16 +247,6 @@ const filterSubjectRating = asyncHandler(async (req, res) => {
 //filter the courses based on price (price can be FREE)
 const filterPrice = asyncHandler(async (req, res) => {
     const price = req.query.price;
-    // if(price == "FREE"){
-    //     const result = await courseModel.find({price:0}); 
-    //     if(result.length>0){
-    //         res.status(200).json(result);
-    //     }
-    //     else{
-    //         res.status(400).json({error:"No course found"});
-    //     } 
-    // }
-    // else{
     const result = await Course.find({ price: { $lte: price } });
     if (result.length > 0) {
         res.status(200).json(result);
@@ -367,6 +378,13 @@ const getCourseRating = asyncHandler(async (req, res) => {
 })
 
 
+//get subtitle id from title
+const getSubtitleId = asyncHandler(async (req, res) => {
+    const title = req.query.title;
+    const result = await subtitle.find({ title: title }).select('_id');
+    res.status(200).json(result);
+})
+
 module.exports = {
     getCourseById,
     getCourses,
@@ -380,5 +398,7 @@ module.exports = {
     filterPrice, addCourseReview, getCourseReviews,
     getCourseRating,
     CorporateCourses,
-    IndividualCourses
+    IndividualCourses,
+    getSubtitles,
+    getSubtitleId
 }

@@ -1,5 +1,5 @@
 import "./SearchBar.css"
-import SearchIcon from '@material-ui/icons/Search';
+import SearchIcon from '@mui/icons-material/Search';
 import {useState,useEffect} from 'react'
 
 function Searchbar({placeholder}){

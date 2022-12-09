@@ -20,6 +20,7 @@ const instructorSchema = mongoose.Schema({
     },
     email: {
         type: String,
+        required: [true, 'e.g. name@gmail.com'],
     },
     rating: {
         type: Number,
@@ -43,6 +44,10 @@ const instructorSchema = mongoose.Schema({
     money: {
         type: Number,
         default: 0,
+    },
+    biography: {
+        type: String,
+        default: '',
     },
 }, {
     timestamps: true

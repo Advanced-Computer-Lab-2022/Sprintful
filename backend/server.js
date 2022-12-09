@@ -6,11 +6,9 @@ const connectDB = require('./config/db')
 const port = process.env.PORT || 5000
 const cors = require("cors")
 
-
 connectDB()
  
 const app = express();
-app.use(cors())
 
 // added this line to overcome a connction error with axios.get()
 app.use(cors()) // Use this after the variable declaration

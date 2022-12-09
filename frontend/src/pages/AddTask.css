@@ -1,0 +1,81 @@
+.container ol li{
+    font-size: 1em;
+    color: #2d2c2c;
+}
+
+h1{
+    color:darkcyan;
+    text-align: center;
+}
+
+h2{
+    color:rgb(24, 83, 155);
+    text-align: center;
+    font-size: 1.3em;
+}
+
+
+input[type=text]{
+    width: 30%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+} 
+
+.title{
+    align-self: center;
+}
+
+button{
+    margin-top: 3ex;
+    width: 20%;
+}
+
+
+p{
+    text-align: center;
+}
+
+.start{
+    display: flex;
+    justify-content: center;
+    padding-top: 2em;
+    
+}
+
+.start .btn{
+    padding: .2em 1.7em;
+    border: none;
+    border-radius: .1em;
+    font-size: 1.2em;
+    color: #202020;
+    text-decoration: none;
+    background-color: #a3a39d;
+}
+
+#form{
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+#form .userid{
+    padding: .7em 2em;
+    width: 60%;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    align-self: center;
+}
+
+select{
+    padding: .7em 2em;
+    width: 60%;
+    border: none;
+    border-radius: 3px;
+    font-size: 1em;
+    align-self: center;
+}
