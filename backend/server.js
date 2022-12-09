@@ -24,6 +24,8 @@ app.use('/api/corporateTrainee', require('./routes/corporateTraineeRoutes'))
 app.use('/api/individualTrainee', require('./routes/individualTraineeRoutes'))
 app.use('/api/subtitles', require('./routes/subtitleRoutes'))
 app.use('/api/tasks', require('./routes/taskRoutes'))
+app.use('/api/answers', require('./routes/answerRoutes'))
+app.use('/api/questions', require('./routes/questionRoutes'))
 
 
 

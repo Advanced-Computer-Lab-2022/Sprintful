@@ -11,12 +11,9 @@ const questionSchema = mongoose.Schema({
     },
     // Array of 4 choices
     choices: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Choice',
-        default: [],
-        max: [4, 'Choices cannot be more than 4'],
+        text: String,
+        isCorrect: Boolean,
     }],
-
     task: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Task',
