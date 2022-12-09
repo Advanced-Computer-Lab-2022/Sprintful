@@ -6,9 +6,9 @@ const questionSchema = mongoose.Schema({
         required: [true, 'Please add a title for this question'],
     },
 
-    number: {
-        type: Number,
-    },
+    //number: {
+     //   type: Number,
+    //},
     // Array of 4 choices
     choices: [{
         text: String,

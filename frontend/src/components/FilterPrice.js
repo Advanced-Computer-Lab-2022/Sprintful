@@ -5,8 +5,12 @@ import {useState, useEffect} from 'react'
 const FilterPrice = () => {
   const [courses,setCourses] = useState([])
   const[price,setPrice] = useState(1000000)
-  const[filteredCourses,setFilteredCourses] = useState([])
-  //const [filterData,setFilterData]=useState([]);
+  const [subject, setSubject] = useState("")
+  const [rating, setRating] = useState(0)
+  //const[filteredPriceCourses,setFilteredPriceCourses] = useState([])
+  //const[filteredSubCourses,setFilteredSubCourses] = useState([])
+  //const[filteredRatingCourses,setFilteredRatingCourses] = useState([])
+  const [filterData,setFilterData]=useState([]);
   // const params = new URLSearchParams(window.location.search);
   // console.log(params.get('price'))
 
@@ -15,7 +19,7 @@ const FilterPrice = () => {
         await axios.get('http://localhost:5000/api/courses/').then(
        (res) => { 
            const courses = res.data
-           console.log(courses)
+           //console.log(courses)
            setCourses(courses)
        }
         );
@@ -24,22 +28,57 @@ const FilterPrice = () => {
 }, [])
 
 
-const handleOption = async (event) =>{
+const handlePriceOption = async (event) =>{
   const priceSelected = event.target.value
   setPrice(priceSelected)
   await axios.post(`http://localhost:5000/api/courses/filterPrice?price=${price}`).then(
     (res) => { 
         console.log(price)
         const courses = res.data
-        console.log("hello")
+        console.log("price")
         console.log(courses)
-        setFilteredCourses(courses)
+        setFilterData(courses)
     }
      );
 }
 
+const handleSubOption = async (event) =>{
+  const subSelected = event.target.value
+  setSubject(subSelected)
+  await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}`).then(
+    (res) => { 
+        console.log(subject)
+        const courses = res.data
+        console.log("subject")
+        console.log(courses)
+        setFilterData(courses)
+    }
+     );
+}
+
+const handleRatingOption = async (event) =>{
+  const ratingSelected = event.target.value
+  setRating(ratingSelected)
+  await axios.post(`http://localhost:5000/api/courses/filter?rating=${rating}`).then(
+    (res) => { 
+        console.log(rating)
+        if(res.status===400){
+          // alert("No courses found")
+          setFilterData([])
+        }
+        else{
+        const courses = res.data
+        console.log("rating")
+        console.log(courses)
+        setFilterData(courses)
+        }
+    }
+     );
+}
+
+
 const viewCourse = async(event) =>{
-  
+  //navigates to course details
 }
 
 //const handleFilter = async (event) =>{
@@ -74,7 +113,7 @@ return(
   <div classname="filter">
       <div class="priceList">
         <select class="list"
-          onChange={(e) => handleOption(e)}
+          onChange={(e) => handlePriceOption(e)}
         >
           {/* assuming price range is 0-5000 */}
           <option selected disabled key="0" value="-1"> Select a price</option> 
@@ -87,7 +126,9 @@ return(
       </div>
 
       <div class="subjectList">
-        <select class="list">
+        <select class="list"
+          onChange={(e) => handleSubOption(e)}
+        >
           <option selected disabled> Choose a course' subject</option>
           {courses.map((op) => (
             <option key={op.id} value={op.id}> {op.subject} </option>
@@ -96,7 +137,9 @@ return(
       </div>
 
       <div class="ratingList">
-        <select class="list">
+        <select class="list"
+        onChange={(e) => handleRatingOption(e)}
+        >
           <option selected disabled> Choose a course' rating</option>
           <option key="1" value="1">1 Star </option>
           <option key="2" value="2">2 Stars</option>
@@ -106,13 +149,31 @@ return(
         </select> 
       </div>
 
-      <div class="results">
+      <div class="price results">
         <ul>
-        {filteredCourses.map((course) => (
+        {filterData.map((course) => (
+          <li key={course._id} onClick={viewCourse}>{course.title}</li>
+        ))}
+        </ul>
+        {/*setFilteredCourses([])*/}
+      </div>
+
+       <div class="subject results">
+        <ul>
+        {filterData.map((course) => (
+          <li key={course._id} onClick={viewCourse}>{course.title}</li>
+        ))}
+        </ul>
+       
+        </div>
+
+        <div class="rating results">
+        <ul>
+        {filterData.map((course) => (
           <li onClick={viewCourse}>{course.title}</li>
         ))}
         </ul>
-      </div>
+        </div>
 
   </div>
 )

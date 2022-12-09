@@ -17,6 +17,7 @@ const AddTaskMain = () => {
      const [option, setOption] = useState("");
      const [subtitleOption, setSubtitleOption]= useState("");
      const [subtitles, setSubtitles] = useState([]);
+     const [title,setTitle] = useState("");
     
 
      useEffect( ()=>{
@@ -81,6 +82,20 @@ const AddTaskMain = () => {
     
     console.log(courses)
 
+    const handleSubmit = async (e) => {
+        // const task={
+        //     title
+        // }
+        // const response = await fetch('/api/courses/',{
+        //     method:'POST',
+        //     body :JSON.stringify(task),
+        //     headers :{
+        //         'Content-Type':'application/json'
+        //     }
+        //    })
+        
+    }
+
 return(
     <div className='container'>
     <h1 className='title text-light' >Task Application</h1>
@@ -93,7 +108,7 @@ return(
         <li>The result will be declared at the end of the quiz.</li>
     </ol>
 
-      <form id="form">
+      <form id="form" onSubmit={handleSubmit}>
          {/* <input ref={inputRef} className="userid" type="text" placeholder='Task Title' />  */}
          <p>Choose course</p>
           <select
@@ -128,10 +143,15 @@ return(
             <option key="1" value="option"> Final Exam </option>
         </select> 
 
-            <label>
-                <input type="radio" name="option" value="option1" />
-            </label>
-        
+        <p>Task title</p>
+        <input 
+            id = "title"
+            type="text"
+            onChange={(e)=>setTitle(e.target.value)}
+            value={title}
+        />
+
+
     </form>  
     {/* <Link to={`/addTask/${option}/${subtitleOption}`} className="btn btn-primary">Start Quiz</Link> */}
 
