@@ -44,7 +44,7 @@ function App() {
                 />
 
                 <Route 
-                  exact path="/api/subtitles/:courseid/:subtitleid/Instructor"
+                  exact path="/api/subtitles/:subtitleid/Instructor"
                   element={<SubtitlePageInst/>}
                 />
               </Routes>
