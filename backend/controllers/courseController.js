@@ -3,14 +3,10 @@ const courseModel = require('../models/courseModel')
 const req = require('express/lib/request')
 // const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
-<<<<<<< HEAD
 const Instructor = require('../models/InstructorModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
-||||||| 8fbd869
-=======
-const Instructor=require('../models/instructorModel')
->>>>>>> Reem.sprint2
+const Instructor = require('../models/instructorModel')
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
@@ -25,7 +21,7 @@ const getCourseById = asyncHandler(async (req, res) => {
         res.status(404)
         throw new Error('Course not found')
     }
- })
+})
 
 // @desc    Get all courses
 // @route   GET /api/courses
@@ -93,7 +89,7 @@ const addCourse = asyncHandler(async (req, res) => {
     const newCoursesList = ((await Instructor.findById('635a591011ecdc081ce890f7')).courses).concat(newcourseid); //.concat concatenates the new array
     const updatedcoursesArray = await Instructor.findByIdAndUpdate('635a591011ecdc081ce890f7', { courses: newCoursesList }).exec();
     //put the static id in lines 
-   res.status(200).json(newCourse)
+    res.status(200).json(newCourse)
 })
 
 // @desc GET courses by instructor
@@ -113,20 +109,20 @@ const instructorCourses = asyncHandler(async (req, res) => {
 
 const CorporateCourses = asyncHandler(async (req, res) => {
     //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
-    const myCoursesDocuments = await CorporateTrainee.find({ _id: req.query.id }, '-_id courses' ).exec()
+    const myCoursesDocuments = await CorporateTrainee.find({ _id: req.query.id }, '-_id courses').exec()
     let coursesIds;
     let flatArray;
     console.log(myCoursesDocuments)
-    if(myCoursesDocuments[0]!=null){
-         coursesIds = myCoursesDocuments[0].courses
-         const courses =[]
+    if (myCoursesDocuments[0] != null) {
+        coursesIds = myCoursesDocuments[0].courses
+        const courses = []
         for (let i = 0; i < coursesIds.length; i++) {
-             courses[i]=(await Course.find( {_id: coursesIds[i]} ) )// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+            courses[i] = (await Course.find({ _id: coursesIds[i] }))// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
         }
-         flatArray = [].concat.apply([], courses);
+        flatArray = [].concat.apply([], courses);
     }
     // const courses = coursesIds.map( (course) => {
-        
+
 
     // if (courses.length === 0) {
     //     return res.status(200).json({ message: "No Courses to display !" })  //return is used to tell it do not complete the rest of function
@@ -139,17 +135,17 @@ const CorporateCourses = asyncHandler(async (req, res) => {
 
 const IndividualCourses = asyncHandler(async (req, res) => {
     //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
-    const myCoursesDocuments = await IndividualTrainee.find({ _id: req.query.id }, '-_id courses' ).exec()
+    const myCoursesDocuments = await IndividualTrainee.find({ _id: req.query.id }, '-_id courses').exec()
     let coursesIds;
     let flatArray;
     console.log(myCoursesDocuments)
-    if(myCoursesDocuments[0]!=null){
-         coursesIds = myCoursesDocuments[0].courses
-         const courses =[]
+    if (myCoursesDocuments[0] != null) {
+        coursesIds = myCoursesDocuments[0].courses
+        const courses = []
         for (let i = 0; i < coursesIds.length; i++) {
-             courses[i]=(await Course.find( {_id: coursesIds[i]} ) )// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+            courses[i] = (await Course.find({ _id: coursesIds[i] }))// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
         }
-         flatArray = [].concat.apply([], courses);
+        flatArray = [].concat.apply([], courses);
     }
     console.log(flatArray)
     res.status(200).json(flatArray)
@@ -186,27 +182,27 @@ const filterMyCourses = asyncHandler(async (req, res) => {
 
 
 // Search for a course based on course title or subject or instructor
-const searchCourse= asyncHandler(async (req,res) => {
+const searchCourse = asyncHandler(async (req, res) => {
     const title = req.query.title;
     const subject = req.query.subject;
     const firstName = req.query.first;
     const lastName = req.query.last;
 
-   let result
-    if(subject == null && firstName == null && lastName ==null){
-        result = await Course.find({title: title});
+    let result
+    if (subject == null && firstName == null && lastName == null) {
+        result = await Course.find({ title: title });
         res.json(result);
-    } else if(title == null && firstName == null && lastName ==null){
-        result = await Course.find({subject: subject});
+    } else if (title == null && firstName == null && lastName == null) {
+        result = await Course.find({ subject: subject });
         res.json(result);
-    } else if(title == null && subject == null){
-        const instructorId = await Instructor.find({firstName:firstName,lastName:lastName}).select('_id').exec();
-        result = await Course.find({instructor: instructorId});
+    } else if (title == null && subject == null) {
+        const instructorId = await Instructor.find({ firstName: firstName, lastName: lastName }).select('_id').exec();
+        result = await Course.find({ instructor: instructorId });
         res.json(result);
     } else {
-        res.status(400).json({error:"No course found"});
+        res.status(400).json({ error: "No course found" });
     }
-}) 
+})
 
 //filter the courses based on a subject and/or rating
 
@@ -253,13 +249,13 @@ const filterPrice = asyncHandler(async (req, res) => {
 
 //add a review on a course
 
-const addCourseReview = asyncHandler( async (req, res, next) => {
-    const { rating, comment, courseId} = req.body;
+const addCourseReview = asyncHandler(async (req, res, next) => {
+    const { rating, comment, courseId } = req.body;
     console.log("I am woring");
     const review = {
-       // user: req.user._id,    //no authentication 
+        // user: req.user._id,    //no authentication 
         //name: req.user.name,
-        rating: Number (rating),
+        rating: Number(rating),
         comment
 
     }
@@ -276,33 +272,33 @@ const addCourseReview = asyncHandler( async (req, res, next) => {
             }    
         });
     }*/
-        //in else part
-        course.reviews.push(comment);
-        course.numofReviews = course.reviews.length;
-        //review.rating = Number (rating);
-        course.ratingsArray.push(rating);
+    //in else part
+    course.reviews.push(comment);
+    course.numofReviews = course.reviews.length;
+    //review.rating = Number (rating);
+    course.ratingsArray.push(rating);
 
-        //course.rating = (ratingsArray / ratingsArray.length) * ratingsArray.length;
+    //course.rating = (ratingsArray / ratingsArray.length) * ratingsArray.length;
 
-            var total = 0;
-            for(var i = 0; i < course.ratingsArray.length; i++) {
-                total += course.ratingsArray[i];
-            }
-            var avg = total / course.ratingsArray.length; 
-        course.rating = avg;    
-        console.log(avg);
-        console.log(course.rating);
+    var total = 0;
+    for (var i = 0; i < course.ratingsArray.length; i++) {
+        total += course.ratingsArray[i];
+    }
+    var avg = total / course.ratingsArray.length;
+    course.rating = avg;
+    console.log(avg);
+    console.log(course.rating);
     //course.rating = course.reviews.reduce((acc, item) => item.rating + acc, 0) / course.reviews.length
-   /* const updatedCurrentRating = await Course.findOneAndUpdate(
-        { _id: req.params.courseId },
-        [{$set: { rating: { $avg: 'rating.star' } }}],
-        {
-           new: true,
-           useFindAndModify: true
-        });
-    console.log(updatedCurrentRating);
-*/
-    await course.save({ validateBeforeSave: false});
+    /* const updatedCurrentRating = await Course.findOneAndUpdate(
+         { _id: req.params.courseId },
+         [{$set: { rating: { $avg: 'rating.star' } }}],
+         {
+            new: true,
+            useFindAndModify: true
+         });
+     console.log(updatedCurrentRating);
+ */
+    await course.save({ validateBeforeSave: false });
 
     res.status(200).json({
         success: true
@@ -312,18 +308,18 @@ const addCourseReview = asyncHandler( async (req, res, next) => {
 const getCourseReviews = asyncHandler(async (req, res) => {
     const course = await Course.findById(req.params.id)
 
-   /* if (course) {
-        res.json(course)
-    } else {
-        res.status(404)
-        throw new Error('Course not found')
-    }*/
+    /* if (course) {
+         res.json(course)
+     } else {
+         res.status(404)
+         throw new Error('Course not found')
+     }*/
 
     //let course;
-    for(var i = 0; i < courseModel.length; i++) {
-        if(courseModel[i]._id == "6385c9f46f6bb55a030163d4"){
+    for (var i = 0; i < courseModel.length; i++) {
+        if (courseModel[i]._id == "6385c9f46f6bb55a030163d4") {
             console.log("I am working 0");
-             course = courseModel[i];
+            course = courseModel[i];
         }
     }
     //const courseId = req.body;
@@ -334,42 +330,42 @@ const getCourseReviews = asyncHandler(async (req, res) => {
     let allReviews
     let rating
     console.log("I am working 2");
-        allReviews = await course.reviews;
-        console.log("I am working 3");
-        res.json(allReviews);
-        rating = await course.rating;
-        console.log("I am working 4");
-        res.json(rating);
-        console.log("I am working 5");
-        if (allReviews.length > 0 && rating > 0) {
-            res.status(200).json(result);
-        }
-        else {
-            res.status(400).json({ error: "No reviews found" });
-        }
-    })
+    allReviews = await course.reviews;
+    console.log("I am working 3");
+    res.json(allReviews);
+    rating = await course.rating;
+    console.log("I am working 4");
+    res.json(rating);
+    console.log("I am working 5");
+    if (allReviews.length > 0 && rating > 0) {
+        res.status(200).json(result);
+    }
+    else {
+        res.status(400).json({ error: "No reviews found" });
+    }
+})
 
-    const getCourseRating = asyncHandler(async (req, res) => {
-        console.log("I am working 0");
-        const course = await Course.findById('6385c9f46f6bb55a030163d4')
-        console.log("I am working 1");
-        let allReviews
-        let rating
-        console.log("I am working 2");
-            allReviews = await course.reviews;
-            console.log("I am working 3");
-            rating = await course.rating;
-            console.log("I am working 4");  
-            if (allReviews.length > 0 && rating > 0) {
-                res.status(200).json(rating);
-            }
-            else {
-                res.status(400).json({ error: "No reviews found" });
-            }
-            console.log("I am working 5");
-            console.log(allReviews);
-            console.log(rating);
-    })
+const getCourseRating = asyncHandler(async (req, res) => {
+    console.log("I am working 0");
+    const course = await Course.findById('6385c9f46f6bb55a030163d4')
+    console.log("I am working 1");
+    let allReviews
+    let rating
+    console.log("I am working 2");
+    allReviews = await course.reviews;
+    console.log("I am working 3");
+    rating = await course.rating;
+    console.log("I am working 4");
+    if (allReviews.length > 0 && rating > 0) {
+        res.status(200).json(rating);
+    }
+    else {
+        res.status(400).json({ error: "No reviews found" });
+    }
+    console.log("I am working 5");
+    console.log(allReviews);
+    console.log(rating);
+})
 
 
 module.exports = {
