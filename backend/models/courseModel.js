@@ -19,6 +19,24 @@ const courseSchema = mongoose.Schema({
         type: Number,
         default: 0,
     },
+   /* ratingsArray: [{
+        user: {
+            type: 'ObjectId',
+            ref:'user'   
+        },
+        username:String,
+        //experience: String,
+        //feedback: String,
+        star: Number,
+        date: {
+            type: Date,
+            default:Date.now
+        }
+     }],*/
+    ratingsArray:{    //Not the best option but will be updated after authentication
+        type: Array,
+        default: [],
+    },
     shortsummary: {
         type: String,
         requird: [true, 'Please add a short summary'],
@@ -26,6 +44,10 @@ const courseSchema = mongoose.Schema({
     reviews: {
         type: Array,
         default: [],
+    },
+    numofReviews: {
+        type: Number,
+        default: 0,
     },
     instructor: {
         type: mongoose.Schema.Types.ObjectId,

@@ -26,6 +26,10 @@ const instructorSchema = mongoose.Schema({
         default: 0,
         range: [0, 5],
     },
+    ratingsArray:{    //Not the best option but will be updated after authentication
+        type: Array,
+        default: [],
+    },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course',

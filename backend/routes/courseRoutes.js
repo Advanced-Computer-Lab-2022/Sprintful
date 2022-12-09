@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
 const { getCourseById, getCourses,corporateGetCourses, addCourse, instructorCourses, filterMyCourses, searchCourse, filterSubjectRating, filterPrice,CorporateCourses,IndividualCourses} = require('../controllers/courseController')
+const { getCourseById, getCourses,corporateGetCourses, addCourse, instructorCourses, filterMyCourses, searchCourse, filterSubjectRating, filterPrice, addCourseReview, getCourseReviews, getCourseRating} = require('../controllers/courseController')
 
 router.get('/search', searchCourse)
 router.route('/').get(getCourseById) // get course by id
@@ -14,4 +15,9 @@ router.get('/instructor/:id', instructorCourses) // get all courses for instruct
 router.get('/instructor/filterMyCourses', filterMyCourses) // get all courses for instructor filtered
 router.get('/filter', filterSubjectRating) // This is a POST request to the /api/guest endpoint
 router.post('/filterP', filterPrice) // This is a GET request to the /api/guest endpoint
+router.put('/review', addCourseReview );
+router.route('/reviewsnratings').get(getCourseRating)
+router.route('/getreviews/:id').get(getCourseReviews);
+
+
 module.exports = router
