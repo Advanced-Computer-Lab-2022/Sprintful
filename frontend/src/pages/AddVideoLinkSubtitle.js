@@ -18,12 +18,14 @@ const AddVideoLinkSubtitle=()=>{
 
           //functions
         const handleSubmit=async(e)=>{
+            e.preventDefault();
             const update ={youtubevideo:youtubeVideo ,videoDescription:videoDescription}
          
             const response=await axios.patch(`/api/subtitles/addVideoLink/${subtitleid}`,update);
             console.log("subtitle Updated",response.data)
-               setYoutubeVideo("");
-               setVideoDescription("");
+              //setYoutubeVideo("");
+               //setVideoDescription(""); 
+              // window.location.href=`/api/subtitles/${subtitleid}/Instructor`
 
                navigate(`/api/subtitles/${subtitleid}/Instructor`);
                navigate(0);
@@ -38,7 +40,7 @@ const AddVideoLinkSubtitle=()=>{
    
     return(
         <div className="create">
-            <form onSubmit={handleSubmit}>
+            <form >
                 <h3>Add a video link  and  video description </h3>
                     <label>Video Link :</label>
                     <input 
@@ -54,7 +56,7 @@ const AddVideoLinkSubtitle=()=>{
                     value={videoDescription}
                      />
 
-                     <button>Done</button>
+                     <button onClick={handleSubmit}>Done</button>
 
 
             </form>
