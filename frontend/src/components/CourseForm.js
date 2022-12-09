@@ -15,7 +15,7 @@ const [subject,setSubject]=useState('Computer Science')
 const navigate=useNavigate();
 
 const handleSubmit= async (e)=>{
-    // e.preventDefault()
+    e.preventDefault()
    const Course ={
    title,
    subject,
