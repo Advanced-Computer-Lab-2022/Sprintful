@@ -21,7 +21,7 @@ const AddVideoLinkSubtitle=()=>{
             e.preventDefault();
             const update ={youtubevideo:youtubeVideo ,videoDescription:videoDescription}
          
-            const response=await axios.patch(`/api/subtitles/addVideoLink/${subtitleid}`,update);
+            const response=await axios.patch(`http://localhost:5000/api/subtitles/addVideoLink/${subtitleid}`,update);
             console.log("subtitle Updated",response.data)
               //setYoutubeVideo("");
                //setVideoDescription(""); 
@@ -32,12 +32,6 @@ const AddVideoLinkSubtitle=()=>{
 
 
         }  
-   
-   
-   
-   
-   
-   
     return(
         <div className="create">
             <form >

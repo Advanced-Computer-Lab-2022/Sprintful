@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+require('dotenv').config()
 const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const { model } = require('mongoose')
@@ -39,6 +40,11 @@ const loginAdmin =asyncHandler (async(req,res)=>{
     }
 }
 )
+const logout = async (req, res) => {
+    const token = createToken("");
+    res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
+    res.status(200).json({message: "You have logged out!"})
+}
 //res.status(200).json(admins)
 
 
@@ -47,33 +53,35 @@ const loginAdmin =asyncHandler (async(req,res)=>{
 // @access Private
 const createAdmin = asyncHandler(async (req, res) => { 
     const { username, password } = req.body
-
-   const adminExists = await Admin.findOne({ username })
-
-   if (adminExists) {
-        res.status(400)
-        throw new Error('Admin already exists')
-    }
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password,salt)
-    
-    const admin = await Admin.create({
-        username,
-        password : hashedPassword
-    })
-
-    if (admin) {
-        res.status(201).json({
-            _id: admin._id,
-            username: admin.username,
-            password: admin.password,
-            token: generateToken(admin._id)
-
+    try {
+        const adminExists = await Admin.findOne({ username })
+        if (adminExists) {
+                res.status(400)
+                throw new Error('Admin already exists')
+        }
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password,salt)
+        const admin = await Admin.create({
+            username,
+            password : hashedPassword
         })
-    } else {
-        res.status(400)
-        throw new Error('Invalid admin data')
+
+        if (admin) {
+            res.status(201).json({
+                _id: admin._id,
+                username: admin.username,
+                password: admin.password,
+                // token: generateToken(admin._id)
+            })
+        }
+        else {
+            res.status(400)
+            throw new Error('Invalid admin data')
+        }
     }
+    catch (error) {
+        res.status(400).json({ error: error.message })
+    } 
 })
 
 
@@ -84,4 +92,4 @@ const generateToken =(id) =>{
     })
 }
 
-module.exports = { createAdmin,loginAdmin, getAdmin}
+module.exports = { createAdmin,loginAdmin, getAdmin, logout}
