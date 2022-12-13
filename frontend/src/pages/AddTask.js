@@ -8,6 +8,8 @@ import {useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import "./AddTask.css"
 import axios from 'axios'
+import {useNavigate} from "react-router";
+//import { getCourseById } from '../../../backend/controllers/courseController'
 //import Course from '../../../models/courseModel';
 
 
@@ -18,29 +20,20 @@ const AddTaskMain = () => {
      const [subtitleOption, setSubtitleOption]= useState("");
      const [subtitles, setSubtitles] = useState([]);
      const [title,setTitle] = useState("");
-    
+     const[subId, setSubId]=useState(0);
 
      useEffect( ()=>{
         const fetchCourses =async () =>{
             await axios.get('http://localhost:5000/api/courses/').then(
            (res) => { 
                const courses = res.data
-               //console.log(courses)
                setCourses(courses)
+               console.log(courses)
+
            }
             );
         }
-
-        // const fetchSubtitles =async () =>{
-        //     await axios.get(`http://localhost:5000/api/courses/getSubtitles?courseId=${option}`).then(
-        //    (res) => { 
-        //        const courses = res.data
-        //        //console.log(courses)
-        //        setSubtitles(courses)
-        //    }
-        //     );
-        // }
-
+        
         fetchCourses()
        // fetchSubtitles()
     }, [])
@@ -53,18 +46,22 @@ const AddTaskMain = () => {
            setSubtitles(courses)
        }
         );
+        //getId();
     }
+    //let subId=0;
+    const getId = async () =>{
+        await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
+            (res) => { 
+                const subIdArr = res.data
+                //console.log("1"+subId)
+                //setSubtitles(courses)
+                setSubId( subIdArr.reduce((acc, curr) => `${acc}${curr._id}` ,''))
 
-    // const getId = async () =>{
-    //     await axios.get(`http://localhost:5000/api/courses/getSubtitleId?id=${finalOption}`).then(
-    //         (res) => { 
-    //             const courses = res.data
-    //             //console.log(courses)
-    //             setSubtitles(courses)
-    //         }
-    //          );
-    // }
-
+                //console.log("inside "+subId)
+            }
+             );
+    }
+//console.log("out"+ subId)
 
     // useEffect( ()=>{
     //     const fecthSubtitles =async () =>{
@@ -79,26 +76,39 @@ const AddTaskMain = () => {
     //     fecthSubtitles()
     // }, [])
 
-    
-    console.log(courses)
+    console.log("outside"+subId)
+    //console.log(courses)
+    const navigate=useNavigate();
 
     const handleSubmit = async (e) => {
-        // const task={
-        //     title
-        // }
-        // const response = await fetch('/api/courses/',{
-        //     method:'POST',
-        //     body :JSON.stringify(task),
-        //     headers :{
-        //         'Content-Type':'application/json'
-        //     }
-        //    })
+        e.preventDefault();
+        const task={
+            title
+        }
+        const response = await fetch(`http://localhost:5000/api/tasks/`,{
+            method:'POST',
+            body :JSON.stringify(task),
+            headers :{
+                'Content-Type':'application/json'
+            }
+           })
+
+           const json =await response.json()
+           if(response.ok){
+       
+          //const taskId=json._id;
+          console.log('Task added',json)
+       
+           }
+           console.log("id in handleSubmit: "+subId)
+           navigate(`/addTask/${subId}`);
+           navigate(0);
         
     }
 
 return(
-    <div className='container'>
-    <h1 className='title text-light' >Task Application</h1>
+    <div className='task'>
+    <h1 className='title'>Task Application</h1>
 
     <ol>
         <li>You will be asked questions one after another.</li>
@@ -115,6 +125,7 @@ return(
             placeholder= "View Options"
             value={option}
             onChange={(e) => setOption(e.target.value)}
+            onClick={()=>fetchSubtitles()}
          > 
 
          <option selected disabled key="0"> Select a course</option>
@@ -132,13 +143,14 @@ return(
          <p>Choose Subtitle</p>
 
         <select
-        onClick={()=>fetchSubtitles()}
-        onChange={(e) => setSubtitleOption(e.target.value)}
+        // onClick={()=>getId()}
+        onChange={(e) => setSubtitleOption(e.target.value)
+        }
         >
          <option selected disabled key="0"> Select a Subtitle</option>
 
          {subtitles.map((sub) => (
-            <option key={sub.id} value={sub.id}> {sub} </option>
+            <option key={sub.id} value={sub.title}> {sub} </option>
             ))}   
             <option key="1" value="option"> Final Exam </option>
         </select> 
@@ -148,17 +160,18 @@ return(
             id = "title"
             type="text"
             onChange={(e)=>setTitle(e.target.value)}
+            onClick={()=>getId()}
             value={title}
         />
 
+        <button>Continue</button>
 
     </form>  
     {/* <Link to={`/addTask/${option}/${subtitleOption}`} className="btn btn-primary">Start Quiz</Link> */}
 
-    <div className='start'>
-        <Link className='btn' to={'questions'}>Continue</Link>
-    </div>
-
+    {/* <div className='start'>
+        <Link onClick={handleSubmit} className='btn' to={'questions'}>Continue</Link>
+    </div> */}
 </div>
 )
 }
