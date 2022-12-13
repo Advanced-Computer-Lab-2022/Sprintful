@@ -6,8 +6,8 @@ export default function ProfileDropdownMenu() {
     <div id="app">
       <div className="text-end">
         <PopupMenu>
-          <button className="btn btn-primary">
-            <small>Menu</small>
+          <button className="">
+            My profile
           </button>
 
           <div className="card text-start">
@@ -40,14 +40,12 @@ export default function ProfileDropdownMenu() {
                 style={{ margin: "0 -24px 0" }}
               >
                 <button className="list-group-item list-group-item-action px-4">
-                  <small>Change Requests</small>
+                  <small>My Courses</small>
                 </button>
                 <button className="list-group-item list-group-item-action px-4">
-                  <small>Pending Requests</small>
+                  <small>Report</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4">
-                  <small>Other Requests</small>
-                </button>
+
               </div>
 
               <hr style={{ margin: "0 -24px 24px" }} />
