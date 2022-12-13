@@ -1,25 +1,45 @@
-.container ol li{
+.task ol{
     font-size: 1em;
     color: #2d2c2c;
 }
+.task li{
+background-color: white;
+padding: 1em;
+margin-bottom: 0cm;
+margin-top: 0cm;
+font: 1em sans-serif;
+}
+/* .task {
+background-color: white;
+} */
 
-h1{
+.task h1{
     color:darkcyan;
     text-align: center;
 }
 
-h2{
+.task h2{
     color:rgb(24, 83, 155);
     text-align: center;
     font-size: 1.3em;
 }
 
+.task select{
+    padding: .7em 2em;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    align-self: center;
+}
 
-input[type=text]{
-    width: 30%;
+.task input[type=text]{
+    width: 50%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
+    align-items: center;
+    align-self: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -29,13 +49,16 @@ input[type=text]{
     align-self: center;
 }
 
-button{
+.task button{
     margin-top: 3ex;
     width: 20%;
+    align-items: center;
+    align-self: center;
+    align-content: center;
 }
 
 
-p{
+.task p{
     text-align: center;
 }
 
@@ -56,7 +79,7 @@ p{
     background-color: #a3a39d;
 }
 
-#form{
+#form .task{
     display: flex;
     justify-content: center;
     margin-top: 2em;
@@ -71,11 +94,3 @@ p{
     align-self: center;
 }
 
-select{
-    padding: .7em 2em;
-    width: 60%;
-    border: none;
-    border-radius: 3px;
-    font-size: 1em;
-    align-self: center;
-}
