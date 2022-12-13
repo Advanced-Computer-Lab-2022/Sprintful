@@ -25,7 +25,7 @@ import React from "react";
 import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
-
+import TraineeHome from './pages/TraineeHome';
 function App() {
   return (
     <div className="App">
@@ -83,6 +83,10 @@ function App() {
             <Route
               path="/quiz"
               element={<Quiz />}
+            />
+            <Route
+              path="/traineehome"
+              element={<TraineeHome />}
             />
 
             {/* Somaya */}
