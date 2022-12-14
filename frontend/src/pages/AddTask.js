@@ -21,6 +21,8 @@ const AddTaskMain = () => {
      const [subtitles, setSubtitles] = useState([]);
      const [title,setTitle] = useState("");
      const[subId, setSubId]=useState(0);
+     const[courseRef, setCourseRef]= useState(false)
+     const[task, setTask] = useState([])
 
      useEffect( ()=>{
         const fetchCourses =async () =>{
@@ -50,6 +52,10 @@ const AddTaskMain = () => {
     }
     //let subId=0;
     const getId = async () =>{
+        if(subtitleOption==="option"){
+            setSubId(option._id)
+            setCourseRef(true)
+        }
         await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
             (res) => { 
                 const subIdArr = res.data
@@ -82,9 +88,19 @@ const AddTaskMain = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const task={
-            title
-        }
+        if(courseRef){
+        setTask({
+            title: title, 
+            course: subId
+        })
+    }
+    else{
+        setTask({
+            title: title, 
+            subtitle: subId
+        })
+
+    }
         const response = await fetch(`http://localhost:5000/api/tasks/`,{
             method:'POST',
             body :JSON.stringify(task),
@@ -96,14 +112,14 @@ const AddTaskMain = () => {
            const json =await response.json()
            if(response.ok){
        
-          //const taskId=json._id;
+          const taskId=json._id;
           console.log('Task added',json)
        
-           }
+           
            console.log("id in handleSubmit: "+subId)
-           navigate(`/addTask/${subId}`);
+           navigate(`/addQuestion/${taskId}`);
            navigate(0);
-        
+           }   
     }
 
 return(

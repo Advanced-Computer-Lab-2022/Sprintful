@@ -98,7 +98,7 @@ function App() {
             />
 
             <Route
-              path="/addTask/questions"
+              path="/addQuestion/:taskId"
               element={<AddQuestion />}
             />
 
