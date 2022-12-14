@@ -1,51 +1,47 @@
-// import "./SearchBar.css"
-import SearchIcon from '@mui/icons-material/Search';
+import "./SearchBar.css"
 import {useState,useEffect} from 'react'
+import axios from 'axios';
 
 function Searchbar({placeholder}){
-    const [courses,setCourses] = useState(null)
-    const [filterData,setFilterData]=useState([]);
-    useEffect( ()=>{
-        const fecthCourses =async () =>{
-            const response =await fetch('/api/courses/search')
-            const json = await response.json()
+    const [courses,setCourses] = useState([])
+    const [searchTerm,setSearchTerm] = useState(null)
 
-            if(response.ok){
-                setCourses(json)
-            }
-        }
-
-        fecthCourses()
-    }, [])
-    const handleFilter = (event) =>{
-        const searchWord =event.target.value
-        const newFilter = courses.filter((value)=>{
-            return value.title.toLowerCase().includes(searchWord.toLowerCase()) ||  value.subject.toLowerCase().includes(searchWord.toLowerCase()) 
-            
+    useEffect(() => {
+        axios.get(`http://localhost:5000/api/courses/search?searchTerm=${searchTerm}`)
+        .then((res) => {
+            console.log(res.data)
+            setCourses(res.data);
         })
-        setFilterData(newFilter)
+        .catch((err) => {
+            console.log(err);
+        });
+    }, [searchTerm]);
+
+    const handleOnChange = async(e) =>{
+        e.preventDefault()
+        var a = document.getElementById('input').value  ;
+        setSearchTerm(a)
+        console.log(searchTerm)
     }
     return(
         <div className="search">
             <div className="searchInputs">
-                <input type="text" placeholder={placeholder} onChange={handleFilter}/>
+                <input id={'input'} value={searchTerm} type="text" placeholder={placeholder}  />
                 <div className="searchIcon">
-                     <SearchIcon/>
+                    <button onClick={handleOnChange} > Search </button>
                 </div>
             </div>
             <div className='courses'>
-            {courses && filterData.map((course) => (
+            {courses  && courses.map((course) => (
                 <div className="box" key={course._id}>
                 <p>{course.title}</p>
+                <p>Course Id:{course._id}</p>
                 <p>totalhours: {course.totalhours}</p>
                 <p>rating: {course.rating}</p>
                 <button >View Course Details</button>
-
-
               </div>
-                // <p key= {course._id}>{course.title}</p>
             ))}
-        </div>
+            </div>
         </div>
     )
 }
