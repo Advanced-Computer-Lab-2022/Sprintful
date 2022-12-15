@@ -3,9 +3,6 @@ import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import {useNavigate} from "react-router";
 
-
-
-
 const SubtitlePageInst= ()=>{
     //states
     const[content,setContent]=useState('');
@@ -25,9 +22,7 @@ const SubtitlePageInst= ()=>{
 
 //function for fetching subtitle data
     const fetchdata=async()=>{
-    
-        
-        const response =await axios.get(`/api/subtitles/${subtitleid}`)
+        const response =await axios.get(`http://localhost:5000/api/subtitles/${subtitleid}`)
         const subtitle=response.data;
         setContent(subtitle.content);
         setTitle(subtitle.title);

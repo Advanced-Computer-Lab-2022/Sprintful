@@ -1,5 +1,5 @@
 import axios from 'axios'
-import "./FilterDropDown.css"
+// import "./FilterDropDown.css"
 import {useState, useEffect} from 'react'
 
 const FilterPrice = () => {

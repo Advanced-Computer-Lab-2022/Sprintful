@@ -1,14 +1,14 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Course from './pages/Course'
-import Quiz from './pages/Quiz'
+import Quiz from './components/Quiz'
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import "./App.css"
+// import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
 import Navbar2 from './components/Navbar2';
 import MyCourses from './pages/MyCourses';
-import Home2 from './pages/Home2';
+import GuestHome from './pages/GuestHome';
 import About from './pages/About';
 import Video from "./pages/Video";
 import SideBar from './components/SideBar';
@@ -25,7 +25,7 @@ import React from "react";
 import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
-
+import TraineeHome from './pages/TraineeHome';
 function App() {
   return (
     <div className="App">
@@ -84,6 +84,10 @@ function App() {
               path="/quiz"
               element={<Quiz />}
             />
+            <Route
+              path="/traineehome"
+              element={<TraineeHome />}
+            />
 
             {/* Somaya */}
 
@@ -111,7 +115,7 @@ function App() {
             />
             <Route
               exact path="/"
-              element={[<Navbar2 />, <Home2 />]}
+              element={[ <GuestHome />]}
             />
             <Route
               exact path="/about"

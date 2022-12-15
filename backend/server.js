@@ -5,6 +5,8 @@ const { errorHandler } = require('./middleware/errorMiddleware')
 const connectDB = require('./config/db')
 const port = process.env.PORT || 5000
 const cors = require("cors")
+const cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser')
 
 connectDB()
  
@@ -16,7 +18,8 @@ app.use(cors()) // Use this after the variable declaration
 app.use(express.json()) // This is a middleware function that allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: false })) // This is a middleware function that allows us to accept form data
 // app.use(express.params) // This is a middleware function that allows us to accept params
-
+app.use(cookieParser());
+app.use(bodyParser.json())
 app.use('/api/admin', require('./routes/adminRoutes'))
 app.use('/api/courses', require('./routes/courseRoutes'))
 app.use('/api/instructor', require('./routes/instructorRoutes'))
@@ -27,8 +30,6 @@ app.use('/api/subtitles', require('./routes/subtitleRoutes'))
 app.use('/api/tasks', require('./routes/taskRoutes'))
 app.use('/api/answers', require('./routes/answerRoutes'))
 app.use('/api/questions', require('./routes/questionRoutes'))
-
-
 
 
 app.listen(port, () => { 

@@ -1,6 +1,7 @@
 const asyncHandler = require('express-async-handler')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
+require('dotenv').config()
 const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
 const Instructor = require('../models/instructorModel')
@@ -12,37 +13,69 @@ const Question = require('../models/questionModel.js')
 //const Choice = require('../models/choiceSchema.js')
 const instructor = require('../models/instructorModel.js')
 
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (name) => { 
+    return jwt.sign({ name }, process.env.JWT_Secret, {
+        expiresIn: maxAge
+    });
+};
+const login = async (req, res) => {
+    const instructor = await Instructor.findOne({ username: req.body.username });
+    if(instructor)
+    {
+        const auth = await bcrypt.compare(req.body.password, instructor.password);
+        if(auth){
+            const token = createToken(instructor.username);
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(200).json(instructor);
+        }
+        else{
+            res.status(400).json({ error: 'Wrong password' });
+
+        }
+    }
+    else{
+        res.status(400).json({ error: 'User not Found'});
+    }
+
+}
 const createInstructor = asyncHandler(async (req, res) => {
     const { username, password } = req.body
-
-    const instructorExists = await Instructor.findOne({ username })
-
-    if (instructorExists) {
-        res.status(400)
-        throw new Error('Instructor already exists')
-    }
-    // Hash password
-    const salt = await bcrypt.genSalt(10)
-    const hashedPassword = await bcrypt.hash(password, salt)
-
-    const instructor = await Instructor.create({
-        username,
-        password: hashedPassword
-    })
-
-    if (instructor) {
-        res.status(201).json({
-            _id: instructor._id,
-            username: instructor.username,
-            password: instructor.password,
-            token: generateToken(instructor._id)
+    try{
+        const instructorExists = await Instructor.findOne({ username })
+        if (instructorExists) {
+            res.status(400)
+            throw new Error('Instructor already exists')
+        }
+        // Hash password
+        const salt = await bcrypt.genSalt(10)
+        const hashedPassword = await bcrypt.hash(password, salt)
+        const instructor = await Instructor.create({
+            username,
+            password: hashedPassword
         })
-    } else {
-        res.status(400)
-        throw new Error('Invalid instructor data')
+        if (instructor) {
+            res.status(201).json({
+                _id: instructor._id,
+                username: instructor.username,
+                password: instructor.password,
+                // token: generateToken(instructor._id)
+            })
+        }
+        else {
+            res.status(400)
+            throw new Error('Invalid instructor data')
+        }
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message })
     }
 })
-
+const logout = async (req, res) => {
+    const token = createToken("");
+    res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
+    res.status(200).json({message: "You have logged out!"})
+}
 //NO authentication
 //Changes Milad's password
 const changePassword = async (req, res, next) => {
@@ -58,37 +91,6 @@ const changePassword = async (req, res, next) => {
         return res.status(400).json({ status: false, error: "Error Occured" });
     }
 }
-//Rate and add a review to the instructor
-const addInstructorReview = asyncHandler(async (req, res, next) => {
-    const { rating, comment } = req.body;
-    const instructorId = req.query.id;
-    console.log("I am woring");
-    const review = {
-        rating: Number(rating),
-        comment
-    }
-    const instructor = await Instructor.findById(instructorId);
-    /*const isReviewed = course.reviews.find(    //No authentication baby
-        r => r.user.toString() === req.user._id.toString()
-    )
-
-
-//app.put('/update/:id', 
-const editBioEmail= asyncHandler((req, res) => {
-  const email=req.body.email;
-  const biography= req.body.biography;
-    //const update = { price: 800 };
-    //const course = require('./courseSchema');
-   Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', {email: email}, {biography: biography}, function (err, docs) {
-    if (err){
-        res.json({message: 'error'});
-    }
-    else{
-        res.json(docs);
-    }});
-  
-   //.then(result=> res.send(result))
-  });
 
 // //create a multiple choice exam with 4 choices per question
 // const createChoice = asyncHandler(async(req,res) =>{
@@ -174,6 +176,36 @@ const editBioEmail= asyncHandler((req, res) => {
 //     }
 // });
 
+// app.put('/update/:id', 
+const editBioEmail= asyncHandler((req, res) => {
+    const email=req.body.email;
+    const biography= req.body.biography;
+      //const update = { price: 800 };
+      //const course = require('./courseSchema');
+     Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', {email: email}, {biography: biography}, function (err, docs) {
+      if (err){
+          res.json({message: 'error'});
+      }
+      else{
+          res.json(docs);
+      }});
+    
+     //.then(result=> res.send(result))
+});
+
+//Rate and add a review to the instructor
+const addInstructorReview = asyncHandler(async (req, res, next) => {
+    const { rating, comment } = req.body;
+    const instructorId = req.query.id;
+    console.log("I am woring");
+    const review = {
+        rating: Number(rating),
+        comment
+    }
+    const instructor = await Instructor.findById(instructorId);
+    /*const isReviewed = course.reviews.find(    //No authentication baby
+        r => r.user.toString() === req.user._id.toString()
+    )
     if(isReviewed){ 
         course.reviews.array.forEach(review => {
             if(review.user.toString() === req.user._id.toString()) {
@@ -208,7 +240,6 @@ const editBioEmail= asyncHandler((req, res) => {
      console.log(updatedCurrentRating);
  */
     await instructor.save({ validateBeforeSave: false });
-
     res.status(200).json({
         success: true
     })
@@ -241,4 +272,4 @@ const getInstructorProfile = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile }
+module.exports = { createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmail, logout}

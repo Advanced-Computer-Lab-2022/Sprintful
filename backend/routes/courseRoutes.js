@@ -1,5 +1,7 @@
 const express = require('express')
 const router = express.Router({ mergeParams: true })
+const {requireAuth} = require('../middleware/authMiddleware')
+
 const { getCourseById,
     getCourses,
     corporateGetCourses,
@@ -28,11 +30,11 @@ router.get('/getSubtitles', getSubtitles) // get course subtitles
 router.get('/getSubtitleId', getSubtitleId) // get subtitle id from title
 router.route('/:id').get(getCourseById) // get course by id
 router.route('/').get(getCourses) // get all courses
-router.get('/instructor/filterMyCourses', filterMyCourses) // get all courses for instructor filtered
+router.get('/instructor/filterMyCourses',requireAuth, filterMyCourses) // get all courses for instructor filtered
 router.post('/filter', filterSubjectRating) // This is a POST request to the /api/guest endpoint
-router.put('/review', addCourseReview);
-router.route('/reviewsnratings').get(getCourseRating)
-router.route('/getreviews/:id').get(getCourseReviews);
+router.put('/review',requireAuth, addCourseReview);
+router.get('/reviewsnratings',requireAuth,getCourseRating)
+router.get('/getreviews/:id',requireAuth,getCourseReviews)
 router.post('/filterPrice', filterPrice) // This is a GET request to the /api/guest endpoint
 router.route('/:id').get(getCourseById) // get course by id
 
