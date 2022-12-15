@@ -9,12 +9,13 @@ import InstructorForm from './components/InstructorForm'
 import Navbar2 from './components/Navbar2';
 import MyCourses from './pages/MyCourses';
 import GuestHome from './pages/GuestHome';
+import AdminHomePage from './components/AdminHomePage';
 import About from './pages/About';
 import Video from "./pages/Video";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/CorporateTraineeForm';
+import CorporateTraineeForm from './components/corporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
 import RateInstructor from './components/RateInstructor';
@@ -125,6 +126,12 @@ function App() {
               path="/Video/"
               element={<Video />}
             />
+
+            <Route
+              path="/admin"
+              element={ <AdminHomePage />}
+            />
+
           </Routes>
         </div>
       </BrowserRouter>
