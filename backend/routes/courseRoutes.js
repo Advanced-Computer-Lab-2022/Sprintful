@@ -16,7 +16,7 @@ const { getCourseById,
     addCourseReview,
     getCourseReviews,
     getCourseRating,
-    getSubtitles, getSubtitleId } = require('../controllers/courseController')
+    getSubtitles, getSubtitleId,addPromotion } = require('../controllers/courseController')   //destructuring
 
 router.get('/search', searchCourse)
 router.route('/').get(getCourseById) // get course by id
@@ -37,5 +37,6 @@ router.put('/review',requireAuth, addCourseReview);
 router.get('/reviewsnratings',requireAuth,getCourseRating)
 router.get('/getreviews/:id',requireAuth,getCourseReviews)
 router.post('/filterPrice', filterPrice) // This is a GET request to the /api/guest endpoint
+router.patch('/addPromotion/:courseid',addPromotion)
 
 module.exports = router
