@@ -12,6 +12,31 @@ const subtitle = require('../models/subtitleModel.js')
 // @route   GET /api/courses/:id
 // @access  Public
 
+
+
+//Add a Discount and Set its expiration date 
+const addPromotion=asyncHandler(async (req,res)=>{
+    const courseid=req.params.courseid;
+    const discount=req.body.discount;
+    const discountExpireAt=req.body.discountExpireAt;
+
+    const update={discount:discount ,discountExpireAt:discountExpireAt}
+
+    const courseAfterUpdate=await Course.findOneAndUpdate({_id:courseid},update,{new:true});
+    // if(courseAfterUpdate){
+    //     res.json(courseAfterUpdate)
+    // }
+    // else{
+    //     res.json({message:"No course with the specified id"})
+    // }
+
+    res.json(courseAfterUpdate);
+
+})
+
+
+
+
 const getSubtitles = asyncHandler(async (req, res) => {
     const courseId = req.query.courseId;
     //console.log(courseId)
@@ -399,5 +424,6 @@ module.exports = {
     CorporateCourses,
     IndividualCourses,
     getSubtitles,
-    getSubtitleId
+    getSubtitleId,
+    addPromotion
 }
