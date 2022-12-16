@@ -9,7 +9,8 @@ import InstructorForm from './components/InstructorForm'
 import Navbar2 from './components/Navbar2';
 import MyCourses from './pages/MyCourses';
 import GuestHome from './pages/GuestHome';
-import AdminHomePage from './components/AdminHomePage';
+//import AdminHomePage from './components/AdminHomePage';
+import AHome from './pages/AdminHome';
 import About from './pages/About';
 import Video from "./pages/Video";
 import SideBar from './components/SideBar';
@@ -129,7 +130,7 @@ function App() {
 
             <Route
               path="/admin"
-              element={ <AdminHomePage />}
+              element={ <AHome />}
             />
 
           </Routes>
