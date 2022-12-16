@@ -56,7 +56,7 @@ const handleSubmit= async (e)=>{
   //  navigate('/api/admin/createInstructor');
    navigate(0);
   //  navigate(`/addSubtitle/${courseid}`);
-  //hii
+  
 
     }
 
