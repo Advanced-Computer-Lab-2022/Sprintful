@@ -39,9 +39,6 @@ export default function IndividualTraineeHome() {
                                 <h2>Find Interesting Online Courses </h2>
                             </div>
                         </div>
-                        <div className="col-lg-12">
-                           <HomeSearch/> 
-                        </div>
                         <div className="col-lg-10 offset-lg-1">
                             <ul className="categories">
                                 <li><a href="category.html"><span className="icon"><img src="assets/images/search-icon-01.png" alt="Home" /></span> Apartments</a></li>
@@ -51,6 +48,9 @@ export default function IndividualTraineeHome() {
                                 <li><a href="#"><span className="icon"><img src="assets/images/search-icon-05.png" alt="Travel" /></span> Traveling</a></li>
                             </ul>
                         </div>
+                        <div className="col-lg-12">
+                           <HomeSearch/> 
+                        </div>=
                     </div>
                 </div>
             </div>

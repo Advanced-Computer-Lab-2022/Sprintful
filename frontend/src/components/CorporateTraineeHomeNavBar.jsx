@@ -14,7 +14,8 @@ const CorporateTraineeHomeNavBar = () => {
             {/* <!-- ***** Logo End ***** --> */}
             {/* <!-- ***** Menu Start ***** --> */}
             <ul className="nav">
-                <li><a href="index.html" className="active">Home</a></li>
+                <li><a href="index.html" className="active">Home</a>
+                </li>
                 <Country />
                 <li><a href="contact.html">Contact Us</a></li>
                 {/* <li><a href="listing.html">My Courses</a></li>
