@@ -1,15 +1,31 @@
-import "./ProfileDropdownMenu.scss";
 import { PopupMenu } from "react-simple-widgets";
+import React, { useState } from "react";
+import axios from 'axios';
+import {useNavigate} from "react-router";
+import "./ProfileDropdownMenu.scss";
 
-export default function ProfileDropdownMenu() {
+export default function IndividualProfileDropdownMenu() {
+  const navigate =useNavigate();
+
+  const handleOnClick = async(e) =>{
+    e.preventDefault()
+    axios.get(`http://localhost:5000/api/individualTrainee/logout`)
+    .then((res) => {
+      navigate('/');
+      navigate(0);
+    })
+    .catch((err) => {
+      console.log(err);
+  });
+}
+  
   return (
     <div id="app">
       <div className="text-end">
         <PopupMenu>
-          <button className="">
-            My profile
-          </button>
-
+            <button className="but">
+              My profile
+            </button>
           <div className="card text-start">
             <div className="card-body px-4 py-4">
               <div id="circle-avatar" className="text-center mx-auto mb-4">
@@ -51,7 +67,7 @@ export default function ProfileDropdownMenu() {
               <hr style={{ margin: "0 -24px 24px" }} />
 
               <div className="d-grid">
-                <button className="btn btn-secondary">
+                <button className="btn btn-secondary" onClick={handleOnClick}>
                   <small>Logout</small>
                 </button>
               </div>

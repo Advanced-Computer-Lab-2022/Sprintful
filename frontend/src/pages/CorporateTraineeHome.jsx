@@ -1,9 +1,10 @@
-import HomeNavBar from '../components/HomeNavBar';
-import HomeSearch from '../components/HomeSearch';
+import CorporateTraineeHomeNavBar from '../components/CorporateTraineeHomeNavBar';
+import CorporateTraineeSearch from '../components/CorporateTraineeSearch';
 export default function GuestHome() {
     return (
 
         <div>
+
             {/* <!-- ***** Preloader Start ***** --> */}
             <div id="js-preloader" className="js-preloader">
                 <div className="preloader-inner">
@@ -22,7 +23,7 @@ export default function GuestHome() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <HomeNavBar />
+                            <CorporateTraineeHomeNavBar />
                         </div>
                     </div>
                 </div>
@@ -51,7 +52,7 @@ export default function GuestHome() {
                             </ul>
                         </div>
                         <div className="col-lg-12">
-                           <HomeSearch/> 
+                           <CorporateTraineeSearch/> 
                         </div>
                     </div>
                 </div>

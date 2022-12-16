@@ -52,12 +52,23 @@ const getCourseById = asyncHandler(async (req, res) => {
 
 // search for all courses for corporate
 const corporateGetCourses = asyncHandler(async (req, res) => {
-    const courses = await Course.find({}).select('-price')
-    if (courses) {
-        res.json(courses)
-    } else {
+   const searchTerm = req.query.searchTerm
+    let result1, result2, result3, result4, instructorId
+
+    result1 = await Course.find({title: { "$regex": searchTerm, "$options": "i" } }).select('-price');
+    result2 = await Course.find({subject: { "$regex": searchTerm, "$options": "i" }}).select('-price'); 
+    instructorId = await Instructor.find({firstName: { "$regex": searchTerm, "$options": "i" }}).select('_id');
+    // console.log(instructorId)
+    result3 = await Course.find({instructor: instructorId}).select('-price');
+    instructorId = await Instructor.find({lastName: { "$regex": searchTerm, "$options": "i" }}).select('_id');
+    // console.log(instructorId)
+    result4 = await Course.find({instructor: instructorId}).select('-price');
+    const courses = [result1,result2,result3,result4];
+    flatArray = [].concat.apply([], courses);
+    if(flatArray)
+        res.json(flatArray);
+    else 
         res.status(400).json({ error: "No course found" });
-    }
 })
 
 // search for all courses except for corporate and instructor

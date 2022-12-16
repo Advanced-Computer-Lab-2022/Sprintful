@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import Country from '../components/Country';
-import ProfileDropdownMenu from '../components/ProfileDropdownMenu';
+import Country from './Country';
+import InstructorProfileDropdownMenu from './InstructorProfileDropdownMenu'
 
-const TraineeHomeNavBar = () => {
+const IndividualTraineeHomeNavBar = () => {
 
     return (
         <nav className="main-nav">
@@ -19,7 +19,7 @@ const TraineeHomeNavBar = () => {
                 <li><a href="contact.html">Contact Us</a></li>
                 {/* <li><a href="listing.html">My Courses</a></li>
                 <li><a href="listing.html">My profile</a></li> */}
-                <ProfileDropdownMenu />
+                <InstructorProfileDropdownMenu />
                 <li></li>
             </ul>
             <a className='menu-trigger'>
@@ -30,4 +30,4 @@ const TraineeHomeNavBar = () => {
     )
 }
 
-export default TraineeHomeNavBar;
+export default IndividualTraineeHomeNavBar;

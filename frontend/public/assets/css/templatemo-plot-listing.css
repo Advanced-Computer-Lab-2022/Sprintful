@@ -793,15 +793,18 @@ Banner Style
 form#search-form {
   background-color: #fff;
   padding: 0px 0px 0px 30px;
-  width: 100%;
+  width: 70%;
   border-radius: 7px;
   display: inline-block;
   text-align: center;
+  position: relative;
+  left:150px;
+  top: 30px;
 }
 
 form#search-form select,
 form#search-form input {
-  width: 100%;
+  width: 210%;
   height: 36px;
   background-color: transparent;
   border: none;
@@ -822,11 +825,11 @@ form#search-form input.searchText {
 
 form#search-form input::placeholder {
   color: #2a2a2a;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 form#search-form button {
-  width: 100%;
+  width: 200%;
   height: 100%;
   background-color: #8d99af;
   border: none;
@@ -835,6 +838,9 @@ form#search-form button {
   font-size: 15px;
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
+  position: relative;
+  left :218px;
+  
 }
 
 form#search-form button i {
@@ -847,9 +853,74 @@ form#search-form button i {
   text-align: center;
   line-height: 38px;
   margin-right: 10px;
+
+  
 }
+/*
+---------------------------------------
+Courses Cards
+---------------------------------------
+*/
+html {
+  font-size: 50.5%;
+}
+body {
+  background: #F0F0F0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.card-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  /* left:150px; */
+  top: 100px;
 
-
+}
+.card-container:hover .card {
+  opacity: .7;
+  cursor: pointer;
+  filter: grayscale(1);
+}
+.card-container .card {
+  margin: 10px;
+  width: calc(100% / 3 - 20px);
+  float: left;
+  box-shadow: 0 0 2px 2px rgba(0,0,0,.05);
+  background: #FFF;
+  -webkit-transition: .3s all ease;
+  transition: .15s all ease;
+}
+.card-container .card:hover {
+  box-shadow: 0 0 8px 3px rgba(0,0,0,.15);
+  transform: scale(1.025);
+  opacity: 1;
+  filter: grayscale(0);
+  transition: .35s all ease;
+}
+.card-container .card img {
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.card-container .card .content {
+  padding: 15px 20px;
+}
+.card-container .card h3 {
+  font: 2.8rem/3.4rem 'Bree Serif', serif;
+  padding: 0;
+  margin: 0 0 10px;
+  letter-spacing: -.075rem
+}
+.card-container .card p {
+  color: #888;
+  padding: 0;
+  margin: 0;
+  font: 400 1.6rem/2.2rem 'Open Sans script=all', sans-serif;
+}
 
 /*
 ---------------------------------------

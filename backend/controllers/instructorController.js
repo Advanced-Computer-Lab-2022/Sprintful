@@ -40,7 +40,7 @@ const login = async (req, res) => {
 
 }
 const createInstructor = asyncHandler(async (req, res) => {
-    const { username, password } = req.body
+    const { username, password,email } = req.body
     try{
         const instructorExists = await Instructor.findOne({ username })
         if (instructorExists) {
@@ -52,7 +52,8 @@ const createInstructor = asyncHandler(async (req, res) => {
         const hashedPassword = await bcrypt.hash(password, salt)
         const instructor = await Instructor.create({
             username,
-            password: hashedPassword
+            password: hashedPassword,
+            email
         })
         if (instructor) {
             res.status(201).json({

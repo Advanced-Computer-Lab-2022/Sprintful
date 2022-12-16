@@ -1,9 +1,10 @@
-import HomeNavBar from '../components/HomeNavBar';
 import HomeSearch from '../components/HomeSearch';
-export default function GuestHome() {
+import IndividualTraineeHomeNavBar from '../components/InstructorHomeNavBar';
+export default function IndividualTraineeHome() {
     return (
 
         <div>
+
             {/* <!-- ***** Preloader Start ***** --> */}
             <div id="js-preloader" className="js-preloader">
                 <div className="preloader-inner">
@@ -22,7 +23,7 @@ export default function GuestHome() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <HomeNavBar />
+                            <IndividualTraineeHomeNavBar />
                         </div>
                     </div>
                 </div>
@@ -38,9 +39,9 @@ export default function GuestHome() {
                                 <h2>Find Interesting Online Courses </h2>
                             </div>
                         </div>
-                        {/* <div className="col-lg-12">
+                        <div className="col-lg-12">
                            <HomeSearch/> 
-                        </div> */}
+                        </div>
                         <div className="col-lg-10 offset-lg-1">
                             <ul className="categories">
                                 <li><a href="category.html"><span className="icon"><img src="assets/images/search-icon-01.png" alt="Home" /></span> Apartments</a></li>
@@ -50,13 +51,11 @@ export default function GuestHome() {
                                 <li><a href="#"><span className="icon"><img src="assets/images/search-icon-05.png" alt="Travel" /></span> Traveling</a></li>
                             </ul>
                         </div>
-                        <div className="col-lg-12">
-                           <HomeSearch/> 
-                        </div>
                     </div>
                 </div>
             </div>
-            
+
+
             <div className="popular-categories">
                 <div className="container">
                     <div className="row">
@@ -217,7 +216,7 @@ export default function GuestHome() {
             </div>
 
 
-            {/* <div className="recent-listing">
+            <div className="recent-listing">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -496,7 +495,7 @@ export default function GuestHome() {
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
 
 
             <footer>

@@ -1,6 +1,6 @@
 import HomeSearch from '../components/HomeSearch';
-import TraineeHomeNavBar from '../components/TraineeHomeNavBar';
-export default function TraineeHome() {
+import InstructorHomeNavBar from '../components/InstructorHomeNavBar';
+export default function InstructorHome() {
     return (
 
         <div>
@@ -23,7 +23,7 @@ export default function TraineeHome() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <TraineeHomeNavBar />
+                            <InstructorHomeNavBar />
                         </div>
                     </div>
                 </div>

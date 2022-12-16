@@ -49,6 +49,10 @@ const instructorSchema = mongoose.Schema({
         type: String,
         default: '',
     },
+    // role:{
+    //     type: String,
+    //     required: [true]
+    // }
 }, {
     timestamps: true
 })

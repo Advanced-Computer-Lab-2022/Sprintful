@@ -18,10 +18,10 @@ const corporateTraineeSchema = mongoose.Schema({
         required:[true,"Set the course id"],
         default:[]
     }],
-   /* courses: [{
-                            //This is an array of its courses or the ids of the courses they take
-       
-    }],*/
+    // role:{
+    //     type: String,
+    //     required: [true]
+    // }
 }, {
     timestamps: true
 })

@@ -6,6 +6,11 @@ const { builtinModules } = require('module')
 const Course = require('../models/courseModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 
+const generateToken =(id) =>{
+    return jwt.sign({id }, process.env.JWT_SECRET, {
+        expiresIn: '365d',
+    })
+}
 const createCorporateTrainee = asyncHandler(async (req, res) => { 
      const { username, password } = req.body
      try {
@@ -42,7 +47,7 @@ const createCorporateTrainee = asyncHandler(async (req, res) => {
 }
 )
 const logout = async (req, res) => {
-    const token = createToken("");
+    const token = generateToken("");
     res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
     res.status(200).json({message: "You have logged out!"})
 }

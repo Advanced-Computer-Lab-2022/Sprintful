@@ -34,7 +34,11 @@ const individualTraineeSchema = mongoose.Schema({
         ref: 'Course',                                 //we do not need to import Insrtuctor model to be able to write this line
         required:[true,"Set the course id"],
         default:[]
-    }]
+    }],
+    // role:{
+    //     type: String,
+    //     required: [true]
+    // }
 }, {
     timestamps: true
 })

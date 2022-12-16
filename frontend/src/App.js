@@ -11,6 +11,7 @@ import MyCourses from './pages/MyCourses';
 import GuestHome from './pages/GuestHome';
 import About from './pages/About';
 import Video from "./pages/Video";
+import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
@@ -25,7 +26,10 @@ import React from "react";
 import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
-import TraineeHome from './pages/TraineeHome';
+import CorporateTraineeHome from './pages/CorporateTraineeHome';
+import IndividualTraineeHome from './pages/IndividualTraineeHome';
+import InstructorHome from './pages/InstructorHome';
+
 function App() {
   return (
     <div className="App">
@@ -85,8 +89,8 @@ function App() {
               element={<Quiz />}
             />
             <Route
-              path="/traineehome"
-              element={<TraineeHome />}
+              path="/CorporateTrainee"
+              element={<CorporateTraineeHome />}
             />
 
             {/* Somaya */}
@@ -118,6 +122,22 @@ function App() {
               element={[ <GuestHome />]}
             />
             <Route
+              exact path="/corporate"
+              element={[ <CorporateTraineeHome />]}
+            />
+             <Route
+              exact path="/individual"
+              element={[ <IndividualTraineeHome />]}
+            />
+             <Route
+              exact path="/instructor"
+              element={[ <InstructorHome />]}
+            />
+            <Route
+              exact path="/admin"
+              // element={[ <AdminHome />]}
+            />
+            <Route
               exact path="/about"
               element={[<Navbar2 />, <About />]}
             />
@@ -128,6 +148,10 @@ function App() {
             <Route
               path="/Video/"
               element={<Video />}
+            />
+            <Route
+              path="/Login"
+              element={<Login />}
             />
           </Routes>
         </div>
