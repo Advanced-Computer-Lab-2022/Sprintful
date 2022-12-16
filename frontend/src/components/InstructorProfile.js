@@ -25,9 +25,10 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 const InstructorProfile = () => {
     const [instructor, setInstructor] = useState("");
 
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-    console.log(id);
+    // const params = new URLSearchParams(window.location.search);
+    // const id = params.get('id');
+    //console.log(id);
+    const id = '6385df81dabe4d7c48be943a' //I test instructor id
 
     useEffect(() => {
       const fetchData = async () => {
@@ -57,6 +58,7 @@ const InstructorProfile = () => {
                         <StyledTableCell align="center">Last name</StyledTableCell>
                         <StyledTableCell align="center">Rating</StyledTableCell>
                         <StyledTableCell align="center">Reviews</StyledTableCell>
+                        <StyledTableCell align="center">Biography</StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -68,6 +70,7 @@ const InstructorProfile = () => {
                             <TableCell align="center">{instructor.lastName}</TableCell>
                             <TableCell align="center">{instructor.rating}</TableCell>
                             <TableCell align="center">{instructor.reviews}</TableCell>
+                            <TableCell align="center">{instructor.biography}</TableCell>
                         </TableRow>
                     )}
                 </TableBody>

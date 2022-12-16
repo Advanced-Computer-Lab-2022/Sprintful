@@ -180,9 +180,10 @@ const changePassword = async (req, res, next) => {
 const editBioEmail= asyncHandler((req, res) => {
     const email=req.body.email;
     const biography= req.body.biography;
+    const instructorId = req.query.id;
       //const update = { price: 800 };
       //const course = require('./courseSchema');
-     Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', {email: email}, {biography: biography}, function (err, docs) {
+     Instructor.findByIdAndUpdate(instructorId, {email: email}, {biography: biography}, function (err, docs) {
       if (err){
           res.json({message: 'error'});
       }
