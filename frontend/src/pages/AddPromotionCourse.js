@@ -12,13 +12,14 @@ const AddPromotionCourse=()=>{
     const [discount,setDiscount]=useState(0); // try it with an empty String
     const[discountExpireAt,setDiscountExpireAt]=useState('')
 
+     //getting courseid from react route 
+     const courseid=useParams().courseid;
+
     //handling Submitting 
     
      const handleSubmit=async(e)=>{
         e.preventDefault();
-        
-        //getting courseid from react route 
-        const courseid=useParams().courseid;
+    
 
         //The Update 
         const update={discount:discount,discountExpireAt:discountExpireAt}
