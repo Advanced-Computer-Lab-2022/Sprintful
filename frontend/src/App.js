@@ -26,6 +26,7 @@ import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
 import TraineeHome from './pages/TraineeHome';
+import AddPromotionCourse from './pages/AddPromotionCourse';
 function App() {
   return (
     <div className="App">
@@ -50,6 +51,9 @@ function App() {
               exact path="/api/subtitles/:subtitleid/Instructor"
               element={<SubtitlePageInst />}
             />
+            <Route 
+            exact path ="/api/courses/addPromotion/:courseid"
+            element ={<AddPromotionCourse/>} />
 
             {/* Nada */}
 
