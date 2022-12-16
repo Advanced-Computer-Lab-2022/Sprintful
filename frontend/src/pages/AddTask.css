@@ -1,13 +1,13 @@
 .task ol{
     font-size: 1em;
     color: #2d2c2c;
+    margin-bottom:2em;
 }
+
 .task li{
-background-color: white;
-padding: 1em;
-margin-bottom: 0cm;
-margin-top: 0cm;
-font: 1em sans-serif;
+    background-color: white;
+    padding: 0.25em; 
+    font: 1em sans-serif;
 }
 /* .task {
 background-color: white;
@@ -18,28 +18,29 @@ background-color: white;
     text-align: center;
 }
 
-.task h2{
-    color:rgb(24, 83, 155);
-    text-align: center;
-    font-size: 1.3em;
-}
 
-.task select{
+#form{
+    text-align: center;
+    align-items: center;
+    align-self: center;
+}
+/* .task select{
     padding: .7em 2em;
     width: 50%;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 1em;
     align-self: center;
-}
+} */
 
 .task input[type=text]{
-    width: 50%;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    width: 45%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
-    align-items: center;
-    align-self: center;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
@@ -50,16 +51,29 @@ background-color: white;
 }
 
 .task button{
-    margin-top: 3ex;
+    margin-top: 1.5cm;
     width: 20%;
-    align-items: center;
     align-self: center;
-    align-content: center;
+    
 }
 
 
 .task p{
     text-align: center;
+    margin-bottom: 0cm;
+}
+
+.task select{
+    display:block;
+    text-align: center;
+    text-align-last: center;
+    align-self: center;
+    padding: .7em 2em;
+    width: 45%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 0.5cm;
 }
 
 .start{
@@ -69,7 +83,7 @@ background-color: white;
     
 }
 
-.start .btn{
+/* .start .btn{
     padding: .2em 1.7em;
     border: none;
     border-radius: .1em;
@@ -92,5 +106,5 @@ background-color: white;
     border-radius: 3px;
     font-size: 1em;
     align-self: center;
-}
+} */
 

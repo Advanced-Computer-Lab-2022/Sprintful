@@ -101,7 +101,7 @@ const AddTaskMain = () => {
         })
 
     }
-        const response = await fetch(`http://localhost:5000/api/tasks/`,{
+        const response = await fetch(`http://localhost:5000/api/tasks/addTask/${subId}`,{
             method:'POST',
             body :JSON.stringify(task),
             headers :{
@@ -117,9 +117,12 @@ const AddTaskMain = () => {
        
            
            console.log("id in handleSubmit: "+subId)
-           navigate(`/addQuestion/${taskId}`);
+           navigate(`/addQuestion?taskid=${taskId}`);
            navigate(0);
            }   
+           else{
+            console.log("fail")
+           }
     }
 
 return(
@@ -179,7 +182,7 @@ return(
             onClick={()=>getId()}
             value={title}
         />
-
+        <br/>
         <button>Continue</button>
 
     </form>  
