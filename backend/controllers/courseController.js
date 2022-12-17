@@ -6,7 +6,7 @@ const Course = require('../models/courseModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const Instructor = require('../models/instructorModel')
-const subtitle = require('../models/subtitleModel.js')
+const Subtitle = require('../models/subtitleModel.js')
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
@@ -40,17 +40,21 @@ const addPromotion=asyncHandler(async (req,res)=>{
 const getSubtitles = asyncHandler(async (req, res) => {
     const courseId = req.query.courseId;
     //console.log(courseId)
-    const course = await Course.find({_id:courseId});
-    const subtitleIds = course[0].subtitles
+    const course = await Course.findOne({_id:courseId});
+    const subtitleIds = course.subtitles;
     //console.log(course)
+    //console.log(subtitleIds);
     const result = []
-    let subtitleDetails = []
+    let subtitleDetails ;
     
         //console.log("course subtitles")
          //console.log(subtitleIds)
         // res.json(course.subtitles);
         for(let i=0; i<subtitleIds.length; i++){
-            subtitleDetails = await subtitle.findById(subtitleIds[i])
+            let subtitleid=subtitleIds[i].toString();
+           // console.log(subtitleid);
+            subtitleDetails = await Subtitle.findById(subtitleid)    //ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
+            //console.log(subtitleDetails)
             result.push(subtitleDetails.title)
             //console.log("SUBTITLE")
 
