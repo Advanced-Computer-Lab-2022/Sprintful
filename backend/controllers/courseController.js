@@ -34,10 +34,8 @@ const addPromotion=asyncHandler(async (req,res)=>{
 
 })
 
-
-
-
-const getSubtitles = asyncHandler(async (req, res) => {
+//Reem  //for the course view Page
+const getSubtitlesforCourse = asyncHandler(async (req, res) => {
     const courseId = req.query.courseId;
     //console.log(courseId)
     const course = await Course.findOne({_id:courseId});
@@ -54,6 +52,34 @@ const getSubtitles = asyncHandler(async (req, res) => {
             let subtitleid=subtitleIds[i].toString();
            // console.log(subtitleid);
             subtitleDetails = await Subtitle.findById(subtitleid)    //ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
+            //console.log(subtitleDetails)
+            result.push(subtitleDetails);
+            //console.log("SUBTITLE")
+
+            //console.log(result[i])
+        }
+         res.json(result);
+    }
+)
+
+
+
+//Somaya  //for AddTask 
+const getSubtitles = asyncHandler(async (req, res) => {
+    const courseId = req.query.courseId;
+    //console.log(courseId)
+    const course = await Course.findOne({_id:courseId});
+    const subtitleIds = course[0].subtitles;
+    //console.log(course)
+     const result = []
+     let subtitleDetails=[] ;
+    
+        //console.log("course subtitles")
+         //console.log(subtitleIds)
+        // res.json(course.subtitles);
+        for(let i=0; i<subtitleIds.length; i++){
+            let subtitleid=subtitleIds[i].toString();
+            subtitleDetails = await Subtitle.findById(subtitleid[i])    //ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
             //console.log(subtitleDetails)
             result.push(subtitleDetails.title)
             //console.log("SUBTITLE")
@@ -429,5 +455,6 @@ module.exports = {
     IndividualCourses,
     getSubtitles,
     getSubtitleId,
-    addPromotion
+    addPromotion,
+    getSubtitlesforCourse
 }
