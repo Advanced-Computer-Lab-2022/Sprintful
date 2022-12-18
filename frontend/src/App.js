@@ -26,6 +26,7 @@ import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
 import TraineeHome from './pages/TraineeHome';
+import TraineeProfile from './pages/TraineeProfile';
 function App() {
   return (
     <div className="App">
@@ -128,6 +129,10 @@ function App() {
             <Route
               path="/Video/"
               element={<Video />}
+            />
+            <Route
+              path="/trainee/profile"
+              element={<TraineeProfile />}
             />
           </Routes>
         </div>
