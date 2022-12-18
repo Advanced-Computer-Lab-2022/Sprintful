@@ -1,11 +1,15 @@
 import { PopupMenu } from "react-simple-widgets";
 import React, { useState } from "react";
 import axios from 'axios';
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router"
 import "./ProfileDropdownMenu.scss";
 
 export default function ProfileDropdownMenu() {
   const navigate =useNavigate();
+
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+  console.log(id);
 
   const handleOnClick = async(e) =>{
     e.preventDefault()
@@ -17,8 +21,14 @@ export default function ProfileDropdownMenu() {
     .catch((err) => {
       console.log(err);
   });
+
 }
-  
+// const handleMyCourses = async(e) =>{
+//   e.preventDefault()
+//   console.log(id)
+//   // navigate(`/MyCourses?id=${id}`);
+//   navigate(0);
+// }
   return (
     <div id="app">
       <div className="text-end">
@@ -55,8 +65,8 @@ export default function ProfileDropdownMenu() {
                 className="list-group list-group-flush"
                 style={{ margin: "0 -24px 0" }}
               >
-                <button className="list-group-item list-group-item-action px-4">
-                  <small>My Courses</small>
+                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href = `/MyCourses?id=${id}`}>  
+                <small>My Courses</small>
                 </button>
                 <button className="list-group-item list-group-item-action px-4">
                   <small>Report</small>

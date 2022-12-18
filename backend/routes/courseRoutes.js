@@ -21,8 +21,8 @@ const { getCourseById,
 router.get('/search', searchCourse)
 router.route('/').get(getCourseById) // get course by id
 // router.route('/:id').get(getCourseById) // get course by id
-router.get('/corporate/myCourses', requireAuth, CorporateCourses)
-router.get('/individual/myCourses',requireAuth, IndividualCourses)
+router.get('/corporate/myCourses',CorporateCourses)
+router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
 router.post('/',requireAuth, addCourse)
 router.get('/instructor/:id',requireAuth, instructorCourses) // get all courses for instructor

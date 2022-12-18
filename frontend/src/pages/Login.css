@@ -85,11 +85,11 @@ button {
   transition: all 0.3s ease;
   outline: 0;
 }
-/* button.log :hover {
+/* button :hover {
   transform: translateY(-3px);
   box-shadow: 0 2px 6px -1px rgba(182, 157, 230, .65);
 }
-button.log :hover:active {
+button :hover:active {
   transform: scale(0.99);
 } */
 input {

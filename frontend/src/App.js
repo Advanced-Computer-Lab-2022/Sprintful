@@ -29,7 +29,8 @@ import AddQuestion from './pages/AddQuestion';
 import CorporateTraineeHome from './pages/CorporateTraineeHome';
 import IndividualTraineeHome from './pages/IndividualTraineeHome';
 import InstructorHome from './pages/InstructorHome';
-
+import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
+import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 function App() {
   return (
     <div className="App">
@@ -88,10 +89,10 @@ function App() {
               path="/quiz"
               element={<Quiz />}
             />
-            <Route
+            {/* <Route
               path="/CorporateTrainee"
               element={<CorporateTraineeHome />}
-            />
+            /> */}
 
             {/* Somaya */}
 
@@ -122,6 +123,14 @@ function App() {
               element={[ <GuestHome />]}
             />
             <Route
+              exact path="/MyCourses"
+              element={[ <CorporateTraineeMyCourses/>]}
+            />
+            <Route
+              exact path="/MyEnrolledCourses"
+              element={[ <IndividualTraineeMyCourses/>]}
+            />
+            <Route
               exact path="/corporate"
               element={[ <CorporateTraineeHome />]}
             />
@@ -141,10 +150,10 @@ function App() {
               exact path="/about"
               element={[<Navbar2 />, <About />]}
             />
-            <Route
+            {/* <Route
               exact path="/myCourses"
               element={[<Navbar2 />, <MyCourses />]}
-            />
+            /> */}
             <Route
               path="/Video/"
               element={<Video />}
@@ -154,6 +163,12 @@ function App() {
               element={<Login />}
             />
           </Routes>
+          {/* <Routes>
+            <Route
+                path="/individual/MyCourses"
+                element={[ <IndividualTraineeMyCourses />]}
+            />
+          </Routes> */}
         </div>
       </BrowserRouter>
     </div>

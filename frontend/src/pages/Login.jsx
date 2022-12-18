@@ -13,6 +13,7 @@ export default function Login() {
 const handleOnChange = async(e) =>{
   e.preventDefault()
   let role;
+  let id;
   let axiosConfig = {
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
@@ -29,20 +30,21 @@ const handleOnChange = async(e) =>{
   .then((res) => {
       console.log(res.data.role)
       role = res.data.role
+      id = res.data._id
       if(role =="Corporate"){
-        navigate('/corporate')
+        navigate(`/corporate?id=${id}`)
         navigate(0)
       }
       else if(role =="Instructor"){
-        navigate('/instructor')
+        navigate(`/instructor?id=${id}`)
         navigate(0)
       }
       else if(role =="Individual"){
-        navigate('/individual')
+        navigate(`/individual?id=${id}`)
         navigate(0)
       }
       else{
-        navigate('/admin')
+        navigate(`/admin?id=${id}`)
         navigate(0)
       }
   })
@@ -113,7 +115,7 @@ return (
         </div>
         
       </div>
-      <button className="log" type="submit" onClick={handleOnChange} >Log in</button>
+      <button  type="submit" onClick={handleOnChange} >Log in</button>
       <a href="https://codepen.io/elujambio/pen/yjwzGP" className="discrete" target="_blank">Forget Password?</a>
     </form>
   </div>

@@ -1,5 +1,5 @@
 import HomeSearch from '../components/HomeSearch';
-import IndividualTraineeHomeNavBar from '../components/InstructorHomeNavBar';
+import IndividualTraineeHomeNavBar from '../components/IndividualTraineeHomeNavBar';
 export default function IndividualTraineeHome() {
     return (
 

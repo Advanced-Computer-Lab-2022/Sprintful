@@ -7,6 +7,10 @@ import "./ProfileDropdownMenu.scss";
 export default function IndividualProfileDropdownMenu() {
   const navigate =useNavigate();
 
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+  console.log(id);
+
   const handleOnClick = async(e) =>{
     e.preventDefault()
     axios.get(`http://localhost:5000/api/individualTrainee/logout`)
@@ -18,6 +22,13 @@ export default function IndividualProfileDropdownMenu() {
       console.log(err);
   });
 }
+
+// const handleMyCourses = async(e) =>{
+//   e.preventDefault()
+//   console.log(id)
+//   navigate(`/MyCourses?id=${id}`);
+//   // navigate(0);
+// }
   
   return (
     <div id="app">
@@ -55,7 +66,7 @@ export default function IndividualProfileDropdownMenu() {
                 className="list-group list-group-flush"
                 style={{ margin: "0 -24px 0" }}
               >
-                <button className="list-group-item list-group-item-action px-4">
+                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href = `/MyEnrolledCourses?id=${id}`}>
                   <small>My Courses</small>
                 </button>
                 <button className="list-group-item list-group-item-action px-4">
