@@ -9,57 +9,6 @@ const RateInstructor = () => {
     const [hoverStar, setHoverStar] = useState(undefined);
 
     
-  
-    const handleText = () => {
-      switch (rating || hoverStar) {
-        case 0:
-          return "Evaluate";
-        case 1:
-          return "Dissatifation";
-        case 2:
-          return "Unsatisfied";
-        case 3:
-          return "Normal";
-        case 4:
-          return "Satisfied";
-        case 5:
-          return "Very Satisfied";
-        default:
-          return "Evaluate";
-      }
-    };
-    const handlePlaceHolder = () => {
-      switch (rating || hoverStar) {
-        case 0:
-          return "Comment here...";
-        case 1:
-        case 2:
-        case 3: 
-          return "What is your problem?";
-        case 4:
-        case 5:
-          return "Why do you like the instructor?";
-        default:
-          return "Comment here...";
-      }
-    };
-
-
-    //Try using useEffect
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     await axios.post(`http://localhost:5000/api/instructor/review?id=${id}`)
-        
-    //     .then((res) => {
-    //       setInstructor(res.data);
-    //       console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //       console.log(err);
-    //   });
-    // }       
-    // fetchData();
-    // }, []);
 
     const handleSubmit = async(e) => {
          e.preventdefault()
@@ -116,6 +65,34 @@ const RateInstructor = () => {
     return (    //lines 88 and 114 should be a form
     <div>
     <form onSubmit={handleSubmit}> 
+    <div className="popup">
+          <div className="content">
+          <div >  {/* onSubmit={handleSubmit} */}
+            <div className="product"> 
+              {/* <h1>Evaluate your instructor</h1> */}
+            </div>
+            {/* <div>
+              {/* <h1>{handleText()}</h1> */}
+               {Array(5).fill().map((_, index) =>
+                  rating >= index + 1 || hoverStar >= index + 1 ? (
+                    <AiFillStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  ) : (
+                    <AiOutlineStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  )
+                  
+                )}
+            </div> 
+            <div>
             <label>Review:</label>
                         <input 
                         type="text"
@@ -125,9 +102,15 @@ const RateInstructor = () => {
                 {/* <textarea id="area1" placeholder={handlePlaceHolder()}></textarea> */}
                 {/*setReview(document.getElementById('area1').value);*/}
                 
-            <button> Submit </button>
+            </div>
+            <button className={` ${!rating && "disabled"} `} onClick={() => handleSubmit}>Submit</button>
+            </div>    
+          </div>
+            {/* <button> Submit </button> */}
     </form>
 </div>
+
+
     );
   }
 

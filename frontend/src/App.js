@@ -25,6 +25,7 @@ import React from "react";
 import FilterPrice from './components/FilterPrice.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
+import AdminHome from './pages/AdminHome'
 
 function App() {
   return (
@@ -124,6 +125,10 @@ function App() {
             <Route
               path="/Video/"
               element={<Video />}
+            />
+            <Route
+              path="/admin/"
+              element={<AdminHome />}
             />
           </Routes>
         </div>
