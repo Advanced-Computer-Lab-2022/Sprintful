@@ -4,7 +4,7 @@ import axios from 'axios';
 import Country from './Country';
 import InstructorProfileDropdownMenu from './InstructorProfileDropdownMenu'
 
-const IndividualTraineeHomeNavBar = () => {
+const InstructorHomeNavBar = () => {
 
     return (
         <nav className="main-nav">
@@ -30,4 +30,4 @@ const IndividualTraineeHomeNavBar = () => {
     )
 }
 
-export default IndividualTraineeHomeNavBar;
+export default InstructorHomeNavBar;

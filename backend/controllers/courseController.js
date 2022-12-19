@@ -52,7 +52,7 @@ const getCourseById = asyncHandler(async (req, res) => {
 
 // search for all courses for corporate
 const corporateGetCourses = asyncHandler(async (req, res) => {
-   const searchTerm = req.query.searchTerm
+    const searchTerm = req.query.searchTerm
     let result1, result2, result3, result4, instructorId
 
     result1 = await Course.find({title: { "$regex": searchTerm, "$options": "i" } }).select('-price');
@@ -130,14 +130,20 @@ const addCourse = asyncHandler(async (req, res) => {
 // @access Private
 //Method for getting titles of courses given by the instructor himself (Requirement #)
 const instructorCourses = asyncHandler(async (req, res) => {
-    //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
-    const myCoursesDocuments = await Course.find({ instructor: '635a591011ecdc081ce890f7' }, '-_id title').exec()
-    if (myCoursesDocuments.length === 0) {
-        return res.status(200).json({ message: "No Courses to display !" })  //return is used to tell it do not complete the rest of function
+    const myCoursesDocuments = await Instructor.find({ _id: req.query.id }, '-_id courses').exec()
+    let coursesIds;
+    let flatArray;
+    console.log(myCoursesDocuments)
+    if (myCoursesDocuments[0] != null) {
+        coursesIds = myCoursesDocuments[0].courses
+        const courses = []
+        for (let i = 0; i < coursesIds.length; i++) {
+            courses[i] = (await Course.find({ _id: coursesIds[i] }))// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+        }
+        flatArray = [].concat.apply([], courses);
     }
-    res.status(200).json(myCoursesDocuments)
-
-    //while loop in Javascript to put titles' values in an array to be able to work with them in Frontend
+    console.log(flatArray)
+    res.status(200).json(flatArray)
 });
 
 

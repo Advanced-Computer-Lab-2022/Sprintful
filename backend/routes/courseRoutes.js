@@ -25,7 +25,7 @@ router.get('/corporate/myCourses',CorporateCourses)
 router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
 router.post('/',requireAuth, addCourse)
-router.get('/instructor/:id',requireAuth, instructorCourses) // get all courses for instructor
+router.get('/instructor', instructorCourses) // get all courses for instructor
 router.post('/search', searchCourse)
 router.get('/getSubtitles',requireAuth, getSubtitles) // get course subtitles
 router.get('/getSubtitleId',requireAuth, getSubtitleId) // get subtitle id from title')

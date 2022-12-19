@@ -31,6 +31,7 @@ import IndividualTraineeHome from './pages/IndividualTraineeHome';
 import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
+import InstructorMyCourses from './pages/InstructorMyCourses';
 function App() {
   return (
     <div className="App">
@@ -129,6 +130,10 @@ function App() {
             <Route
               exact path="/MyEnrolledCourses"
               element={[ <IndividualTraineeMyCourses/>]}
+            />
+            <Route
+              exact path="/MyTaughtCourses"
+              element={[ <InstructorMyCourses/>]}
             />
             <Route
               exact path="/corporate"
