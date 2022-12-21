@@ -231,17 +231,75 @@ const searchInstructorCourses = asyncHandler(async (req,res) => {
 }) 
 
 //filter the courses based on a subject and/or rating
-const filterSubjectRating = asyncHandler(async (req, res) => {
+const filter = asyncHandler(async (req, res) => {
     const subject = req.query.subject;
     const rating = req.query.rating;
+    const price= req.query.price;
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
+    let result1
+    if(subject==null ){
+    if(rating==null){
+        result1 = await Course.find({ price:  price  });
+    }
+    else if(price==null){
+        result1 = await Course.find({ rating:  rating  });
+    }
+    else{
+        result1 = await Course.find({
+                            $and:[
+                                { rating:  rating  },
+                                {price:price}
+                             ] 
+    });
+    }
+    }
 
-    const result = await Course.find({ subject: subject });
-    const result2 = await Course.find({ rating: rating });
-    const final = result.concat(result2);
 
-    if (final.length > 0) {
-        res.status(200).json(final);
+    else if(price==null){
+        if(rating==null){
+            result1 = await Course.find({ subject:  subject });
+    }
+    else if(subject==null){
+        result1 = await Course.find({ rating:  rating  });
+    }
+    else{
+        result1 = await Course.find({
+                            $and:[
+                                { rating:  rating  },
+                                {subject:subject}]})
+  
+}
+    }
+
+
+    else if(rating==null){
+        if(price==null){
+            result1 = await Course.find({ subject:  subject });
+       }
+    else if(subject==null){
+        result1 = await Course.find({ price:  price  });
+}
+    else{
+        result1 = await Course.find({
+                            $and:[
+                                { subject: subject },
+                                {price:price}
+                            ]})
+
+    }
+}
+    else{
+    result1 = await Course.find({
+                            $and:[
+                                { subject: subject },
+                                { rating:  rating  },
+                                {price:price}
+                             ] 
+    });
+}
+
+    if (result1.length > 0) {
+        res.status(200).json(result1);
     }
 
     else {
@@ -250,12 +308,31 @@ const filterSubjectRating = asyncHandler(async (req, res) => {
 })
 
 //filter the courses based on price (price can be FREE)
-const filterPrice = asyncHandler(async (req, res) => {
-    const price = req.query.price;
-    const result = await Course.find({ price: { $lte: price } });
-    if (result.length > 0) {
-        res.status(200).json(result);
+const filterCorporate = asyncHandler(async (req, res) => {
+    const subject = req.query.subject;
+    const rating = req.query.rating;
+    //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
+    let result1
+    if(subject==null ){
+        result1 = await Course.find({ rating:  rating  });
     }
+
+    else if(rating==null){
+            result1 = await Course.find({ subject:  subject });
+}
+    else{
+    result1 = await Course.find({
+                            $and:[
+                                { subject: subject },
+                                { rating:  rating  },
+                             ] 
+    });
+}
+
+    if (result1.length > 0) {
+        res.status(200).json(result1);
+    }
+
     else {
         res.status(400).json({ error: "No course found" });
     }
@@ -399,8 +476,8 @@ module.exports = {
     instructorViewCourses,
     corporateGetCourses,
     searchCourse,
-    filterSubjectRating,
-    filterPrice, 
+    filter,
+    filterCorporate, 
     addCourseReview, 
     getCourseReviews,
     getCourseRating,

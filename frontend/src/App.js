@@ -23,7 +23,7 @@ import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
 import SubtitlePageInst from './pages/SubtitlePageInst';
 import React from "react";
-import FilterPrice from './components/FilterPrice.js';
+import FilterPrice from './components/Filter.js';
 import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
 import CorporateTraineeHome from './pages/CorporateTraineeHome';
