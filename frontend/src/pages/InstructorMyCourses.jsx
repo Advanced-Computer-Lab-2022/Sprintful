@@ -2,25 +2,59 @@ import InstructorHomeNavBar  from '../components/InstructorHomeNavBar';
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-export default function InstructorMyCourses() {
+import InstructorSearch from '../components/InstructorSearch';
 
-    const [courses, setCourses] = useState("");
+export default function InstructorMyCourses() {
+    const [courses,setCourses] = useState([])
+    const [courses2,setCourses2] = useState([])
+    const [searchTerm,setSearchTerm] = useState(null)
+    const [searched,setSearched] = useState(false)
     let params = new URLSearchParams(document.location.search);
     let id = params.get("id");
     useEffect(() => {
-         axios.get(`http://localhost:5000/api/courses/instructor?id=${id}`) 
-         .then((res) => {
-            console.log(res.data)
-            setCourses(res.data)
-         })
-        .catch(errors => {
-            // react on errors.
-            console.error(errors);
-        });
-    
-    }, []);
-    return (
+        axios.get(`http://localhost:5000/api/courses/instructor?id=${id}`) 
+        .then((res) => {
+           console.log(res.data)
+           setCourses(res.data)
+        })
+       .catch(errors => {
+           // react on errors.
+           console.error(errors);
+       });
 
+       axios.get(`http://localhost:5000/api/courses/instructor/search?id=${id}&searchTerm=${searchTerm}`)
+       .then((res) => {
+           console.log(res.data)
+           setCourses2(res.data);
+       })
+       .catch((err) => {
+           console.log(err);
+       });
+       setSearchTerm(null)
+
+    }, [searchTerm,searched]);
+   
+    const handleOnChange = async(e) =>{
+        e.preventDefault()
+        var a = document.getElementById('input').value  ;
+        setSearchTerm(a)
+        setSearched(true);
+        console.log(searchTerm)
+   }
+
+   const mystyle = {
+    color: "white",
+    backgroundColor: "#8d99af",
+    padding: "10px",
+    position: "relative",
+    top: "50px",
+    left: "500px",
+    width: "130px",
+    height: "40px",
+    fontSize: "13px"
+    };
+
+    return (
         <div>
             {/* <!-- ***** Preloader Start ***** --> */}
             <div id="js-preloader" className="js-preloader">
@@ -52,27 +86,62 @@ export default function InstructorMyCourses() {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="top-text header-text">
-                                {/* <h6>Over 36,500+ Courses</h6> */}
                                 <h2>My Courses </h2>
                             </div>
                         </div>
-                        {/* Corporate Course view */}
+                        <div>
+                            { 
+                            <form id="search-form" name="gs" method="submit" role="search" action="#">
+                                <div className="row">
+                                    <div className="col-lg-3 align-self-center">
+                                        <fieldset>
+                                            <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Search my Courses by title or subject ..." autocomplete="on" required />
+                                        </fieldset>
+                                    </div>
+                                    <div className="col-lg-3">
+                                        <fieldset>
+                                            <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i> Search Now</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+
+                            </form>
+                            }
+                            <div>
+                                <button id="main-button" style={mystyle}> Add a new Course</button>
+                            </div>
+                            { searched &&
+                                <div className="card-container">
+                                    {courses2  && courses2.map((course) =>( 
+                                        <div className="card">
+                                            <img src="assets/images/courseCard.jpg"/>
+                                            <div className="content">
+                                                <h3> {course.title} </h3>
+                                            </div>
+                                        </div>
+                                    ))}             
+                                </div>
+                            }
+                        </div>
+                        {/* Instructor Course view */}
+                        { !searched && 
                         <div className="card-container">
                             {courses  && courses.map((course) =>( 
                                 <div className="card">
-                                <img src="assets/images/courseCard.jpg"/>
-                                <div className="content">
-                                    <h3> {course.title} </h3>
-                                    {/* <p>totalhours: {course.totalhours}</p>
-                                    <p>rating: {course.rating}</p> */}
-                                    {/* <p>Price: {course.price}</p> */}
-                                </div>
+                                    <img src="assets/images/courseCard.jpg"/>
+                                    <div className="content">
+                                        <h3> {course.title} </h3>
+                                        <p>totalhours: {course.totalhours}</p>
+                                        <p>rating: {course.rating}</p>
+                                    </div>
                                 </div>
                             ))}
-                         </div>
+                        </div>
+                        }
                     </div>
                 </div>
             </div>
+
             <footer>
                 <div className="container">
                     <div className="row">

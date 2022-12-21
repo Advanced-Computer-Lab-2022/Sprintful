@@ -17,8 +17,6 @@ const InstructorHomeNavBar = () => {
                 <li><a href="index.html" className="active">Home</a></li>
                 <Country />
                 <li><a href="contact.html">Contact Us</a></li>
-                {/* <li><a href="listing.html">My Courses</a></li>
-                <li><a href="listing.html">My profile</a></li> */}
                 <InstructorProfileDropdownMenu />
                 <li></li>
             </ul>
@@ -29,5 +27,4 @@ const InstructorHomeNavBar = () => {
         </nav>
     )
 }
-
 export default InstructorHomeNavBar;

@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from "react-router";
+import axios from 'axios';
 
 const CourseForm =() =>{
 
@@ -10,63 +11,75 @@ const [shortsummary,setShortSummary]=useState('')
 const[previewvideolink,setPreviewVideoLink]=useState('')
 const [discount,setDiscount]=useState('')
 const [subject,setSubject]=useState('Computer Science')
+const [contract,setContract] =useState(true)
 
 
 const navigate=useNavigate();
 
 const handleSubmit= async (e)=>{
     e.preventDefault()
-   const Course ={
-   title,
-   subject,
-   price,
-   totalhours,
-   shortsummary,
-   previewvideolink,
-   discount,}
 
-  //Route  /api/courses/
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+      }
+    };
 
-   const response = await fetch('/api/courses/',{
-    method:'POST',
-    body :JSON.stringify(Course),
-    headers :{
-        'Content-Type':'application/json'
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+     console.log(id)
+    const response=  axios.post(`http://localhost:5000/api/courses?id=${id}`, { 
+        title: title ,
+        subject: subject,
+        price: price,
+        totalhours: totalhours,
+        shortsummary: shortsummary,
+        instructor: id,
+        previewvideolink: previewvideolink,
+        discount: discount
+  
+      },axiosConfig)
+      .then(function (response) {
+        // console.log(response);
+        // console.log('Course added ',response.data)
+        console.log(response.data[0])
+        console.log(response.data[1])
+        // contract =response.data[1];
+        setContract(response.data[1])
+  
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+
+      const json =await response[0].json()
+      if(response.ok){
+        const courseid=json._id;
+        console.log('Course added ',json)
+        setTitle('')
+        setPrice('')
+        setSubject('Computer Science')
+        setTotalHours('')
+        setShortSummary('')
+        setPreviewVideoLink('')
+        setDiscount('')
+     
+        navigate(`/addSubtitle/${courseid}`);
+       //  navigate('/api/admin/createInstructor');
+        navigate(0);
+       //  navigate(`/addSubtitle/${courseid}`);
+      };
+  
+
+  
+
     }
-   })
-
-
-   const json =await response.json()
-    if(response.ok){
-
-   const courseid=json._id;
-   console.log('Course added ',json)
-
-   
-
-   setTitle('')
-   setPrice('')
-   setSubject('Computer Science')
-   setTotalHours('')
-   setShortSummary('')
-   setPreviewVideoLink('')
-   setDiscount('')
-
-   navigate(`/addSubtitle/${courseid}`);
-  //  navigate('/api/admin/createInstructor');
-   navigate(0);
-  //  navigate(`/addSubtitle/${courseid}`);
-
-    }
-
-}
-
-
 
 return (
 
   <div className="create">
-    <form onSubmit={handleSubmit}>  
+    {<form onSubmit={handleSubmit}>  
          <h3>Add a new Course</h3>
             <label>Course Title:</label>
                <input 
@@ -120,7 +133,7 @@ return (
                    <option value="Business Adminstration">Business Adminstration</option>
                 </select>
               <button>Add Subtitle</button>
-    </form>
+    </form>}
 
     </div>     
 

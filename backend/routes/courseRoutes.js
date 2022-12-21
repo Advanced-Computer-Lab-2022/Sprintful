@@ -16,15 +16,16 @@ const { getCourseById,
     addCourseReview,
     getCourseReviews,
     getCourseRating,
-    getSubtitles, getSubtitleId } = require('../controllers/courseController')
+    getSubtitles, 
+    getSubtitleId,
+    searchInstructorCourses } = require('../controllers/courseController')
 
 router.get('/search', searchCourse)
 router.route('/').get(getCourseById) // get course by id
-// router.route('/:id').get(getCourseById) // get course by id
 router.get('/corporate/myCourses',CorporateCourses)
 router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
-router.post('/',requireAuth, addCourse)
+router.post('/', addCourse)
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.post('/search', searchCourse)
 router.get('/getSubtitles',requireAuth, getSubtitles) // get course subtitles
@@ -37,5 +38,6 @@ router.put('/review',requireAuth, addCourseReview);
 router.get('/reviewsnratings',requireAuth,getCourseRating)
 router.get('/getreviews/:id',requireAuth,getCourseReviews)
 router.post('/filterPrice', filterPrice) // This is a GET request to the /api/guest endpoint
+router.get('/instructor/search', searchInstructorCourses)
 
 module.exports = router

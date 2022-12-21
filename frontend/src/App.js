@@ -32,6 +32,7 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
+import InstructorSearch from './components/InstructorSearch';
 function App() {
   return (
     <div className="App">
@@ -133,7 +134,7 @@ function App() {
             />
             <Route
               exact path="/MyTaughtCourses"
-              element={[ <InstructorMyCourses/>]}
+              element={[<InstructorMyCourses/> ]} 
             />
             <Route
               exact path="/corporate"
