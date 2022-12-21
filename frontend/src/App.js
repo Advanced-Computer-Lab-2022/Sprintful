@@ -16,9 +16,11 @@ import Video from "./pages/Video";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/corporateTraineeForm';
+import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
+import CorporateTraineeProfile from './components/CorporateTraineeProfile';
+import IndividualTraineeProfile from './components/IndividualTraineeProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -55,7 +57,10 @@ function App() {
             />
 
             {/* Nada */}
-
+            <Route
+              exact path="/api/instructor/rate"
+              element={<RateInstructor />}
+            />
             <Route
               exact path="/api/admin/"
               element={<AdminForm />}
@@ -73,8 +78,12 @@ function App() {
               element={<InstructorProfile />}
             />
             <Route
-              exact path="/api/instructor/rate"
-              element={<RateInstructor />}
+              exact path="/api/corporateTrainee/getProfile"
+              element={<CorporateTraineeProfile />}
+            />
+            <Route
+              exact path="/api/individualTrainee/getProfile"
+              element={<IndividualTraineeProfile />}
             />
 
             {/* Ragaa */}

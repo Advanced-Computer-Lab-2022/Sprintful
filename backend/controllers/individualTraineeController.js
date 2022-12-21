@@ -54,4 +54,17 @@ const login = async (req, res) => {
     }
 
 }
-module.exports = { changePassword, login, logout}
+
+
+const getIndividualTraineeProfile = asyncHandler(async (req, res) => {
+    const individualTrainee = await IndividualTrainee.findById(req.query.id)
+    console.log(individualTrainee);
+    if (individualTrainee) {
+        res.json(individualTrainee)
+    } else {
+        res.status(404)
+        throw new Error('Individual Trainee not found')
+    }
+})
+
+module.exports = { changePassword, login, logout, getIndividualTraineeProfile}

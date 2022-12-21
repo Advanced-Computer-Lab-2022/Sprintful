@@ -63,4 +63,16 @@ const changePassword = async(req, res, next) => {
     }
 }
 
-module.exports = { createCorporateTrainee, changePassword, logout}
+const getCorporateTraineeProfile = asyncHandler(async (req, res) => {
+    const corporateTrainee = await CorporateTrainee.findById(req.query.id)
+    console.log(corporateTrainee);
+    if (corporateTrainee) {
+        res.json(corporateTrainee)
+    } else {
+        res.status(404)
+        throw new Error('Corporate Trainee not found')
+    }
+})
+
+
+module.exports = { createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile}
