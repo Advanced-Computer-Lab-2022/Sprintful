@@ -5,7 +5,7 @@ const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const Instructor = require('../models/instructorModel')
 const subtitle = require('../models/subtitleModel.js')
-
+var searchedCourses = []; 
 const getSubtitles = asyncHandler(async (req, res) => {
     const courseId = req.query.courseId;
     //console.log(courseId)
@@ -199,8 +199,10 @@ const searchCourse = asyncHandler(async (req,res) => {
     result4 = await Course.find({instructor: instructorId});
     const courses = [result1,result2,result3,result4];
     flatArray = [].concat.apply([], courses);
-    if(flatArray)
+    if(flatArray){
+        searchedCourses = searchedCourses.concat(flatArray);
         res.json(flatArray);
+    }
     else 
         res.status(400).json({ error: "No course found" });
 
@@ -265,7 +267,7 @@ const filter = asyncHandler(async (req, res) => {
     else{
         result1 = await Course.find({
                             $and:[
-                                { rating:  rating  },
+                                { rating: rating  },
                                 {subject:subject}]})
   
 }
