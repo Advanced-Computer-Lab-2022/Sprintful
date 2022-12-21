@@ -22,12 +22,12 @@ const FilterPrice = () => {
     setRating(a)
     var b = document.getElementById('subject').value  ;
     setSubject(b)
-    var c = document.getElementById('price').value  ;
+    var c = document.getElementById('price').value  ; //-->value=price
     setPrice(c)
   
     //console.log("New Rating:" +rating)
   
-    console.log(price +" " + subject + " " + rating)
+    //console.log(price +" " + subject + " " + rating)
   }
 
   useEffect( ()=>{
@@ -42,23 +42,36 @@ const FilterPrice = () => {
     }
     const response = async() =>{
       console.log("hello")
+      console.log(price +" " + subject + " " + rating)
     await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
     .then((res) => { 
-          console.log(price)
+          //console.log(price)
           const course = res.data
-          console.log("price")
-          console.log(course)
-          setFilterData(course)
+          //console.log("price")
+          if(res.status===200){
+            console.log("check success")
+            console.log(course)
+            setFilterData(course)
+          }
+          else{
+            console.log("entered empty check")
+            setFilterData([])
+          }
+
       })
-      .catch((err) => {
-        console.log(err);
-    }
+    //   .catch((err) => {
+    //     console.log(err);
+    // }
   
-       );
+ //      );
     }
     fecthCourses()
     response()
-}, [price,subject,rating])
+    setPrice(null)
+    setSubject(null)
+    setRating(null)
+    //setFilterData([])
+}, [price,subject,rating,filterData])
 
 
 
@@ -104,6 +117,7 @@ return(
         <select className="list"
           //onChange={(e) => setPrice(e.target.value)}
           id={'price'}
+          value={price}
         >
           {/* assuming price range is 0-5000 */}
           <option selected disabled key="0" value="null"> Select a price</option> 
@@ -116,25 +130,40 @@ return(
 
       </div>
 
-      <div className="subjectList">
+      {/* <div className="subjectList">
         <select className="list"
           //onChange={(e) => setSubject(e.target.value)}
           id={'subject'}
+          value={subject}
         >
-          <option selected disabled> Choose a course' subject</option>
+          <option key="0" value="null" selected disabled> Choose a course' subject</option>
           {courses.map((op) => (
-            <option key={op.id} value={op.id}> {op.subject} </option>
+            <option key={op.id} value={op.subject}> {op.subject} </option>
           ))}  
         </select>
-      </div>
+      </div> */}
+      <div className="subjectList">
+        <select className="list"
+        id={'subject'}
+        value={subject}
+        >
+          <option key="0" value="null" selected disabled> Choose a course' subject</option>
+          <option key="1" value="Computer Science">Computer Science</option>
+          <option key="2" value="Languages">Languages</option>
+          <option key="3" value="Physics">Physics</option>
+          <option key="4" value="Business Administration">Business Administration</option>
+          <option key="5" value="Mathematics">Mathematics</option>
+          </select>
+          </div>
 
       <div className="ratingList">
         <select className="list"
         //onChange={(e) => setRating(e.target.value)}
         id={'rating'}
+        value={rating}
         >
-          <option selected disabled> Choose a course' rating</option>
-          <option key="0" value="0"> 0 Stars</option>
+          <option key="-1" value="null" selected disabled> Choose a course' rating</option>
+          {/* <option key="0" value="0"> 0 Stars</option> */}
           <option key="1" value="1">1 Star </option>
           <option key="2" value="2">2 Stars</option>
           <option key="3" value="3">3 Stars</option>
