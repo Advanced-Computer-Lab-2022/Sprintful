@@ -793,18 +793,18 @@ Banner Style
 form#search-form {
   background-color: #fff;
   padding: 0px 0px 0px 30px;
-  width: 70%;
+  width: 30%;
   border-radius: 7px;
   display: inline-block;
   text-align: center;
   position: relative;
-  left:150px;
+  left:40px;
   top: 30px;
 }
 
 form#search-form select,
 form#search-form input {
-  width: 210%;
+  width: 430%;
   height: 36px;
   background-color: transparent;
   border: none;
@@ -825,11 +825,11 @@ form#search-form input.searchText {
 
 form#search-form input::placeholder {
   color: #2a2a2a;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 form#search-form button {
-  width: 200%;
+  width: 10px;
   height: 100%;
   background-color: #8d99af;
   border: none;
@@ -839,7 +839,7 @@ form#search-form button {
   border-top-right-radius: 7px;
   border-bottom-right-radius: 7px;
   position: relative;
-  left :218px;
+  left :220px;
   
 }
 
