@@ -13,7 +13,11 @@ const reportSchema = mongoose.Schema({
         type: String,
         default: "unseen"
     },
-    istructorId: [{
+    type: {
+        type: String,
+        required: [true, "Add a type to your report"]
+    },
+    instructorId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Instructor',
     }],
