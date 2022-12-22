@@ -28,7 +28,7 @@ router.post('/',requireAuth, addCourse)
 router.get('/instructor/:id',requireAuth, instructorCourses) // get all courses for instructor
 router.post('/search', searchCourse)
 router.get('/getSubtitles', requireAuth,getSubtitles) // get course subtitles "Somaya"
-router.get('/getSubtitlesforCourse',getSubtitlesforCourse) //get course subtitles "Reem"   we need both of them 
+router.get('/getSubtitlesforCourse/:courseId',getSubtitlesforCourse) //get course subtitles "Reem"   we need both of them 
 router.get('/getSubtitleId',requireAuth, getSubtitleId) // get subtitle id from title')
 router.route('/:id').get(getCourseById) // get course by id
 router.route('/').get(getCourses) // get all courses
