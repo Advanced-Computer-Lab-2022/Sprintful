@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import Filter from '../components/HomeFilter';
 
 const HomeSearch = () => {
     const [courses,setCourses] = useState([])
@@ -99,32 +98,11 @@ const HomeSearch = () => {
         <div>
         { <form id="search-form" name="gs" method="submit" role="search" action="#">
             <div className="row">
-                {/* <div className="col-lg-3 align-self-center">
-                    <fieldset>
-                        <select name="area" className="form-select" aria-label="Area" id="chooseCategory" onchange="this.form.click()">
-                            <option selected>All Areas</option>
-                            <option value="New Village">New Village</option>
-                            <option value="Old Town">Old Town</option>
-                            <option value="Modern City">Modern City</option>
-                        </select>
-                    </fieldset>
-                </div> */}
                 <div className="col-lg-3 align-self-center">
                     <fieldset>
                         <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or an instructor name" autocomplete="on" required />
                     </fieldset>
                 </div>
-                {/* <div className="col-lg-3 align-self-center">
-                    <fieldset>
-                        <select name="price" className="form-select" aria-label="Default select example" id="chooseCategory" onchange="this.form.click()">
-                            <option selected>Price Range</option>
-                            <option value="$100 - $250">$100 - $250</option>
-                            <option value="$250 - $500">$250 - $500</option>
-                            <option value="$500 - $1000">$500 - $1,000</option>
-                            <option value="$1000+">$1,000 or more</option>
-                        </select>
-                    </fieldset>
-                </div> */}
                 <div className="col-lg-3">
                     <fieldset>
                         <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>

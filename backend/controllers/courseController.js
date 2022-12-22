@@ -232,7 +232,7 @@ const searchInstructorCourses = asyncHandler(async (req,res) => {
         res.status(400).json({ error: "No course found" });
 }) 
 
-//filter the courses based on a subject and/or rating
+//filter the courses based on a subject and/or rating and/or price
 const filter = asyncHandler(async (req, res) => {
     const subject = req.query.subject;
     const rating = req.query.rating;
@@ -240,45 +240,40 @@ const filter = asyncHandler(async (req, res) => {
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
     
     if(subject=="null" ){
-    if(rating=="null"){
-        console.log("hello 1")
-        result1 = await Course.find({ price:  {$lte:price}  });
+        if(rating=="null"){
+            console.log("hello 1")
+            result1 = await Course.find({ price:  {$lte:price}  });
+        }
+        else if(price=="null"){
+            console.log("hello 2")
+            result1 = await Course.find({ rating:  rating  });
+        }
+        else{
+            console.log("hello 3")
+            result1 = await Course.find({
+                                $and:[
+                                    { rating:  rating  },
+                                    {price:{$lte:price}}
+                                ] 
+        });
+        }
     }
-    else if(price=="null"){
-        console.log("hello 2")
-        result1 = await Course.find({ rating:  rating  });
-    }
-    else{
-        console.log("hello 3")
-        result1 = await Course.find({
-                            $and:[
-                                { rating:  rating  },
-                                {price:{$lte:price}}
-                             ] 
-    });
-    }
-    }
-
-
     else if(price=="null"){
         if(rating=="null"){
             console.log("hello 4")
             result1 = await Course.find({ subject:  subject });
+        }
+        else if(subject=="null"){
+            console.log("hello 5")
+            result1 = await Course.find({ rating:  rating  });
+        }
+        else{
+            console.log("hello 6")
+            result1 = await Course.find({
+                                $and:[
+                                    { rating: rating  },
+                                    {subject:subject}]})
     }
-    else if(subject=="null"){
-        console.log("hello 5")
-
-        result1 = await Course.find({ rating:  rating  });
-    }
-    else{
-        console.log("hello 6")
-
-        result1 = await Course.find({
-                            $and:[
-                                { rating: rating  },
-                                {subject:subject}]})
-  
-}
     }
 
 
@@ -288,33 +283,32 @@ const filter = asyncHandler(async (req, res) => {
 
             result1 = await Course.find({ subject:  subject });
        }
-    else if(subject=="null"){
-        console.log("hello 8")
+        else if(subject=="null"){
+            console.log("hello 8")
 
-        result1 = await Course.find({ price:  {$lte:price}  });
-}
-    else{
-        console.log("hello 9")
+            result1 = await Course.find({ price:  {$lte:price}  });
+        }   
+        else{
+            console.log("hello 9")
 
-        result1 = await Course.find({
-                            $and:[
-                                { subject: subject },
-                                {price:{$lte:price}}
-                            ]})
+            result1 = await Course.find({
+                                $and:[
+                                    { subject: subject },
+                                    {price:{$lte:price}}
+                                ]})
 
+        }
     }
-}
     else if(rating!="null" && price!="null" && subject!="null"){
         console.log("hello 10 final")
-
-    result1 = await Course.find({
-                            $and:[
-                                { subject: subject },
-                                { rating:  rating  },
-                                {price:{$lte: price}}
-                             ] 
-    });
-}
+        result1 = await Course.find({
+                                $and:[
+                                    { subject: subject },
+                                    { rating:  rating  },
+                                    {price:{$lte: price}}
+                                ] 
+        });
+    }
 
     if (result1) {
         res.status(200).json(result1);
@@ -331,13 +325,13 @@ const filterCorporate = asyncHandler(async (req, res) => {
     const rating = req.query.rating;
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
     let result1
-    if(subject==null ){
+    if(subject=="null" ){
         result1 = await Course.find({ rating:  rating  });
     }
 
-    else if(rating==null){
+    else if(rating=="null"){
             result1 = await Course.find({ subject:  subject });
-}
+    }
     else{
     result1 = await Course.find({
                             $and:[
@@ -345,9 +339,9 @@ const filterCorporate = asyncHandler(async (req, res) => {
                                 { rating:  rating  },
                              ] 
     });
-}
+    }   
 
-    if (result1.length > 0) {
+    if (result1) {
         res.status(200).json(result1);
     }
 
