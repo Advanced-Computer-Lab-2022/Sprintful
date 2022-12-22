@@ -36,7 +36,7 @@ const addPromotion=asyncHandler(async (req,res)=>{
 
 //Reem  //for the course view Page
 const getSubtitlesforCourse = asyncHandler(async (req, res) => {
-    const courseId = req.query.courseId;
+    const courseId = req.params.courseId;
     //console.log(courseId)
     const course = await Course.findOne({_id:courseId});
     const subtitleIds = course.subtitles;
@@ -49,11 +49,13 @@ const getSubtitlesforCourse = asyncHandler(async (req, res) => {
          //console.log(subtitleIds)
         // res.json(course.subtitles);
         for(let i=0; i<subtitleIds.length; i++){
-            let subtitleid=subtitleIds[i].toString();
-           // console.log(subtitleid);
-            subtitleDetails = await Subtitle.findById(subtitleid)    //ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
+            let subtitleid=subtitleIds[i].toString();//ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
+           subtitleDetails = await Subtitle.findOne({_id:subtitleid}).populate('tasks')
+           //projecting only on subtitle title and total number of hours and exercises titles 
+           // subtitleDetails = await Subtitle.findById(subtitleid)
             //console.log(subtitleDetails)
             result.push(subtitleDetails);
+            //subtitleDetails.depopulate('tasks');
             //console.log("SUBTITLE")
 
             //console.log(result[i])
