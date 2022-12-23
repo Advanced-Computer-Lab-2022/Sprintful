@@ -13,7 +13,7 @@ const reportSchema = mongoose.Schema({
         type: String,
         default: "unseen"
     },
-    istructorId: [{
+    instructorId: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Instructor',
     }],

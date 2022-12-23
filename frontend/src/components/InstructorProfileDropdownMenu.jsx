@@ -36,12 +36,12 @@ export default function IndividualProfileDropdownMenu() {
                 <span>K</span>
               </div>
 
-              <h5 className="text-center mb-0">John Doe</h5>
-              <p className="text-center mb-2">jd@gmail.com</p>
+              <p className="text-center mb-0">John Doe</p>
+              <h5 className="text-center mb-2">jd@gmail.com</h5>
 
-              <hr />
+              {/*<hr />
 
-              <p
+               <p
                 className="mb-0"
                 style={{ color: "#bebebe", fontWeight: "bold", fontSize: 12 }}
               >
@@ -51,7 +51,7 @@ export default function IndividualProfileDropdownMenu() {
                 {["Submitter", "Project manager", "Change control board"].join(
                   ", "
                 )}
-              </p>
+              </p> */}
 
               <hr className="mb-0" style={{ margin: "0 -24px 0" }} />
 
@@ -62,9 +62,13 @@ export default function IndividualProfileDropdownMenu() {
                 <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`}>
                   <small>My Courses</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4">
-                  <small>Report</small>
+                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/ViewReports?id=${id}`}>
+                  <small>My Reports</small>
                 </button>
+                <button className="list-group-item list-group-item-action px-4">
+                  <small>Add a new report</small>
+                </button>
+
 
               </div>
 
