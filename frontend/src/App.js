@@ -32,7 +32,7 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
-import ViewReports from './pages/ViewReports';
+import ViewReports from './pages/AdminViewReports';
 import InstructorSearch from './components/InstructorSearch';
 function App() {
   return (

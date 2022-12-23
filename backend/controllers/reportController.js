@@ -46,10 +46,6 @@ const corporateViewReports = asyncHandler(async (req, res) => {
     }
 })
 
-//mark reported problems as "resolved" or "pending"
-
-
-
 
 const addReport = asyncHandler(async (req, res) => {
     const id = req.query.id;
@@ -124,6 +120,34 @@ const addReport = asyncHandler(async (req, res) => {
     } 
 })
 
+//mark reported problems as "resolved" or "pending"
+
+
+//view reported problems - should automaticalled be marked as "unseen"
+const adminViewReports = asyncHandler(async (req, res) => {
+    const reports = await Report.find({})
+    if(reports){
+        res.json(reports)
+    }
+    else{
+        res.status(404)
+        throw new Error('No reports found')
+    }
+})
+
+
+//follow up on an unresolved problem based on status
+const getReportStatus = asyncHandler(async (req, res) => {
+    const id = req.params.id
+    const report = await Report.findById(id)
+    if(report){
+        res.json(report.status)
+    }
+    else{
+        res.status(404)
+        throw new Error('No report found')
+    }
+})
 
 
 
@@ -131,9 +155,7 @@ const addReport = asyncHandler(async (req, res) => {
 
 
 
-
-
-module.exports = { addReport, instructorViewReports, individualViewReports, corporateViewReports}
+module.exports = { addReport, instructorViewReports, individualViewReports, corporateViewReports, adminViewReports, getReportStatus}
 
 
 

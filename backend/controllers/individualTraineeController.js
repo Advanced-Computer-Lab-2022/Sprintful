@@ -54,4 +54,19 @@ const login = async (req, res) => {
     }
 
 }
-module.exports = { changePassword, login, logout}
+
+//view the amount available in their wallet from refunded courses
+const viewMoney = asyncHandler(async (req, res) => {
+const individualTraineeId = req.params.individualTraineeId
+const individualTrainee = await IndividualTrainee.findById(individualTraineeId)
+if(individualTrainee){
+    res.json(individualTrainee.money)
+}
+else{
+    res.status(404)
+    throw new Error('Error, individual trainee not found')
+}
+})
+
+
+module.exports = { changePassword, login, logout, viewMoney}
