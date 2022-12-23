@@ -32,6 +32,7 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
+import ViewReports from './pages/AdminViewReports';
 import InstructorSearch from './components/InstructorSearch';
 import ReportProblem from './components/ReportProblem';
 
@@ -118,6 +119,12 @@ function App() {
               path="/addTask/questions"
               element={<AddQuestion />}
             />
+
+            <Route
+              exact path="/ViewReports"
+              element={[<ViewReports/> ]} 
+            />
+
 
             {/* Hoda */}
 

@@ -35,6 +35,10 @@ const individualTraineeSchema = mongoose.Schema({
         required:[true,"Set the course id"],
         default:[]
     }],
+    money: [{
+        type: Number,
+        default: 0
+    }]
     // role:{
     //     type: String,
     //     required: [true]
