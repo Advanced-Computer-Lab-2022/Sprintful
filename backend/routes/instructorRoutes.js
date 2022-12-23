@@ -11,6 +11,7 @@ router.get('/reviewsnratings',requireAuth, getInstructorRating)
 router.get('/profile', getInstructorProfile)
 router.post('/login', login);
 router.get('/logout', logout)
-router.put('/editBioEmail', editBioEmail)
+//router.put('/editBioEmail', requireAuth,editBioEmail)
+router.patch('/editBioEmail',editBioEmail)
 
 module.exports = router;
