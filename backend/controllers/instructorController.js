@@ -181,7 +181,8 @@ const changePassword = async (req, res, next) => {
 const editBioEmail= async (req, res) => {
     const email=req.body.email;
     const biography= req.body.biography;
-      const instructor = await Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', req.body, { new: true })   //combinations? hardcode it
+    const instructorId = req.query.id;
+      const instructor = await Instructor.findByIdAndUpdate(instructorId, req.body, { new: true })   //combinations? hardcode it
         if(instructor){
       return res.status(200).json(instructor );
         }
