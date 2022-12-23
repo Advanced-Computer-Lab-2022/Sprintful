@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
-import {useNavigate} from "react-router";
 
 
 const ViewReports = () => {
@@ -11,12 +10,13 @@ const ViewReports = () => {
           textAlign: "center",
         };
 
-        const navigate=useNavigate();
         const [reports, setReports] = useState([])
-        const [reportid, setReportid] = useState(null)
+        const params = new URLSearchParams(window.location.search);
+       // const id = params.get('id');
+       const id = "63897f88f459b2631346deee";
         useEffect( ()=>{
             const fetchReports =async () =>{
-                await axios.get('http://localhost:5000/api/report/getReportsAdmin').then(
+                await axios.get(`http://localhost:5000/api/report/getReports/${id}`).then(
                (res) => { 
                    const reports = res.data
                    console.log(reports)
@@ -26,14 +26,6 @@ const ViewReports = () => {
             }
             fetchReports()
         }, [])
-
-        const openReport = () => {
-          //e.preventDefault()
-          var a = document.getElementById('report').value  ;
-          setReportid(a)
-          navigate(`/ReportDetails/${reportid}`)
-        }
-
     
     
   return (
@@ -48,12 +40,11 @@ const ViewReports = () => {
 
     ))}    */}
 
-<div className="card-container" id="report">
+<div className="card-container">
                             {reports  && reports.map((report) =>( 
-                                <div onClick={()=>openReport()} className="card" style={{height: "30em"}}>
+                                <div className="card" style={{height: "30em"}}>
                                 {/* <img src="assets/images/courseCard.jpg"/> */}
-                                <div className="content" value={report._id}>
-                              
+                                <div className="content">
                                     <h3> {report.subject} </h3>
                                     <p>type: {report.type}</p>
                                     <p>status: {report.status}</p>

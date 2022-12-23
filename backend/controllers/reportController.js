@@ -9,41 +9,33 @@ const CorporateTrainee = require('../models/corporateTraineeModel')
 
 
 //view reported problems - should automaticalled be marked as "unseen"
-const instructorViewReports = asyncHandler(async (req, res) => {
-    const instructorId = req.params.instructorid
-    const reports = await Report.find({ instructorId: instructorId })
+const viewReports = asyncHandler(async (req, res) => {
+    const id = req.params.id
+    const instructor = await Instructor.findById(id)
+    const individualTrainee = await IndividualTrainee.findById(id)
+    const corporateTrainee = await CorporateTrainee.findById(id)
+    if(instructor){
+    const reports = await Report.find({ instructorId: id })
     if(reports){
         res.json(reports)
     }
-    else{
-        res.status(404)
-        throw new Error('No reports found')
-    }
-})
-
-const individualViewReports = asyncHandler(async (req, res) => {
-    const individualTraineeId = req.params.individualTraineeId
-    const reports = await Report.find({ individualTraineeId: individualTraineeId })
+}
+else if(individualTrainee){
+    const reports = await Report.find({ individualTraineeId: id })
     if(reports){
         res.json(reports)
     }
-    else{
-        res.status(404)
-        throw new Error('No reports found')
-    }
-})
-
-
-const corporateViewReports = asyncHandler(async (req, res) => {
-    const corporateTraineeId= req.params.corporateTraineeId
-    const reports = await Report.find({ corporateTraineeId: corporateTraineeId })
+}
+else if(corporateTrainee){
+    const reports = await Report.find({ corporateTraineeId: id })
     if(reports){
         res.json(reports)
     }
-    else{
-        res.status(404)
-        throw new Error('No reports found')
-    }
+}
+else{
+    res.status(400).json({ error: "invalid user id" });
+}
+
 })
 
 
@@ -149,13 +141,21 @@ const getReportStatus = asyncHandler(async (req, res) => {
     }
 })
 
+const getReportbyId = asyncHandler(async (req, res) => {
+    const id = req.params.id
+    const report = await Report.findById(id)
+    if(report){
+        res.json(report)
+    }
+})
 
 
 
 
 
 
-module.exports = { addReport, instructorViewReports, individualViewReports, corporateViewReports, adminViewReports, getReportStatus}
+
+module.exports = { addReport, viewReports, adminViewReports, getReportStatus, getReportbyId}
 
 
 

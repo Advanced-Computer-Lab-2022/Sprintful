@@ -32,7 +32,9 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
-import ViewReports from './pages/AdminViewReports';
+import AdminViewReports from './pages/AdminViewReports';
+import UsersViewReports from './pages/UsersViewReports';
+import ReportDetails from './pages/ReportDetails';
 import InstructorSearch from './components/InstructorSearch';
 function App() {
   return (
@@ -114,9 +116,18 @@ function App() {
               element={<AddQuestion />}
             />
 
+            {/* css bydrab law 3amaltaha /api/admin/ViewReports */}
+            <Route
+              path="/adminViewReports"
+              element={[<AdminViewReports/> ]} 
+            />
             <Route
               exact path="/ViewReports"
-              element={[<ViewReports/> ]} 
+              element={[<UsersViewReports/> ]} 
+            />
+            <Route
+              exact path="ReportDetails/:reportid"
+              element={[<ReportDetails/> ]}
             />
 
 
