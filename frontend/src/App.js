@@ -36,6 +36,8 @@ import AdminViewReports from './pages/AdminViewReports';
 import UsersViewReports from './pages/UsersViewReports';
 import ReportDetails from './pages/ReportDetails';
 import InstructorSearch from './components/InstructorSearch';
+import ReportProblem from './components/ReportProblem';
+
 function App() {
   return (
     <div className="App">
@@ -82,6 +84,10 @@ function App() {
             <Route
               exact path="/api/instructor/rate"
               element={<RateInstructor />}
+            />
+             <Route
+              exact path="/api/reportProblem"
+              element={<ReportProblem />}
             />
 
             {/* Ragaa */}
