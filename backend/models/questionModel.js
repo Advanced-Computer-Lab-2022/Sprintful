@@ -8,10 +8,10 @@ const questionSchema = mongoose.Schema({
     number: {
         type: Number,
     },
-    choices: {
-        type: Array,
-        // isCorrect: Boolean,
-    },
+    choices: [{
+        text:String,
+         isCorrect: Boolean,
+    }],
     task: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Task',

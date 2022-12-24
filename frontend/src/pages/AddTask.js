@@ -20,7 +20,7 @@ const AddTaskMain = () => {
      const [subtitleOption, setSubtitleOption]= useState("");
      const [subtitles, setSubtitles] = useState([]);
      const [title,setTitle] = useState("");
-     const[subId, setSubId]=useState(0);
+     const[subId, setSubId]=useState(null);
      const[courseRef, setCourseRef]= useState(false)
      const[task, setTask] = useState([])
 
@@ -52,11 +52,13 @@ const AddTaskMain = () => {
     }
     //let subId=0;
     const getId = async () =>{
-        if(subtitleOption==="option"){
-            setSubId(option._id)
+        console.log("option " + option )
+        if(subtitleOption=="option"){
+            setSubId(option)
+            console.log("subId set for final exam")
             setCourseRef(true)
         }
-        await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
+       else{ await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
             (res) => { 
                 const subIdArr = res.data
                 //console.log("1"+subId)
@@ -67,6 +69,8 @@ const AddTaskMain = () => {
             }
              );
     }
+    console.log("sub Id " +subId)
+}
 //console.log("out"+ subId)
 
     // useEffect( ()=>{
@@ -82,7 +86,7 @@ const AddTaskMain = () => {
     //     fecthSubtitles()
     // }, [])
 
-    console.log("outside"+subId)
+    console.log("outside "+subId)
     //console.log(courses)
     const navigate=useNavigate();
 
@@ -99,8 +103,9 @@ const AddTaskMain = () => {
             title: title, 
             subtitle: subId
         })
-
+        
     }
+    console.log("id in handleSubmit: "+subId)
         const response = await fetch(`http://localhost:5000/api/tasks/addTask/${subId}`,{
             method:'POST',
             body :JSON.stringify(task),
@@ -116,7 +121,6 @@ const AddTaskMain = () => {
           console.log('Task added',json)
        
            
-           console.log("id in handleSubmit: "+subId)
            navigate(`/addQuestion?taskid=${taskId}`);
            navigate(0);
            }   
@@ -156,9 +160,9 @@ return(
 
          </select> 
 
-         {console.log(option)}
-         {console.log(subtitles)}
-
+         {/* {console.log("courseId "+option)}
+         {console.log("subtitles for course " +subtitles)}
+ */}
          <p>Choose Subtitle</p>
 
         <select
