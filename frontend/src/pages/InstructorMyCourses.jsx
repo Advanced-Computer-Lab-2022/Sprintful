@@ -4,9 +4,8 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
+
 import {render} from 'react-dom';
-
-
 import { fontSize } from '@mui/system';
 
 
@@ -16,6 +15,11 @@ export default function InstructorMyCourses() {
     const [courses2,setCourses2] = useState([])
     const [searchTerm,setSearchTerm] = useState(null)
     const [searched,setSearched] = useState(false)
+
+    const[filterPrice,setFilterPrice] = useState(null)
+    const [filterSubject, setFilterSubject] = useState(null)
+    const [filterData,setFilterData]=useState([]);
+
     const [add, setAdd] =useState(false)
     const [mess,setMess] = useState(false)
 
@@ -27,6 +31,7 @@ export default function InstructorMyCourses() {
     const [discount,setDiscount]=useState('')
     const [subject,setSubject]=useState('Computer Science')
     // const [contract,setContract] =useState(false)
+
     const navigate=useNavigate();
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -40,17 +45,26 @@ export default function InstructorMyCourses() {
       };
     //   render(<PopUp/>)
 
+    const handleFilter =  async(e) =>{
+        e.preventDefault()
+        var b = document.getElementById('subject').value  ;
+        setFilterSubject(b)
+        var c = document.getElementById('price').value  ;
+        setFilterPrice(c)
+        setCourses([])
+    }
+
     const handleSubmit= async (e)=>{
         e.preventDefault()
-      const response=  axios.post(`http://localhost:5000/api/courses/addCourse?id=${id}`, { 
-        title: title ,
-        subject: subject,
-        price: price,
-        totalhours: totalhours,
-        shortsummary: shortsummary,
-        instructor: id,
-        previewvideolink: previewvideolink,
-        discount: discount
+        const response=  axios.post(`http://localhost:5000/api/courses/addCourse?id=${id}`, { 
+            title: title ,
+            subject: subject,
+            price: price,
+            totalhours: totalhours,
+            shortsummary: shortsummary,
+            instructor: id,
+            previewvideolink: previewvideolink,
+            discount: discount
     
         },axiosConfig)
         .then(function (response) {
@@ -65,7 +79,7 @@ export default function InstructorMyCourses() {
         })
         .catch(function (error) {
         // setContract(false)
-        navigate(`/paymentPolicy?id=${id}`);
+        navigate(`/contract?id=${id}`);
         navigate(0)
         console.log(error);
         })
@@ -86,6 +100,27 @@ export default function InstructorMyCourses() {
     
     }
     useEffect(() => {
+        const response = async() =>{
+            console.log("hello")
+            console.log(filterSubject +" " + filterPrice)
+            await axios.post(`http://localhost:5000/api/courses/instructor/filterMyCourses?id=${id}&subject=${filterSubject}&price=${filterPrice}`)
+            .then((res) => { 
+                const course = res.data
+                if(res.status===200){
+                    console.log("check success")
+                    console.log("FILTER")
+                    setFilterData(course)
+                }
+                else{
+                    console.log("entered empty check")
+                    setFilterData([])
+                }
+            })
+        }
+        response()
+        setFilterPrice(null)
+        setFilterSubject(null)
+
         const fetchCourses = async()=>{
             await axios.get(`http://localhost:5000/api/courses/instructor?id=${id}`,axiosConfig)
             .then((res) => {
@@ -109,13 +144,14 @@ export default function InstructorMyCourses() {
 
        setSearchTerm(null)
 
-    }, [searchTerm,searched]);
+    }, [searchTerm,searched,filterData,filterPrice,filterSubject]);
    
     const handleOnChange = async(e) =>{
         e.preventDefault()
         var a = document.getElementById('input').value  ;
         setSearchTerm(a)
         setSearched(true);
+        setFilterData([])
         console.log(searchTerm)
     }
 
@@ -157,6 +193,28 @@ export default function InstructorMyCourses() {
         borderStyle: "solid",
         borderColor : "#8d99af"
       }
+      const styleFilterForm = {
+        position: "relative",
+        top: "-40px",
+        left: "350px",
+        height: "70px",
+        width: "340px"
+        };
+    
+    const styleFilterButton ={
+        height: "70px",
+        left:"70px"
+    }
+    const stylePrice ={
+        width : "100px",
+        fontSize: "12px",
+    }
+    const styleSubject ={
+        width : "120px",
+        fontSize: "12px",
+        position: "relative",
+        left:"20px"
+    }
     return (
         <div>
             {/* <!-- ***** Preloader Start ***** --> */}
@@ -189,7 +247,7 @@ export default function InstructorMyCourses() {
                     <div className="row">
                         <div className="col-lg-12">
                             { 
-                            <form id="search-form" name="gs" method="submit" role="search" action="#" style={{position:"relative",top:"-150px", left:"10px"}}>
+                            <form id="search-form" name="gs" method="submit" role="search" action="#" style={{position:"relative",top:"-40px", left:"10px"}}>
                                 <div className="row">
                                     <div className="col-lg-3 align-self-center">
                                         <fieldset>
@@ -205,11 +263,48 @@ export default function InstructorMyCourses() {
 
                             </form>
                             }
+                            { <form id="search-form" name="gs" method="submit" role="search" action="#"  style={styleFilterForm}>
+                                <div className="row">
+                                    <div className="col-lg-3 align-self-center">
+                                        <fieldset>
+                                            <select  id={'price'}  value={filterPrice} name="area" className="form-select" aria-label="Area"  onchange="this.form.click()" style={stylePrice}> 
+                                            {/* id="chooseCategory" */}
+                                            {/* assuming price range is 0-5000 */}
+                                                <option selected disabled key="0" value="null"> Select a price</option> 
+                                                <option key="1" value="0" >FREE </option>
+                                                <option key="2" value="1000" >less than 1000</option>
+                                                <option key="3" value="3000" >less than 3000</option>
+                                                <option key="4" value="5000">less than 5000</option>
+                                                <option key="5" value="99999999">more than 5000</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div className="col-lg-3 align-self-center">
+                                        <fieldset>
+                                            <select id={'subject'} value={filterSubject} name="price" className="form-select" aria-label="Default select example" onchange="this.form.click()" style={styleSubject}>
+                                                {/* id="chooseCategory" */}
+                                                <option key="0" value="null" selected disabled> Select a subject</option>
+                                                <option key="1" value="Computer Science">Computer Science</option>
+                                                <option key="2" value="Languages">Languages</option>
+                                                <option key="3" value="Physics">Physics</option>
+                                                <option key="4" value="Business Administration">Business Administration</option>
+                                                <option key="5" value="Mathematics">Mathematics</option>
+                                            </select>
+                                        </fieldset>
+                                    </div>
+                                    <div className="col-lg-3">
+                                        <fieldset>
+                                            <button id="main-button" onClick={handleFilter} style={styleFilterButton}> Apply</button>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </form>
+                            }
                         </div>
                     </div>
                 </div>
-            </div>
-    
+            </div>   
+
             <div className="popular-categories">
                 <div className="container">
                     <div className="row">
@@ -222,7 +317,21 @@ export default function InstructorMyCourses() {
                             </div>
                         </div>
                         <div className="col-lg-12">
-                             
+                            { 
+                                <div className="card-container"  style={{position:"relative", top:"-160px"}}>
+                                    {filterData  && filterData.map((course) =>( 
+                                        <div className="card">
+                                        <img src="assets/images/courseCard.jpg"/>
+                                        <div className="content">
+                                            <h3> {course.title} </h3>
+                                            <p>totalhours: {course.totalhours}</p>
+                                            <p>rating: {course.rating}</p>
+                                            <p>Price: {course.price}</p>
+                                        </div>
+                                        </div>
+                                    ))}       
+                                </div>
+                            }      
                             { searched &&
                                 <div className="card-container" style={{position:"relative", top:"-160px"}}>
                                     {courses2  && courses2.map((course) =>( 
@@ -238,7 +347,7 @@ export default function InstructorMyCourses() {
                                 </div>
                             } 
                             {/* Instructor Course view */}
-                            { !searched && 
+                            { !searched  &&
                             <div className="card-container" style={{position:"relative", top:"-160px"}} >
                                 {courses  && courses.map((course) =>( 
                                     <div className="card"  >

@@ -7,7 +7,7 @@ const { getCourseById,
     corporateGetCourses,
     addCourse,
     instructorCourses,
-    filterMyCourses,
+    filterInstructorCourses,
     searchCourse,
     filter,
     filterCorporate,
@@ -34,7 +34,7 @@ router.get('/getSubtitles',requireAuth, getSubtitles) // get course subtitles
 router.get('/getSubtitleId',requireAuth, getSubtitleId) // get subtitle id from title')
 router.route('/:id').get(getCourseById) // get course by id
 router.route('/').get(getCourses) // get all courses
-router.get('/instructor/filterMyCourses',requireAuth, filterMyCourses) // get all courses for instructor filtered
+router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
 router.post('/filter', filter) // This is a POST request to the /api/guest endpoint
 router.put('/review',requireAuth, addCourseReview);
 router.get('/reviewsnratings',requireAuth,getCourseRating)

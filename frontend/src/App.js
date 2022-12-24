@@ -33,7 +33,7 @@ import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import InstructorSearch from './components/InstructorSearch';
-import PaymentPolicy from './pages/PaymentPolicy'
+import Contract from './pages/Contract'
 function App() {
   return (
     <div className="App">
@@ -116,9 +116,9 @@ function App() {
 
             {/* Hoda */}
             <Route
-              exact path="/paymentPolicy"
+              exact path="/contract"
               element={
-                <PaymentPolicy/>}
+                <Contract/>}
             />
 
             <Route
