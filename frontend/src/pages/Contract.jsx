@@ -1,5 +1,32 @@
-export default function Contract() {
+import React, { useState } from "react";
+import {useNavigate} from "react-router";
+import { useEffect } from 'react';
+import axios from 'axios';
+export default function PaymentPolicy() {
 
+  const navigate=useNavigate();
+  const params = new URLSearchParams(window.location.search);
+  const id = params.get('id');
+  console.log(id)
+
+  let axiosConfig = {
+    headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        "Access-Control-Allow-Origin": "*",
+    }
+  };
+    const handleOnClick= async(e) =>{
+      e.preventDefault()
+      const response=  axios.put(`http://localhost:5000/api/courses/acceptContract?id=${id}`, {
+    },axiosConfig)
+    .then(function (response) {
+      navigate(`/MyTaughtCourses?id=${id}`)
+    })
+    .catch(function (error) {
+     console.log(error);
+     })
+
+    } 
     const style1 ={ //.terms-container
         fontFamily: "'Open Sans', sans-serif",
         color: "#262626",
@@ -51,13 +78,16 @@ export default function Contract() {
     //   }
       
       const style7 ={ //.terms_footer h3 
-        marginTop: "60px",
-        marginBottom: "125px",
-        textAlign: "center",
-        fontWeight: "bold",
-        letterSpacing: "3px",
-        lineHeight: "1.5",
-        color: "#262626"
+        background: "#8d99af",
+        color: "#fff",
+        border: "0",
+        padding: "8px",
+        borderRadius: "8px",
+        cursor: "pointer",
+        fontSize: "16px",
+        position: "relative",
+        left: "250px",
+        marginBottom: "20px"
       }
       
     //   .terms_footer h3 a:link {
@@ -119,8 +149,10 @@ export default function Contract() {
                         For all orders within North America, please allow approximately 14 business days from the time a campaign ends (please note this is different from the time of purchase) to receive your order.
                         For all international orders, please allow approximately 21 business days from the time a campaign ends (please note this is different from the time of purchase) to receive your order. 
                         You will receive an email from The Main Label when your order has been confirmed.
-                        If you still have not received your purchase after the above mentioned times, please notify <a  style={style6} href="email">customerservice@themainlabel.com</a>.      
-                    </p><div className="container terms_footer"> <h3 style={style7}>Can't find what you're looking for? <a style={style6}  href="www.themainalabel.com">Email us</a></h3>
+                        If you still have not received your purchase after the above mentioned times, please notify <a style={style6} href="email">customerservice@themainlabel.com</a>.      
+                    </p><div className="container terms_footer"> <button style ={style7} onClick={handleOnClick}>Accept</button>
+ 
+                    {/* <h3 style={style7}>Can't find what you're looking for? <a style={style6}  href="www.themainalabel.com">Email us</a> </h3>*/}
                     </div>   
                     </div>   
                 </div>

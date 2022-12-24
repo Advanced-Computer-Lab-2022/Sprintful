@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Navigate, useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
-import "../pages/Signup.css"
+// import "../pages/Signup.css"
 
 export default function Signup() {
 const [isHovering, setIsHovering] = useState(false);
