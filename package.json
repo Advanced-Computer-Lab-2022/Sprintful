@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Advanced-Computer-Lab-2022/Sprintful#readme",
   "dependencies": {
+    "@fontsource/roboto": "^4.5.8",
     "axios": "^1.2.0",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
