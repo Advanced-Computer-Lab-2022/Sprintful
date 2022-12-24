@@ -33,6 +33,7 @@ import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import InstructorSearch from './components/InstructorSearch';
+import PaymentPolicy from './pages/PaymentPolicy'
 function App() {
   return (
     <div className="App">
@@ -42,7 +43,7 @@ function App() {
 
             {/* Reem */}
             <Route
-              exact path="/api/courses/"
+              exact path="/addCourse"
               element={<CourseForm />}
             />
             <Route
@@ -114,6 +115,11 @@ function App() {
             />
 
             {/* Hoda */}
+            <Route
+              exact path="/paymentPolicy"
+              element={
+                <PaymentPolicy/>}
+            />
 
             <Route
               exact path="/api/courses/search"

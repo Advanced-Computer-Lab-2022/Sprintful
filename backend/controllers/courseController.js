@@ -74,8 +74,19 @@ const instructorViewCourses = asyncHandler(async (req, res) => {
     res.status(200).json(course)
 })
 
+const acceptContract = asyncHandler(async (req, res) => {
+    const id = req.query.id;
+    const response =await Instructor.findByIdAndUpdate(id,{contract: true})
+    if(response)
+        res.json(response)
+    else {
+        res.status(404)
+        throw new Error('Instructor not found')
+    }
+
+})
+
 const addCourse = asyncHandler(async (req, res) => {
-    // construct an object to add to the db
     //const discount =(req.body.discount)/100
     const newCourse = new Course({
         title: req.body.title,
@@ -89,20 +100,25 @@ const addCourse = asyncHandler(async (req, res) => {
     });
 
     const contract = (await Instructor.findById(req.query.id)).contract
+    console.log(contract)
     if(contract){
         newCourse.save(function (err) {
-            if (err) {
-                console.log(err);
-            }
+        if (err) {
+            console.log(err);
+        }
         })
-    }   
+        const newcourseid = [newCourse._id];
+        //Saving the instructor reference id 
+        //Getting the courses array and putting the neew course's id in this Instructor courses array
+        const newCoursesList = ((await Instructor.findById(req.query.id )).courses).concat(newcourseid); //.concat concatenates the new array
+        const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id , { courses: newCoursesList }).exec();
+        res.status(200).json([newCourse,contract])
+    }
+    else{
+        res.status(400).json({ error: "can't add course. Accept contract first" });
+    }  
     //putting the course id into an array newcourseid
-    const newcourseid = [newCourse._id];
-    //Saving the instructor reference id 
-    //Getting the courses array and putting the neew course's id in this Instructor courses array
-    const newCoursesList = ((await Instructor.findById(req.query.id )).courses).concat(newcourseid); //.concat concatenates the new array
-    const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id , { courses: newCoursesList }).exec();
-    res.json([newCourse,contract])
+    
 })
 
 
@@ -120,8 +136,14 @@ const instructorCourses = asyncHandler(async (req, res) => {
         }
         flatArray = [].concat.apply([], courses);
     }
-    console.log(flatArray)
-    res.status(200).json(flatArray)
+    if(flatArray){
+        console.log(myCoursesDocuments)
+        res.json(flatArray);
+    }
+    else {
+        console.log("hello")
+        res.status(400).json({ error: "No course found" });
+    }
 });
 
 const IndividualCourses = asyncHandler(async (req, res) => {
@@ -497,5 +519,6 @@ module.exports = {
     IndividualCourses,
     getSubtitles,
     getSubtitleId,
-    searchInstructorCourses
+    searchInstructorCourses,
+    acceptContract
 }

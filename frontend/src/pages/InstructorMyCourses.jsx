@@ -1,27 +1,102 @@
 import InstructorHomeNavBar  from '../components/InstructorHomeNavBar';
+import PopUp from '../components/PopUp'
 import React, { useState } from "react";
+import {useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
-import InstructorSearch from '../components/InstructorSearch';
+import {render} from 'react-dom';
+
+
+import { fontSize } from '@mui/system';
+
 
 export default function InstructorMyCourses() {
+    
     const [courses,setCourses] = useState([])
     const [courses2,setCourses2] = useState([])
     const [searchTerm,setSearchTerm] = useState(null)
     const [searched,setSearched] = useState(false)
-    let params = new URLSearchParams(document.location.search);
-    let id = params.get("id");
-    useEffect(() => {
-        axios.get(`http://localhost:5000/api/courses/instructor?id=${id}`) 
-        .then((res) => {
-           console.log(res.data)
-           setCourses(res.data)
-        })
-       .catch(errors => {
-           // react on errors.
-           console.error(errors);
-       });
+    const [add, setAdd] =useState(false)
+    const [mess,setMess] = useState(false)
 
+    const[title,setTitle]=useState('') 
+    const [price ,setPrice]=useState('')
+    const [totalhours,setTotalHours]=useState('')
+    const [shortsummary,setShortSummary]=useState('')
+    const[previewvideolink,setPreviewVideoLink]=useState('')
+    const [discount,setDiscount]=useState('')
+    const [subject,setSubject]=useState('Computer Science')
+    // const [contract,setContract] =useState(false)
+    const navigate=useNavigate();
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log(id)
+
+      let axiosConfig = {
+          headers: {
+              'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*",
+          }
+      };
+    //   render(<PopUp/>)
+
+    const handleSubmit= async (e)=>{
+        e.preventDefault()
+      const response=  axios.post(`http://localhost:5000/api/courses/addCourse?id=${id}`, { 
+        title: title ,
+        subject: subject,
+        price: price,
+        totalhours: totalhours,
+        shortsummary: shortsummary,
+        instructor: id,
+        previewvideolink: previewvideolink,
+        discount: discount
+    
+        },axiosConfig)
+        .then(function (response) {
+        console.log(response.data[0])
+        console.log(response.data[1])
+        setMess(true);
+        // navigate(`/instructor?id=${id}`)
+        // navigate(0)
+        // const json = response[0].json()
+        // const courseid=json._id;
+        // console.log('Course added ',json)
+        })
+        .catch(function (error) {
+        // setContract(false)
+        navigate(`/paymentPolicy?id=${id}`);
+        navigate(0)
+        console.log(error);
+        })
+
+        setTitle('')
+        setPrice('')
+        setSubject('Computer Science')
+        setTotalHours('')
+        setShortSummary('')
+        setPreviewVideoLink('')
+        setDiscount('')
+        // if(contract){
+          
+        // }
+        // else {
+            
+        // }
+    
+    }
+    useEffect(() => {
+        const fetchCourses = async()=>{
+            await axios.get(`http://localhost:5000/api/courses/instructor?id=${id}`,axiosConfig)
+            .then((res) => {
+               console.log(res.data)
+               setCourses(res.data)
+            })
+           .catch(errors => {
+               // react on errors.
+               console.error(errors);
+           });
+        }
        axios.get(`http://localhost:5000/api/courses/instructor/search?id=${id}&searchTerm=${searchTerm}`)
        .then((res) => {
            console.log(res.data)
@@ -30,6 +105,8 @@ export default function InstructorMyCourses() {
        .catch((err) => {
            console.log(err);
        });
+       fetchCourses()
+
        setSearchTerm(null)
 
     }, [searchTerm,searched]);
@@ -40,20 +117,46 @@ export default function InstructorMyCourses() {
         setSearchTerm(a)
         setSearched(true);
         console.log(searchTerm)
-   }
+    }
 
    const mystyle = {
-    color: "white",
-    backgroundColor: "#8d99af",
-    padding: "10px",
-    position: "relative",
-    top: "50px",
-    left: "500px",
-    width: "130px",
-    height: "40px",
-    fontSize: "13px"
+        color: "white",
+        backgroundColor: "#8d99af",
+        padding: "10px",
+        position: "relative",
+        width: "130px",
+        height: "40px",
+        fontSize: "13px",
+        position:"relative",
+        left:"20px",
+        top: "-230px" ,
+        marginTop: "150px"
     };
-
+    const style1 = { //.create input, .create textarea, .create select
+        width: "100%",
+        padding: "6px 10px",
+        margin: "10px 0",
+        border: "1px solid #ddd",
+        boxSizing: "border-box",
+        display: "block",
+        fontSize:"14px",
+      }
+     const style2 ={ // .create button
+        background: "#8d99af",
+        color: "#fff",
+        border: "0",
+        padding: "8px",
+        borderRadius: "8px",
+        cursor: "pointer"
+      }
+      const style3 ={ //  form
+        position: "relative",
+        left:"11px",
+        top: "-10px",
+        fontSize:"14px",
+        borderStyle: "solid",
+        borderColor : "#8d99af"
+      }
     return (
         <div>
             {/* <!-- ***** Preloader Start ***** --> */}
@@ -70,7 +173,7 @@ export default function InstructorMyCourses() {
             {/* <!-- ***** Preloader End ***** --> */}
 
             {/* <!-- ***** Header Area Start ***** --> */}
-            <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+            <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s" >
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
@@ -85,13 +188,8 @@ export default function InstructorMyCourses() {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="top-text header-text">
-                                <h2>My Courses </h2>
-                            </div>
-                        </div>
-                        <div>
                             { 
-                            <form id="search-form" name="gs" method="submit" role="search" action="#">
+                            <form id="search-form" name="gs" method="submit" role="search" action="#" style={{position:"relative",top:"-150px", left:"10px"}}>
                                 <div className="row">
                                     <div className="col-lg-3 align-self-center">
                                         <fieldset>
@@ -100,48 +198,131 @@ export default function InstructorMyCourses() {
                                     </div>
                                     <div className="col-lg-3">
                                         <fieldset>
-                                            <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i> Search Now</button>
+                                            <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
                                         </fieldset>
                                     </div>
                                 </div>
 
                             </form>
                             }
-                            <div>
-                                <button id="main-button" style={mystyle}> Add a new Course</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div className="popular-categories">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="section-heading">
+                                <h2 style={{fontSize: "30px", position:"relative",left:"-450px", top: "-40px"}}>My Courses</h2>
                             </div>
+                            <div>
+                                <button id="main-button" onClick={() => setAdd(!add)} style={mystyle}> Add a new Course</button>
+                            </div>
+                        </div>
+                        <div className="col-lg-12">
+                             
                             { searched &&
-                                <div className="card-container">
+                                <div className="card-container" style={{position:"relative", top:"-160px"}}>
                                     {courses2  && courses2.map((course) =>( 
-                                        <div className="card">
+                                        <div className="card"  >
                                             <img src="assets/images/courseCard.jpg"/>
                                             <div className="content">
                                                 <h3> {course.title} </h3>
                                             </div>
                                         </div>
-                                    ))}             
-                                </div>
-                            }
-                        </div>
-                        {/* Instructor Course view */}
-                        { !searched && 
-                        <div className="card-container">
-                            {courses  && courses.map((course) =>( 
-                                <div className="card">
-                                    <img src="assets/images/courseCard.jpg"/>
-                                    <div className="content">
-                                        <h3> {course.title} </h3>
-                                        <p>totalhours: {course.totalhours}</p>
-                                        <p>rating: {course.rating}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                        }
-                    </div>
-                </div>
-            </div>
 
+                                    ))}
+  
+                                </div>
+                            } 
+                            {/* Instructor Course view */}
+                            { !searched && 
+                            <div className="card-container" style={{position:"relative", top:"-160px"}} >
+                                {courses  && courses.map((course) =>( 
+                                    <div className="card"  >
+                                        <img src="assets/images/courseCard.jpg"/>
+                                        <div className="content" >
+                                            <h3> {course.title} </h3>
+                                            <p>totalhours: {course.totalhours}</p>
+                                            <p>rating: {course.rating}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            } 
+                            <div className="create">
+                                { add && <form onSubmit={handleSubmit} style={style3}>  
+                                    {/* <h3>Add a new Course</h3> */}
+                                        <label style={{fontSize:"16px"}}>Course Title</label>
+                                        <input 
+                                            type="text"
+                                            onChange={(e)=>setTitle(e.target.value)}
+                                            value={title}
+                                            style= {style1}
+                                            />
+                                    
+                                        <label style={{fontSize:"16px"}}>Price (in LE)</label>
+                                        <input 
+                                            type="number"
+                                            onChange={(e)=>setPrice(e.target.value)}
+                                            value={price}
+                                            style= {style1}
+                                            />
+                                    
+                                    <label style={{fontSize:"16px"}}>Credit Hours</label>
+                                        <input 
+                                            type="number"
+                                            onChange={(e)=>setTotalHours(e.target.value)}
+                                            value={totalhours}
+                                            style= {style1}
+                                            />
+                                    
+                                        <label style={{fontSize:"16px"}}>Short Summary</label>
+                                        <input 
+                                            type="text"
+                                            onChange={(e)=>setShortSummary(e.target.value)}
+                                            value={shortsummary}
+                                            style= {style1}
+                                            />
+
+                                        <label style={{fontSize:"16px"}}>Preview video link</label>
+                                        <input 
+                                            type="text"
+                                            onChange={(e)=>setPreviewVideoLink(e.target.value)}
+                                            value={previewvideolink}
+                                            style= {style1}
+                                            />
+                                        
+                                        <label style={{fontSize:"16px"}}>Discount</label>
+                                        <input 
+                                            type="number"
+                                            onChange={(e)=>setDiscount(e.target.value)}
+                                            value={discount}
+                                            style= {style1}
+                                            />
+
+                                        <label style={{fontSize:"16px"}}>Choose a Subject</label>
+                                            <select value={subject}  onChange={(e)=>setSubject(e.target.value)} style= {style1}>
+                                            <option style={style1} value="Languages">Languages</option>
+                                            <option style={style1}  value="Computer Science">Computer Science </option>
+                                            <option style={style1}  value="Physics">Physics</option>
+                                            <option style={style1}  value="Business Adminstration">Business Adminstration</option>
+                                            <option style={style1}  value="Mathematics">Mathematics</option>
+                                            </select>
+                                        <button style ={style2}>Add Subtitle</button>
+        
+                                        </form>
+                                    }
+                                    { mess && <strong style={{position:"relative", left: "25px",top: "-33px" ,marginTop: "10px", fontSize:"13px", color:"#4BB543"}}> Course added successfully!</strong>
+
+                                    }
+                            </div>    
+                        </div>   
+                    </div> 
+                </div>
+            </div>        
             <footer>
                 <div className="container">
                     <div className="row">
@@ -200,6 +381,13 @@ export default function InstructorMyCourses() {
                     </div>
                 </div>
             </footer>
+
         </div>
+
+
+
+
+
+
     )
 }

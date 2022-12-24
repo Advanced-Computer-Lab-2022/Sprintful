@@ -18,15 +18,17 @@ const { getCourseById,
     getCourseRating,
     getSubtitles, 
     getSubtitleId,
-    searchInstructorCourses } = require('../controllers/courseController')
-
+    searchInstructorCourses,
+    acceptContract } = require('../controllers/courseController')
+    
+router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
 router.route('/:id').get(getCourseById) // get course by id
 router.get('/corporate/myCourses',CorporateCourses)
 router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
-router.post('/', addCourse)
-router.get('/instructor', instructorCourses) // get all courses for instructor
+router.post('/addCourse', addCourse)
+router.put('/acceptContract',acceptContract)
 router.post('/search', searchCourse)
 router.get('/getSubtitles',requireAuth, getSubtitles) // get course subtitles
 router.get('/getSubtitleId',requireAuth, getSubtitleId) // get subtitle id from title')
@@ -39,5 +41,6 @@ router.get('/reviewsnratings',requireAuth,getCourseRating)
 router.get('/getreviews/:id',requireAuth,getCourseReviews)
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)
+
 
 module.exports = router
