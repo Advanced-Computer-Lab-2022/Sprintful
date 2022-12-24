@@ -19,8 +19,9 @@ const { getCourseById,
     getSubtitles, getSubtitleId,addPromotion,getSubtitlesforCourse } = require('../controllers/courseController')   //destructuring
 
 router.get('/search', searchCourse)
-router.route('/').get(getCourseById) // get course by id
+//router.route('/').get(getCourseById) // get course by id
 // router.route('/:id').get(getCourseById) // get course by id
+router.get('/',getCourseById)
 router.get('/corporate/myCourses', requireAuth, CorporateCourses)
 router.get('/individual/myCourses',requireAuth, IndividualCourses)
 router.get('/corporate',requireAuth,corporateGetCourses) // get all courses for corporate . search without the price

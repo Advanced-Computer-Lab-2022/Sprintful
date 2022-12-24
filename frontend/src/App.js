@@ -27,6 +27,7 @@ import AddTaskMain from './pages/AddTask';
 import AddQuestion from './pages/AddQuestion';
 import TraineeHome from './pages/TraineeHome';
 import AddPromotionCourse from './pages/AddPromotionCourse';
+import CourseView from './pages/CourseView';
 function App() {
   return (
     <div className="App">
@@ -54,6 +55,10 @@ function App() {
             <Route 
             exact path ="/api/courses/addPromotion/:courseid"
             element ={<AddPromotionCourse/>} />
+
+            <Route 
+            exact path="api/courses/getCourse/:courseid"
+            element={<CourseView/>} />
 
             {/* Nada */}
 
