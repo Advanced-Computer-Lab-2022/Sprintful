@@ -19,15 +19,15 @@ const individualTraineeSchema = mongoose.Schema({
     },
     firstName: {
         type: String,
-        required: [true, 'Please add a username'],
+        required: [true, 'Please add your first name'],
     },
     lastName: {
         type: String,
-        required: [true, 'Please add a username'],
+        required: [true, 'Please add your last name'],
     },
     gender: {
         type: String, // not sure
-        // required: [true, 'Please add a username'],
+        required: [true],
     },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,

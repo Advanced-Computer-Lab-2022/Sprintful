@@ -34,6 +34,8 @@ import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
+import Signup from './pages/Signup';
+
 function App() {
   return (
     <div className="App">
@@ -120,7 +122,11 @@ function App() {
               element={
                 <Contract/>}
             />
-
+             <Route
+              exact path="/Signup"
+              element={
+                <Signup/>}
+            />
             <Route
               exact path="/api/courses/search"
               element={

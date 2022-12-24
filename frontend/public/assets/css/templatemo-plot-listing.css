@@ -2223,5 +2223,28 @@ responsive
     opacity: .6;
   }
 
+ .signup__field:before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sansSerif;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 0px;
+    height: 2px;
+    background: #a4243b;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: all 0.4s ease;
+  }
+
+ .signup__input:focus + .signup__label, .signup__input:valid + .signup__label {
+    top: 0;
+    font-size: 1rem;
+    background-color: white; 
+  }
+  
 
 }
