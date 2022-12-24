@@ -6,6 +6,7 @@ const IndividualTrainee = require('../models/individualTraineeModel')
 const Instructor = require('../models/instructorModel')
 const subtitle = require('../models/subtitleModel.js')
 var searchedCourses = []; 
+
 const getSubtitles = asyncHandler(async (req, res) => {
     const courseId = req.query.courseId;
     //console.log(courseId)
@@ -74,8 +75,19 @@ const instructorViewCourses = asyncHandler(async (req, res) => {
     res.status(200).json(course)
 })
 
+const acceptContract = asyncHandler(async (req, res) => {
+    const id = req.query.id;
+    const response =await Instructor.findByIdAndUpdate(id,{contract: true})
+    if(response)
+        res.json(response)
+    else {
+        res.status(404)
+        throw new Error('Instructor not found')
+    }
+
+})
+
 const addCourse = asyncHandler(async (req, res) => {
-    // construct an object to add to the db
     //const discount =(req.body.discount)/100
     const newCourse = new Course({
         title: req.body.title,
@@ -89,20 +101,25 @@ const addCourse = asyncHandler(async (req, res) => {
     });
 
     const contract = (await Instructor.findById(req.query.id)).contract
+    console.log(contract)
     if(contract){
         newCourse.save(function (err) {
-            if (err) {
-                console.log(err);
-            }
+        if (err) {
+            console.log(err);
+        }
         })
-    }   
+        const newcourseid = [newCourse._id];
+        //Saving the instructor reference id 
+        //Getting the courses array and putting the neew course's id in this Instructor courses array
+        const newCoursesList = ((await Instructor.findById(req.query.id )).courses).concat(newcourseid); //.concat concatenates the new array
+        const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id , { courses: newCoursesList }).exec();
+        res.status(200).json([newCourse,contract])
+    }
+    else{
+        res.status(400).json({ error: "can't add course. Accept contract first" });
+    }  
     //putting the course id into an array newcourseid
-    const newcourseid = [newCourse._id];
-    //Saving the instructor reference id 
-    //Getting the courses array and putting the neew course's id in this Instructor courses array
-    const newCoursesList = ((await Instructor.findById(req.query.id )).courses).concat(newcourseid); //.concat concatenates the new array
-    const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id , { courses: newCoursesList }).exec();
-    res.json([newCourse,contract])
+    
 })
 
 
@@ -120,8 +137,14 @@ const instructorCourses = asyncHandler(async (req, res) => {
         }
         flatArray = [].concat.apply([], courses);
     }
-    console.log(flatArray)
-    res.status(200).json(flatArray)
+    if(flatArray){
+        console.log(myCoursesDocuments)
+        res.json(flatArray);
+    }
+    else {
+        console.log("hello")
+        res.status(400).json({ error: "No course found" });
+    }
 });
 
 const IndividualCourses = asyncHandler(async (req, res) => {
@@ -144,31 +167,6 @@ const IndividualCourses = asyncHandler(async (req, res) => {
 });
 
 //Function for filtering the courses of the instructor himself based on subject or price  
-const filterMyCourses = asyncHandler(async (req, res) => {
-
-    //Saving the id of the instructor 
-    const instructorId = '635a591011ecdc081ce890f7'
-    //Getting the subject and price according the user's choice 
-    const subjectName = req.query.subject
-    const MaxPriceamount = req.query.price
-    //Searching for the title of courses of this instructor himself whose its subject = the specified subject in filter or its price <= the specified price  ($lte)
-    //for a free course 
-    let queriedCourses = []
-    if (MaxPriceamount == 0) {
-        queriedCourses = await Course.find({ instructor: instructorId, $or: [{ subject: subjectName }, { price: 0 }] }, '-_id title')
-    }
-    //for a paid course 
-    else {
-        queriedCourses = await Course.find({ instructor: instructorId, $or: [{ subject: subjectName }, { price: { $lte: MaxPriceamount } }] }, '-_id title')
-
-    }
-    //checking for any results 
-    if (queriedCourses.length === 0) {
-        return res.json({ message: "No courses with these choices are found " })
-    }
-    res.status(200).json(queriedCourses)
-})
-
 const CorporateCourses = asyncHandler(async (req, res) => {
     //Searching in Courses Collection to get courses of the insructor himself using his id , then projecting on the title field(title of course)
     const myCoursesDocuments = await CorporateTrainee.find({ _id: req.query.id }, '-_id courses').exec()
@@ -207,7 +205,47 @@ const searchCourse = asyncHandler(async (req,res) => {
         res.status(400).json({ error: "No course found" });
 
 }) 
+const filterInstructorCourses = asyncHandler(async (req, res) => {
+    //Saving the id of the instructor 
+    const id = req.query.id
+    const subject = req.query.subject;
+    const price= req.query.price;
+    let result1
+    if(subject=="null" ){
+        result1 = await Course.find({
+                                    $and:[
+                                        { instructor: id },
+                                        { price:  {$lte:price}  }
+                                    ]
+        });
+    }
 
+    else if(price=="null"){
+        result1 = await Course.find({ 
+                                    $and:[
+                                        { instructor: id },
+                                        { subject:  subject }
+                                    ]
+        })
+    }
+    else{
+        result1 = await Course.find({
+                                $and:[
+                                    { instructor: id },
+                                    { subject: subject },
+                                    { price:  {$lte:price} },
+                                ] 
+    });
+    }   
+
+    if (result1) {
+        res.status(200).json(result1);
+    }
+
+    else {
+        res.status(404).json({ error: "No course found" });
+    }
+})
 const searchInstructorCourses = asyncHandler(async (req,res) => {
     const searchTerm = req.query.searchTerm
     const id = req.query.id
@@ -484,7 +522,6 @@ module.exports = {
     getCourses,
     addCourse,
     instructorCourses,
-    filterMyCourses,
     instructorViewCourses,
     corporateGetCourses,
     searchCourse,
@@ -497,5 +534,7 @@ module.exports = {
     IndividualCourses,
     getSubtitles,
     getSubtitleId,
-    searchInstructorCourses
+    searchInstructorCourses,
+    acceptContract,
+    filterInstructorCourses
 }

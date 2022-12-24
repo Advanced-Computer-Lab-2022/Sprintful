@@ -8,9 +8,9 @@ router.post('/createInstructor', createInstructor);
 router.put('/changePassword', requireAuth,changePassword);
 router.put('/review',requireAuth, addInstructorReview)
 router.get('/reviewsnratings',requireAuth, getInstructorRating)
-router.get('/profile', getInstructorProfile)
+router.get('/profile',requireAuth, getInstructorProfile)
 router.post('/login', login);
 router.get('/logout', logout)
-router.put('/editBioEmail',editBioEmail)
+router.put('/editBioEmail', requireAuth,editBioEmail)
 
 module.exports = router;

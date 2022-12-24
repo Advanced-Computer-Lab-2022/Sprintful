@@ -47,50 +47,7 @@ const InstructorProfile = () => {
     return (
       <div>
       <div className="InstructorProfile">
-
-      {
-        instructor && (
-          <div>
-            <p>
-            <label>User name:</label>
-            <label>{instructor.username}</label>
-            </p>
-            
-            <p>
-            <label>First name:</label>
-            <label>{instructor.firstName}</label>
-            </p>
-
-            <p>
-            <label>Last name:</label>
-            <label>{instructor.lastName}</label>
-            </p>
-
-            <p>
-            <label>Email:</label>
-            <label>{instructor.email}</label>
-            </p>
-
-            <p>
-            <label>Biography:</label>
-            <label>{instructor.biography}</label>
-            </p>
-            <p>
-            <label>Rating:</label>
-            <label>{instructor.rating}</label>
-            </p>
-            <p>
-            <label>Reviews:</label>
-            <label>{instructor.reviews}</label>
-            </p>
-            </div>
-        )
-      }
-        
-
-
-
-        {/* <TableContainer component={Paper}>
+        <TableContainer component={Paper}>
             <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
                 <TableHead>
                     <TableRow>
@@ -115,7 +72,7 @@ const InstructorProfile = () => {
                     )}
                 </TableBody>
             </Table>
-        </TableContainer> */}
+        </TableContainer>
         </div>
         </div>
 

@@ -15,10 +15,9 @@ import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/CorporateTraineeForm';
+import CorporateTraineeForm from './components/corporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
-import EditInstructorProfile from './components/EditInstructorProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -34,6 +33,7 @@ import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import InstructorSearch from './components/InstructorSearch';
+import Contract from './pages/Contract'
 function App() {
   return (
     <div className="App">
@@ -43,7 +43,7 @@ function App() {
 
             {/* Reem */}
             <Route
-              exact path="/api/courses/"
+              exact path="/addCourse"
               element={<CourseForm />}
             />
             <Route
@@ -76,10 +76,6 @@ function App() {
             <Route
               exact path="/api/instructor/getProfile"
               element={<InstructorProfile />}
-            />
-            <Route
-              exact path="/api/instructor/editProfile"
-              element={<EditInstructorProfile />}
             />
             <Route
               exact path="/api/instructor/rate"
@@ -119,6 +115,11 @@ function App() {
             />
 
             {/* Hoda */}
+            <Route
+              exact path="/contract"
+              element={
+                <Contract/>}
+            />
 
             <Route
               exact path="/api/courses/search"

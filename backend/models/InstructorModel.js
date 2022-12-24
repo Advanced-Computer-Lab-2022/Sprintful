@@ -14,11 +14,9 @@ const instructorSchema = mongoose.Schema({
     },
     firstName: {
         type: String,
-        default: ""
     },
     lastName: {
         type: String,
-        default: ""
     },
     email: {
         type: String,
@@ -51,8 +49,10 @@ const instructorSchema = mongoose.Schema({
         type: String,
         default: '',
     },
-    contract:{
+    contract: {
         type: Boolean,
+        default: false,
+        required: [true],
         default: false
     }
 }, {
