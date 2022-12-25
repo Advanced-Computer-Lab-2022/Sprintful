@@ -85,6 +85,11 @@
     cursor: pointer;
     color: #a4243b;
   }
+  .terms{
+    text-decoration: underline;
+    cursor: pointer;
+    color: #a4243b;
+  }
   .pass{
     display: flex;
     flex-direction: column;
@@ -224,6 +229,7 @@
     border-radius: 20px;
     position: relative;
     left :40px;
+    top:-30px;
   }
   
   button:hover {
@@ -271,7 +277,7 @@
 }
 .custom02 input[type="radio"]:checked + label::before {
 	background: #fff;
-	border: 1px solid #3498db;
+	border: 1px solid  #a4243b;
 }
 .custom02 input[type="radio"]:checked + label::after {
 	opacity: 1;
@@ -291,9 +297,9 @@
 
 
 
-.new {
-  /* padding: 50px; */
-}
+/* .new {
+  padding: 50px;
+} */
 
 .form-group {
   display: block;
@@ -320,16 +326,18 @@
   content:'';
   -webkit-appearance: none;
   background-color: transparent;
-  border: 2px solid #0079bf;
+  border: 2px solid  #a4243b;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
-  padding: 7px;
+  padding: 5px;
   display: inline-block;
   position: relative;
   vertical-align: middle;
   cursor: pointer;
   margin-right: 5px;
 }
-
+.paymentLabel{
+  white-space: nowrap;
+}
 .form-group input:checked + label:after {
   content: '';
   display: block;
@@ -338,7 +346,7 @@
   left: 9px;
   width: 6px;
   height: 14px;
-  border: solid #0079bf;
+  border: solid  #a4243b;
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
 }

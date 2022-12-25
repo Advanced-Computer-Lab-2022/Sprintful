@@ -28,6 +28,8 @@ import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import Contract from './pages/Contract'
+import Policy from './pages//PaymentPolicy'
+
 import Signup from './pages/Signup';
 
 function App() {
@@ -114,6 +116,10 @@ function App() {
             <Route
               exact path="/contract"
               element={<Contract/>}
+            />
+            <Route
+              exact path="/policy"
+              element={<Policy/>}
             />
              <Route
               exact path="/Signup"

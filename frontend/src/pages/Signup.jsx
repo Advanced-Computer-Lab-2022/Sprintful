@@ -20,7 +20,8 @@ const [password,setPassword]=useState('')
 const [firstName,setFirstName]=useState('')
 const[lastName,setLastName]=useState('')
 const [gender,setGender]=useState(null)
-
+const [chekced,setChecked]=useState(false)
+const [display,setDisplay]=useState(false)
 let axiosConfig = {
     headers: {
         'Content-Type': 'application/json;charset=UTF-8',
@@ -29,31 +30,35 @@ let axiosConfig = {
 };
 const handleSubmit= async (e)=>{
     e.preventDefault()
-    console.log(gender)
-    const response=  axios.post(`http://localhost:5000/api/guest/signUp`, { 
-        username: username ,
-        email: email,
-        password: password,
-        firstName: firstName,
-        lastName: lastName,
-        gender: gender,
-    },axiosConfig)
-    .then(function (response) {
-        navigate('/Login')
-    })
-    .catch(function (error) {
-    console.log(error);
-    })
+    if(chekced){
+      console.log(gender)
+      const response=  axios.post(`http://localhost:5000/api/guest/signUp`, { 
+          username: username ,
+          email: email,
+          password: password,
+          firstName: firstName,
+          lastName: lastName,
+          gender: gender,
+      },axiosConfig)
+      .then(function (response) {
+          navigate('/Login')
+      })
+      .catch(function (error) {
+      console.log(error);
+      })
 
-    setUsername('')
-    setPassword('')
-    setEmail('')
-    setFirstName('')
-    setLastName('')
-    setGender('')
+      setUsername('')
+      setPassword('')
+      setEmail('')
+      setFirstName('')
+      setLastName('')
+      setGender('')
+    }
+    else{
+      setDisplay(true);
+    }
 
 }
-
 const style10 ={ //.signup__input
     border: "0",
     outline: "none",
@@ -110,17 +115,18 @@ return(
           <input type="radio" onChange={(e)=>setGender('male')}id="radio03-02" name="demo03" /><label for="radio03-02">Male</label>
       </div>
     </div>
-    {/* <div className="check"> */}
       <div className="new">
         <form>
           <div className="form-group">
-            <input type="checkbox" id="terms of use"/>
-            <label for="terms of use">By signing up you agree to our terms of use</label>
+            <input type="checkbox" id="terms of use" onChange={() => setChecked(!chekced)}/>
+            <label className="paymentLabel" for="terms of use">I hereby agree to the <span className="terms" onClick={() => navigate('/policy')}>terms of use</span> </label>
           </div>
         </form>
       </div>  
-    {/* </div> */}
-    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >Sign up</button> 
+      {
+        display && <p style={{fontSize:"12px",color:"red",whiteSpace: "nowrap", position:"relative", top:"-60px"}}>Accepting terms of use is required</p>
+      }
+    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Sign up</button> 
   </form>
   </body>
 )
