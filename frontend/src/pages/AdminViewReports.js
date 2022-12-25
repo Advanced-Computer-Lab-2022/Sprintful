@@ -39,7 +39,7 @@ const ViewReports = () => {
           // console.log("openReport 1 "+reportid)
           // setReportid("2345678")
           // console.log("openReport 2 "+reportid)
-          navigate(`/ReportDetails/${reportid}`)
+          navigate(`/ReportDetailsAdmin/${reportid}`)
         }
 
     
@@ -58,7 +58,7 @@ const ViewReports = () => {
 
 <div className="card-container" >
                             {reports  && reports.map((report) =>( 
-                                <div onClick={()=>navigate(`/ReportDetails?reportid=${report._id}`)} className="card" style={{height: "30em"}} >
+                                <div onClick={()=>navigate(`/ReportDetailsAdmin?reportid=${report._id}`)} className="card" style={{height: "30em"}} >
                                 {/* <img src="assets/images/courseCard.jpg"/> */}
                                 <div className="content">
                                     <h3> {report.subject} </h3>
