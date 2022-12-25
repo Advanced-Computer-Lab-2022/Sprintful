@@ -30,7 +30,7 @@ app.use('/api/subtitles', require('./routes/subtitleRoutes'))
 app.use('/api/tasks', require('./routes/taskRoutes'))
 app.use('/api/answers', require('./routes/answerRoutes'))
 app.use('/api/questions', require('./routes/questionRoutes'))
-
+app.use('/api/requestAccess', require('./routes/requestAccessRoutes'))
 
 app.listen(port, () => { 
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`.yellow.bold)

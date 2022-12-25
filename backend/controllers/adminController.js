@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const { model } = require('mongoose')
 const Admin = require('../models/adminModel')
+const Corporates = require('../models/corporatesModel')
 
 
 const getAdmin = asyncHandler(async (req, res) => {
@@ -85,6 +86,39 @@ const createAdmin = asyncHandler(async (req, res) => {
 })
 
 
+
+const addCorporate = asyncHandler(async (req, res) => { 
+    const { name, subject } = req.body
+    try {
+        const CorporateExists = await Corporates.findOne({ name })
+        if (CorporateExists) {
+                res.status(400)
+                throw new Error('Corporate already exists')
+        }
+        const corporate = await Corporates.create({
+            name,
+            subject
+        })
+
+        if (corporate) {
+            res.status(201).json({
+                _id: corporate._id,
+                name: corporate.name,
+                subject: corporate.subject,
+                // token: generateToken(admin._id)
+            })
+        }
+        else {
+            res.status(400)
+            throw new Error('Invalid Corporate data')
+        }
+    }
+    catch (error) {
+        res.status(400).json({ error: error.message })
+    } 
+})
+
+
 //Generate JWT
 const generateToken =(id) =>{
     return jwt.sign({id }, process.env.JWT_SECRET, {
@@ -92,4 +126,4 @@ const generateToken =(id) =>{
     })
 }
 
-module.exports = { createAdmin,loginAdmin, getAdmin, logout}
+module.exports = { createAdmin,loginAdmin, getAdmin, logout, addCorporate}

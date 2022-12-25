@@ -3,8 +3,9 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcryptjs')
 require('dotenv').config()
 const { builtinModules } = require('module')
-const Course = require('../models/courseModel')
+const Courses = require('../models/courseModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
+const Corporates = require('../models/corporatesModel')
 
 const generateToken =(id) =>{
     return jwt.sign({id }, process.env.JWT_SECRET, {
@@ -12,7 +13,10 @@ const generateToken =(id) =>{
     })
 }
 const createCorporateTrainee = asyncHandler(async (req, res) => { 
-     const { username, password } = req.body
+     const { username, password, corporate } = req.body
+     const thisCorporate = await Corporates.find({ name: corporate });
+     const traineeSubject = thisCorporate[0].subject
+     console.log("itest2",traineeSubject)
      try {
         const corporateTraineeExists = await CorporateTrainee.findOne({ username })
         if (corporateTraineeExists) {
@@ -22,17 +26,26 @@ const createCorporateTrainee = asyncHandler(async (req, res) => {
         else {
             const salt = await bcrypt.genSalt(10)
             const hashedPassword = await bcrypt.hash(password,salt)
+            const traineeCourses = await Courses.find({ subject: traineeSubject })
+            // console.log("courses", traineeCourses)
             const corporateTrainee = await CorporateTrainee.create({
                 username,
-                password: hashedPassword
+                password: hashedPassword,
+                corporate: corporate,
+                courses: traineeCourses
             })
+            
             if (corporateTrainee) {
                 res.status(201).json({
                     _id: corporateTrainee._id,
                     username: corporateTrainee.username,
                     password: corporateTrainee.password,
+                    corporate: corporateTrainee.corporate,
+                    courses: corporateTrainee.courses
                     // token: generateToken(corporateTrainee._id)
                 })
+                console.log("res")
+                console.log(corporateTrainee)
             } 
             else {
                 res.status(400)
@@ -67,5 +80,7 @@ const changePassword = async(req, res, next) => {
         return res.status(400).json({ status: false, error: "Error Occured"});
     }
 }
+
+
 
 module.exports = { createCorporateTrainee, changePassword, logout}

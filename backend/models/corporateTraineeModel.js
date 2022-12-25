@@ -12,6 +12,10 @@ const corporateTraineeSchema = mongoose.Schema({
         minlength: [6, 'Password cannot be less than 6 characters'],
 
     },
+    corporate: {
+        type: String,
+        required: [true, 'Please add a corporate'],
+    },
     courses: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course',                                 //we do not need to import Insrtuctor model to be able to write this line

@@ -3,7 +3,7 @@ const router = express.Router();
 const { createCorporateTrainee, changePassword, logout } = require('../controllers/coroprateTraineeController')
 const {requireAuth} = require('../middleware/authMiddleware')
 
-router.post("/createCorporateTrainee",createCorporateTrainee)
+router.post("/createCorporateTrainee", createCorporateTrainee)
 router.put('/changePassword', requireAuth,changePassword);
 router.get('/logout', logout)
 

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createAdmin,loginAdmin,getAdmin,logout }  = require('../controllers/adminController')
+const { createAdmin,loginAdmin,getAdmin,logout, addCorporate }  = require('../controllers/adminController')
 const {requireAuth} = require('../middleware/authMiddleware')
 // const createInstructor = require('../controllers/adminController')
 
@@ -9,4 +9,5 @@ router.post('/',createAdmin) // This is a POST request to the /api/admin endpoin
 router.post('/loginAdmin',loginAdmin)
 router.get('/getAdmin',requireAuth, getAdmin)
 router.get('/logout', logout)
+router.post('/addCorporate', addCorporate)
 module.exports = router;
