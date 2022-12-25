@@ -17,20 +17,22 @@ const { getCourseById,
     getCourseReviews,
     getCourseRating,
     getSubtitles, 
-    getSubtitleId,
+    getSubtitleId,addPromotion,getSubtitlesforCourse,
     searchInstructorCourses,
-    acceptContract } = require('../controllers/courseController')
+    acceptContract } = require('../controllers/courseController')   //destructuring
     
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
-router.route('/:id').get(getCourseById) // get course by id
+//router.route('/:id').get(getCourseById) // get course by id
+router.get('/',getCourseById)
 router.get('/corporate/myCourses',CorporateCourses)
 router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
 router.post('/addCourse', addCourse)
 router.put('/acceptContract',acceptContract)
 router.post('/search', searchCourse)
-router.get('/getSubtitles',requireAuth, getSubtitles) // get course subtitles
+router.get('/getSubtitles', requireAuth,getSubtitles) // get course subtitles "Somaya"
+router.get('/getSubtitlesforCourse/:courseId',getSubtitlesforCourse) //get course subtitles "Reem"   we need both of them 
 router.get('/getSubtitleId',requireAuth, getSubtitleId) // get subtitle id from title')
 router.route('/:id').get(getCourseById) // get course by id
 router.route('/').get(getCourses) // get all courses
@@ -43,5 +45,6 @@ router.route('/:id').get(getCourseById) // get course by id
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)
 
+router.patch('/addPromotion/:courseid',addPromotion)
 
 module.exports = router

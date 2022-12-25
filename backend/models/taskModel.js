@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const taskSchema = mongoose.Schema({
     title: {
         type: String,
-        required: [true, 'Please add a title for this subtitle'],
+        required: [true, 'Please add a title for this task'],
     },
     // Array of Questions
     questions: [{

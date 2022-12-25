@@ -74,6 +74,11 @@ const courseSchema = mongoose.Schema({
         required: [true, 'Please add subtitles'],
     },
 
+    discountExpireAt:{
+        type :Date ,
+        default:'2025-01-01'
+    },
+
 
 }, {
     timestamps: true

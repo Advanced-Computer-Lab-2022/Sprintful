@@ -37,6 +37,9 @@ import Policy from './pages//PaymentPolicy'
 
 import Signup from './pages/Signup';
 
+import AddPromotionCourse from './pages/AddPromotionCourse';
+import CourseView from './pages/CourseView';
+import CourseViewPage from './pages/CourseViewPage';
 function App() {
   return (
     <div className="App">
@@ -61,6 +64,13 @@ function App() {
               exact path="/api/subtitles/:subtitleid/Instructor"
               element={<SubtitlePageInst />}
             />
+            <Route 
+            exact path ="/api/courses/addPromotion/:courseid"
+            element ={<AddPromotionCourse/>} />
+
+            <Route 
+            exact path="api/courses/getCourse/:courseid"
+            element={<CourseView/>} />
 
             {/* Nada */}
 
