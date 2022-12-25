@@ -17,7 +17,7 @@ import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
-import InstructorProfile from './components/InstructorProfile';
+import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
@@ -35,6 +35,7 @@ import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
+import Reviews from './components/Reviews';
 function App() {
   return (
     <div className="App">
@@ -85,6 +86,10 @@ function App() {
             <Route
               exact path="/api/instructor/rate"
               element={<RateInstructor />}
+            />
+            <Route
+              exact path="reviews"
+              element={<Reviews />}
             />
 
             {/* Ragaa */}

@@ -11,15 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { useNavigate } from 'react-router-dom';
-const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14,
-    },
-  }));
+
 //const { useState } = require("react");
 const InstructorProfile = () => {
     const [instructor, setInstructor] = useState("");
@@ -50,7 +42,7 @@ const InstructorProfile = () => {
         instructor && (
           <div>
             <p>
-            <label>User name:</label>
+            <label>Username:</label>
             <label>{instructor.username}</label>
             </p>
 
