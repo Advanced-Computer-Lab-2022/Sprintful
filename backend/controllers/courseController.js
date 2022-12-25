@@ -122,7 +122,6 @@ const addCourse = asyncHandler(async (req, res) => {
     
 })
 
-
 //Method for getting titles of courses given by the instructor himself
 const instructorCourses = asyncHandler(async (req, res) => {
     const myCoursesDocuments = await Instructor.find({ _id: req.query.id }, '-_id courses').exec()
@@ -514,8 +513,12 @@ const getCourseRating = asyncHandler(async (req, res) => {
 const getSubtitleId = asyncHandler(async (req, res) => {
     const title = req.query.title;
     const result = await subtitle.find({ title: title }).select('_id');
-    res.status(200).json(result);
-})
+    if (result.length > 0) {
+        res.status(200).json(result);
+    }
+    else {
+        res.status(400).json({ error: "Subtitle not found" });
+    }})
 
 module.exports = {
     getCourseById,

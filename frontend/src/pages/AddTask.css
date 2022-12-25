@@ -1,22 +1,43 @@
-.container ol li{
+.task ol{
     font-size: 1em;
     color: #2d2c2c;
+    margin-bottom:2em;
 }
 
-h1{
+.task li{
+    background-color: white;
+    padding: 0.25em; 
+    font: 1em sans-serif;
+}
+/* .task {
+background-color: white;
+} */
+
+.task h1{
     color:darkcyan;
     text-align: center;
 }
 
-h2{
-    color:rgb(24, 83, 155);
+
+#form{
     text-align: center;
-    font-size: 1.3em;
+    align-items: center;
+    align-self: center;
 }
+/* .task select{
+    padding: .7em 2em;
+    width: 50%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    align-self: center;
+} */
 
-
-input[type=text]{
-    width: 30%;
+.task input[type=text]{
+    align-items: center;
+    text-align: center;
+    align-self: center;
+    width: 45%;
     padding: 12px 20px;
     margin: 8px 0;
     display: inline-block;
@@ -29,14 +50,30 @@ input[type=text]{
     align-self: center;
 }
 
-button{
-    margin-top: 3ex;
+.task button{
+    margin-top: 1.5cm;
     width: 20%;
+    align-self: center;
+    
 }
 
 
-p{
+.task p{
     text-align: center;
+    margin-bottom: 0cm;
+}
+
+.task select{
+    display:block;
+    text-align: center;
+    text-align-last: center;
+    align-self: center;
+    padding: .7em 2em;
+    width: 45%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    margin-bottom: 0.5cm;
 }
 
 .start{
@@ -46,7 +83,7 @@ p{
     
 }
 
-.start .btn{
+/* .start .btn{
     padding: .2em 1.7em;
     border: none;
     border-radius: .1em;
@@ -56,7 +93,7 @@ p{
     background-color: #a3a39d;
 }
 
-#form{
+#form .task{
     display: flex;
     justify-content: center;
     margin-top: 2em;
@@ -69,13 +106,5 @@ p{
     border-radius: 3px;
     font-size: 1em;
     align-self: center;
-}
+} */
 
-select{
-    padding: .7em 2em;
-    width: 60%;
-    border: none;
-    border-radius: 3px;
-    font-size: 1em;
-    align-self: center;
-}

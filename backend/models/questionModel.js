@@ -9,8 +9,8 @@ const questionSchema = mongoose.Schema({
         type: Number,
     },
     choices: [{
-        text: String,
-        isCorrect: Boolean,
+        text:String,
+         isCorrect: Boolean,
     }],
     task: {
         type: mongoose.Schema.Types.ObjectId,

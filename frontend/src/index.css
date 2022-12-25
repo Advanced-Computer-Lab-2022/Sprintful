@@ -108,6 +108,8 @@ header a {
 label, input {
   display: block;
 }
+
+
 input {
   padding: 10px;
   margin-top: 10px;
@@ -117,7 +119,9 @@ input {
   border-radius: 4px;
   box-sizing: border-box;
 }
-form button {
+
+
+/* form button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -125,7 +129,7 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -139,8 +143,6 @@ form{
   display:flex;
   flex-direction:column ;
   padding: 10px;
-
-
 }
 
 .create {
@@ -157,7 +159,7 @@ form{
   color: #f1356d;
   margin-bottom: 30px;
 }
-form button {
+/* form button {
   background: var(--primary);
   border: 0;
   color: #fff;
@@ -165,7 +167,7 @@ form button {
   font-family: "Poppins";
   border-radius: 4px;
   cursor: pointer;
-}
+} */
 div.error {
   padding: 10px;
   background: #ffefef;
@@ -181,27 +183,29 @@ div.error {
   border: 1px solid #ddd;
   box-sizing: border-box;
   display: block;
+  align-self: center;
+
 }
-.create button {
+/* .create button {
   background: #f1356d;
   color: #fff;
   border: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-}
+} */
  /* watch button styleing */
 
-button {
+/*button {
   background: #f1356d;
   color: #fff;
   /* position: absolute; 
-  bottom: 490px; */
-  /*  */
+  bottom: 490px; 
+  
   left: 5px; 
   top: 1px;
   border: 0;
   padding: 8px;
   border-radius: 8px;
   cursor: pointer;
-}
+}*/

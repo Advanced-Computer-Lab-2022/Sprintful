@@ -17,14 +17,14 @@ const getQuestions = asyncHandler(async (req, res) => {
  
 const addQuestion= asyncHandler(async (req,res) =>{
 //const taskid= '6384ab2fde37d33c820275a9'
-const taskid = req.params.taskid
+const taskid = req.query.taskid
 const title = req.body.title
 const choices = req.body.choices
 const task = await Task.findById(taskid)
 if(task){
     const newQuestion = await Question.create({
         title,
-        task: taskId,
+        task: taskid,
         choices: choices
     });
     task.questions.push(newQuestion)
