@@ -1,9 +1,30 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import { makeStyles } from '@mui/styles';
+import {Typography} from '@mui/material';
+import { blue } from '@mui/material/colors';
+import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
+import Card from '../components/Card'
+
+
+//stylings custom css
+
 
 
 const CourseView=()=>{
+    // const useStyles=makeStyles({
+    //     courseTitle:{
+    //         fontSize:60,
+    //         color:blue,
+    
+    
+    
+    //     }
+    // })
+
+    //styles
+    // const classes=useStyles();
 
     const [course,setCourse]=useState(null);
     const [coursePriceAfterDiscount,setPrice]=useState('');
@@ -84,10 +105,27 @@ const CourseView=()=>{
 
         <div>
             <div>
-               {/* we check that course is not null before getting its attributes using boolean operator && AND */}
-                <h1>{course&&course.title}</h1>
-                <h2>Total Hours :{course&&course.totalhours}</h2>
-                <h4>Price:  {course&&coursePriceAfterDiscount}</h4>
+               {/* we check that course is not null before getting its attributes using boolean operator && AND
+                <Typography
+                variant="h5"
+                color="primary">{course&&course.title}
+                </Typography>
+                <Typography
+                variant="h6"
+                color="secondary"
+                >Total Hours :{course&&course.totalhours}
+                </Typography>
+
+                <Typography
+                variant="h6"
+                color="primary"
+                >Price:  {course&&coursePriceAfterDiscount}
+                </Typography> */}
+               < StyledCourseHeader>
+               <h3> {course&&course.title} </h3>
+               
+               </StyledCourseHeader>
+                
 
              </div>
 
@@ -100,7 +138,7 @@ const CourseView=()=>{
                  {/* subtitles */}
                  
     
-                  {courseSubtitles.map((subtitle)=>(
+                  {/* {courseSubtitles.map((subtitle)=>(
                     <div  key={subtitle._id}>
                        <h5>{subtitle.title}</h5>
                        <h6>total hours :{subtitle.totalHours}</h6>
@@ -109,9 +147,14 @@ const CourseView=()=>{
                           <p>  {task.title}</p>
                         </div>
 
-                       ))}
+                       ))} */}
 
-                    </div>
+
+                     {courseSubtitles.map((subtitle)=>(
+                        <Card key={subtitle._id}  subtitle={subtitle}/>
+
+
+                  
 
 
                   ))}
