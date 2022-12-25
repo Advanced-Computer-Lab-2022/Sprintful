@@ -132,8 +132,8 @@ const adminViewReports = asyncHandler(async (req, res) => {
     //const reports = await Report.find({})
     const reports = await Report.find({
         $or:[
-            { status:  unseen },
-            {statuc: pending}
+            { status:  "unseen" },
+            {status: "pending"}
         ] 
 });
     //console.log("zefttt")
