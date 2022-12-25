@@ -58,7 +58,7 @@
       
   }
   
-  h1 {
+  .CreateAccount {
     text-align: center;
     color: #a4243b;
     position: relative;
@@ -67,7 +67,7 @@
     font-weight: bold;
 
   }
-  h2 {
+ .HaveAnAccount {
     text-align: center;
     font-size: 1.7rem;
     font-weight: bold;
@@ -218,7 +218,7 @@
   }
   
   /*  Button */
-  button {
+  .sign {
     background: #a4243b;
     color: white;
     padding: 12px 0;
@@ -232,7 +232,7 @@
     top:-30px;
   }
   
-  button:hover {
+  .sign:hover {
     background: #4b111b;
   }
 .custom02 input[type="radio"] {

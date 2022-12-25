@@ -7,7 +7,7 @@ const port = process.env.PORT || 5000
 const cors = require("cors")
 const cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
-
+const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 connectDB()
  
 const app = express();
@@ -16,7 +16,7 @@ const app = express();
 app.use(cors()) // Use this after the variable declaration
 
 app.use(express.json()) // This is a middleware function that allows us to accept JSON data in the body
-app.use(express.urlencoded({ extended: false })) // This is a middleware function that allows us to accept form data
+app.use(express.urlencoded({ extended: true })) // This is a middleware function that allows us to accept form data
 // app.use(express.params) // This is a middleware function that allows us to accept params
 app.use(cookieParser());
 app.use(bodyParser.json())
@@ -31,6 +31,29 @@ app.use('/api/tasks', require('./routes/taskRoutes'))
 app.use('/api/answers', require('./routes/answerRoutes'))
 app.use('/api/questions', require('./routes/questionRoutes'))
 
+app.post("/payment", async (req, res) => {
+	let { amount, id } = req.body
+	try {
+		const payment = await stripe.paymentIntents.create({
+			amount,
+			currency: "USD",
+			description: "Online learning platform",
+			payment_method: id,
+			confirm: true
+		})
+		console.log("Payment", payment)
+		res.json({
+			message: "Payment successful",
+			success: true
+		})
+	} catch (error) {
+		console.log("Error", error)
+		res.json({
+			message: "Payment failed",
+			success: false
+		})
+	}
+})
 
 app.listen(port, () => { 
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`.yellow.bold)

@@ -34,7 +34,8 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.7.3",
     "react-icons": "^4.7.1",
-    "sass": "^1.56.2"
+    "sass": "^1.56.2",
+    "stripe": "^11.5.0"
   },
   "devDependencies": {
     "concurrently": "^7.5.0",
