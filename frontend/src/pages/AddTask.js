@@ -24,9 +24,13 @@ const AddTaskMain = () => {
      const[courseRef, setCourseRef]= useState(false)
      const[task, setTask] = useState([])
 
+     const params = new URLSearchParams(window.location.search);
+     const id = params.get('id');
+
+
      useEffect( ()=>{
         const fetchCourses =async () =>{
-            await axios.get('http://localhost:5000/api/courses/').then(
+            await axios.get(`http://localhost:5000/api/courses/instructor/?id=${id}`).then(
            (res) => { 
                const courses = res.data
                setCourses(courses)
