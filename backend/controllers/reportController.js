@@ -113,7 +113,18 @@ const addReport = asyncHandler(async (req, res) => {
 })
 
 //mark reported problems as "resolved" or "pending"
-
+const changeStatus = async (req, res, next) => {
+    try {
+        const reportId = req.query.reportId;
+        console.log(reportId);
+        const status = req.body;
+        const report = await Report.findByIdAndUpdate(reportId, status, { new: true })
+        return res.status(200).json({ report });
+    }
+    catch (error) {
+        return res.status(400).json({ status: false, error: "Error Occured" });
+    }
+}
 
 //view reported problems - should automaticalled be marked as "unseen"
 const adminViewReports = asyncHandler(async (req, res) => {
@@ -127,7 +138,6 @@ const adminViewReports = asyncHandler(async (req, res) => {
         res.status(400).json({ error: error.message })
     }
 })
-
 
 //follow up on an unresolved problem based on status
 const getReportStatus = asyncHandler(async (req, res) => {
@@ -150,13 +160,7 @@ const getReportbyId = asyncHandler(async (req, res) => {
     }
 })
 
-
-
-
-
-
-
-module.exports = { addReport, viewReports, adminViewReports, getReportStatus, getReportbyId}
+module.exports = { addReport, changeStatus, viewReports, adminViewReports, getReportStatus, getReportbyId}
 
 
 

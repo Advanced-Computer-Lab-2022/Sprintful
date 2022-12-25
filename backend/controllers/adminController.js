@@ -93,17 +93,6 @@ const generateToken =(id) =>{
     })
 }
 
-const changeStatus = async (req, res, next) => {
-    try {
-        const reportId = req.query.reportId;
-        console.log(reportId);
-        const status = req.body;
-        const report = await Report.findByIdAndUpdate(reportId, status, { new: true })
-        return res.status(200).json({ report });
-    }
-    catch (error) {
-        return res.status(400).json({ status: false, error: "Error Occured" });
-    }
-}
 
-module.exports = { createAdmin, loginAdmin, getAdmin, logout, changeStatus}
+
+module.exports = { createAdmin, loginAdmin, getAdmin, logout}
