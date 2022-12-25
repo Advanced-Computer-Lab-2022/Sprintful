@@ -1,6 +1,6 @@
 import HomeSearch from '../components/HomeSearch';
-import TraineeHomeNavBar from '../components/TraineeHomeNavBar';
-export default function TraineeHome() {
+import IndividualTraineeHomeNavBar from '../components/IndividualTraineeHomeNavBar';
+export default function IndividualTraineeHome() {
     return (
 
         <div>
@@ -23,7 +23,7 @@ export default function TraineeHome() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <TraineeHomeNavBar />
+                            <IndividualTraineeHomeNavBar />
                         </div>
                     </div>
                 </div>
@@ -39,9 +39,6 @@ export default function TraineeHome() {
                                 <h2>Find Interesting Online Courses </h2>
                             </div>
                         </div>
-                        <div className="col-lg-12">
-                           <HomeSearch/> 
-                        </div>
                         <div className="col-lg-10 offset-lg-1">
                             <ul className="categories">
                                 <li><a href="category.html"><span className="icon"><img src="assets/images/search-icon-01.png" alt="Home" /></span> Apartments</a></li>
@@ -51,6 +48,9 @@ export default function TraineeHome() {
                                 <li><a href="#"><span className="icon"><img src="assets/images/search-icon-05.png" alt="Travel" /></span> Traveling</a></li>
                             </ul>
                         </div>
+                        <div className="col-lg-12">
+                           <HomeSearch/> 
+                        </div>=
                     </div>
                 </div>
             </div>

@@ -1,9 +1,10 @@
-import HomeNavBar from '../components/HomeNavBar';
 import HomeSearch from '../components/HomeSearch';
-export default function GuestHome() {
+import InstructorHomeNavBar from '../components/InstructorHomeNavBar';
+export default function InstructorHome() {
     return (
 
         <div>
+
             {/* <!-- ***** Preloader Start ***** --> */}
             <div id="js-preloader" className="js-preloader">
                 <div className="preloader-inner">
@@ -22,7 +23,7 @@ export default function GuestHome() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <HomeNavBar />
+                            <InstructorHomeNavBar />
                         </div>
                     </div>
                 </div>
@@ -53,7 +54,8 @@ export default function GuestHome() {
                     </div>
                 </div>
             </div>
-            
+
+
             <div className="popular-categories">
                 <div className="container">
                     <div className="row">
@@ -214,7 +216,7 @@ export default function GuestHome() {
             </div>
 
 
-            {/* <div className="recent-listing">
+            <div className="recent-listing">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
@@ -493,7 +495,7 @@ export default function GuestHome() {
                         </div>
                     </div>
                 </div>
-            </div> */}
+            </div>
 
 
             <footer>
@@ -554,16 +556,6 @@ export default function GuestHome() {
                     </div>
                 </div>
             </footer>
-
-
-            {/* <!-- Scripts --> */}
-            {/* <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/js/owl-carousel.js"></script>
-  <script src="assets/js/animation.js"></script>
-  <script src="assets/js/imagesloaded.js"></script>
-  <script src="assets/js/custom.js"></script> */}
-
         </div>
     )
 }

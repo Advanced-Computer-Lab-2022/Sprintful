@@ -4,15 +4,31 @@ import {useState, useEffect} from 'react'
 
 const FilterPrice = () => {
   const [courses,setCourses] = useState([])
-  const[price,setPrice] = useState(1000000)
-  const [subject, setSubject] = useState("")
-  const [rating, setRating] = useState(0)
+  const[price,setPrice] = useState(null)
+  const [subject, setSubject] = useState(null)
+  const [rating, setRating] = useState(null)
   //const[filteredPriceCourses,setFilteredPriceCourses] = useState([])
   //const[filteredSubCourses,setFilteredSubCourses] = useState([])
   //const[filteredRatingCourses,setFilteredRatingCourses] = useState([])
   const [filterData,setFilterData]=useState([]);
   // const params = new URLSearchParams(window.location.search);
   // console.log(params.get('price'))
+
+  const handleFilter =  async(e) =>{
+    //const priceSelected = event.target.value
+    //setSubject
+    e.preventDefault()
+    var a = document.getElementById('rating').value  ;
+    setRating(a)
+    var b = document.getElementById('subject').value  ;
+    setSubject(b)
+    var c = document.getElementById('price').value  ; //-->value=price
+    setPrice(c)
+  
+    //console.log("New Rating:" +rating)
+  
+    //console.log(price +" " + subject + " " + rating)
+  }
 
   useEffect( ()=>{
     const fecthCourses =async () =>{
@@ -24,57 +40,42 @@ const FilterPrice = () => {
        }
         );
     }
+    const response = async() =>{
+      console.log("hello")
+      console.log(price +" " + subject + " " + rating)
+    await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
+    .then((res) => { 
+          //console.log(price)
+          const course = res.data
+          //console.log("price")
+          if(res.status===200){
+            console.log("check success")
+            console.log(course)
+            setFilterData(course)
+          }
+          else{
+            console.log("entered empty check")
+            setFilterData([])
+          }
+
+      })
+    //   .catch((err) => {
+    //     console.log(err);
+    // }
+  
+ //      );
+    }
     fecthCourses()
-}, [])
+    response()
+    setPrice(null)
+    setSubject(null)
+    setRating(null)
+    //setFilterData([])
+}, [price,subject,rating,filterData])
 
 
-const handlePriceOption = async (event) =>{
-  const priceSelected = event.target.value
-  setPrice(priceSelected)
-  await axios.post(`http://localhost:5000/api/courses/filterPrice?price=${price}`).then(
-    (res) => { 
-        console.log(price)
-        const courses = res.data
-        console.log("price")
-        console.log(courses)
-        setFilterData(courses)
-    }
-     );
-}
 
-const handleSubOption = async (event) =>{
-  const subSelected = event.target.value
-  setSubject(subSelected)
-  await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}`).then(
-    (res) => { 
-        console.log(subject)
-        const courses = res.data
-        console.log("subject")
-        console.log(courses)
-        setFilterData(courses)
-    }
-     );
-}
 
-const handleRatingOption = async (event) =>{
-  const ratingSelected = event.target.value
-  setRating(ratingSelected)
-  await axios.post(`http://localhost:5000/api/courses/filter?rating=${rating}`).then(
-    (res) => { 
-        console.log(rating)
-        if(res.status===400){
-          // alert("No courses found")
-          setFilterData([])
-        }
-        else{
-        const courses = res.data
-        console.log("rating")
-        console.log(courses)
-        setFilterData(courses)
-        }
-    }
-     );
-}
 
 
 const viewCourse = async(event) =>{
@@ -110,37 +111,59 @@ const viewCourse = async(event) =>{
 
 
 return(
-  <div classname="filter">
-      <div class="priceList">
-        <select class="list"
-          onChange={(e) => handlePriceOption(e)}
+  <div className="filter">
+      <div className="priceList">
+
+        <select className="list"
+          //onChange={(e) => setPrice(e.target.value)}
+          id={'price'}
+          value={price}
         >
           {/* assuming price range is 0-5000 */}
-          <option selected disabled key="0" value="-1"> Select a price</option> 
+          <option selected disabled key="0" value="null"> Select a price</option> 
           <option key="1" value="0" >FREE </option>
           <option key="2" value="1000" >less than 1000</option>
           <option key="3" value="3000" >less than 3000</option>
           <option key="4" value="5000">less than 5000</option>
           <option key="5" value="99999999">more than 5000</option>
         </select>
+
       </div>
 
-      <div class="subjectList">
-        <select class="list"
-          onChange={(e) => handleSubOption(e)}
+      {/* <div className="subjectList">
+        <select className="list"
+          //onChange={(e) => setSubject(e.target.value)}
+          id={'subject'}
+          value={subject}
         >
-          <option selected disabled> Choose a course' subject</option>
+          <option key="0" value="null" selected disabled> Choose a course' subject</option>
           {courses.map((op) => (
-            <option key={op.id} value={op.id}> {op.subject} </option>
+            <option key={op.id} value={op.subject}> {op.subject} </option>
           ))}  
         </select>
-      </div>
-
-      <div class="ratingList">
-        <select class="list"
-        onChange={(e) => handleRatingOption(e)}
+      </div> */}
+      <div className="subjectList">
+        <select className="list"
+        id={'subject'}
+        value={subject}
         >
-          <option selected disabled> Choose a course' rating</option>
+          <option key="0" value="null" selected disabled> Choose a course' subject</option>
+          <option key="1" value="Computer Science">Computer Science</option>
+          <option key="2" value="Languages">Languages</option>
+          <option key="3" value="Physics">Physics</option>
+          <option key="4" value="Business Administration">Business Administration</option>
+          <option key="5" value="Mathematics">Mathematics</option>
+          </select>
+          </div>
+
+      <div className="ratingList">
+        <select className="list"
+        //onChange={(e) => setRating(e.target.value)}
+        id={'rating'}
+        value={rating}
+        >
+          <option key="-1" value="null" selected disabled> Choose a course' rating</option>
+          {/* <option key="0" value="0"> 0 Stars</option> */}
           <option key="1" value="1">1 Star </option>
           <option key="2" value="2">2 Stars</option>
           <option key="3" value="3">3 Stars</option>
@@ -149,7 +172,7 @@ return(
         </select> 
       </div>
 
-      <div class="price results">
+      <div className="result">
         <ul>
         {filterData.map((course) => (
           <li key={course._id} onClick={viewCourse}>{course.title}</li>
@@ -157,25 +180,9 @@ return(
         </ul>
         {/*setFilteredCourses([])*/}
       </div>
+      <button onClick={handleFilter}> Apply</button>
+      </div>
 
-       <div class="subject results">
-        <ul>
-        {filterData.map((course) => (
-          <li key={course._id} onClick={viewCourse}>{course.title}</li>
-        ))}
-        </ul>
-       
-        </div>
-
-        <div class="rating results">
-        <ul>
-        {filterData.map((course) => (
-          <li onClick={viewCourse}>{course.title}</li>
-        ))}
-        </ul>
-        </div>
-
-  </div>
 )
 }
 

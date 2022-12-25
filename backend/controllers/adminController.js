@@ -41,7 +41,7 @@ const loginAdmin =asyncHandler (async(req,res)=>{
 }
 )
 const logout = async (req, res) => {
-    const token = createToken("");
+    const token = generateToken ("");
     res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
     res.status(200).json({message: "You have logged out!"})
 }

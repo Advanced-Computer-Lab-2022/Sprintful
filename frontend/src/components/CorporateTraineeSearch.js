@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 
-const HomeSearch = () => {
+const CorporateTraineeSearch = () => {
     const [courses,setCourses] = useState([])
     const [searchTerm,setSearchTerm] = useState(null)
     const [searched,setSearched] = useState(false)
 
-    const[price,setPrice] = useState(null)
     const [subject, setSubject] = useState(null)
     const [rating, setRating] = useState(null)
     const [filterData,setFilterData]=useState([]);
@@ -18,36 +17,33 @@ const HomeSearch = () => {
         setRating(a)
         var b = document.getElementById('subject').value  ;
         setSubject(b)
-        var c = document.getElementById('price').value  ;
-        setPrice(c)
         setCourses([])
       }
 
     useEffect(() => {
         const response = async() =>{
             console.log("hello")
-            console.log(price +" " + subject + " " + rating)
-          await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
-          .then((res) => { 
+            console.log(subject + " " + rating)
+            await axios.post(`http://localhost:5000/api/courses/filterCorporate?subject=${subject}&rating=${rating}`)
+            .then((res) => { 
                 const course = res.data
                 if(res.status===200){
-                  console.log("check success")
-                  console.log(course)
-                  setFilterData(course)
+                    console.log("check success")
+                    console.log(course)
+                    setFilterData(course)
                 }
                 else{
-                  console.log("entered empty check")
-                  setFilterData([])
+                    console.log("entered empty check")
+                    setFilterData([])
                 }
-      
+        
             })
-          }
-          response()
-          setPrice(null)
-          setSubject(null)
-          setRating(null)
+        }
+        response()
+        setSubject(null)
+        setRating(null)
 
-        axios.get(`http://localhost:5000/api/courses/search?searchTerm=${searchTerm}`)
+        axios.get(`http://localhost:5000/api/courses/corporate/search?searchTerm=${searchTerm}`)
         .then((res) => {
             console.log(res.data)
             setCourses(res.data);
@@ -56,44 +52,40 @@ const HomeSearch = () => {
             console.log(err);
         });
         setSearchTerm(null)
-    }, [searchTerm,searched,price,subject,rating,filterData]);
+    }, [searchTerm,searched,subject,rating,filterData]);
 
-    const handleOnChange = async(e) =>{
-        e.preventDefault()
-        var a = document.getElementById('input').value  ;
-        setSearchTerm(a)
-        setSearched(true);
-        setFilterData([])
-        console.log(searchTerm)
-    }
-    const styleFilterForm = {
-        position: "relative",
-        top: "-40px",
-        left: "550px",
-        height: "70px",
-        width: "440px"
-        };
-    
-    const styleFilterButton ={
-        height: "70px",
-        left:"70px"
-    }
-    const stylePrice ={
-        width : "117px",
-        fontSize: "12px",
-    }
-    const styleSubject ={
-        width : "117px",
-        fontSize: "12px",
-        position: "relative",
-        left:"20px"
-    }
-    const styleRating ={
-        width : "117px",
-        fontSize: "12px",
-        position: "relative",
-        left:"40px"
-    }
+const handleOnChange = async(e) =>{
+    e.preventDefault()
+    var a = document.getElementById('input').value  ;
+    setSearchTerm(a)
+    setSearched(true);
+    setFilterData([])
+    console.log(searchTerm)
+}
+const styleFilterForm = {
+    position: "relative",
+    top: "-40px",
+    left: "550px",
+    height: "70px",
+    width: "340px"
+ };
+
+const styleFilterButton ={
+    height: "70px",
+    left:"10px"
+}
+const styleSubject ={
+    width : "117px",
+    fontSize: "12px",
+    position: "relative",
+    left:"-100px"
+}
+const styleRating ={
+    width : "117px",
+    fontSize: "12px",
+    position: "relative",
+    left:"-60px"
+}
     return (
         <div>
         { <form id="search-form" name="gs" method="submit" role="search" action="#">
@@ -105,28 +97,17 @@ const HomeSearch = () => {
                 </div>
                 <div className="col-lg-3">
                     <fieldset>
-                        <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
+                        <button className="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
                     </fieldset>
                 </div>
             </div>
         </form> }
         <div className="col-lg-12">
         <div>
+
     { <form id="search-form" name="gs" method="submit" role="search" action="#"  style={styleFilterForm}>
         <div className="row">
             <div className="col-lg-3 align-self-center">
-                <fieldset>
-                    <select  id={'price'}  value={price} name="area" className="form-select" aria-label="Area"  onchange="this.form.click()" style={stylePrice}> 
-                    {/* id="chooseCategory" */}
-                     {/* assuming price range is 0-5000 */}
-                        <option selected disabled key="0" value="null"> Select a price</option> 
-                        <option key="1" value="0" >FREE </option>
-                        <option key="2" value="1000" >less than 1000</option>
-                        <option key="3" value="3000" >less than 3000</option>
-                        <option key="4" value="5000">less than 5000</option>
-                        <option key="5" value="99999999">more than 5000</option>
-                    </select>
-                </fieldset>
             </div>
             <div className="col-lg-3 align-self-center">
                 <fieldset>
@@ -181,7 +162,6 @@ const HomeSearch = () => {
     </div> 
         </div>
         { searched &&
-            
             <div className="card-container">
                 {courses  && courses.map((course) =>( 
                       <div className="card">
@@ -190,57 +170,13 @@ const HomeSearch = () => {
                           <h3> {course.title} </h3>
                           <p>totalhours: {course.totalhours}</p>
                           <p>rating: {course.rating}</p>
-                          <p>Price: {course.price}</p>
                       </div>
                       </div>
-                ))}
-              
-{/*             
-                <div className="card">
-                <img src="https://placeimg.com/800/500/arch"/>
-                <div className="content">
-                    <h3>Architecture is wonderful.</h3>
-                    <p>Override the digital divide with additional clickthroughs from DevOps.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/nature"/>
-                <div className="content">
-                    <h3>Be one with mother nature.</h3>
-                    <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/people"/>
-                <div className="content">
-                    <h3>There's billions of people, let's be excellent to them.</h3>
-                    <p>Leverage agile frameworks to provide a robust synopsis for high level overviews.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/tech"/>
-                <div className="content">
-                    <h3>Technology is life...</h3>
-                    <p>Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/any"/>
-                <div className="content">
-                    <h3>Do you feel lucky?</h3>
-                    <p>Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
-                </div>
-                </div> */}
-                
+                ))}                
             </div>
         }
-
         </div>
     )
 }
 
-export default HomeSearch;
+export default CorporateTraineeSearch;

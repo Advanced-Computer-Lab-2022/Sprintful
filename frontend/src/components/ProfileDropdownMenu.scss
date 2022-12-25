@@ -25,16 +25,33 @@ body {
         font-weight: bold;
       }
     }
-
-    button {
-      width: 100%;
-      height: 40px;
-      border: none;
-      border-radius: 4px;
-      // color: #fff;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
+    .text-end{
+      .list-group-item ,.btn{
+        position: relative;
+        left: 12px;
+        width: 89.5%;
+        height: 40px;
+        border: none;
+        border-bottom: none;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .but{
+        position: relative;
+        left: 12px;
+        width: 100%;
+        height: 40px;
+        border: none;
+        background-color: #8d99af;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        line-height:10px;
+      }
     }
+    
   }
 }
