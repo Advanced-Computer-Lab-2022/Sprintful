@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { useNavigate } from 'react-router-dom';
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
       backgroundColor: theme.palette.common.black,
@@ -25,6 +26,8 @@ const InstructorProfile = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
+
+    const navigate = useNavigate();
     useEffect(() => {
       const fetchData = async () => {
         await axios.get(`http://localhost:5000/api/instructor/profile?id=${id}`)
@@ -82,6 +85,7 @@ const InstructorProfile = () => {
         )
       }
         </div>
+        <button onClick={()=> navigate(`/api/instructor/editProfile?id=${id}`)}>Edit Profile</button>
         </div>
 
     )
