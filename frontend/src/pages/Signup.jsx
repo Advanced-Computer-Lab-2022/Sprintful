@@ -86,8 +86,8 @@ const style13={ //button
 return(
     <body className="main" >
     <form className="signup" onSubmit={handleSubmit} autoComplete="off">
-    <h1 >Create account</h1>
-    <h2 >Already have an account? <span>Sign in</span></h2>
+    <h1 className="CreateAccount">Create account</h1>
+    <h2 className="HaveAnAccount" >Already have an account? <span>Sign in</span></h2>
     <div  className="signup__field">
       <input  className="signup__input" style={style10} type="text" onChange={(e)=>setUsername(e.target.value)} value={username} name="username" id="username" required />
       <label className="signup__label" htmlFor="username">Username</label>

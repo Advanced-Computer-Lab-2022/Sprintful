@@ -37,6 +37,10 @@ import Reviews from './components/Reviews';
 import Policy from './pages//PaymentPolicy'
 
 import Signup from './pages/Signup';
+import PaymentForm from './components/PaymentForm';
+import StripeContainer from './components/StripeContainer';
+// import '../src/components/PaymentForm.css'
+// import '../src/pages/Signup.css'
 
 import AddPromotionCourse from './pages/AddPromotionCourse';
 import CourseView from './pages/CourseView';
@@ -137,6 +141,10 @@ function App() {
             />
 
             {/* Hoda */}
+            <Route
+              exact path="/payment"
+              element={<StripeContainer/>}
+            />
             <Route
               exact path="/contract"
               element={<Contract/>}

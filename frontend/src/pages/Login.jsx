@@ -115,7 +115,7 @@ return (
         </div>
         
       </div>
-      <button  type="submit" onClick={handleOnChange} >Log in</button>
+      <button  className="logInBtn" type="submit" onClick={handleOnChange} >Log in</button>
       <a href="https://codepen.io/elujambio/pen/yjwzGP" className="discrete" target="_blank">Forget Password?</a>
     </form>
   </div>
