@@ -6,7 +6,7 @@ const {addReport, viewReports, adminViewReports, getReportStatus, getReportbyId}
 router.post('/addReport', addReport);
 router.get('/:id', getReportbyId)
 router.get('/getReports/:id', viewReports)
-router.get('/getReportsAdmin', adminViewReports)
+router.post('/getReportsAdmin', adminViewReports)
 router.get('/status/:reportid', getReportStatus)
 
 

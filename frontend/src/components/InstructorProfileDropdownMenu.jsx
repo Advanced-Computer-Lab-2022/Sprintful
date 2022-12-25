@@ -36,7 +36,7 @@ export default function IndividualProfileDropdownMenu() {
                 <span>K</span>
               </div>
 
-              <p className="text-center mb-0">John Doe</p>
+              <p className="text-center mb-0" >John Doe</p>
               <h5 className="text-center mb-2">jd@gmail.com</h5>
 
               {/*<hr />

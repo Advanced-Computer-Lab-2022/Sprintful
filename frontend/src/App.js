@@ -132,7 +132,7 @@ function App() {
               element={[<UsersViewReports/> ]} 
             />
             <Route
-              exact path="ReportDetails/:reportid"
+              exact path="/ReportDetails"
               element={[<ReportDetails/> ]}
             />
 

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import {useNavigate} from "react-router";
 
 
+
 const ViewReports = () => {
     
         const header = {
@@ -13,10 +14,10 @@ const ViewReports = () => {
 
         const navigate=useNavigate();
         const [reports, setReports] = useState([])
-        const [reportid, setReportid] = useState(null)
+        const [reportid, setReportid] = useState("fghj")
         useEffect( ()=>{
             const fetchReports =async () =>{
-                await axios.get('http://localhost:5000/api/report/getReportsAdmin').then(
+                await axios.post('http://localhost:5000/api/report/getReportsAdmin').then(
                (res) => { 
                    const reports = res.data
                    console.log(reports)
@@ -27,10 +28,17 @@ const ViewReports = () => {
             fetchReports()
         }, [])
 
-        const openReport = () => {
+        const openReport = async(e) => {
           //e.preventDefault()
-          var a = document.getElementById('report').value  ;
-          setReportid(a)
+          // var a = document.getElementById('report').id  ;
+          // var b = document.getElementsByClassName('card').id ;
+          // console.log("a " +a)
+          // console.log("b " +b)
+
+          // setReportid(a)
+          // console.log("openReport 1 "+reportid)
+          // setReportid("2345678")
+          // console.log("openReport 2 "+reportid)
           navigate(`/ReportDetails/${reportid}`)
         }
 
@@ -48,12 +56,11 @@ const ViewReports = () => {
 
     ))}    */}
 
-<div className="card-container" id="report">
+<div className="card-container" >
                             {reports  && reports.map((report) =>( 
-                                <div onClick={()=>openReport()} className="card" style={{height: "30em"}}>
+                                <div onClick={()=>navigate(`/ReportDetails?reportid=${report._id}`)} className="card" style={{height: "30em"}} >
                                 {/* <img src="assets/images/courseCard.jpg"/> */}
-                                <div className="content" value={report._id}>
-                              
+                                <div className="content">
                                     <h3> {report.subject} </h3>
                                     <p>type: {report.type}</p>
                                     <p>status: {report.status}</p>

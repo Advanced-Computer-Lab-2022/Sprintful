@@ -117,13 +117,14 @@ const addReport = asyncHandler(async (req, res) => {
 
 //view reported problems - should automaticalled be marked as "unseen"
 const adminViewReports = asyncHandler(async (req, res) => {
+    //console.log("naaayy")
     const reports = await Report.find({})
+    //console.log("zefttt")
     if(reports){
         res.json(reports)
     }
     else{
-        res.status(404)
-        throw new Error('No reports found')
+        res.status(400).json({ error: error.message })
     }
 })
 
