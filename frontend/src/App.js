@@ -31,13 +31,12 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
+import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
 import Policy from './pages//PaymentPolicy'
 
 import Signup from './pages/Signup';
 
-import InstructorSearch from './components/InstructorSearch';
-import Contract from './pages/Contract'
 function App() {
   return (
     <div className="App">

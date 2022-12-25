@@ -3,32 +3,32 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
-export default function Contract() {
+// export default function Contract() {
 
-  const navigate=useNavigate();
-  const params = new URLSearchParams(window.location.search);
-  const id = params.get('id');
-  console.log(id)
+//   const navigate=useNavigate();
+//   const params = new URLSearchParams(window.location.search);
+//   const id = params.get('id');
+//   console.log(id)
 
-  let axiosConfig = {
-    headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-    }
-  };
-    const handleOnClick= async(e) =>{
-      e.preventDefault()
-      const response=  axios.put(`http://localhost:5000/api/courses/acceptContract?id=${id}`, {
-    },axiosConfig)
-    .then(function (response) {
-      navigate(`/MyTaughtCourses?id=${id}`)
-    })
-    .catch(function (error) {
-     console.log(error);
-     })
+//   let axiosConfig = {
+//     headers: {
+//         'Content-Type': 'application/json;charset=UTF-8',
+//         "Access-Control-Allow-Origin": "*",
+//     }
+//   };
+//     const handleOnClick= async(e) =>{
+//       e.preventDefault()
+//       const response=  axios.put(`http://localhost:5000/api/courses/acceptContract?id=${id}`, {
+//     },axiosConfig)
+//     .then(function (response) {
+//       navigate(`/MyTaughtCourses?id=${id}`)
+//     })
+//     .catch(function (error) {
+//      console.log(error);
+//      })
 
-    } 
-  }
+//     } 
+//   }
 export default function Contract() {
 
     const style1 ={ //.terms-container
@@ -98,7 +98,30 @@ export default function Contract() {
     //     color: #EB573D; 
     //     text-decoration: none;
     //   }
-
+    const navigate=useNavigate();
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log(id)
+  
+    let axiosConfig = {
+      headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+          "Access-Control-Allow-Origin": "*",
+      }
+    };
+      const handleOnClick= async(e) =>{
+        e.preventDefault()
+        const response=  axios.put(`http://localhost:5000/api/courses/acceptContract?id=${id}`, {
+      },axiosConfig)
+      .then(function (response) {
+        navigate(`/MyTaughtCourses?id=${id}`)
+      })
+      .catch(function (error) {
+       console.log(error);
+       })
+  
+      } 
+  
     return (
         <div>
             <main className="header-offset content-wrapper about-wrapper">

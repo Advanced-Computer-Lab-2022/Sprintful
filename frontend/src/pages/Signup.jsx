@@ -69,7 +69,7 @@ const style10 ={ //.signup__input
 
 const style13={ //button
     margin: "0",
-    padding: "0",
+    //padding: "0",
     boxSizing: "border-box",
     fontFamily: "Poppins, sansSerif",
     background: "#a4243b",
