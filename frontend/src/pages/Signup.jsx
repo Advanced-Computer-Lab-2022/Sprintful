@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {Navigate, useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
-// import "../pages/Signup.css"
+import "../pages/Signup.css"
 
 export default function Signup() {
 const [isHovering, setIsHovering] = useState(false);
@@ -104,12 +104,22 @@ return(
       <label  className="signup__label" htmlFor="Last Name">Last Name</label>
     </div>
     <div  className="s">
-    <label className="signup__label" style={{position:"relative", top:"-10px"}}htmlFor="gender"> Gender</label>
-    <div class="custom02">
-        <input type="radio" onChange={(e)=>setGender(e.target.value)}  value={gender} id="radio03-01" name="demo03" /><label for="radio03-01">Female</label>
-        <input type="radio" id="radio03-02" name="demo03" /><label for="radio03-02">Male</label>
+      <label className="signup__label" style={{position:"relative", top:"-10px"}}htmlFor="gender"> Gender</label>
+      <div class="custom02">
+          <input type="radio" onChange={(e)=>setGender('female')} id="radio03-01" name="demo03" /><label for="radio03-01">Female</label>
+          <input type="radio" onChange={(e)=>setGender('male')}id="radio03-02" name="demo03" /><label for="radio03-02">Male</label>
+      </div>
     </div>
-    </div>
+    {/* <div className="check"> */}
+      <div className="new">
+        <form>
+          <div className="form-group">
+            <input type="checkbox" id="terms of use"/>
+            <label for="terms of use">By signing up you agree to our terms of use</label>
+          </div>
+        </form>
+      </div>  
+    {/* </div> */}
     <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} >Sign up</button> 
   </form>
   </body>

@@ -1,4 +1,4 @@
-export default function Contract() {
+export default function PaymentPolicy() {
 
   const style1 ={ //.terms-container
       fontFamily: "'Open Sans', sans-serif",

@@ -1,20 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Course from './pages/Course'
 import Quiz from './components/Quiz'
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
 import Navbar2 from './components/Navbar2';
-import MyCourses from './pages/MyCourses';
 import GuestHome from './pages/GuestHome';
 import About from './pages/About';
 import Video from "./pages/Video";
 import Login from "./pages/Login";
-import SideBar from './components/SideBar';
-import { ProSidebarProvider } from 'react-pro-sidebar';
-import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
@@ -32,7 +27,6 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
-import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
 import Signup from './pages/Signup';
 
@@ -119,18 +113,15 @@ function App() {
             {/* Hoda */}
             <Route
               exact path="/contract"
-              element={
-                <Contract/>}
+              element={<Contract/>}
             />
              <Route
               exact path="/Signup"
-              element={
-                <Signup/>}
+              element={<Signup/>}
             />
             <Route
               exact path="/api/courses/search"
-              element={
-                <Searchbar placeholder="Enter a course title or subject or instructor ..." />}
+              element={<Searchbar placeholder="Enter a course title or subject or instructor ..." />}
             />
             <Route
               exact path="/"

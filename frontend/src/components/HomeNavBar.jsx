@@ -17,8 +17,7 @@ const HomeNavBar = () => {
                 <Country />
                 <li><a href="contact.html">Contact Us</a></li>
                 <li><a href="/Login">Log in</a></li>
-                <li><a href="listing.html">Sign up</a></li>
-
+                <li><a href="/Signup">Sign up</a></li>
                 <li></li>
             </ul>
             <a className='menu-trigger'>

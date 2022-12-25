@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
-export default function PaymentPolicy() {
+export default function Contract() {
 
   const navigate=useNavigate();
   const params = new URLSearchParams(window.location.search);
