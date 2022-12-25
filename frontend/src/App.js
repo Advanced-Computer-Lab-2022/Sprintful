@@ -28,6 +28,7 @@ import AddQuestion from './pages/AddQuestion';
 import TraineeHome from './pages/TraineeHome';
 import AddPromotionCourse from './pages/AddPromotionCourse';
 import CourseView from './pages/CourseView';
+import CourseViewPage from './pages/CourseViewPage';
 function App() {
   return (
     <div className="App">

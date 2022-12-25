@@ -10,13 +10,17 @@ export default function  Card({subtitle:{_id,title ,totalHours, tasks}}){
             <h5>{title}</h5>
             <h6>total hours :{totalHours}</h6>
             <br></br>
-
-
-            </div>
+            <h6>Exercises:</h6>
             {tasks.map((task)=>(
                     
                         <div key={task._id}>
-                          <p>{task.title}</p>
+                        
+
+                            
+                         <div>
+                          <li>{task.title}</li>
+                          </div>
+                       
                           
                         </div>
                      
@@ -24,7 +28,7 @@ export default function  Card({subtitle:{_id,title ,totalHours, tasks}}){
 
                        ))}
 
-           <div>
+          
 
 
 
