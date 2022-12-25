@@ -118,6 +118,51 @@ const changePassword = async (req, res, next) => {
     }
 }
 
+const editBioEmailPassword= async(req, res) => {
+
+    // const instructorId = req.query.id;
+       //combinations? hardcode it
+    console.log("editing000");
+    try {
+        console.log("editing5");
+        const email=req.body.email;
+        const biography= req.body.biography;
+        const instructorId = req.query.id;
+        console.log("instructorId",instructorId);
+        const instructor = await Instructor.findById(instructorId)
+        console.log("instructor",instructor);
+        const instructor2 = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography}, { new: true })
+        console.log("instructor 2",instructor2)
+        const oldPassword = instructor.password
+        const currentPassword = req.body.currentPassword
+        const auth = await bcrypt.compare(currentPassword, oldPassword);
+        console.log("authentication", auth);
+
+        if(auth){
+            const salt = await bcrypt.genSalt(10);
+            console.log("authentication2");
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            console.log("authentication26", hashedPassword);
+            const response = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography, password: hashedPassword}, { new: true })
+            console.log(response)
+            res.status(200).json(response);
+        }
+        else{
+            res.status(400).json({ error: 'Wrong password' });
+
+        }   
+    }
+    catch (error) {
+        return res.status(400).json({ status: false, error: "Error Occured" });
+    }
+    // if(instructor){
+    //     return res.status(200).json(instructor );
+    // }
+    // else{
+    //     return res.status(400).json({ status: false, error: "Error Occured" });
+    // }
+    };
+
 // //create a multiple choice exam with 4 choices per question
 // const createChoice = asyncHandler(async(req,res) =>{
 //     const title = req.body.title;
@@ -203,18 +248,7 @@ const changePassword = async (req, res, next) => {
 // });
 
 // app.put('/update/:id', 
-const editBioEmail= async(req, res) => {
-    const email=req.body.email;
-    const biography= req.body.biography;
-    const instructorId = req.query.id;
-    const instructor = await Instructor.findByIdAndUpdate(instructorId, req.body, { new: true })   //combinations? hardcode it
-    if(instructor){
-        return res.status(200).json(instructor );
-    }
-    else{
-        return res.status(400).json({ status: false, error: "Error Occured" });
-    }
-    };
+
     
      //.then(result=> res.send(result))
 
@@ -298,4 +332,4 @@ const getInstructorProfile = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmail, logout}
+module.exports = { createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}
