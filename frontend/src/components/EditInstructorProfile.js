@@ -9,6 +9,7 @@ const EditInstructorProfile = () => {
     const [instructor, setInstructor] = useState("");
     const [email, setEmail] = useState(instructor.email);
     const [biography, setBiography] = useState(instructor.biography);
+    const [currentPassword, setCurrentPassword] = useState(instructor.currentPassword);
     const [password, setPassword] = useState(instructor.password);
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -39,9 +40,10 @@ const EditInstructorProfile = () => {
          }
        };
 
-     axios.put(`http://localhost:5000/api/instructor/editBioEmail?id=${id}`, { //?id=${id}
+     axios.put(`http://localhost:5000/api/instructor/editProfile?id=${id}`, { //?id=${id}
         email: email,
         biography: biography,
+        currentPassword: currentPassword,
         password: password
    },axiosConfig)
 
@@ -87,10 +89,10 @@ const EditInstructorProfile = () => {
         <br/>
 
         <label>Current Password: </label>
-            {/* <input 
+             <input style = {{width: "10em"}}
             type="text"
-            onChange={(e) => setBiography(e.target.value)}
-            value={biography}/> */}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            value={currentPassword}/> 
             <br/>
 
         <label>New Password: </label>
