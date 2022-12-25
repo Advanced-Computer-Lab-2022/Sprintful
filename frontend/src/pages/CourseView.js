@@ -6,6 +6,9 @@ import {Typography} from '@mui/material';
 import { blue } from '@mui/material/colors';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 import Card from '../components/Card'
+// import Card from '@mui/material/Card';
+// import CardActions from '@mui/material/CardActions';
+// import CardContent from '@mui/material/CardContent';
 
 
 //stylings custom css
@@ -150,14 +153,16 @@ const CourseView=()=>{
                        ))} */}
 
 
-                     {courseSubtitles.map((subtitle)=>(
-                        <Card key={subtitle._id}  subtitle={subtitle}/>
+                      {courseSubtitles.map((subtitle)=>(
+                        <Card key={subtitle._id}  subtitle={subtitle}/> 
+                         ))}
+                        
 
 
                   
 
 
-                  ))}
+                 
 
 
 
