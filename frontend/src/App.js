@@ -34,6 +34,8 @@ import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
+import AccessRequests from './components/AccessRequests';
+
 function App() {
   return (
     <div className="App">
@@ -80,6 +82,10 @@ function App() {
             <Route
               exact path="/api/instructor/rate"
               element={<RateInstructor />}
+            />
+            <Route
+              exact path="/api/admin/accessRequests"
+              element={<AccessRequests />}
             />
 
             {/* Ragaa */}

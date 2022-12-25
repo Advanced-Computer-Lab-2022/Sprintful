@@ -4,17 +4,26 @@ const CorporateTrainee = require('../models/corporateTraineeModel')
 const RequestAccess = require('../models/requestAccessModel')
 
 
-const requestAccess = async(req, res, next) => {
+const requestAccess = async(req, res, next) => {   
     console.log("Request Access");
     try{
         const corporateTraineeId = req.query.id;
         const courseId = req.query.courseId;
         console.log("corporate", corporateTraineeId);
         console.log("course",   courseId);
+
+        const corporateTrainee = await CorporateTrainee.findById(corporateTraineeId)
+        const corporateTraineeUsername = corporateTrainee.username
+        console.log("traineeeee", corporateTraineeUsername)
+        const course = await Courses.findById(courseId)
+        const courseName = course.title
+        console.log("course  ", courseName)
         // const prevRequest = await RequestAccess.find( , , {new: true})
         const request = await RequestAccess.create({
             corporateTraineeId,
+            corporateTraineeUsername,
             courseId,
+            courseName,
             state: "pending"
         })
         console.log("Request Access5");
@@ -22,7 +31,9 @@ const requestAccess = async(req, res, next) => {
             res.status(201).json({
                 _id: request._id,
                 corporateTraineeId: request.corporateTraineeId,
+                corporateTraineeUsername: request.corporateTraineeUsername,
                 courseId: request.courseId,
+                courseName: request.courseName,
                 state: request.state
             })
         }
@@ -39,12 +50,14 @@ const requestAccess = async(req, res, next) => {
 
 const getAccessRequests = asyncHandler(async (req, res) => {
     const requests = await RequestAccess.find({state: "pending"})
-    if (requests) {
-        res.json(requests)
-    } 
+    console.log("working")
+    
     if(requests.length == 0){
         console.log("NO requests");
     }
+    if (requests) {
+        res.json(requests)
+    } 
     else {
         res.status(404)
         throw new Error('Requests not found')
@@ -54,18 +67,19 @@ const getAccessRequests = asyncHandler(async (req, res) => {
 const grantAccess = async(req, res, next) => {
     console.log("Grant Access");
     try{
-        console.log("Grant Access2");
-        const requestId = req.query.requestId
+        const requestId = req.query.id
         console.log(requestId)
-        console.log("Grant Access3");
-        const request = await RequestAccess.findByIdAndUpdate(req.query.requestId,  {state: "true"}, { new: true })
+        const request = await RequestAccess.findByIdAndUpdate(req.query.id,  {state: "true"}, { new: true })
         console.log("request", request)
-        console.log("Request Access5");
         request.state = "true"
-        // const corporateTraineeId = request.corporateTraineeId;
-        // const courseId = request.courseId;
-        // console.log("corporate", corporateTraineeId);
-        // console.log("course",   courseId);
+        const corporateTraineeId = request.corporateTraineeId;
+        const courseId = request.courseId;
+        const corporateTrainee = await CorporateTrainee.findById(corporateTraineeId)
+        console.log(corporateTrainee)
+        console.log(corporateTrainee.courses)
+        corporateTrainee.courses.push(courseId)
+        console.log(corporateTrainee.courses)
+        const newCorporateTrainee = await CorporateTrainee.findByIdAndUpdate(corporateTraineeId, {courses: corporateTrainee.courses})
         if (request) {
             res.status(201).json({
                 _id: request._id,

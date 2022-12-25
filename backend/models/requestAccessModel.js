@@ -7,13 +7,21 @@ const requestAccessSchema = mongoose.Schema({
         required:[true,"Set the corporate trainee id"],
         
     },
+    corporateTraineeUsername: {
+        type: String,
+        default: ""
+    },
     courseId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course',                                
         required:[true,"Set the course id"],
         
     },
-    state: {
+    courseName: {
+        type: String,
+        default: ""
+    },
+    state: {   //could be pending, false, true
         type: String,
         default: "false"
     }
