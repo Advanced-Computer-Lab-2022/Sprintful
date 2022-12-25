@@ -15,9 +15,10 @@ import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/corporateTraineeForm';
+import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
+import EditInstructorProfile from './components/EditInstructorProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -76,6 +77,10 @@ function App() {
             <Route
               exact path="/api/instructor/getProfile"
               element={<InstructorProfile />}
+            />
+            <Route
+              exact path="/api/instructor/editProfile"
+              element={<EditInstructorProfile />}
             />
             <Route
               exact path="/api/instructor/rate"

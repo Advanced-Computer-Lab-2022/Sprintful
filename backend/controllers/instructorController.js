@@ -203,21 +203,21 @@ const changePassword = async (req, res, next) => {
 // });
 
 // app.put('/update/:id', 
-const editBioEmail= asyncHandler((req, res) => {
+const editBioEmail= async(req, res) => {
     const email=req.body.email;
     const biography= req.body.biography;
-      //const update = { price: 800 };
-      //const course = require('./courseSchema');
-     Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', {email: email}, {biography: biography}, function (err, docs) {
-      if (err){
-          res.json({message: 'error'});
-      }
-      else{
-          res.json(docs);
-      }});
+    const instructorId = req.query.id;
+    const instructor = await Instructor.findByIdAndUpdate(instructorId, req.body, { new: true })   //combinations? hardcode it
+    if(instructor){
+        return res.status(200).json(instructor );
+    }
+    else{
+        return res.status(400).json({ status: false, error: "Error Occured" });
+    }
+    };
     
      //.then(result=> res.send(result))
-});
+
 
 //Rate and add a review to the instructor
 const addInstructorReview = asyncHandler(async (req, res, next) => {
