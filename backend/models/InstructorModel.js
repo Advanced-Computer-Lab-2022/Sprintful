@@ -14,9 +14,11 @@ const instructorSchema = mongoose.Schema({
     },
     firstName: {
         type: String,
+        default:""
     },
     lastName: {
         type: String,
+        default:""
     },
     email: {
         type: String,

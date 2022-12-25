@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import {useNavigate} from "react-router";
 import { useEffect } from 'react';
@@ -27,6 +28,9 @@ export default function Contract() {
      })
 
     } 
+  }
+export default function Contract() {
+
     const style1 ={ //.terms-container
         fontFamily: "'Open Sans', sans-serif",
         color: "#262626",

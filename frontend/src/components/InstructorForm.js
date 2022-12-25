@@ -6,10 +6,10 @@ const InstructorForm = () => {
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
-        // e.preventdefault()
+        e.preventDefault()
 
         const newUser = {username, password}
-        const response = await fetch('/api/instructor/createInstructor', {
+        const response = await fetch('http://localhost:5000/api/instructor/createInstructor', {
             method: 'POST',
             body: JSON.stringify(newUser),
             headers: {
@@ -31,16 +31,16 @@ const InstructorForm = () => {
 
     return (
         <form className="create" onSubmit={handleSubmit}> 
-            <h3> Add a new User </h3>
+            <h3> Add a new Instructor </h3>
 
             <label>User name:</label>
-            <input 
+            <input style={{width: 200}}
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}/>
 
              <label>Password:</label>
-            <input 
+            <input style={{width: 200}}
                 type="text"
                 onChange={(e) => setPassword(e.target.value)}
                 value={password}/>

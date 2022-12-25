@@ -1,15 +1,47 @@
 import { PopupMenu } from "react-simple-widgets";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import {useNavigate} from "react-router";
 import "./ProfileDropdownMenu.scss";
 
+
 export default function IndividualProfileDropdownMenu() {
   const navigate =useNavigate();
+  const [instructor, setInstructor] = useState([])
+
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
 
   let params = new URLSearchParams(document.location.search);
   let id = params.get("id");
   console.log(id);
+
+  useEffect( ()=>{
+    const fetchInstructor =async () =>{
+        await axios.get(`http://localhost:5000/api/instructor/profile?id=${id}`).then(
+       (res) => { 
+           const response = res.data
+           //console.log(courses)
+           setInstructor(response)
+          }
+          );
+        }
+        
+        // }
+        
+        fetchInstructor()
+      }, [])
+      
+      const openProfile = () => {
+          navigate(`/api/instructor/getProfile?id=${id}`);
+      }
 
   const handleOnClick = async(e) =>{
     e.preventDefault()
@@ -21,6 +53,7 @@ export default function IndividualProfileDropdownMenu() {
     .catch((err) => {
       console.log(err);
   });
+
 }
   
   return (
@@ -36,8 +69,15 @@ export default function IndividualProfileDropdownMenu() {
                 <span>K</span>
               </div>
 
-              <h5 className="text-center mb-0">John Doe</h5>
-              <p className="text-center mb-2">jd@gmail.com</p>
+              <h5 className="text-center mb-0" style={{
+            textDecoration: isHovering ? 'underline' : '',
+            color: isHovering ? 'blue' : 'black',
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={()=>openProfile()}
+          >{instructor.username}</h5>
+              <p className="text-center mb-2">{instructor.email}</p>
 
               <hr />
 

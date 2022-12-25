@@ -10,9 +10,13 @@ import GuestHome from './pages/GuestHome';
 import About from './pages/About';
 import Video from "./pages/Video";
 import Login from "./pages/Login";
+import SideBar from './components/SideBar';
+import { ProSidebarProvider } from 'react-pro-sidebar';
+import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './components/InstructorProfile';
+import EditInstructorProfile from './components/EditInstructorProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -32,6 +36,8 @@ import Policy from './pages//PaymentPolicy'
 
 import Signup from './pages/Signup';
 
+import InstructorSearch from './components/InstructorSearch';
+import Contract from './pages/Contract'
 function App() {
   return (
     <div className="App">
@@ -74,6 +80,10 @@ function App() {
             <Route
               exact path="/api/instructor/getProfile"
               element={<InstructorProfile />}
+            />
+            <Route
+              exact path="/api/instructor/editProfile"
+              element={<EditInstructorProfile />}
             />
             <Route
               exact path="/api/instructor/rate"
