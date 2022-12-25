@@ -1,0 +1,59 @@
+.spr-container {
+    min-height: 10px;
+    max-width: 1200px;
+    margin: 0 auto;
+    float: none;
+    padding: 0 15px !important;
+    width: 100%;
+    font-size: inherit;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .spr-icon {
+    color: #fdbc00;
+    font-size: 120%;
+    position: relative;
+    width: 1.3em;
+    height: 1.3em;
+  }
+  .spr-summary-actions-newreview {
+    float: right;
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 5px;
+    margin-right: 24px;
+  }
+  
+  .spr-review {
+    width: 31%;
+    margin: 0 1% !important;
+    min-height: 250px;
+    display: inline-block;
+    float: left;
+    padding: 20px 25px !important;
+    /*background: #fff;*/
+    margin-bottom: 25px !important;
+    border: 1px solid;
+    border-radius: 12px;
+  }
+  
+  .spr-pagination {
+    clear: both;
+  }
+  #shopify-product-reviews .spr-review-header-title {
+    display: block;
+    clear: both;
+    float: none;
+  }
+  @media (max-width: 800px) {
+    .spr-review {
+      float: none;
+      width: 100%;
+      min-height: auto;
+      margin: 0 !important;
+      margin-bottom: 25px !important;
+    }
+    .spr-summary-actions-newreview {
+      margin-right: 0px;
+    }
+  }
