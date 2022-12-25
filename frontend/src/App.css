@@ -1,5 +1,5 @@
-/*@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
-.App {
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap");
+/*.App {
    width: 100vw;
   height: 100vh;
   display: flex;
@@ -10,10 +10,7 @@
 }  
   background-image: linear-gradient(90deg, #c2bbc8, #c4b6d0); 
 } 
-body {
-  padding: 0;
-  margin: z0;
-}
+
 
 
 /* .app {
@@ -21,4 +18,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+} */
+/* body {
+  padding: 0;
+  margin: z0;
 } */

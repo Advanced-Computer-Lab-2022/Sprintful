@@ -10,7 +10,7 @@ const Subtitle = require('../models/subtitleModel.js')
 // @route   GET /api/courses/:id
 // @access  Public
 
-
+var searchedCourses = []
 
 //Add a Discount and Set its expiration date 
 const addPromotion=asyncHandler(async (req,res)=>{
