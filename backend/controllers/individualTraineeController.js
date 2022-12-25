@@ -19,19 +19,34 @@ const logout = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
     res.status(200).json({message: "You have logged out!"})
 }
-//Logical error, returns true and with no change in the password. 
-//Changes ???????'s password
-const changePassword = async(req, res, next) => {
+
+const changePassword = async (req, res, next) => {
     console.log("Change Password");
-    try{
-        const{userId} = req.params;
-        const salt = await bcrypt.genSalt(10);
-        const password = await bcrypt.hash(req.body.password, salt);
-        const userPassword = await IndividualTrainee.findByIdAndUpdate('', req.body, {new: true})   //combinations? hardcode it
-        return res.status(200).json({ status: true, data: password});
+    try {
+        const individualTraineeId = req.query.id;
+        console.log("individualTraineeId",individualTraineeId);
+        const individualTrainee = await IndividualTrainee.findById(individualTraineeId)
+        console.log("individualTrainee",individualTrainee);
+        const oldPassword = individualTrainee.password
+        const currentPassword = req.body.currentPassword
+        const auth = await bcrypt.compare(currentPassword, oldPassword);
+        console.log("authentication", auth);
+
+        if(auth){
+            const salt = await bcrypt.genSalt(10);
+            console.log("authentication2");
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            console.log("authentication26", hashedPassword);
+            const response = await IndividualTrainee.findByIdAndUpdate(individualTraineeId, {password: hashedPassword}, { new: true })
+            console.log(response)
+            res.status(200).json(response);
+        }
+        else{
+            res.status(400).json({ error: 'Wrong password' });
+        }   
     }
-    catch(error){
-        return res.status(400).json({ status: false, error: "Error Occured"});
+    catch (error) {
+        return res.status(400).json({ status: false, error: "Error Occured" });
     }
 }
 const login = async (req, res) => {

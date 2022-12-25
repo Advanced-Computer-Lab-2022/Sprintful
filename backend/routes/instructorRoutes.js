@@ -5,7 +5,7 @@ const { createInstructor, changePassword, addInstructorReview, getInstructorRati
 const {requireAuth} = require('../middleware/authMiddleware')
 
 router.post('/createInstructor', createInstructor);
-router.put('/changePassword', requireAuth,changePassword);
+router.put('/changePassword', changePassword);
 router.put('/review',requireAuth, addInstructorReview)
 router.get('/reviewsnratings',requireAuth, getInstructorRating)
 router.get('/profile',requireAuth, getInstructorProfile)

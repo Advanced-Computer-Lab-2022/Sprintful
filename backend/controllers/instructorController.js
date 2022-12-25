@@ -12,6 +12,7 @@ const courseModel = require('../models/courseModel.js')
 const Question = require('../models/questionModel.js')
 //const Choice = require('../models/choiceSchema.js')
 const instructor = require('../models/instructorModel.js')
+const e = require('express')
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (name) => { 
@@ -40,16 +41,23 @@ const login = async (req, res) => {
 
 }
 const createInstructor = asyncHandler(async (req, res) => {
-    const { username, password,email } = req.body
+    console.log("createInstructor");
+    const username = req.body.username
+    const password = req.body.password
+    const email = req.body.email
     try{
+        console.log("createInstructor22");
         const instructorExists = await Instructor.findOne({ username })
+        console.log(instructorExists);
         if (instructorExists) {
             res.status(400)
             throw new Error('Instructor already exists')
         }
         // Hash password
+        console.log("cred", username, password, email)
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
+        console.log("createInstructor55");
         const instructor = await Instructor.create({
             username,
             password: hashedPassword,
@@ -77,16 +85,33 @@ const logout = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
     res.status(200).json({message: "You have logged out!"})
 }
-//NO authentication
-//Changes Milad's password
+
+
 const changePassword = async (req, res, next) => {
     console.log("Change Password");
     try {
-        const { userId } = req.params;
-        const salt = await bcrypt.genSalt(10);
-        const password = await bcrypt.hash(req.body.password, salt);
-        const userPassword = await Instructor.findByIdAndUpdate('636179a6cae9a97f1a43d792', req.body, { new: true })   //combinations? hardcode it
-        return res.status(200).json({ status: true, data: password });
+        const instructorId = req.query.id;
+        console.log("instructorId",instructorId);
+        const instructor = await Instructor.findById(instructorId)
+        console.log("instructor",instructor);
+        const oldPassword = instructor.password
+        const currentPassword = req.body.currentPassword
+        const auth = await bcrypt.compare(currentPassword, oldPassword);
+        console.log("authentication", auth);
+
+        if(auth){
+            const salt = await bcrypt.genSalt(10);
+            console.log("authentication2");
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            console.log("authentication26", hashedPassword);
+            const response = await Instructor.findByIdAndUpdate(instructorId, {password: hashedPassword}, { new: true })
+            console.log(response)
+            res.status(200).json(response);
+        }
+        else{
+            res.status(400).json({ error: 'Wrong password' });
+
+        }   
     }
     catch (error) {
         return res.status(400).json({ status: false, error: "Error Occured" });
