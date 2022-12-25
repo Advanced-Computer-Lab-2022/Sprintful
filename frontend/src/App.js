@@ -34,6 +34,7 @@ import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
 import AdminViewReports from './pages/AdminViewReports';
 import UsersViewReports from './pages/UsersViewReports';
+import ReportDetailsAdmin from './pages/ReportDetailsAdmin';
 import ReportDetails from './pages/ReportDetails';
 import InstructorSearch from './components/InstructorSearch';
 import ReportProblem from './components/ReportProblem';
@@ -130,6 +131,10 @@ function App() {
             <Route
               exact path="/ViewReports"
               element={[<UsersViewReports/> ]} 
+            />
+            <Route
+              exact path="/ReportDetailsAdmin"
+              element={[<ReportDetailsAdmin/> ]}
             />
             <Route
               exact path="/ReportDetails"

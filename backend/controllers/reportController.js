@@ -118,7 +118,13 @@ const addReport = asyncHandler(async (req, res) => {
 //view reported problems - should automaticalled be marked as "unseen"
 const adminViewReports = asyncHandler(async (req, res) => {
     //console.log("naaayy")
-    const reports = await Report.find({})
+    //const reports = await Report.find({})
+    const reports = await Report.find({
+        $or:[
+            { status:  unseen },
+            {statuc: pending}
+        ] 
+});
     //console.log("zefttt")
     if(reports){
         res.json(reports)
