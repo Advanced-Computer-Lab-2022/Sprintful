@@ -21,6 +21,7 @@ export default function InstructorMyCourses() {
     const [filterData,setFilterData]=useState([]);
 
     const [add, setAdd] =useState(false)
+    const [addTask, setAddTask] =useState(false)
     const [mess,setMess] = useState(false)
 
     const[title,setTitle]=useState('') 
@@ -31,6 +32,16 @@ export default function InstructorMyCourses() {
     const [discount,setDiscount]=useState('')
     const [subject,setSubject]=useState('Computer Science')
     // const [contract,setContract] =useState(false)
+
+    const[instructorCourses,setInstructorCourses] = useState([])
+    const [option, setOption] = useState("");
+    const [subtitleOption, setSubtitleOption]= useState("");
+    const [subtitles, setSubtitles] = useState([]);
+    const [titleTask,setTitleTask] = useState("");
+    const[subId, setSubId]=useState(null);
+    const[courseRef, setCourseRef]= useState(false)
+    const[task, setTask] = useState([])
+
 
     const navigate=useNavigate();
     const params = new URLSearchParams(window.location.search);
@@ -53,6 +64,76 @@ export default function InstructorMyCourses() {
         setFilterPrice(c)
         setCourses([])
     }
+
+    const handleTaskSubmit = async (e) => {
+        e.preventDefault();
+        if(courseRef){
+        setTask({
+            title: titleTask, 
+            course: subId
+        })
+    }
+    else{
+        setTask({
+            title: titleTask, 
+            subtitle: subId
+        })
+        
+    }
+    console.log("id in handleSubmit: "+subId)
+        const response = await fetch(`http://localhost:5000/api/tasks/addTask/${subId}`,{
+            method:'POST',
+            body :JSON.stringify(task),
+            headers :{
+                'Content-Type':'application/json'
+            }
+           },axiosConfig)
+
+           const json =await response.json()
+           if(response.ok){
+       
+          const taskId=json._id;
+          console.log('Task added',json)
+       
+           
+           navigate(`/addQuestion?taskid=${taskId}`);
+           navigate(0);
+           }   
+           else{
+            console.log("fail")
+           }
+    }
+    const fetchSubtitles =async () =>{
+        await axios.get(`http://localhost:5000/api/courses/getSubtitles?courseId=${option}`).then(
+       (res) => { 
+           const courses = res.data
+           //console.log(courses)
+           setSubtitles(courses)
+       }
+        );
+        //getId();
+    }
+
+    const getId = async () =>{
+        console.log("option " + option )
+        if(subtitleOption=="option"){
+            setSubId(option)
+            console.log("subId set for final exam")
+            setCourseRef(true)
+        }
+       else{ await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
+            (res) => { 
+                const subIdArr = res.data
+                //console.log("1"+subId)
+                //setSubtitles(courses)
+                setSubId( subIdArr.reduce((acc, curr) => `${acc}${curr._id}` ,''))
+
+                //console.log("inside "+subId)
+            }
+             );
+    }
+    console.log("sub Id " +subId)
+}
 
     const handleSubmit= async (e)=>{
         e.preventDefault()
@@ -117,6 +198,19 @@ export default function InstructorMyCourses() {
                 }
             })
         }
+        const fetchInstructorCourses =async () =>{
+            await axios.get(`http://localhost:5000/api/courses/instructor/?id=${id}`).then(
+           (res) => { 
+               const courses = res.data
+               setInstructorCourses(courses)
+               console.log(courses)
+
+           }
+            );
+        }
+        
+        fetchInstructorCourses()
+
         response()
         setFilterPrice(null)
         setFilterSubject(null)
@@ -166,7 +260,8 @@ export default function InstructorMyCourses() {
         position:"relative",
         left:"20px",
         top: "-230px" ,
-        marginTop: "150px"
+        marginTop: "150px",
+        marginRight: "50px"
     };
     const style1 = { //.create input, .create textarea, .create select
         width: "100%",
@@ -314,7 +409,10 @@ export default function InstructorMyCourses() {
                             </div>
                             <div>
                                 <button id="main-button" onClick={() => setAdd(!add)} style={mystyle}> Add a new Course</button>
+                            
+                                <button id="main-button" onClick={() => setAddTask(!addTask)} style={mystyle}> Add a task</button>
                             </div>
+
                         </div>
                         <div className="col-lg-12">
                             { 
@@ -427,7 +525,66 @@ export default function InstructorMyCourses() {
                                     { mess && <strong style={{position:"relative", left: "25px",top: "-33px" ,marginTop: "10px", fontSize:"13px", color:"#4BB543"}}> Course added successfully!</strong>
 
                                     }
-                            </div>    
+
+                                    
+                            {/* </div> 
+                            <div className="createTask"> */}
+                           {addTask && <form id="form" onSubmit={handleTaskSubmit} style={style3}>
+                                {/* <input ref={inputRef} className="userid" type="text" placeholder='Task Title' />  */}
+                                <label style={{fontSize:"16px"}}>Choose course</label>
+                                <select
+                                    placeholder= "View Options"
+                                    value={option}
+                                    onChange={(e) => setOption(e.target.value)}
+                                    onClick={()=>fetchSubtitles()}
+                                    style= {style1}
+                                > 
+
+                                <option selected disabled key="0"> Select a course</option>
+                                    {courses.map((op) => (
+                                    <option key={op.id} value={op._id}> {op.title} </option>
+                                    ))}  
+
+                                
+
+                                </select> 
+
+                                {/* {console.log("courseId "+option)}
+                                {console.log("subtitles for course " +subtitles)}
+                        */}
+                                <label style={{fontSize:"16px"}}>Choose Subtitle</label>
+
+                                <select
+                                // onClick={()=>getId()}
+                                style= {style1}
+                                onChange={(e) => setSubtitleOption(e.target.value)
+                                }
+                                >
+                                <option selected disabled key="0"> Select a Subtitle</option>
+
+                                {subtitles.map((sub) => (
+                                    <option key={sub.id} value={sub.title}> {sub} </option>
+                                    ))}   
+                                    <option key="1" value="option"> Final Exam </option>
+                                </select> 
+
+                                <label style={{fontSize:"16px"}}>Task title</label>
+                                <input 
+                                    //id = "title"
+                                    type="text"
+                                    onChange={(e)=>setTitleTask(e.target.value)}
+                                    onClick={()=>getId()}
+                                    value={titleTask}
+                                    style= {style1}
+                                />
+                                
+                                <br/>
+                                <button style ={style2}>Continue</button>
+
+                            </form>  
+}
+                                </div> 
+                              
                         </div>   
                     </div> 
                 </div>

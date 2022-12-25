@@ -39,7 +39,6 @@ router.post('/filter', filter) // This is a POST request to the /api/guest endpo
 router.put('/review',requireAuth, addCourseReview);
 router.get('/reviewsnratings',requireAuth,getCourseRating)
 router.get('/getreviews/:id',requireAuth,getCourseReviews)
-router.post('/filterPrice', filterPrice) // This is a GET request to the /api/guest endpoint
 router.route('/:id').get(getCourseById) // get course by id
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)

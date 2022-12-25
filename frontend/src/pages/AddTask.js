@@ -137,13 +137,13 @@ return(
     <div className='task'>
     <h1 className='title'>Task Application</h1>
 
-    <ol>
+    {/* <ol>
         <li>You will be asked questions one after another.</li>
         <li>1 point is awarded for the correct answer.</li>
         <li>Each question has four options. You can choose only one options.</li>
         <li>You can review and change answers before the quiz finish.</li>
         <li>The result will be declared at the end of the quiz.</li>
-    </ol>
+    </ol> */}
 
       <form id="form" onSubmit={handleSubmit}>
          {/* <input ref={inputRef} className="userid" type="text" placeholder='Task Title' />  */}
