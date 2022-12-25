@@ -66,19 +66,34 @@ const EditInstructorProfile = () => {
          
           <div>
            <p>
-            <label>User name: </label>
-            <label>{instructor.username}</label>
+            <label style={{fontSize:"16px"}}>User name: </label>
+            <label style={{fontSize:"16px"}}>{instructor.username}</label>
             </p>
 
         <label>Email: </label>
-            <input style= {{width: "20em"}}
+            <input style = {{ //.create input, .create textarea, .create select
+                    padding: "6px 10px",
+                    margin: "10px 0",
+                    border: "1px solid #ddd",
+                    boxSizing: "border-box",
+                    display: "block",
+                    fontSize:"14px",
+                   }}
             type="text"
             onChange={(e) => setEmail(e.target.value)}
             value={email}/>
             <br/>
 
         <label>Biography: </label>
-            <input style= {{width: "20em", height: "6em"}} 
+            <input style = {{ //.create input, .create textarea, .create select
+                    padding: "6px 10px",
+                    margin: "10px 0",
+                    height: "6em",
+                    border: "1px solid #ddd",
+                    boxSizing: "border-box",
+                    display: "block",
+                    fontSize:"14px",
+                   }} 
             type="text"
             onChange={(e) => setBiography(e.target.value)}
             value={biography}/>
@@ -89,22 +104,37 @@ const EditInstructorProfile = () => {
         <br/>
 
         <label>Current Password: </label>
-             <input style = {{width: "10em"}}
+             <input style = {{ //.create input, .create textarea, .create select
+                    padding: "6px 10px",
+                    margin: "10px 0",
+                    border: "1px solid #ddd",
+                    boxSizing: "border-box",
+                    display: "block",
+                    fontSize:"14px",
+                   }}
             type="text"
             onChange={(e) => setCurrentPassword(e.target.value)}
             value={currentPassword}/> 
             <br/>
 
         <label>New Password: </label>
-            <input style = {{width: "10em"}}
-            type="text"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}/>
+            <input style = {{ //.create input, .create textarea, .create select
+                    padding: "6px 10px",
+                    margin: "10px 0",
+                    border: "1px solid #ddd",
+                    boxSizing: "border-box",
+                    display: "block",
+                    fontSize:"14px",
+                   }}
+                  type="text"
+                  onChange={(e) => setPassword(e.target.value)}
+                  value={password}/>
            
             </div>
       
         </div>
-            <button> Apply </button>
+        <br/>
+            <button style={{width: "50px"}}> Apply </button>
         </form>
         </div>
 

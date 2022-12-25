@@ -85,7 +85,8 @@ const InstructorProfile = () => {
         )
       }
         </div>
-        <button onClick={()=> navigate(`/api/instructor/editProfile?id=${id}`)}>Edit Profile</button>
+        <br/>
+        <button style={{width: "50px"}} onClick={()=> navigate(`/api/instructor/editProfile?id=${id}`)}>Edit Profile</button>
         </div>
 
     )
