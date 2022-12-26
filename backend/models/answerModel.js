@@ -12,11 +12,11 @@ const answerSchema = mongoose.Schema({
     },
     corporate: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Corporate',
+        ref: 'CorporateTrainee',
     },
     individual: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Individual',
+        ref: 'IndividualTrainee',
     },
 })
 
