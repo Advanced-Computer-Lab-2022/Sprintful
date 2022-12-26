@@ -20,6 +20,7 @@ const ReportDetails = () => {
                const response = res.data
                //console.log(response)
                setStatus(response.status)
+               console.log("status: " +status)
                if(status == "pending" || status == "unseen"){
                 setAvailable(true)
                }

@@ -58,7 +58,7 @@ const ViewReports = () => {
 
 <div className="card-container" >
                             {reports  && reports.map((report) =>( 
-                                <div onClick={()=>navigate(`/ReportDetails?reportid=${report._id}`)} className="card" style={{height: "30em"}} >
+                                <div onClick={()=>navigate(`/ReportDetailsAdmin?reportid=${report._id}`)} className="card" style={{height: "30em"}} >
                                 {/* <img src="assets/images/courseCard.jpg"/> */}
                                 <div className="content">
                                     <h3> {report.subject} </h3>
