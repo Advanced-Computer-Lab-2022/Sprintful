@@ -124,7 +124,7 @@ import { useState } from "react"
 const ReportProblem = () => {
     const [subject, setSubject] = useState('')
     const [body, setBody] = useState('')
-    const [type, setType] = useState('')
+    const [type, setType] = useState("Technical")
     const[instructorId,setInstructorId]=useState('') 
     const[individualTraineeId,setIndividualTraineeId]=useState('') 
     const[corporateTraineeId,setCorporateTraineeId]=useState('')
@@ -176,6 +176,7 @@ const ReportProblem = () => {
                     <label>Problem Type: </label>
                     <div style= {{width: "18em"}}>
                         <select value={type}  onChange={(e)=>setType(e.target.value)}>
+                            {/* <option value="noType">Choose a type </option> */}
                             <option value="Technical">Technical</option>
                             <option value="Financial">Financial</option>
                             <option value="Other">Other</option>
