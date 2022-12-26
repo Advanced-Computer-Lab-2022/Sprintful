@@ -4,7 +4,7 @@ const { createCorporateTrainee, changePassword, logout, getCorporateTraineeProfi
 const {requireAuth} = require('../middleware/authMiddleware')
 
 router.post("/createCorporateTrainee", createCorporateTrainee)
-router.put('/changePassword', requireAuth,changePassword);
+router.put('/changePassword',changePassword);
 router.get('/logout', logout)
 router.get('/profile', getCorporateTraineeProfile)
 

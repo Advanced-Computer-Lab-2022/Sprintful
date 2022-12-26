@@ -3,7 +3,7 @@ const router = express.Router();
 const { changePassword ,login, logout, viewMoney, getIndividualTraineeProfile} = require('../controllers/individualTraineeController')
 const {requireAuth} = require('../middleware/authMiddleware')
 
-router.put('/changePassword',requireAuth,changePassword);
+router.put('/changePassword',changePassword);
 router.post('/login', login)
 router.get('/logout', logout)
 router.get('/profile', getIndividualTraineeProfile)
