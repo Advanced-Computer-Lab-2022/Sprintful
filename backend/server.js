@@ -30,6 +30,7 @@ app.use('/api/subtitles', require('./routes/subtitleRoutes'))
 app.use('/api/tasks', require('./routes/taskRoutes'))
 app.use('/api/answers', require('./routes/answerRoutes'))
 app.use('/api/questions', require('./routes/questionRoutes'))
+app.use('/api/report', require('./routes/reportRoutes'))
 
 app.post("/payment", async (req, res) => {
 	let { amount, id } = req.body

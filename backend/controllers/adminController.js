@@ -5,6 +5,7 @@ const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const { model } = require('mongoose')
 const Admin = require('../models/adminModel')
+const Report = require('../models/reportModel')
 
 
 const getAdmin = asyncHandler(async (req, res) => {
@@ -92,4 +93,6 @@ const generateToken =(id) =>{
     })
 }
 
-module.exports = { createAdmin,loginAdmin, getAdmin, logout}
+
+
+module.exports = { createAdmin, loginAdmin, getAdmin, logout}

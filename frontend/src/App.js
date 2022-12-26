@@ -14,6 +14,7 @@ import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
+import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
@@ -31,6 +32,10 @@ import InstructorHome from './pages/InstructorHome';
 import CorporateTraineeMyCourses from './pages/CorporateMyCourses';
 import IndividualTraineeMyCourses from './pages/IndividualMyCourses'
 import InstructorMyCourses from './pages/InstructorMyCourses';
+import AdminViewReports from './pages/AdminViewReports';
+import UsersViewReports from './pages/UsersViewReports';
+import ReportDetailsAdmin from './pages/ReportDetailsAdmin';
+import ReportDetails from './pages/ReportDetails';
 import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
 import Reviews from './components/Reviews';
@@ -45,6 +50,8 @@ import StripeContainer from './components/StripeContainer';
 import AddPromotionCourse from './pages/AddPromotionCourse';
 import CourseView from './pages/CourseView';
 import CourseViewPage from './pages/CourseViewPage';
+import ReportProblem from './components/ReportProblem';
+
 function App() {
   return (
     <div className="App">
@@ -107,6 +114,10 @@ function App() {
               exact path="reviews"
               element={<Reviews />}
             />
+             <Route
+              exact path="/api/reportProblem"
+              element={<ReportProblem />}
+            />
 
             {/* Ragaa */}
 
@@ -139,6 +150,25 @@ function App() {
               path="/addQuestion"
               element={<AddQuestion />}
             />
+
+            {/* css bydrab law 3amaltaha /api/admin/ViewReports */}
+            <Route
+              path="/adminViewReports"
+              element={[<AdminViewReports/> ]} 
+            />
+            <Route
+              exact path="/ViewReports"
+              element={[<UsersViewReports/> ]} 
+            />
+            <Route
+              exact path="/ReportDetailsAdmin"
+              element={[<ReportDetailsAdmin/> ]}
+            />
+            <Route
+              exact path="/ReportDetails"
+              element={[<ReportDetails/> ]}
+            />
+
 
             {/* Hoda */}
             <Route
