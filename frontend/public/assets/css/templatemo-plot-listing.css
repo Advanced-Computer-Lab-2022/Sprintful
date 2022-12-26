@@ -829,7 +829,7 @@ form#search-form input::placeholder {
 }
 
 form#search-form button {
-  width: 10px;
+  width: 100px;
   height: 100%;
   background-color: #8d99af;
   border: none;
