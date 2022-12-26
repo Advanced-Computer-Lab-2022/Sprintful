@@ -114,11 +114,15 @@ const addReport = asyncHandler(async (req, res) => {
 
 //mark reported problems as "resolved" or "pending"
 const changeStatus = async (req, res, next) => {
+    console.log("working")
     try {
-        const reportId = req.query.reportId;
+        const reportId = req.query.reportid;
+        console.log("idddddddddddd", req.query.reportid)
         console.log(reportId);
         const status = req.body;
+        console.log("working85", status)
         const report = await Report.findByIdAndUpdate(reportId, status, { new: true })
+        console.log("working8895", report)
         return res.status(200).json({ report });
     }
     catch (error) {

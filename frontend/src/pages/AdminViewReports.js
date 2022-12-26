@@ -39,7 +39,7 @@ const ViewReports = () => {
           // console.log("openReport 1 "+reportid)
           // setReportid("2345678")
           // console.log("openReport 2 "+reportid)
-          navigate(`/ReportDetails/${reportid}`)
+          navigate(`/ReportDetailsAdmin/${reportid}`)
         }
 
     
