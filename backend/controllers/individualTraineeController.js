@@ -83,7 +83,7 @@ const getIndividualTraineeProfile = asyncHandler(async (req, res) => {
     }
 })
 
-mount available in their wallet from refunded courses
+// mount available in their wallet from refunded courses
 const viewMoney = asyncHandler(async (req, res) => {
 const individualTraineeId = req.params.individualTraineeId
 const individualTrainee = await IndividualTrainee.findById(individualTraineeId)
