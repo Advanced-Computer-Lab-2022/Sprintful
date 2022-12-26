@@ -16,7 +16,6 @@ import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
-import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
