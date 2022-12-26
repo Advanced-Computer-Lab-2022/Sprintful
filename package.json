@@ -39,9 +39,12 @@
     "react-icons": "^4.7.1",
     "sass": "^1.56.2",
     "styled": "^1.0.0"
+    
   },
   "devDependencies": {
     "concurrently": "^7.5.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20" 
+    
+
   }
 }
