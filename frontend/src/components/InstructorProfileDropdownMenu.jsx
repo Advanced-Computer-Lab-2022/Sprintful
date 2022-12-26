@@ -105,7 +105,7 @@ export default function IndividualProfileDropdownMenu() {
                 <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/ViewReports?id=${id}`}>
                   <small>My Reports</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4">
+                <button className="list-group-item list-group-item-action px-4" onClick={() => navigate(`/api/reportProblem?id=${id}`)}>
                   <small>Add a new report</small>
                 </button>
 

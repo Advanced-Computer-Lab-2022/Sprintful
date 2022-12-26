@@ -18,8 +18,8 @@ const ViewReports = () => {
         const [reports, setReports] = useState([])
         const [reportid, setReportid] = useState(null)
         const params = new URLSearchParams(window.location.search);
-       // const id = params.get('id');
-       const id = "63897f88f459b2631346deee";
+        const id = params.get('id');
+       //const id = "63897f88f459b2631346deee";
         useEffect( ()=>{
             const fetchReports =async () =>{
                 await axios.get(`http://localhost:5000/api/report/getReports/${id}`).then(

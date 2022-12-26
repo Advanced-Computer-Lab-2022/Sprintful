@@ -123,14 +123,7 @@ function App() {
               exact path="/api/individualTrainee/getProfile"
               element={<IndividualTraineeProfile />}
             />
-            <Route
-              exact path="reviews"
-              element={<Reviews />}
-            />
-             <Route
-              exact path="/api/reportProblem"
-              element={<ReportProblem />}
-            />
+            
             <Route
               exact path="reviews"
               element={<Reviews />}
@@ -143,10 +136,7 @@ function App() {
               exact path="/api/admin/accessRequests"
               element={<AccessRequests />}
             />
-            <Route
-              exact path="/api/admin/accessRequests"
-              element={<AccessRequests />}
-            />
+           
 
             {/* Ragaa */}
 
