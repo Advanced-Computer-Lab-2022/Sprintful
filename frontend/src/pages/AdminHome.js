@@ -46,16 +46,16 @@ export default function AdminHome(){
                         <a className="active-menu"  href="index.html"><i className="fa fa-dashboard fa-3x"></i> Dashboard</a>
                     </li> */}
                      <li>
-                        <a  href="ui.html"><i className="fa fa-desktop fa-3x" style={{width: "130px"}} onClick={()=>  navigate(`/adminViewReports`)}></i> User's Reports </a>
+                        <a  onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-desktop fa-3x" style={{width: "130px"}}></i> User's Reports </a>
                     </li>
                     <li>
-                        <a  href="tab-panel.html"><i className="fa fa-qrcode fa-3x" style={{width: "130px"}}></i> Course Requests </a>
+                        <a  onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-qrcode fa-3x" style={{width: "130px"}}></i> Course Requests </a>
                     </li>
 						   <li  >
-                        <a   href="chart.html"><i className="fa fa-bar-chart-o fa-3x" style={{width: "130px"}}></i> Add an Admin</a>
+                        <a   onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "130px"}}></i> Add an Admin</a>
                     </li>	
                       <li  >
-                        <a  href="table.html"><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Add an Instructor</a>
+                        <a  onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Add an Instructor</a>
                     </li>
                     <li  >
                         <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "100px"}}></i> Add a Corporate Trainee </a>
