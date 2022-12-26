@@ -15,7 +15,7 @@ import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/corporateTraineeForm';
+import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
@@ -139,18 +139,6 @@ function App() {
              <Route
               exact path="/api/reportProblem"
               element={<ReportProblem />}
-            />
-            <Route
-              exact path="reviews"
-              element={<Reviews />}
-            />
-             <Route
-              exact path="/api/reportProblem"
-              element={<ReportProblem />}
-            />
-            <Route
-              exact path="/api/admin/accessRequests"
-              element={<AccessRequests />}
             />
             <Route
               exact path="/api/admin/accessRequests"
