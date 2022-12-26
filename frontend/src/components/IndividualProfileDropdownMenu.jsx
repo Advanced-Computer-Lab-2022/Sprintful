@@ -93,10 +93,10 @@ export default function IndividualProfileDropdownMenu() {
                 <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href = `/MyEnrolledCourses?id=${id}`}>
                   <small>My Courses</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4" onClick={()=> navigate(`/ViewReports`)}>
+                <button className="list-group-item list-group-item-action px-4" onClick={()=> navigate(`/ViewReports?id=${id}`)}>
                   <small>My Reports</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4">
+                <button className="list-group-item list-group-item-action px-4"onClick={()=> navigate(`/api/reportProblem?id=${id}`)}>
                   <small>Add a Report</small>
                 </button>
 
