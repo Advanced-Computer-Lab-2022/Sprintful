@@ -16,6 +16,7 @@ import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './components/CorporateTraineeForm';
+import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
@@ -55,6 +56,8 @@ import CourseView from './pages/CourseView';
 import CourseViewPage from './pages/CourseViewPage';
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
+
+import AccessRequests from './components/AccessRequests';
 
 function App() {
   return (
@@ -136,6 +139,14 @@ function App() {
              <Route
               exact path="/api/reportProblem"
               element={<ReportProblem />}
+            />
+            <Route
+              exact path="/api/admin/accessRequests"
+              element={<AccessRequests />}
+            />
+            <Route
+              exact path="/api/admin/accessRequests"
+              element={<AccessRequests />}
             />
 
             {/* Ragaa */}
