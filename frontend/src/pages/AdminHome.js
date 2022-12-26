@@ -1,4 +1,17 @@
+import {useNavigate} from "react-router";
+
+
 export default function AdminHome(){
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log(id);
+
+    const navigate=useNavigate();
+   
+
+
+
     return (
         <body>
     <div id="wrapper">
@@ -22,33 +35,40 @@ export default function AdminHome(){
         </nav>   
                 <nav className="navbar-default navbar-side" role="navigation">
             <div className="sidebar-collapse">
-                <ul className="nav" id="main-menu">
-				<li className="text-center">
+            <li className="text-center">
                     <img src="assets/img/find_user.png" className="user-image img-responsive"/>
 					</li>
+                <ul className="nav" id="main-menu">
+				
 				
 					
-                    <li>
+                    {/* <li>
                         <a className="active-menu"  href="index.html"><i className="fa fa-dashboard fa-3x"></i> Dashboard</a>
-                    </li>
+                    </li> */}
                      <li>
-                        <a  href="ui.html"><i className="fa fa-desktop fa-3x"></i> UI Elements</a>
+                        <a  href="ui.html"><i className="fa fa-desktop fa-3x" style={{width: "130px"}} onClick={()=>  navigate(`/adminViewReports`)}></i> User's Reports </a>
                     </li>
                     <li>
-                        <a  href="tab-panel.html"><i className="fa fa-qrcode fa-3x"></i> Tabs & Panels</a>
+                        <a  href="tab-panel.html"><i className="fa fa-qrcode fa-3x" style={{width: "130px"}}></i> Course Requests </a>
                     </li>
 						   <li  >
-                        <a   href="chart.html"><i className="fa fa-bar-chart-o fa-3x"></i> Morris Charts</a>
+                        <a   href="chart.html"><i className="fa fa-bar-chart-o fa-3x" style={{width: "130px"}}></i> Add an Admin</a>
                     </li>	
                       <li  >
-                        <a  href="table.html"><i className="fa fa-table fa-3x"></i> Table Examples</a>
+                        <a  href="table.html"><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Add an Instructor</a>
                     </li>
                     <li  >
-                        <a  href="form.html"><i className="fa fa-edit fa-3x"></i> Forms </a>
+                        <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "100px"}}></i> Add a Corporate Trainee </a>
+                    </li>
+                    <li  >
+                        <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
+                    </li>
+                    <li  >
+                        <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "130px"}}></i> Set a Promotion </a>
                     </li>				
 					
 					                   
-                    <li>
+                    {/* <li>
                         <a href="#"><i className="fa fa-sitemap fa-3x"></i> Multi-Level Dropdown<span className="fa arrow"></span></a>
                         <ul className="nav nav-second-level">
                             <li>
@@ -74,10 +94,10 @@ export default function AdminHome(){
                                
                             </li>
                         </ul>
-                      </li>  
-                  <li  >
+                      </li>   */}
+                  {/* <li  >
                         <a  href="blank.html"><i className="fa fa-square-o fa-3x"></i> Blank Page</a>
-                    </li>	
+                    </li>	 */}
                 </ul>
             </div>
             
@@ -87,7 +107,7 @@ export default function AdminHome(){
                 <div className="row">
                     <div className="col-md-12">
                      <h2>Admin Dashboard</h2>   
-                        <h5>Welcome Jhon Deo , Love to see you back. </h5>
+                        <h5>Welcome Admin , Love to see you back. </h5>
                     </div>
                 </div>              
                   <hr />
@@ -138,9 +158,9 @@ export default function AdminHome(){
 		     </div>
 			</div>
                 <hr />                
-                <div className="row">
-                    <div className="col-md-6 col-sm-12 col-xs-12">           
-			<div className="panel panel-back noti-box">
+                {/* <div className="row">
+                    <div className="col-md-6 col-sm-12 col-xs-12">            */}
+			{/* <div className="panel panel-back noti-box">
                 <span className="icon-box bg-color-blue">
                     <i className="fa fa-warning"></i>
                 </span>
@@ -156,20 +176,20 @@ export default function AdminHome(){
                                </span>
                     </p>
                 </div>
-             </div>
+             </div> */}
 		     </div>
                     
                     
-                    <div className="col-md-3 col-sm-12 col-xs-12">
+                    {/* <div className="col-md-3 col-sm-12 col-xs-12">
                         <div className="panel back-dash">
                                <i className="fa fa-dashboard fa-3x"></i><strong> &nbsp; SPEED</strong>
                              <p className="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing sit ametsit amet elit ftr. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
                         </div>
                        
-                    </div>
-                    <div className="col-md-3 col-sm-12 col-xs-12 ">
-                        <div className="panel ">
-          <div className="main-temp-back">
+                    </div> */}
+                    {/* <div className="col-md-3 col-sm-12 col-xs-12 ">
+                        <div className="panel "> */}
+          {/* <div className="main-temp-back">
             <div className="panel-body">
               <div className="row">
                 <div className="col-xs-6"> <i className="fa fa-cloud fa-3x"></i> Newyork City </div>
@@ -178,10 +198,10 @@ export default function AdminHome(){
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
           
         </div>
-                     <div className="panel panel-back noti-box">
+                     {/* <div className="panel panel-back noti-box">
                 <span className="icon-box bg-color-green set-icon">
                     <i className="fa fa-desktop"></i>
                 </span>
@@ -189,12 +209,12 @@ export default function AdminHome(){
                     <p className="main-text">Display</p>
                     <p className="text-muted">Looking Good</p>
                 </div>
-             </div>
+             </div> */}
 			
-    </div>
+    {/* </div>
                         
-        </div>
-                <div className="row"> 
+        </div> */}
+                {/* <div className="row"> 
                     
                       
                                <div className="col-md-9 col-sm-12 col-xs-12">                     
@@ -230,8 +250,8 @@ export default function AdminHome(){
                     </div>                         
                         </div>
                 
-           </div>
-                <div className="row" >
+           </div> */}
+                {/* <div className="row" >
                     <div className="col-md-3 col-sm-12 col-xs-12">
   <div className="panel panel-primary text-center no-boder bg-color-green">
                         <div className="panel-body">
@@ -315,8 +335,8 @@ export default function AdminHome(){
                     </div>
                     
                     </div>
-                </div>
-                <div className="row">
+                </div> */}
+                {/* <div className="row">
                     <div className="col-md-6 col-sm-12 col-xs-12">
                    
                     <div className="chat-panel panel panel-default chat-boder chat-panel-head" >
@@ -491,13 +511,12 @@ export default function AdminHome(){
                     </div>
                       
                     </div>
-                </div>     
-    </div>
-            </div>
+                </div>      */}
+    {/* </div>
+            </div> */}
         </div>
      
-    
+        </body>  
    
-</body>
-    )
-}
+
+)}
