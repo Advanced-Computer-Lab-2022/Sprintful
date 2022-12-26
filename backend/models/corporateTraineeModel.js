@@ -6,6 +6,14 @@ const corporateTraineeSchema = mongoose.Schema({
         required: [true, 'Please add a username'],
         unique: true,       //What if the username was taken??
     },
+    firstName:{
+        type: String,
+        default: ""
+    },
+    lastName:{
+        type: String,
+        default: ""
+    },
     password: {
         type: String,
         required: [true, 'Please add a password'],

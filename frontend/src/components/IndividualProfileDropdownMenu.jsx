@@ -1,5 +1,5 @@
 import { PopupMenu } from "react-simple-widgets";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import {useNavigate} from "react-router";
 import "./ProfileDropdownMenu.scss";
@@ -7,9 +7,40 @@ import "./ProfileDropdownMenu.scss";
 export default function IndividualProfileDropdownMenu() {
   const navigate =useNavigate();
 
+  const[trainee, setTrainee]= useState([])
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+  };
+
   let params = new URLSearchParams(document.location.search);
   let id = params.get("id");
   console.log(id);
+
+  useEffect( ()=>{
+    const fetchTrainee =async () =>{
+        await axios.get(`http://localhost:5000/api/individualTrainee/profile?id=${id}`).then(
+       (res) => { 
+           const response = res.data
+           //console.log(courses)
+           setTrainee(response)
+          }
+          );
+        }
+        
+        // }
+        
+        fetchTrainee()
+      }, [])
+
+      const openProfile = () => {
+        navigate(`/api/individualTrainee/getProfile?id=${id}`);
+    }
 
   const handleOnClick = async(e) =>{
     e.preventDefault()
@@ -43,24 +74,17 @@ export default function IndividualProfileDropdownMenu() {
                 <span>K</span>
               </div>
 
-              <h5 className="text-center mb-0">John Doe</h5>
-              <p className="text-center mb-2">jd@gmail.com</p>
+              <h5 className="text-center mb-0" style={{
+            textDecoration: isHovering ? 'underline' : '',
+            color: isHovering ? 'blue' : 'black',
+          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          onClick={()=>openProfile()}
+          >{trainee.username}</h5>
+              <p className="text-center mb-2">{trainee.email}</p>
 
-              <hr />
-
-              <p
-                className="mb-0"
-                style={{ color: "#bebebe", fontWeight: "bold", fontSize: 12 }}
-              >
-                ROLES
-              </p>
-              <p style={{ fontSize: 12 }}>
-                {["Submitter", "Project manager", "Change control board"].join(
-                  ", "
-                )}
-              </p>
-
-              <hr className="mb-0" style={{ margin: "0 -24px 0" }} />
+              
 
               <div
                 className="list-group list-group-flush"
@@ -69,8 +93,11 @@ export default function IndividualProfileDropdownMenu() {
                 <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href = `/MyEnrolledCourses?id=${id}`}>
                   <small>My Courses</small>
                 </button>
+                <button className="list-group-item list-group-item-action px-4" onClick={()=> navigate(`/ViewReports`)}>
+                  <small>My Reports</small>
+                </button>
                 <button className="list-group-item list-group-item-action px-4">
-                  <small>Report</small>
+                  <small>Add a Report</small>
                 </button>
 
               </div>
