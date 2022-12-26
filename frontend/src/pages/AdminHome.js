@@ -49,22 +49,22 @@ export default function AdminHome(){
                         <a  onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-desktop fa-3x" style={{width: "130px"}}></i> User's Reports </a>
                     </li>
                     <li>
-                        <a  onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-qrcode fa-3x" style={{width: "130px"}}></i> Course Requests </a>
+                        <a  onClick={()=>  navigate(`/api/admin/accessRequests`)} style={{  cursor: "pointer"}}><i className="fa fa-qrcode fa-3x" style={{width: "130px"}}></i> Course Requests </a>
                     </li>
 						   <li  >
-                        <a   onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "130px"}}></i> Add an Admin</a>
+                        <a   onClick={()=>  navigate(`/api/admin/createAdmin`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "130px"}}></i> Add an Admin</a>
                     </li>	
                       <li  >
-                        <a  onClick={()=>  navigate(`/adminViewReports`)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Add an Instructor</a>
+                        <a  onClick={()=>  navigate(`/api/admin/createInstructor`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "130px"}}></i> Add an Instructor</a>
                     </li>
                     <li  >
-                        <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "100px"}}></i> Add a Corporate Trainee </a>
+                        <a   onClick={()=>  navigate(`/api/admin/createCorporateTrainee`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "100px"}}></i> Add a Corporate Trainee </a>
                     </li>
                     <li  >
-                        <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
+                        <a  onClick={()=>  navigate(``)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
                     </li>
                     <li  >
-                        <a  href="form.html"><i className="fa fa-edit fa-3x" style={{width: "130px"}}></i> Set a Promotion </a>
+                        <a   onClick={()=>  navigate(``)} style={{  cursor: "pointer"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "130px"}}></i> Set a Promotion </a>
                     </li>				
 					
 					                   

@@ -96,7 +96,7 @@ function App() {
               element={<RateInstructor />}
             />
             <Route
-              exact path="/api/admin/"
+              exact path="/api/admin/createAdmin"
               element={<AdminForm />}
             />
             <Route
