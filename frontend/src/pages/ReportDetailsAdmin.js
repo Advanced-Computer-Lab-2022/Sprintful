@@ -69,21 +69,30 @@ const ReportDetails = () => {
 <br/>
                     <label>Change Status: </label>
                         <div style= {{width: "18em"}}>
-                            <select value={status}  onChange={(e)=>setStatus(e.target.value)}>
+                            <select style={{width: "100%",
+                                            padding: "6px 10px",
+                                            margin: "10px 0",
+                                            border: "1px solid #ddd",
+                                            boxSizing: "border-box",
+                                            display: "block",
+                                            fontSize:"14px",}}
+                            value={status}  onChange={(e)=>setStatus(e.target.value)}>
                                 <option value="unseen">UnSeen</option>
                                 <option value="pending">Pending</option>
                                 <option value="resolved">Resolved</option>
                             </select>
                         </div>
-                    <button onClick={() => changeStatus(report._id)}> Apply </button>
+                    <button style={{ width:"2%", background: "#8d99af", color: "#fff", border: "0",
+                        padding: "6px",borderRadius: "6px",cursor: "pointer" }}onClick={() => changeStatus(report._id)}> 
+                        Apply </button>
 <br/>
 <br/>
 <br/>
 <hr/>
 
-                <label style={{color:"#8d99af", fontSize:"20px"}}>Followups</label>
+                 <label style={{color:"#8d99af", fontSize:"20px"}}>Followups</label> 
                 <br/>
-            {/* <div className="followup" style={{borderWidth:"1px", borderStyle:"solid",borderColor:"grey"}}> */}
+            {/* <div className="followup" style={{borderWidth:"1px", borderStyle:"solid",borderColor:"grey"}}>  */}
             <div className="followup">
                 <ul >
                     { report.followups.map((followup) => (
