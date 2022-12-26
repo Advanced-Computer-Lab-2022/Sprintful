@@ -5,12 +5,13 @@ import axios from 'axios'
 
 const ReportDetails = () => {
     const [report, setReport] = useState([])
-    const[status, setStatus] = useState('')
+    const[status, setStatus] = useState(null)
     const[available, setAvailable] = useState(false)
     const[followup, setFollowup] = useState(false)
-    const[followupBody, setFollowupBody] = useState('')
+    const[followupBody, setFollowupBody] = useState("")
+    const [submit, setSubmit] = useState(false)
     const params = new URLSearchParams(window.location.search);
-        const id = params.get('reportid');
+    const id = params.get('reportid');
 
 
     useEffect( ()=>{
@@ -18,10 +19,10 @@ const ReportDetails = () => {
             await axios.get(`http://localhost:5000/api/report/${id}`).then(
            (res) => { 
                const response = res.data
-               //console.log(response)
-               setStatus(response.status)
+               const stat=response.status
+               setStatus(stat)
                console.log("status: " +status)
-               if(status == "pending" || status == "unseen"){
+               if(status === "pending" || status === "unseen"){
                 setAvailable(true)
                }
                setReport(response)
@@ -29,7 +30,39 @@ const ReportDetails = () => {
             );
         }
         fetchReport()
-    }, [])
+    }, [status])
+
+    const handleSubmit = async (e) => {
+        //.preventDefault();
+        console.log("submit")
+        // var a = document.getElementById('button').value;
+        // setFollowupBody(a)
+         console.log("text "+followupBody)
+         const body = {
+            followup: followupBody
+        }
+
+        const response = await fetch(`http://localhost:5000/api/report/addFollowup/${id}`,{
+            method:'POST',
+            body :JSON.stringify(body),
+            headers :{
+                'Content-Type':'application/json'
+            }
+           })
+
+           const json =await response.json()
+           if(response.ok){
+       
+          console.log('Followup added',json)
+          setSubmit(true)
+            setFollowupBody('')
+           }   
+           else{
+            console.log("fail")
+           }
+    }
+        
+    
 
     return (
         <div>
@@ -52,13 +85,20 @@ const ReportDetails = () => {
         {followup &&
         <div className="followup">
             <input style={{width: "50%", height:"6em",padding: "6px 10px",margin: "10px 0",border: "1px solid #ddd",
-                            boxSizing: "border-box",display: "block",fontSize:"14px",}}
+                            boxSizing: "border-box",display: "block",fontSize:"14px",}} 
+                            value={followupBody} onChange={(e)=>setFollowupBody(e.target.value)}
                             type="text"
             />
             {/* <button style={{color: 'white', backgroundColor:'grey', width: "100px", height:"2em", textAlign:"center", verticalAlign:"center", fontSize:"13px"}}> Submit</button> */}
             <button style={{ background: "#8d99af", color: "#fff", border: "0",
-                        padding: "8px",borderRadius: "8px",cursor: "pointer", width:"20px"}} value={followupBody}>
+                        padding: "8px",borderRadius: "8px",cursor: "pointer", width:"20px"}} 
+                         onClick={()=>handleSubmit()}>
                             Submit</button>
+                            <br/>
+            {
+                submit &&
+                <label style={{color: 'green'}}>Followup Added successfully!</label>
+            }
         </div>
         }
         </div>

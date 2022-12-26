@@ -29,6 +29,10 @@ const reportSchema = mongoose.Schema({
     corporateTraineeId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'CorporateTrainee',
+    },
+    followups:{
+        type: Array,
+        default: [],
     }
 })
 

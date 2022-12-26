@@ -146,16 +146,14 @@ const adminViewReports = asyncHandler(async (req, res) => {
 })
 
 //follow up on an unresolved problem based on status
-const getReportStatus = asyncHandler(async (req, res) => {
+const addFollowup = asyncHandler(async (req, res) => {
     const id = req.params.id
+    const followup = req.body.followup
     const report = await Report.findById(id)
-    if(report){
-        res.json(report.status)
-    }
-    else{
-        res.status(404)
-        throw new Error('No report found')
-    }
+    report.followups.push(followup)
+    await report.save()
+    res.status(201).json({ report })
+
 })
 
 const getReportbyId = asyncHandler(async (req, res) => {
@@ -166,7 +164,7 @@ const getReportbyId = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { addReport, changeStatus, viewReports, adminViewReports, getReportStatus, getReportbyId}
+module.exports = { addReport, changeStatus, viewReports, adminViewReports, addFollowup, getReportbyId}
 
 
 
