@@ -263,6 +263,8 @@ const addInstructorReview = asyncHandler(async (req, res, next) => {
         comment
     }
     const instructor = await Instructor.findById(instructorId);
+    console.log(instructor._id);
+
     /*const isReviewed = course.reviews.find(    //No authentication baby
         r => r.user.toString() === req.user._id.toString()
     )
@@ -273,7 +275,7 @@ const addInstructorReview = asyncHandler(async (req, res, next) => {
                 review.rating = rating;
             }    
         });
-    }
+    }*/
     //in else part
     instructor.reviews.push(comment);
     //review.rating = Number (rating);
@@ -289,7 +291,9 @@ const addInstructorReview = asyncHandler(async (req, res, next) => {
     instructor.rating = avg;
     console.log(avg);
     console.log(instructor.rating);
+
     //course.rating = course.reviews.reduce((acc, item) => item.rating + acc, 0) / course.reviews.length
+
     /* const updatedCurrentRating = await Course.findOneAndUpdate(
          { _id: req.params.courseId },
          [{$set: { rating: { $avg: 'rating.star' } }}],

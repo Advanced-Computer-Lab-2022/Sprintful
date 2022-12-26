@@ -7,6 +7,8 @@ import CourseForm from './components/CourseForm';
 import InstructorForm from './components/InstructorForm'
 import Navbar2 from './components/Navbar2';
 import GuestHome from './pages/GuestHome';
+//import AdminHomePage from './components/AdminHomePage';
+import AHome from './pages/AdminHome';
 import About from './pages/About';
 import Video from "./pages/Video";
 import Login from "./pages/Login";
@@ -17,6 +19,8 @@ import CorporateTraineeForm from './components/CorporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
+import CorporateTraineeProfile from './components/CorporateTraineeProfile';
+import IndividualTraineeProfile from './components/IndividualTraineeProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -50,6 +54,7 @@ import AddPromotionCourse from './pages/AddPromotionCourse';
 import CourseView from './pages/CourseView';
 import CourseViewPage from './pages/CourseViewPage';
 import ReportProblem from './components/ReportProblem';
+import AdminHome from './pages/AdminHome'
 
 function App() {
   return (
@@ -84,7 +89,10 @@ function App() {
             element={<CourseView/>} />
 
             {/* Nada */}
-
+            <Route
+              exact path="/api/instructor/rate"
+              element={<RateInstructor />}
+            />
             <Route
               exact path="/api/admin/"
               element={<AdminForm />}
@@ -106,8 +114,20 @@ function App() {
               element={<EditInstructorProfile />}
             />
             <Route
-              exact path="/api/instructor/rate"
-              element={<RateInstructor />}
+              exact path="/api/corporateTrainee/getProfile"
+              element={<CorporateTraineeProfile />}
+            />
+            <Route
+              exact path="/api/individualTrainee/getProfile"
+              element={<IndividualTraineeProfile />}
+            />
+            <Route
+              exact path="reviews"
+              element={<Reviews />}
+            />
+             <Route
+              exact path="/api/reportProblem"
+              element={<ReportProblem />}
             />
             <Route
               exact path="reviews"
@@ -237,6 +257,10 @@ function App() {
             <Route
               path="/Login"
               element={<Login />}
+            />
+            <Route
+              path="/admin/"
+              element={<AdminHome />}
             />
           </Routes>
           {/* <Routes>

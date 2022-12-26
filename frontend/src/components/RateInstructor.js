@@ -5,129 +5,108 @@ import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 const RateInstructor = () => {
     const [rating, setRating] = useState(0);
-    const [review, setReview] = useState("")
+    const [comment, setReview] = useState("")
     const [hoverStar, setHoverStar] = useState(undefined);
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
 
-    
-  
-    const handleText = () => {
-      switch (rating || hoverStar) {
-        case 0:
-          return "Evaluate";
-        case 1:
-          return "Dissatifation";
-        case 2:
-          return "Unsatisfied";
-        case 3:
-          return "Normal";
-        case 4:
-          return "Satisfied";
-        case 5:
-          return "Very Satisfied";
-        default:
-          return "Evaluate";
-      }
-    };
-    const handlePlaceHolder = () => {
-      switch (rating || hoverStar) {
-        case 0:
-          return "Comment here...";
-        case 1:
-        case 2:
-        case 3: 
-          return "What is your problem?";
-        case 4:
-        case 5:
-          return "Why do you like the instructor?";
-        default:
-          return "Comment here...";
-      }
-    };
-
-
-    //Try using useEffect
-    // useEffect(() => {
-    //   const fetchData = async () => {
-    //     await axios.post(`http://localhost:5000/api/instructor/review?id=${id}`)
-        
-    //     .then((res) => {
-    //       setInstructor(res.data);
-    //       console.log(res.data);
-    //   })
-    //   .catch((err) => {
-    //       console.log(err);
-    //   });
-    // }       
-    // fetchData();
-    // }, []);
+    // const test = async (e) =>{
+    //   e.preventDefault();
+    //   console.log("hello")
+    // }
 
     const handleSubmit = async(e) => {
-         e.preventdefault()
+         e.preventDefault();
+         console.log("hello");
+          console.log({id});
+    
+    //     let axiosConfig = {
+    //       headers: {
+    //           'Content-Type': 'application/json;charset=UTF-8',
+    //           "Access-Control-Allow-Origin": "*",
+    //       }
+    //     };
 
-        let axiosConfig = {
-          headers: {
-              'Content-Type': 'application/json;charset=UTF-8',
-              "Access-Control-Allow-Origin": "*",
-          }
-        };
+    //   axios.put(`http://localhost:5000/api/instructor/review?id=${id}`, { //?id=${id}
+    //   rating: rating,
+    //   comment: review
+    // },axiosConfig)
 
-        const params = new URLSearchParams(window.location.search);
-        const id = params.get('id');
-        console.log(id);
-
-      axios.post(`http://localhost:5000/api/instructor/review?id=${id}`, { //?id=${id}
-      rating: rating,
-      comment: review
-    },axiosConfig)
-
-    .then(function (response) {
-       console.log(response.data[0])
-       console.log(response.data[1])
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    // .then(function (response) {
+    //    console.log(response.data[0])
+    //    console.log(response.data[1])
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
+  
 
 
-        //  const NewRate = {rating, review}
+         const NewRate = {rating, comment}
          
-        // //  const response = await fetch(`http://localhost:5000/api/instructor/review?id=${id}`, {
-        // //      method: 'POST',
-        // //      body :JSON.stringify(NewRate),
-        // //      headers: {
-        // //          'Content-Type': 'application/json'
-        // //      }
-        // //  })
-        //  const json = await  response.json()
-        //  console.log('New review was added', json)
-        //     //  setRating('')
-        //     //  setReview('')
+         const response = await fetch(`http://localhost:5000/api/instructor/review?id=${id}`, {
+             method: 'PUT',
+             body :JSON.stringify(NewRate),
+             headers: {
+                 'Content-Type': 'application/json'
+             }
+         })
+         const json = await  response.json()
+         console.log('New review was added', json)
+             setRating('')
+             setReview('')
  
-        // /* if(!response.ok){
+        //  if(!response.ok){
         //      setError(json.error)
-        //  }*/
+        //  }
         //  if(response.ok){
         //     //  setRating('')
         //     //  setReview('')
         //      //setError(null)
         //      console.log('New review was added', json)
         //  }
-     }
+
+        }
     return (    //lines 88 and 114 should be a form
     <div>
     <form onSubmit={handleSubmit}> 
+          <div >
+                {Array(5).fill().map((_, index) =>
+                  rating >= index + 1 || hoverStar >= index + 1 ? (
+                    <AiFillStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  ) : (
+                    <AiOutlineStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  )
+                  
+                )} 
+            </div> 
+
+            <div>
             <label>Review:</label>
                         <input 
                         type="text"
                         onChange={(e) => setReview(e.target.value)}
-                        value={review}/>
+                        value={comment}/>
 
-                {/* <textarea id="area1" placeholder={handlePlaceHolder()}></textarea> */}
-                {/*setReview(document.getElementById('area1').value);*/}
-                
+                 {/* <textarea id="area1" placeholder={handlePlaceHolder()}></textarea> 
+                /*setReview(document.getElementById('area1').value); */}
+            </div>
+
             <button> Submit </button>
     </form>
 </div>
+
+
     );
   }
 

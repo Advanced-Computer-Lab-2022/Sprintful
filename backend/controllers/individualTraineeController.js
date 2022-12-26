@@ -70,7 +70,20 @@ const login = async (req, res) => {
 
 }
 
-//view the amount available in their wallet from refunded courses
+//view the a
+
+const getIndividualTraineeProfile = asyncHandler(async (req, res) => {
+    const individualTrainee = await IndividualTrainee.findById(req.query.id)
+    console.log(individualTrainee);
+    if (individualTrainee) {
+        res.json(individualTrainee)
+    } else {
+        res.status(404)
+        throw new Error('Individual Trainee not found')
+    }
+})
+
+mount available in their wallet from refunded courses
 const viewMoney = asyncHandler(async (req, res) => {
 const individualTraineeId = req.params.individualTraineeId
 const individualTrainee = await IndividualTrainee.findById(individualTraineeId)
@@ -84,4 +97,4 @@ else{
 })
 
 
-module.exports = { changePassword, login, logout, viewMoney}
+module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile}
