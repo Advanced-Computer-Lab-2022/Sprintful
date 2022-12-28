@@ -59,7 +59,9 @@ const getSubtitle=asyncHandler(async(req,res)=>{
     const subtitleid=req.params.subtitleid;
     // const subtitle=await Subtitle.findById(subtitleid).exec();
     //  res.json(subtitle);
-    const subtitle= await Subtitle.findOne({_id:subtitleid}).populate('tasks')
+    const idArray=subtitleid.split("\n")
+    const newid=idArray[0];
+    const subtitle= await Subtitle.findOne({_id:newid}).populate('tasks')
     res.json(subtitle);
 }    
 )
