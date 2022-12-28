@@ -113,7 +113,7 @@ const CourseViewInstructor=()=>{
           }
          
          getCourseanditsSubtitle(); } 
-        ,[courseid] );
+        ,[] );
 
 
 
@@ -126,7 +126,7 @@ const CourseViewInstructor=()=>{
                
                < StyledCourseHeader>
                <h3> {course && course.title} </h3>
-               <h6>Total Hours :{course && course.totalhours}</h6>
+               <h6>Total Hours :{course&&course.totalhours}</h6>
                <h6>Price:  {course && coursePriceAfterDiscount}</h6>
                
                </StyledCourseHeader>
