@@ -9,7 +9,8 @@ import SubtitleCard from '../components/SubtitleCard'
 // import Card from '@mui/material/Card';
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
-
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 //stylings custom css
 
@@ -133,6 +134,28 @@ const CourseViewGuest=()=>{
                 
 
              </div>
+
+
+
+                   <Box
+                         //margin
+                        mt={1}
+                        ml={0}
+                        pl={0}
+                       
+                          
+
+                        
+                         display="flex"
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                          
+                           >
+                            
+                         <Button  style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                          Watch a preview video 
+                           </Button>
+                    </Box>
 
 
 

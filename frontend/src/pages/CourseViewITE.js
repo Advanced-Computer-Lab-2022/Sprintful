@@ -144,6 +144,10 @@ const CourseViewITE=()=>{
                          <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
                          Enroll
                            </Button>
+
+                           <Button   style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40,ml:2 }}>
+                         Watch a preview video
+                           </Button>
                     </Box>
 
 

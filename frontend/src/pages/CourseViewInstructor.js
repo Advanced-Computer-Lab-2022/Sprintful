@@ -16,6 +16,7 @@ import { positions } from '@mui/system';
 import SubtitleCardClickable from '../components/SubtitleCardClickable';
 
 
+
 //stylings custom css
 
 
@@ -27,7 +28,7 @@ const CourseViewInstructor=()=>{
     //         color:blue,
     
     
-    
+     
     //     }
     // })
 
@@ -154,6 +155,7 @@ const CourseViewInstructor=()=>{
                          <Button  onClick={handleAddPromotion} style={{ maxHeight: '50px', maxWidth: '120px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
                          Add Promotion
                            </Button>
+                       
                     </Box>
 
 

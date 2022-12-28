@@ -90,6 +90,8 @@ function App() {
             <Route 
             exact path="/api/courses/getCourse/:courseid/ITE"
             element={<CourseViewITE/>}/>
+
+             {/* Instructor Viweing His own Course */}
             <Route 
             exact path="/api/courses/getCourse/:courseid/InstructorCourse"
             element={<CourseViewInstructor/>}/>
