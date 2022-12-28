@@ -112,6 +112,10 @@ function App() {
             exact path="/api/subtitles/getSubtitle/:subtitleid/CTE"
             element={<SubtitleViewCT/>}/>
 
+           <Route 
+            exact path="/api/subtitles/getSubtitle/:subtitleid/ITE"
+            element={<SubtitleViewCT/>}/>
+
              
             
 
