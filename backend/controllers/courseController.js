@@ -5,6 +5,35 @@ const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const Instructor = require('../models/instructorModel')
 const Subtitle = require('../models/subtitleModel.js')
+var mongoose = require('mongoose');
+
+
+const addPromotionForCourses = asyncHandler(async (req, res) => {
+    // get courses ids
+    const coursesIds = req.body.coursesIds
+    // get discount
+    const discount = req.body.discount
+    console.log(coursesIds)
+    // get discountExpireAt
+    // const discountExpireAt = req.body.discountExpireAt
+    // update courses
+    // const courses = await Course.find({ _id: { $in: coursesIds } })
+    const courses = [];
+    for (let i = 0; i < coursesIds.length; i++) {
+        console.log(coursesIds[i])
+        const course = await Course.findById(coursesIds[i])
+        course.discount = discount
+        // course.discountExpireAt = discountExpireAt
+        await course.save()
+        courses.push(course)
+    }
+    res.json(courses)
+})
+
+
+
+
+
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
@@ -12,15 +41,16 @@ const Subtitle = require('../models/subtitleModel.js')
 
 var searchedCourses = []
 
+
 //Add a Discount and Set its expiration date 
-const addPromotion=asyncHandler(async (req,res)=>{
-    const courseid=req.params.courseid;
-    const discount=req.body.discount;
-    const discountExpireAt=req.body.discountExpireAt;
+const addPromotion = asyncHandler(async (req, res) => {
+    const courseid = req.params.courseid;
+    const discount = req.body.discount;
+    const discountExpireAt = req.body.discountExpireAt;
 
-    const update={discount:discount ,discountExpireAt:discountExpireAt}
+    const update = { discount: discount, discountExpireAt: discountExpireAt }
 
-    const courseAfterUpdate=await Course.findOneAndUpdate({_id:courseid},update,{new:true});
+    const courseAfterUpdate = await Course.findOneAndUpdate({ _id: courseid }, update, { new: true });
     // if(courseAfterUpdate){
     //     res.json(courseAfterUpdate)
     // }
@@ -36,30 +66,30 @@ const addPromotion=asyncHandler(async (req,res)=>{
 const getSubtitlesforCourse = asyncHandler(async (req, res) => {
     const courseId = req.params.courseId;
     //console.log(courseId)
-    const course = await Course.findOne({_id:courseId});
+    const course = await Course.findOne({ _id: courseId });
     const subtitleIds = course.subtitles;
     //console.log(course)
     //console.log(subtitleIds);
     const result = []
-    let subtitleDetails ;
-    
-        //console.log("course subtitles")
-         //console.log(subtitleIds)
-        // res.json(course.subtitles);
-        for(let i=0; i<subtitleIds.length; i++){
-            let subtitleid=subtitleIds[i].toString();//ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
-           subtitleDetails = await Subtitle.findOne({_id:subtitleid}).populate('tasks')
-           //projecting only on subtitle title and total number of hours and exercises titles 
-           // subtitleDetails = await Subtitle.findById(subtitleid)
-            //console.log(subtitleDetails)
-            result.push(subtitleDetails);
-            //subtitleDetails.depopulate('tasks');
-            //console.log("SUBTITLE")
+    let subtitleDetails;
 
-            //console.log(result[i])
-        }
-         res.json(result);
+    //console.log("course subtitles")
+    //console.log(subtitleIds)
+    // res.json(course.subtitles);
+    for (let i = 0; i < subtitleIds.length; i++) {
+        let subtitleid = subtitleIds[i].toString();//ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
+        subtitleDetails = await Subtitle.findOne({ _id: subtitleid }).populate('tasks')
+        //projecting only on subtitle title and total number of hours and exercises titles 
+        // subtitleDetails = await Subtitle.findById(subtitleid)
+        //console.log(subtitleDetails)
+        result.push(subtitleDetails);
+        //subtitleDetails.depopulate('tasks');
+        //console.log("SUBTITLE")
+
+        //console.log(result[i])
     }
+    res.json(result);
+}
 )
 
 
@@ -68,26 +98,26 @@ const getSubtitlesforCourse = asyncHandler(async (req, res) => {
 const getSubtitles = asyncHandler(async (req, res) => {
     const courseId = req.query.courseId;
     //console.log(courseId)
-    const course = await Course.findOne({_id:courseId});
+    const course = await Course.findOne({ _id: courseId });
     const subtitleIds = course[0].subtitles;
     //console.log(course)
-     const result = []
-     let subtitleDetails=[] ;
-    
-        //console.log("course subtitles")
-         //console.log(subtitleIds)
-        // res.json(course.subtitles);
-        for(let i=0; i<subtitleIds.length; i++){
-            let subtitleid=subtitleIds[i].toString();
-            subtitleDetails = await Subtitle.findById(subtitleid[i])    //ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
-            //console.log(subtitleDetails)
-            result.push(subtitleDetails.title)
-            //console.log("SUBTITLE")
+    const result = []
+    let subtitleDetails = [];
 
-            //console.log(result[i])
-        }
-         res.json(result);
+    //console.log("course subtitles")
+    //console.log(subtitleIds)
+    // res.json(course.subtitles);
+    for (let i = 0; i < subtitleIds.length; i++) {
+        let subtitleid = subtitleIds[i].toString();
+        subtitleDetails = await Subtitle.findById(subtitleid[i])    //ObjectId.toString()-->cast object ID into a String (el id nafso ex:'546cgdhj674950')
+        //console.log(subtitleDetails)
+        result.push(subtitleDetails.title)
+        //console.log("SUBTITLE")
+
+        //console.log(result[i])
     }
+    res.json(result);
+}
 )
 
 const getCourseById = asyncHandler(async (req, res) => {
@@ -104,17 +134,17 @@ const getCourseById = asyncHandler(async (req, res) => {
 const corporateGetCourses = asyncHandler(async (req, res) => {
     const searchTerm = req.query.searchTerm
     let result1, result2, result3, result4, instructorId
-    result1 = await Course.find({title: { "$regex": searchTerm, "$options": "i" } }).select('-price');
-    result2 = await Course.find({subject: { "$regex": searchTerm, "$options": "i" }}).select('-price'); 
-    instructorId = await Instructor.find({firstName: { "$regex": searchTerm, "$options": "i" }}).select('_id');
-    result3 = await Course.find({instructor: instructorId}).select('-price');
-    instructorId = await Instructor.find({lastName: { "$regex": searchTerm, "$options": "i" }}).select('_id');
-    result4 = await Course.find({instructor: instructorId}).select('-price');
-    const courses = [result1,result2,result3,result4];
+    result1 = await Course.find({ title: { "$regex": searchTerm, "$options": "i" } }).select('-price');
+    result2 = await Course.find({ subject: { "$regex": searchTerm, "$options": "i" } }).select('-price');
+    instructorId = await Instructor.find({ firstName: { "$regex": searchTerm, "$options": "i" } }).select('_id');
+    result3 = await Course.find({ instructor: instructorId }).select('-price');
+    instructorId = await Instructor.find({ lastName: { "$regex": searchTerm, "$options": "i" } }).select('_id');
+    result4 = await Course.find({ instructor: instructorId }).select('-price');
+    const courses = [result1, result2, result3, result4];
     flatArray = [].concat.apply([], courses);
-    if(flatArray)
+    if (flatArray)
         res.json(flatArray);
-    else 
+    else
         res.status(400).json({ error: "No course found" });
 })
 
@@ -137,8 +167,8 @@ const instructorViewCourses = asyncHandler(async (req, res) => {
 
 const acceptContract = asyncHandler(async (req, res) => {
     const id = req.query.id;
-    const response =await Instructor.findByIdAndUpdate(id,{contract: true})
-    if(response)
+    const response = await Instructor.findByIdAndUpdate(id, { contract: true })
+    if (response)
         res.json(response)
     else {
         res.status(404)
@@ -155,31 +185,31 @@ const addCourse = asyncHandler(async (req, res) => {
         price: req.body.price,
         totalhours: req.body.totalhours,
         shortsummary: req.body.shortsummary,
-        instructor: req.query.id , 
+        instructor: req.query.id,
         previewvideolink: req.body.previewvideolink,
         discount: req.body.discount,
     });
 
     const contract = (await Instructor.findById(req.query.id)).contract
     console.log(contract)
-    if(contract){
+    if (contract) {
         newCourse.save(function (err) {
-        if (err) {
-            console.log(err);
-        }
+            if (err) {
+                console.log(err);
+            }
         })
         const newcourseid = [newCourse._id];
         //Saving the instructor reference id 
         //Getting the courses array and putting the neew course's id in this Instructor courses array
-        const newCoursesList = ((await Instructor.findById(req.query.id )).courses).concat(newcourseid); //.concat concatenates the new array
-        const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id , { courses: newCoursesList }).exec();
-        res.status(200).json([newCourse,contract])
+        const newCoursesList = ((await Instructor.findById(req.query.id)).courses).concat(newcourseid); //.concat concatenates the new array
+        const updatedcoursesArray = await Instructor.findByIdAndUpdate(req.query.id, { courses: newCoursesList }).exec();
+        res.status(200).json([newCourse, contract])
     }
-    else{
+    else {
         res.status(400).json({ error: "can't add course. Accept contract first" });
-    }  
+    }
     //putting the course id into an array newcourseid
-    
+
 })
 
 //Method for getting titles of courses given by the instructor himself
@@ -196,7 +226,7 @@ const instructorCourses = asyncHandler(async (req, res) => {
         }
         flatArray = [].concat.apply([], courses);
     }
-    if(flatArray){
+    if (flatArray) {
         console.log(myCoursesDocuments)
         res.json(flatArray);
     }
@@ -244,58 +274,58 @@ const CorporateCourses = asyncHandler(async (req, res) => {
     res.status(200).json(flatArray)
 });
 
-const searchCourse = asyncHandler(async (req,res) => {
+const searchCourse = asyncHandler(async (req, res) => {
     const searchTerm = req.query.searchTerm
-    let result1, result2, result3, result4,instructorId
+    let result1, result2, result3, result4, instructorId
 
-    result1 = await Course.find({title: { "$regex": searchTerm, "$options": "i" } });
-    result2 = await Course.find({subject: { "$regex": searchTerm, "$options": "i" }}); 
-    instructorId = await Instructor.find({firstName: { "$regex": searchTerm, "$options": "i" }}).select('_id');
-    result3 = await Course.find({instructor: instructorId});
-    instructorId = await Instructor.find({lastName: { "$regex": searchTerm, "$options": "i" }}).select('_id');
-    result4 = await Course.find({instructor: instructorId});
-    const courses = [result1,result2,result3,result4];
+    result1 = await Course.find({ title: { "$regex": searchTerm, "$options": "i" } });
+    result2 = await Course.find({ subject: { "$regex": searchTerm, "$options": "i" } });
+    instructorId = await Instructor.find({ firstName: { "$regex": searchTerm, "$options": "i" } }).select('_id');
+    result3 = await Course.find({ instructor: instructorId });
+    instructorId = await Instructor.find({ lastName: { "$regex": searchTerm, "$options": "i" } }).select('_id');
+    result4 = await Course.find({ instructor: instructorId });
+    const courses = [result1, result2, result3, result4];
     flatArray = [].concat.apply([], courses);
-    if(flatArray){
+    if (flatArray) {
         searchedCourses = searchedCourses.concat(flatArray);
         res.json(flatArray);
     }
-    else 
+    else
         res.status(400).json({ error: "No course found" });
 
-}) 
+})
 const filterInstructorCourses = asyncHandler(async (req, res) => {
     //Saving the id of the instructor 
     const id = req.query.id
     const subject = req.query.subject;
-    const price= req.query.price;
+    const price = req.query.price;
     let result1
-    if(subject=="null" ){
+    if (subject == "null") {
         result1 = await Course.find({
-                                    $and:[
-                                        { instructor: id },
-                                        { price:  {$lte:price}  }
-                                    ]
+            $and: [
+                { instructor: id },
+                { price: { $lte: price } }
+            ]
         });
     }
 
-    else if(price=="null"){
-        result1 = await Course.find({ 
-                                    $and:[
-                                        { instructor: id },
-                                        { subject:  subject }
-                                    ]
+    else if (price == "null") {
+        result1 = await Course.find({
+            $and: [
+                { instructor: id },
+                { subject: subject }
+            ]
         })
     }
-    else{
+    else {
         result1 = await Course.find({
-                                $and:[
-                                    { instructor: id },
-                                    { subject: subject },
-                                    { price:  {$lte:price} },
-                                ] 
-    });
-    }   
+            $and: [
+                { instructor: id },
+                { subject: subject },
+                { price: { $lte: price } },
+            ]
+        });
+    }
 
     if (result1) {
         res.status(200).json(result1);
@@ -305,105 +335,107 @@ const filterInstructorCourses = asyncHandler(async (req, res) => {
         res.status(404).json({ error: "No course found" });
     }
 })
-const searchInstructorCourses = asyncHandler(async (req,res) => {
+const searchInstructorCourses = asyncHandler(async (req, res) => {
     const searchTerm = req.query.searchTerm
     const id = req.query.id
     let result1, result2
     result1 = await Course.find({
-                            $and:[
-                                { instructor: id },
-                                { title: { "$regex": searchTerm, "$options": "i" }}
-                             ] 
+        $and: [
+            { instructor: id },
+            { title: { "$regex": searchTerm, "$options": "i" } }
+        ]
     });
     result2 = await Course.find({
-                            $and:[
-                                { instructor: id },
-                                { subject: { "$regex": searchTerm, "$options": "i" }}
-                            ] 
+        $and: [
+            { instructor: id },
+            { subject: { "$regex": searchTerm, "$options": "i" } }
+        ]
     });
-    const courses = [result1,result2];
+    const courses = [result1, result2];
     flatArray = [].concat.apply([], courses);
-    if(flatArray)
+    if (flatArray)
         res.json(flatArray);
-    else 
+    else
         res.status(400).json({ error: "No course found" });
-}) 
+})
 
 //filter the courses based on a subject and/or rating and/or price
 const filter = asyncHandler(async (req, res) => {
     const subject = req.query.subject;
     const rating = req.query.rating;
-    const price= req.query.price;
+    const price = req.query.price;
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
-    
-    if(subject=="null" ){
-        if(rating=="null"){
+
+    if (subject == "null") {
+        if (rating == "null") {
             console.log("hello 1")
-            result1 = await Course.find({ price:  {$lte:price}  });
+            result1 = await Course.find({ price: { $lte: price } });
         }
-        else if(price=="null"){
+        else if (price == "null") {
             console.log("hello 2")
-            result1 = await Course.find({ rating:  rating  });
+            result1 = await Course.find({ rating: rating });
         }
-        else{
+        else {
             console.log("hello 3")
             result1 = await Course.find({
-                                $and:[
-                                    { rating:  rating  },
-                                    {price:{$lte:price}}
-                                ] 
-        });
+                $and: [
+                    { rating: rating },
+                    { price: { $lte: price } }
+                ]
+            });
         }
     }
-    else if(price=="null"){
-        if(rating=="null"){
+    else if (price == "null") {
+        if (rating == "null") {
             console.log("hello 4")
-            result1 = await Course.find({ subject:  subject });
+            result1 = await Course.find({ subject: subject });
         }
-        else if(subject=="null"){
+        else if (subject == "null") {
             console.log("hello 5")
-            result1 = await Course.find({ rating:  rating  });
+            result1 = await Course.find({ rating: rating });
         }
-        else{
+        else {
             console.log("hello 6")
             result1 = await Course.find({
-                                $and:[
-                                    { rating: rating  },
-                                    {subject:subject}]})
-    }
+                $and: [
+                    { rating: rating },
+                    { subject: subject }]
+            })
+        }
     }
 
 
-    else if(rating=="null"){
-        if(price=="null"){
+    else if (rating == "null") {
+        if (price == "null") {
             console.log("hello 7")
 
-            result1 = await Course.find({ subject:  subject });
-       }
-        else if(subject=="null"){
+            result1 = await Course.find({ subject: subject });
+        }
+        else if (subject == "null") {
             console.log("hello 8")
 
-            result1 = await Course.find({ price:  {$lte:price}  });
-        }   
-        else{
+            result1 = await Course.find({ price: { $lte: price } });
+        }
+        else {
             console.log("hello 9")
 
             result1 = await Course.find({
-                                $and:[
-                                    { subject: subject },
-                                    {price:{$lte:price}}
-                                ]})
+                $and: [
+                    { subject: subject },
+                    { price: { $lte: price } }
+                ]
+            })
 
         }
     }
-    else if(rating!="null" && price!="null" && subject!="null"){
+    else if (rating != "null" && price != "null" && subject != "null") {
         console.log("hello 10 final")
         result1 = await Course.find({
-                                $and:[
-                                    { subject: subject },
-                                    { rating:  rating  },
-                                    {price:{$lte: price}}
-                                ] 
+            $and: [
+                { subject: subject },
+                { rating: rating },
+                { price: { $lte: price } }
+            ]
         });
     }
 
@@ -422,21 +454,21 @@ const filterCorporate = asyncHandler(async (req, res) => {
     const rating = req.query.rating;
     //const course = await courseModel.find({$or:[{subject:subject},{rating:rating}]});
     let result1
-    if(subject=="null" ){
-        result1 = await Course.find({ rating:  rating  });
+    if (subject == "null") {
+        result1 = await Course.find({ rating: rating });
     }
 
-    else if(rating=="null"){
-            result1 = await Course.find({ subject:  subject });
+    else if (rating == "null") {
+        result1 = await Course.find({ subject: subject });
     }
-    else{
-    result1 = await Course.find({
-                            $and:[
-                                { subject: subject },
-                                { rating:  rating  },
-                             ] 
-    });
-    }   
+    else {
+        result1 = await Course.find({
+            $and: [
+                { subject: subject },
+                { rating: rating },
+            ]
+        });
+    }
 
     if (result1) {
         res.status(200).json(result1);
@@ -578,7 +610,8 @@ const getSubtitleId = asyncHandler(async (req, res) => {
     }
     else {
         res.status(400).json({ error: "Subtitle not found" });
-    }})
+    }
+})
 
 module.exports = {
     getCourseById,
@@ -589,8 +622,8 @@ module.exports = {
     corporateGetCourses,
     searchCourse,
     filter,
-    filterCorporate, 
-    addCourseReview, 
+    filterCorporate,
+    addCourseReview,
     getCourseReviews,
     getCourseRating,
     CorporateCourses,
@@ -601,5 +634,6 @@ module.exports = {
     getSubtitlesforCourse,
     searchInstructorCourses,
     acceptContract,
-    filterInstructorCourses
+    filterInstructorCourses,
+    addPromotionForCourses
 }

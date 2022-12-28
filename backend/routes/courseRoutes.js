@@ -19,12 +19,13 @@ const { getCourseById,
     getSubtitles, 
     getSubtitleId,addPromotion,getSubtitlesforCourse,
     searchInstructorCourses,
-    acceptContract } = require('../controllers/courseController')   //destructuring
+    acceptContract,
+    addPromotionForCourses
+} = require('../controllers/courseController')   //destructuring
     
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
 //router.route('/:id').get(getCourseById) // get course by id
-router.get('/',getCourseById)
 router.get('/corporate/myCourses',CorporateCourses)
 router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
@@ -44,7 +45,8 @@ router.get('/getreviews/:id',requireAuth,getCourseReviews)
 
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)
+router.put('/addPromotionForCourses', addPromotionForCourses)
+router.patch('/addPromotion/:courseid', addPromotion)
 
-router.patch('/addPromotion/:courseid',addPromotion)
 
 module.exports = router

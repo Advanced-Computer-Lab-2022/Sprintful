@@ -55,6 +55,8 @@ import CourseView from './pages/CourseView';
 import CourseViewPage from './pages/CourseViewPage';
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
+import QuizAnswers from './components/QuizAnswers';
+import Promotion from './pages/Promotion';
 
 import AccessRequests from './components/AccessRequests';
 import ChangeIndividualTraineePassword from './components/ChangeIndividualTraineePassword';
@@ -83,13 +85,13 @@ function App() {
               exact path="/api/subtitles/:subtitleid/Instructor"
               element={<SubtitlePageInst />}
             />
-            <Route 
-            exact path ="/api/courses/addPromotion/:courseid"
-            element ={<AddPromotionCourse/>} />
+            <Route
+              exact path="/api/courses/addPromotion/:courseid"
+              element={<AddPromotionCourse />} />
 
-            <Route 
-            exact path="api/courses/getCourse/:courseid"
-            element={<CourseView/>} />
+            <Route
+              exact path="api/courses/getCourse/:courseid"
+              element={<CourseView />} />
 
             {/* Nada */}
             <Route
@@ -132,12 +134,12 @@ function App() {
               exact path="/api/individualTrainee/getProfile"
               element={<IndividualTraineeProfile />}
             />
-            
+
             <Route
               exact path="reviews"
               element={<Reviews />}
             />
-             <Route
+            <Route
               exact path="/api/reportProblem"
               element={<ReportProblem />}
             />
@@ -145,7 +147,7 @@ function App() {
               exact path="/api/admin/accessRequests"
               element={<AccessRequests />}
             />
-           
+
 
             {/* Ragaa */}
 
@@ -156,6 +158,14 @@ function App() {
             <Route
               path="/quiz"
               element={<Quiz />}
+            />
+            <Route
+              path="/quizanswers"
+              element={<QuizAnswers />}
+            />
+            <Route
+              path="/promotion"
+              element={<Promotion />}
             />
             {/* <Route
               path="/CorporateTrainee"
@@ -182,38 +192,38 @@ function App() {
             {/* css bydrab law 3amaltaha /api/admin/ViewReports */}
             <Route
               path="/adminViewReports"
-              element={[<AdminViewReports/> ]} 
+              element={[<AdminViewReports />]}
             />
             <Route
               exact path="/ViewReports"
-              element={[<UsersViewReports/> ]} 
+              element={[<UsersViewReports />]}
             />
             <Route
               exact path="/ReportDetailsAdmin"
-              element={[<ReportDetailsAdmin/> ]}
+              element={[<ReportDetailsAdmin />]}
             />
             <Route
               exact path="/ReportDetails"
-              element={[<ReportDetails/> ]}
+              element={[<ReportDetails />]}
             />
 
 
             {/* Hoda */}
             <Route
               exact path="/payment"
-              element={<StripeContainer/>}
+              element={<StripeContainer />}
             />
             <Route
               exact path="/contract"
-              element={<Contract/>}
+              element={<Contract />}
             />
             <Route
               exact path="/policy"
-              element={<Policy/>}
+              element={<Policy />}
             />
-             <Route
+            <Route
               exact path="/Signup"
-              element={<Signup/>}
+              element={<Signup />}
             />
             <Route
               exact path="/api/courses/search"
@@ -221,35 +231,35 @@ function App() {
             />
             <Route
               exact path="/"
-              element={[ <GuestHome />]}
+              element={[<GuestHome />]}
             />
             <Route
               exact path="/MyCourses"
-              element={[ <CorporateTraineeMyCourses/>]}
+              element={[<CorporateTraineeMyCourses />]}
             />
             <Route
               exact path="/MyEnrolledCourses"
-              element={[ <IndividualTraineeMyCourses/>]}
+              element={[<IndividualTraineeMyCourses />]}
             />
             <Route
               exact path="/MyTaughtCourses"
-              element={[<InstructorMyCourses/> ]} 
+              element={[<InstructorMyCourses />]}
             />
             <Route
               exact path="/corporate"
-              element={[ <CorporateTraineeHome />]}
+              element={[<CorporateTraineeHome />]}
             />
-             <Route
+            <Route
               exact path="/individual"
-              element={[ <IndividualTraineeHome />]}
+              element={[<IndividualTraineeHome />]}
             />
-             <Route
+            <Route
               exact path="/instructor"
-              element={[ <InstructorHome />]}
+              element={[<InstructorHome />]}
             />
             <Route
               exact path="/admin"
-              // element={[ <AdminHome />]}
+            // element={[ <AdminHome />]}
             />
             <Route
               exact path="/about"
