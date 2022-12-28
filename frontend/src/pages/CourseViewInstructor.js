@@ -164,7 +164,7 @@ const CourseViewInstructor=()=>{
               <div>
                  {/* subtitles */}
 
-                  {course&&courseSubtitles.map((subtitle)=>(
+                  {course && courseSubtitles.map((subtitle)=>(
                         <SubtitleCard key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
                         
