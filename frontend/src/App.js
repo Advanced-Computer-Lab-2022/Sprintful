@@ -46,6 +46,7 @@ import CourseViewCTR from './pages/CourseViewCTR';
 import CourseViewITE from './pages/CourseViewITE';
 import CourseViewInstructor from './pages/CourseViewInstructor';
 import SubtitleViewCT from './pages/SubtitleViewCT';
+import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
 
 function App() {
   return (
@@ -69,7 +70,7 @@ function App() {
             />
             <Route
               exact path="/api/subtitles/:subtitleid/Instructor"
-              element={<SubtitlePageInst />}
+              element={<SubtitlePageInstructorNew />}
             />
             <Route 
             exact path ="/api/courses/addPromotion/:courseid"
