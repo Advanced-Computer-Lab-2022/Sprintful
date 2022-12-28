@@ -43,6 +43,7 @@ import CourseViewGuest from './pages/CourseViewGuest';
 //test
 import TestCard from './pages/TestCard';
 import CourseViewCTR from './pages/CourseViewCTR';
+import CourseViewITE from './pages/CourseViewITE';
 
 function App() {
   return (
@@ -82,6 +83,9 @@ function App() {
             <Route 
             exact path="/api/courses/getCourse/:courseid/CTR"
             element={<CourseViewCTR/>}/>
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/ITE"
+            element={<CourseViewITE/>}/>
 
             {/* Nada */}
 
