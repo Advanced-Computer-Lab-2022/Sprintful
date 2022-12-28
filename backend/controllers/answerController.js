@@ -7,12 +7,12 @@ const IndividualTrainee = require('../models/individualTraineeModel')
 
 const addAnswer = asyncHandler(async (req, res) => {
     const questionid = req.query.questionid
+    const userid = req.query.userid
     const choiceindex = req.body.choiceindex
-    const corporateid = req.query.corporateid
-    const individualid = req.query.individualid
+    //const individualid = req.query.individualid
 
-    const corporate = await CorporateTrainee.findById(corporateid)
-    const individual = await IndividualTrainee.findById(individualid)
+    const corporate = await CorporateTrainee.findById(userid)
+    const individual = await IndividualTrainee.findById(userid)
 
     if (individual) {
         const answer = await Answer.create({
@@ -27,6 +27,13 @@ const addAnswer = asyncHandler(async (req, res) => {
             question: questionid,
             choiceindex: choiceindex,
             corporate: corporate._id
+        })
+        res.json(answer)
+    }
+    else {
+        const answer = await Answer.create({
+            question: questionid,
+            choiceindex: choiceindex,
         })
         res.json(answer)
     }
