@@ -58,9 +58,9 @@ const addYoutubeLinkAndDescript =asyncHandler(async (req,res)=>{
 const getSubtitle=asyncHandler(async(req,res)=>{
     const subtitleid=req.params.subtitleid;
     // const subtitle=await Subtitle.findById(subtitleid).exec();
-    // res.json(subtitle);
-   const subtitle= await Subtitle.findOne({_id:subtitleid}).populate('tasks')
-   res.json(subtitle);
+    //  res.json(subtitle);
+    const subtitle= await Subtitle.findOne({_id:subtitleid}).populate('tasks')
+    res.json(subtitle);
 }    
 )
 
