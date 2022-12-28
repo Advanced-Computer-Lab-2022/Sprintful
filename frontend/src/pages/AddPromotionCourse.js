@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import "../index.css"
 
 
@@ -15,6 +15,9 @@ const AddPromotionCourse=()=>{
 
      //getting courseid from react route 
      const courseid=useParams().courseid;
+
+     //useNavigate
+     const navigate=useNavigate();
 
     //handling Submitting 
     
@@ -35,6 +38,8 @@ const AddPromotionCourse=()=>{
 
         //Redirecting 
         //Navigating to Instructor course view Page 
+        navigate(`/api/courses/getCourse/${courseid}/Instructor`);
+        navigate(0);
 
      }
     
