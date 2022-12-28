@@ -15,7 +15,7 @@ import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/CorporateTraineeForm';
+import CorporateTraineeForm from './components/corporateTraineeForm';
 import AdminForm from './components/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
@@ -43,7 +43,7 @@ import InstructorSearch from './components/InstructorSearch';
 import Contract from './pages/Contract'
 import Reviews from './components/Reviews';
 import Policy from './pages//PaymentPolicy'
-
+import PolicyInstructor from './pages/PaymentPolicyInstructor'
 import Signup from './pages/Signup';
 import PaymentForm from './components/PaymentForm';
 import StripeContainer from './components/StripeContainer';
@@ -90,7 +90,7 @@ function App() {
             element ={<AddPromotionCourse/>} />
 
             <Route 
-            exact path="api/courses/getCourse/:courseid"
+            exact path="/api/courses/getCourse/:courseid"
             element={<CourseView/>} />
 
             {/* Nada */}
@@ -220,6 +220,10 @@ function App() {
             <Route
               exact path="/policy"
               element={<Policy/>}
+            />
+             <Route
+              exact path="/PaymentPolicyInstructor"
+              element={<PolicyInstructor/>}
             />
              <Route
               exact path="/Signup"

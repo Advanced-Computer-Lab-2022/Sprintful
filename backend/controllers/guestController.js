@@ -107,6 +107,7 @@ const login =asyncHandler (async(req,res)=>{
             name: instructor.name,
             email: instructor.email,
             token: generateToken(instructor._id),
+            policy: instructor.policy,
             role: "Instructor"
         })
     }

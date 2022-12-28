@@ -36,8 +36,14 @@ const handleOnChange = async(e) =>{
         navigate(0)
       }
       else if(role =="Instructor"){
-        navigate(`/instructor?id=${id}`)
-        navigate(0)
+        if(res.data.policy== false){
+          navigate(`/PaymentPolicyInstructor?id=${id}`)
+          navigate(0)
+        }
+        else{
+          navigate(`/instructor?id=${id}`)
+          navigate(0)
+        }
       }
       else if(role =="Individual"){
         navigate(`/individual?id=${id}`)

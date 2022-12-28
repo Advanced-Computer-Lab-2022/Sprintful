@@ -54,8 +54,12 @@ const instructorSchema = mongoose.Schema({
     contract: {
         type: Boolean,
         default: false,
-        required: [true],
-        default: false
+        required: [true]
+    },
+    policy: {
+        type: Boolean,
+        default: false,
+        required: [true]
     }
 }, {
     timestamps: true

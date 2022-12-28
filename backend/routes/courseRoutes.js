@@ -19,7 +19,8 @@ const { getCourseById,
     getSubtitles, 
     getSubtitleId,addPromotion,getSubtitlesforCourse,
     searchInstructorCourses,
-    acceptContract } = require('../controllers/courseController')   //destructuring
+    acceptContract,
+    acceptPolicy } = require('../controllers/courseController')   //destructuring
     
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
@@ -30,6 +31,7 @@ router.get('/individual/myCourses', IndividualCourses)
 router.get('/corporate/search',corporateGetCourses) // get all courses for corporate . search without the price
 router.post('/addCourse', addCourse)
 router.put('/acceptContract',acceptContract)
+router.put('/acceptPolicy',acceptPolicy)
 router.post('/search', searchCourse)
 router.get('/getSubtitles', requireAuth,getSubtitles) // get course subtitles "Somaya"
 router.get('/getSubtitlesforCourse/:courseId',getSubtitlesforCourse) //get course subtitles "Reem"   we need both of them 
