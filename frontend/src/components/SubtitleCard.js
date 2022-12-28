@@ -1,6 +1,6 @@
 import {StyleCard} from './styles/Card.style'
 
-export default function  Card({subtitle:{_id,title ,totalHours, tasks}}){
+export default function  SubtitleCard({subtitle:{_id,title ,totalHours, tasks}}){
  
 
     return (

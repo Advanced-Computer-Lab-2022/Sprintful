@@ -40,6 +40,9 @@ import Signup from './pages/Signup';
 import AddPromotionCourse from './pages/AddPromotionCourse';
 import CourseView from './pages/CourseView';
 import CourseViewPage from './pages/CourseViewPage';
+//test
+import TestCard from './pages/TestCard';
+
 function App() {
   return (
     <div className="App">
@@ -69,8 +72,12 @@ function App() {
             element ={<AddPromotionCourse/>} />
 
             <Route 
-            exact path="api/courses/getCourse/:courseid"
+            exact path="/api/courses/getCourse/:courseid"
             element={<CourseView/>} />
+            {/* test Route */}
+            <Route 
+            exact path="/api/teesst"
+            element={<TestCard/>}/>
 
             {/* Nada */}
 
