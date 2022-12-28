@@ -147,6 +147,18 @@ const acceptContract = asyncHandler(async (req, res) => {
 
 })
 
+const acceptPolicy = asyncHandler(async (req, res) => {
+    const id = req.query.id;
+    const response =await Instructor.findByIdAndUpdate(id,{policy: true})
+    if(response)
+        res.json(response)
+    else {
+        res.status(404)
+        throw new Error('Instructor not found')
+    }
+
+})
+
 const addCourse = asyncHandler(async (req, res) => {
     //const discount =(req.body.discount)/100
     const newCourse = new Course({
@@ -601,5 +613,6 @@ module.exports = {
     getSubtitlesforCourse,
     searchInstructorCourses,
     acceptContract,
+    acceptPolicy,
     filterInstructorCourses
 }
