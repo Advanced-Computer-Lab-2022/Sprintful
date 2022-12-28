@@ -38,10 +38,11 @@ import Policy from './pages//PaymentPolicy'
 import Signup from './pages/Signup';
 
 import AddPromotionCourse from './pages/AddPromotionCourse';
-import CourseView from './pages/CourseView';
-import CourseViewPage from './pages/CourseViewPage';
+import CourseViewGuest from './pages/CourseViewGuest';
+
 //test
 import TestCard from './pages/TestCard';
+import CourseViewCTR from './pages/CourseViewCTR';
 
 function App() {
   return (
@@ -72,12 +73,15 @@ function App() {
             element ={<AddPromotionCourse/>} />
 
             <Route 
-            exact path="/api/courses/getCourse/:courseid"
-            element={<CourseView/>} />
+            exact path="/api/courses/getCourse/:courseid/guest"
+            element={<CourseViewGuest/>} />
             {/* test Route */}
-            <Route 
+            {/* <Route 
             exact path="/api/teesst"
-            element={<TestCard/>}/>
+            element={<TestCard/>}/> */}
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/CTR"
+            element={<CourseViewCTR/>}/>
 
             {/* Nada */}
 
