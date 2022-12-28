@@ -47,6 +47,7 @@ import CourseViewITE from './pages/CourseViewITE';
 import CourseViewInstructor from './pages/CourseViewInstructor';
 import SubtitleViewCT from './pages/SubtitleViewCT';
 import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
+import CourseViewInstructor2 from './pages/CourseViewInstructor2';
 
 function App() {
   return (
@@ -94,6 +95,12 @@ function App() {
             element={<CourseViewInstructor/>}/>
 
 
+          {/* Instructor viewing not his own course */}
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/Instructor"
+            element={<CourseViewInstructor2/>}/>
+
+  
 
 
 
