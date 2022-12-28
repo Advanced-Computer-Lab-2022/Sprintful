@@ -13,7 +13,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
-
+import SubtitleCardClickable from '../components/SubtitleCardClickable';
 
 
 //stylings custom css
@@ -165,23 +165,9 @@ const CourseViewInstructor=()=>{
                  {/* subtitles */}
 
                   {course&&courseSubtitles.map((subtitle)=>(
-                        <SubtitleCard key={subtitle._id}  subtitle={subtitle}/> 
+                        <SubtitleCardClickable key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
-                        
-
-
-                  
-
-
-                 
-
-
-
-
-
-
-
-             </div>
+                    </div>
 
 
 

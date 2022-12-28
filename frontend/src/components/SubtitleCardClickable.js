@@ -1,7 +1,7 @@
 import {StyleCard} from './styles/Card.style'
 import {Link} from 'react-router-dom'
 
-export default function  SubtitleCard({subtitle:{_id,title ,totalHours, tasks}}){
+export default function  SubtitleCardClickable({subtitle:{_id,title ,totalHours, tasks}}){
  
 
     return (
@@ -19,9 +19,9 @@ export default function  SubtitleCard({subtitle:{_id,title ,totalHours, tasks}})
 
                             
                          <div>
-                          
+                          <Link to={`/api/subtitles/${_id}/Instructor`}>
                           <li>{task.title}</li>
-                      
+                          </Link>
                           </div>
                        
                           
