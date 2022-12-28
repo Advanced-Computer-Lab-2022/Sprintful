@@ -7,8 +7,9 @@ export default function  SubtitleCardClickable({subtitle:{_id,title ,totalHours,
     return (
         <StyleCard>
             <div>
-
+            <Link to={`/api/subtitles/${_id}/Instructor`}>
             <h5>{title}</h5>
+            </Link>
             <h6>total hours :{totalHours}</h6>
             <br></br>
             <h6>Exercises:</h6>
@@ -19,9 +20,9 @@ export default function  SubtitleCardClickable({subtitle:{_id,title ,totalHours,
 
                             
                          <div>
-                          <Link to={`/api/subtitles/${_id}/Instructor`}>
+                          
                           <li>{task.title}</li>
-                          </Link>
+                         
                           </div>
                        
                           

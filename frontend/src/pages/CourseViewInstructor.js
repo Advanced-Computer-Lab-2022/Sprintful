@@ -125,9 +125,9 @@ const CourseViewInstructor=()=>{
             <div>
                
                < StyledCourseHeader>
-               <h3> {course&&course.title} </h3>
-               <h6>Total Hours :{course&&course.totalhours}</h6>
-               <h6>Price:  {course&&coursePriceAfterDiscount}</h6>
+               <h3> {course && course.title} </h3>
+               <h6>Total Hours :{course && course.totalhours}</h6>
+               <h6>Price:  {course && coursePriceAfterDiscount}</h6>
                
                </StyledCourseHeader>
                 
@@ -164,7 +164,7 @@ const CourseViewInstructor=()=>{
               <div>
                  {/* subtitles */}
 
-                  {course&&courseSubtitles.map((subtitle)=>(
+                  {course &&courseSubtitles.map((subtitle)=>(
                         <SubtitleCardClickable key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
                     </div>
