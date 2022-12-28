@@ -3,12 +3,16 @@ import { useState } from "react"
 const InstructorForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [firstName, setFirstName] = useState('')
+    const [lastName, setLastName] = useState('')
+
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        const newUser = {username, password}
+        const newUser = {username, password, email, firstName, lastName}
         const response = await fetch('http://localhost:5000/api/instructor/createInstructor', {
             method: 'POST',
             body: JSON.stringify(newUser),
@@ -23,6 +27,9 @@ const InstructorForm = () => {
         if(response.ok){
             setUsername('')
             setPassword('')
+            setEmail('')
+            setFirstName('')
+            setLastName('')
             setError(null)
             console.log('New instructor was added', json)
         }
@@ -33,13 +40,32 @@ const InstructorForm = () => {
         <form className="create" onSubmit={handleSubmit}> 
             <h3> Add a new Instructor </h3>
 
-            <label>User name:</label>
+            <label>Username:</label>
             <input style={{width: 200}}
                 type="text"
                 onChange={(e) => setUsername(e.target.value)}
                 value={username}/>
 
-             <label>Password:</label>
+            <label>First Name:</label>
+            <input style={{width: 200}}
+                type="text"
+                onChange={(e) => setFirstName(e.target.value)}
+                value={firstName}/>
+
+            <label>Last Name:</label>
+            <input style={{width: 200}}
+                type="text"
+                onChange={(e) => setLastName(e.target.value)}
+                value={lastName}/>
+
+
+             <label>Email:</label>
+            <input style={{width: 200}}
+                type="text"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}/>
+
+            <label>Password:</label>
             <input style={{width: 200}}
                 type="text"
                 onChange={(e) => setPassword(e.target.value)}

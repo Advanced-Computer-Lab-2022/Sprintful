@@ -59,6 +59,8 @@ import AdminHome from './pages/AdminHome'
 import AccessRequests from './components/AccessRequests';
 import ChangeIndividualTraineePassword from './components/ChangeIndividualTraineePassword';
 import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
+import ChangeAdminPassword from './components/ChangeAdminPassword';
+import ChangeInstructorPassword from './components/ChangeInstructorPassword';
 function App() {
   return (
     <div className="App">
@@ -125,6 +127,10 @@ function App() {
               element={<EditInstructorProfile />}
             />
             <Route
+              exact path="/api/instructor/changePassword"
+              element={<ChangeInstructorPassword />}
+            />
+            <Route
               exact path="/api/corporateTrainee/getProfile"
               element={<CorporateTraineeProfile />}
             />
@@ -132,7 +138,6 @@ function App() {
               exact path="/api/individualTrainee/getProfile"
               element={<IndividualTraineeProfile />}
             />
-            
             <Route
               exact path="reviews"
               element={<Reviews />}
@@ -145,6 +150,11 @@ function App() {
               exact path="/api/admin/accessRequests"
               element={<AccessRequests />}
             />
+             <Route
+              exact path="/api/admin/changePassword"
+              element={<ChangeAdminPassword />}
+            />
+
            
 
             {/* Ragaa */}

@@ -45,6 +45,9 @@ const createInstructor = asyncHandler(async (req, res) => {
     const username = req.body.username
     const password = req.body.password
     const email = req.body.email
+    const firstName = req.body.firstName
+    const lastName = req.body.lastName
+
     try{
         console.log("createInstructor22");
         const instructorExists = await Instructor.findOne({ username })
@@ -54,20 +57,24 @@ const createInstructor = asyncHandler(async (req, res) => {
             throw new Error('Instructor already exists')
         }
         // Hash password
-        console.log("cred", username, password, email)
+        console.log("cred", username, password, email, firstName, lastName)
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
         console.log("createInstructor55");
         const instructor = await Instructor.create({
             username,
             password: hashedPassword,
-            email
+            email,
+            firstName,
+            lastName
         })
         if (instructor) {
             res.status(201).json({
                 _id: instructor._id,
                 username: instructor.username,
                 password: instructor.password,
+                firstName: instructor.firstName,
+                lastName: instructor.lastName
                 // token: generateToken(instructor._id)
             })
         }

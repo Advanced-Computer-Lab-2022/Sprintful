@@ -198,7 +198,11 @@ export default function InstructorProfile() {
             )}
                     <br/>
                       <button style={{width: "100px", textAlign: "center", justifyContent: "center", marginLeft: "86.3em", height: "30px", fontSize: "14px"}} onClick={()=> navigate(`/api/instructor/editProfile?id=${id}`)}>Edit Profile</button>
-                    
+                    <br/>  
+                    <br/>
+                    <br/>
+                      <button style={{width: "150px", textAlign: "center", justifyContent: "center", marginLeft: "82.7  em", height: "30px", fontSize: "14px"}} onClick={()=> navigate(`/api/instructor/changePassword?id=${id}`)}>Change Password</button>
+
                     </div>
                 </div>
             </div>

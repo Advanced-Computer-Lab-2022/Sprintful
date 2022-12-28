@@ -6,10 +6,10 @@ const AdminForm = () => {
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
-       // e.preventdefault()
+        e.preventDefault()
 
         const NewUser = {username, password}
-        const response = await fetch('/api/admin/', {
+        const response = await fetch('http://localhost:5000/api/admin/createAdmin', {
             method: 'POST',
             body :JSON.stringify(NewUser),
             headers: {
@@ -35,7 +35,7 @@ const AdminForm = () => {
     return (
         <div className="create">
             <form onSubmit={handleSubmit}> 
-                <h3> Add a new User </h3>
+                <h3> Add a new Admin </h3>
                     <label>User name:</label>
                         <input 
                         type="text"

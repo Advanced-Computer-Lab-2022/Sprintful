@@ -13,7 +13,7 @@ const generateToken =(id) =>{
     })
 }
 const createCorporateTrainee = asyncHandler(async (req, res) => { 
-     const { username, password, corporate } = req.body
+     const { username, password, corporate, firstName, lastName } = req.body
      const thisCorporate = await Corporates.find({ name: corporate });
      const traineeSubject = thisCorporate[0].subject
      console.log("itest2",traineeSubject)
@@ -32,7 +32,9 @@ const createCorporateTrainee = asyncHandler(async (req, res) => {
                 username,
                 password: hashedPassword,
                 corporate: corporate,
-                courses: traineeCourses
+                courses: traineeCourses,
+                firstName,
+                lastName
             })
             
             if (corporateTrainee) {
@@ -41,7 +43,8 @@ const createCorporateTrainee = asyncHandler(async (req, res) => {
                     username: corporateTrainee.username,
                     password: corporateTrainee.password,
                     corporate: corporateTrainee.corporate,
-                    courses: corporateTrainee.courses
+                    courses: corporateTrainee.courses,
+                    firstName: corporateTrainee.firstName
                     // token: generateToken(corporateTrainee._id)
                 })
                 console.log("res")

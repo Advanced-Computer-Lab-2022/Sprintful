@@ -86,7 +86,48 @@ const createAdmin = asyncHandler(async (req, res) => {
     } 
 })
 
+const getAdminProfile = asyncHandler(async (req, res) => {
+    const admin = await Admin.findById(req.query.id)
+    console.log(admin);
+    if (admin) {
+        res.json(admin)
+    } else {
+        res.status(404)
+        throw new Error('Admin not found')
+    }
+})
 
+
+const changePassword = async (req, res, next) => {
+    console.log("Change Password");
+    try {
+        const adminId = req.query.id;
+        console.log("adminId",adminId);
+        const admin = await Admin.findById(adminId)
+        console.log("admin",admin);
+        const oldPassword = admin.password
+        const currentPassword = req.body.currentPassword
+        const auth = await bcrypt.compare(currentPassword, oldPassword);
+        console.log("authentication", auth);
+
+        if(auth){
+            const salt = await bcrypt.genSalt(10);
+            console.log("authentication2");
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            console.log("authentication26", hashedPassword);
+            const response = await Admin.findByIdAndUpdate(adminId, {password: hashedPassword}, { new: true })
+            console.log(response)
+            res.status(200).json(response);
+        }
+        else{
+            res.status(400).json({ error: 'Wrong password' });
+
+        }   
+    }
+    catch (error) {
+        return res.status(400).json({ status: false, error: "Error Occured" });
+    }
+}
 
 const addCorporate = asyncHandler(async (req, res) => { 
     const { name, subject } = req.body
@@ -129,4 +170,4 @@ const generateToken =(id) =>{
 
 
 
-module.exports = { createAdmin, loginAdmin, getAdmin, logout, addCorporate}
+module.exports = { createAdmin, loginAdmin, getAdmin, logout, addCorporate, changePassword, getAdminProfile}
