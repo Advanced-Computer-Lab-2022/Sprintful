@@ -44,6 +44,7 @@ import CourseViewGuest from './pages/CourseViewGuest';
 import TestCard from './pages/TestCard';
 import CourseViewCTR from './pages/CourseViewCTR';
 import CourseViewITE from './pages/CourseViewITE';
+import SubtitleViewCT from './pages/SubtitleViewCT';
 
 function App() {
   return (
@@ -86,6 +87,11 @@ function App() {
             <Route 
             exact path="/api/courses/getCourse/:courseid/ITE"
             element={<CourseViewITE/>}/>
+            {/* subtitleViews */}
+            <Route 
+            exact path="/api/subtitles/getSubtitle/:subtitleid/CTE"
+            element={<SubtitleViewCT/>}/>
+            
 
             {/* Nada */}
 
