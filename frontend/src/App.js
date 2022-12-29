@@ -48,6 +48,7 @@ import CourseViewInstructor from './pages/CourseViewInstructor';
 import SubtitleViewCT from './pages/SubtitleViewCT';
 import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
 import CourseViewInstructor2 from './pages/CourseViewInstructor2';
+import  CourseViewCTN from './pages/CourseViewCTN';
 
 function App() {
   return (
@@ -69,10 +70,7 @@ function App() {
               exact path="/api/subtitles/addVideoLink/:subtitleid"
               element={<AddVideoLinkSubtitle />}
             />
-            <Route
-              exact path="/api/subtitles/:subtitleid/Instructor"
-              element={<SubtitlePageInstructorNew />}
-            />
+            
             <Route 
             exact path ="/api/courses/addPromotion/:courseid"
             element ={<AddPromotionCourse/>} />
@@ -102,6 +100,12 @@ function App() {
             exact path="/api/courses/getCourse/:courseid/Instructor"
             element={<CourseViewInstructor2/>}/>
 
+            {/* Corporate Trainee view page after enrolling  */}
+           <Route 
+            exact path="/api/courses/getCourse/:courseid/CTN"
+            element={<CourseViewCTN/>}/>
+
+
   
 
 
@@ -115,6 +119,11 @@ function App() {
            <Route 
             exact path="/api/subtitles/getSubtitle/:subtitleid/ITE"
             element={<SubtitleViewCT/>}/>
+
+             <Route
+              exact path="/api/subtitles/:subtitleid/Instructor"
+              element={<SubtitlePageInstructorNew />}
+            />
 
              
             
