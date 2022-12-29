@@ -105,7 +105,7 @@ function App() {
             exact path="/api/courses/getCourse/:courseid/CTN"
             element={<CourseViewCTN/>}/>
 
-            {/* //IndividualTrainee view Course Page after enrolling */}
+            {/* //IndividualTrainee view Course Page after enrolling  "same Page as Corporate Trainee*/}
 
             <Route 
             exact path="/api/courses/getCourse/:courseid/ITN"
