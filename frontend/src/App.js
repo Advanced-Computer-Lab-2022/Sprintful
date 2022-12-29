@@ -127,7 +127,7 @@ function App() {
             element={<SubtitleViewCT/>}/>
 
              <Route
-              exact path="/api/subtitles/:subtitleid/Instructor"
+              exact path="/api/subtitles/getSubtitle/:subtitleid/Instructor"
               element={<SubtitlePageInstructorNew />}
             />
 
