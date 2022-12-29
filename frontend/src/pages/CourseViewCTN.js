@@ -51,11 +51,7 @@ const CourseViewCTN=()=>{
 
 
     //Button Clicking 
-    const handleAddPromotion=()=>{
-        navigate(`/api/courses/addPromotion/${courseid}`);
-        navigate(0);
-    }
-
+   
 
   
     //Using useEffect to run only on 1st render to display the course's data
