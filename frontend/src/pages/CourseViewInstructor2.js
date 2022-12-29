@@ -31,10 +31,18 @@ const CourseViewInstructor2=()=>{
     //styles
     // const classes=useStyles();
 
-    const [course,setCourse]=useState(null);
-    const [coursePriceAfterDiscount,setPrice]=useState('');
-    const [courseSubtitles,setCourseSubtitles]=useState([]);
+    // const [course,setCourse]=useState(null);
+    // const [coursePriceAfterDiscount,setPrice]=useState('');
+    // const [courseSubtitles,setCourseSubtitles]=useState([]);
     
+
+    //state document 
+    const [courseStates,setCourseStates]=useState({
+      course:null,
+      coursePriceAfterDiscount:'',
+      courseSubtitles:[]
+   });
+
     ///api/courses
     const {courseid}=useParams();
 
@@ -50,7 +58,7 @@ const CourseViewInstructor2=()=>{
                const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
                const coursedata=response.data;
                
-               setCourse(coursedata);
+               let finalPrice=0;
               
     
                //handling setting course price according to discount and its expiry date 
@@ -72,24 +80,31 @@ const CourseViewInstructor2=()=>{
 
                       //Comparing current date with expiry date 
                       console.log(dateC.getTime()<=dateE.getTime());
-                       if(dateC.getTime()<=dateE.getTime()){
+                      if(dateC.getTime()<=dateE.getTime()){
 
-                        const newPrice=course.discount*course.price;
-                        setPrice(newPrice);
-                        console.log('teest')
+                        const newPrice=coursedata.discount*coursedata.price;
+                        finalPrice=newPrice;
                        }
 
                        else{
-                        setPrice(coursedata.price);
-                        console.log('teest')
+                        finalPrice=coursedata.price;
                           }
+
 
 
 
             //Sending a get request to server to get this course's Subtitles
             const response2=await axios.get(`http://localhost:5000/api/courses/getSubtitlesforCourse/${courseid}`);
             const subtitlesArray=response2.data;
-            setCourseSubtitles(subtitlesArray);
+            //setCourseSubtitles(subtitlesArray);
+            setCourseStates({
+              course:coursedata,
+              coursePriceAfterDiscount:finalPrice,
+              courseSubtitles:subtitlesArray
+
+
+
+          })
 
     
     
@@ -106,7 +121,8 @@ const CourseViewInstructor2=()=>{
          getCourseanditsSubtitle(); } 
         ,[courseid] );
 
-
+  
+        const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates    //destructuring 
 
 
 
