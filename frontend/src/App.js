@@ -116,7 +116,7 @@ function App() {
 
 
 
-
+ 
             {/* subtitleViews */}
             <Route 
             exact path="/api/subtitles/getSubtitle/:subtitleid/CTE"
