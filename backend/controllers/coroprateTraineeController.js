@@ -147,19 +147,28 @@ const updateProgress=asyncHandler(async(req,res)=>{
     const addedProgress=req.body.addedprogress;
 
     //Getting the Past Progress 
-    const  ProgressArray=await CorporateTrainee.findOne({_id:traineeid},'-_id progress')
-    res.json(ProgressArray);
+    const  ProgressArray=await CorporateTrainee.findOne({_id:traineeid,progress:{course:courseid}},'-_id progress')
+
+
+    //res.json(ProgressArray);
     let coursedocument;
+    let x;
 
      for(let i=0;i<ProgressArray.length;i++){
         coursedocument=ProgressArray[i];
-        if(coursedocument.course.toString()===courseid){
+         x=coursedocument.course==courseid;
+        if(coursedocument.course==courseid){
             coursedocument.progressvalue=coursedocument.progressvalue+addedProgress
+            ProgressArray[i]=coursedocument;
+            console.log("updated")
             break;
          }
      }
 
-     res.json(coursedocument)
+    // const updatingprogress=await CorporateTrainee.findOneAndUpdate({_id:traineeid},{progress:ProgressArray},{new:true});
+
+     //res.json(coursedocument)
+     res.json({message:x});
 
 
 
