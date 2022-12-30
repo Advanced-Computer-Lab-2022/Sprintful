@@ -33,19 +33,28 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
                       let day =currentdate.getDate();
                       let dateCformat=`${year}-${month}-${day}`  //current date in appropriate format.
                       let dateC=new Date(dateCformat);
-                      //console.log(dateCformat);
+                      //console.log(currentdate);
+                      console.log(dateC)
+
 
                       //getting expiry date from DB "through server response"
-                      const expirydate=course.discountExpireAt;
-                      const dateEformat=expirydate.substring(0,10);  //Put it in appropriate format
+                      const expirydate=course.discountExpireAt+"";
+                      const dateformat=new Date(expirydate)
+
+                      let year2=dateformat.getFullYear();
+                      let month2=dateformat.getMonth()+1; //because it outputs a number from 0-11 ex:3-->April
+                      let day2 =dateformat.getDate();
+                      //const dateEformat=expirydate.substring(0,10);  //Put it in appropriate format
+                      const dateEformat =`${year2}-${month2}-${day2}`
                       const dateE=new Date(dateEformat);
-                      //console.log(dateEformat);
+                      //console.log(expirydate);
+                      console.log(dateE);
 
                       //Comparing current date with expiry date 
                       console.log(dateC.getTime()<=dateE.getTime());
                       if(dateC.getTime()<=dateE.getTime()){
 
-                        const newPrice=course.discount*coursedata.price;
+                        const newPrice=course.discount*course.price;
                         finalPrice=newPrice;
                        }
 
