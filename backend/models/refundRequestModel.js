@@ -11,6 +11,12 @@ const RefundRequestSchema = mongoose.Schema({
             ref: 'Course', 
                   },
                      
+    amount:{
+        type:Number
+    }  ,
+                  
+
+
     }, {timestamps: true
         })
         
