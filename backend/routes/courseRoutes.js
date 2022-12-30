@@ -2,7 +2,8 @@ const express = require('express')
 const router = express.Router({ mergeParams: true })
 const {requireAuth} = require('../middleware/authMiddleware')
 
-const { getCourseById,
+const
+  { getCourseById,
     getCourses,
     corporateGetCourses,
     addCourse,
@@ -23,7 +24,7 @@ const { getCourseById,
     acceptPolicy, 
     payCredit } = require('../controllers/courseController')   //destructuring
 
-router.post('/individual/payCredit/:courseId/:individualId/', payCredit)
+router.post('/individual/:courseId/payCredit', payCredit)
 router.get('/instructor/search', searchInstructorCourses)
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
 router.get('/instructor', instructorCourses) // get all courses for instructor

@@ -2,6 +2,8 @@ import React, {useState} from 'react'
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js'
 import axios from "axios"
 import '../components/PaymentForm.css'
+import { Button } from 'react-bootstrap';
+import {useNavigate} from "react-router";
 
 const CARD_OPTIONS = {
 	iconStyle: "solid",
@@ -22,13 +24,17 @@ const CARD_OPTIONS = {
 		}
 	}
 }
-export default function PaymentForm({individualId}, {courseId}) {
+export default function PaymentForm({individualId,courseId}) {
+    const navigate=useNavigate();
     const [success,setSuccess] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
-
+    console.log("Individual " + individualId)
+    console.log("course " + courseId)
     const handleSubmit = async(e) => {
-        e.preventDefault()
+        e.preventDefault();
+        console.log( "Individual" +individualId)
+        console.log( "course" +courseId)
         const {error, paymentMethod} = await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement)
@@ -36,13 +42,10 @@ export default function PaymentForm({individualId}, {courseId}) {
         if(!error){
             try{
                 const {id} = paymentMethod
-                const response = await axios.post(`http://localhost:5000/api/courses/individual/payCredit`,{
-                    params : { courseId: courseId , individualId :individualId },
+                const response = await axios.post(`http://localhost:5000/api/courses/individual/${courseId}/payCredit?individualId=${individualId}`,{
                     paymentMethod: id
-                    
                 })
-                console.log(courseId)
-                console.log(individualId)
+                console.log(response.status)
                 if(response.data.success){
                     console.log("Successful Payment")
                     setSuccess(true)
@@ -59,17 +62,19 @@ export default function PaymentForm({individualId}, {courseId}) {
   return (
     <>
     {!success ? 
-    <form onSubmit={handleSubmit}>
+    <form>
         <fieldset className="FormGroup" >
             <div className="FormRow" >
                 <CardElement options={CARD_OPTIONS}/>
             </div>
 
         </fieldset>
-        <button className='pay' >Pay</button>
+        <button className='pay' onClick={handleSubmit} >Pay</button>
      </form>
     : <div>
-        <h2> Successful Payment! </h2>
+        <h2 style={{color: "green"}}> Successful Payment! </h2>
+        <Button style={{ width: '80px' , height : '30px' ,marginLeft:'30px',marginTop:'10px', marginRight:'30px'}} onClick={()=> {navigate(`/api/courses/getCourse/${courseId}/CTN`)}}> Proceed </Button>
+
     </div>
     }
     </>

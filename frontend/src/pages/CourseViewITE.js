@@ -165,7 +165,7 @@ const CourseViewITE=()=>{
                            >
                             
                          <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }} 
-                           onClick ={ () => { navigate(`/payment/${courseid}/${id}`) }}>
+                           onClick ={ () => { navigate(`/api/${courseid}/payment?id=${id}`) }}>
                          Enroll
                            </Button>
 

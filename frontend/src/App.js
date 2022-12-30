@@ -47,6 +47,7 @@ import PolicyInstructor from './pages/PaymentPolicyInstructor'
 import Signup from './pages/Signup';
 import PaymentForm from './components/PaymentForm';
 import StripeContainer from './components/StripeContainer';
+
 // import '../src/components/PaymentForm.css'
 // import '../src/pages/Signup.css'
 
@@ -267,7 +268,7 @@ function App() {
 
             {/* Hoda */}
             <Route
-              exact path="/payment/:courseId/:individualId"
+              exact path="/api/:courseId/payment"
               element={<StripeContainer/>}
             />
             <Route

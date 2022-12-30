@@ -14,28 +14,34 @@ export default function StripeContainer() {
   const [credit,setCredit]= useState(false);
 
   const {courseId}=useParams();
-  const {individualId}=useParams();
 
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+console.log("Individual " + id)
+console.log("course " + courseId)
   const handleCredit =  async(e) =>{
     e.preventDefault();
     setCredit(!credit)
   }
   return (
+    <div>
     <form style={{ position:'relative', left:'450px', border:'solid' , width:'350px'}}>
       
         <div style={{marginLeft: '20px' , marginBottom: "20px"}}>
            <h1  > Choose a payment method </h1>
-           <Button  style={{ width: '100px' , height : '50px' ,marginLeft:'30px',marginTop:'10px', marginRight:'30px'}}> Wallet </Button>
-           <Button style={{ width: '100px' , height : '50px',marginTop:'10px' }} onClick= {handleCredit}> Credit Card </Button>
+           <Button style={{ width: '100px' , height : '50px' ,marginLeft:'30px',marginTop:'10px', marginRight:'30px'}}> Wallet </Button>
+           <Button style={{ width: '100px' , height : '50px',marginTop:'10px' }}> Credit Card </Button>
         </div>
       
-      { credit &&
+      {
         <Elements stripe={stripeTestPromise} >
-          <PaymentForm individualId ={individualId} courseId ={courseId} />
+          <PaymentForm
+           individualId ={id} 
+           courseId ={courseId} />
         </Elements>
       }
-      
+  
      </form>
- 
+     </div>
   )
 }

@@ -16,7 +16,7 @@ var searchedCourses = [];
 const payCredit = asyncHandler(async (req, res)  => {
     const id = req.body.paymentMethod
     const courseId = req.params.courseId;
-    const individualId = req.params.individualId;
+    const individualId = req.query.individualId;
     const course = await Course.find({_id: courseId});
     let discount = course[0].discount;
     let price = course[0].price;
@@ -33,7 +33,7 @@ const payCredit = asyncHandler(async (req, res)  => {
 		console.log("Payment", payment)
         const newCoursesList = ((await IndividualTrainee.findById(individualId)).courses).concat(courseId)
         const response =await IndividualTrainee.findByIdAndUpdate(individualId,{courses: newCoursesList }).exec()
-		res.json({
+		res.status(200).json({
 			message: "Payment successful",
 			success: true,
             response:response
@@ -46,30 +46,6 @@ const payCredit = asyncHandler(async (req, res)  => {
 		})
 	}
 })
-
-// app.post("/payment", async (req, res) => {
-// 	let { amount, id } = req.body
-// 	try {
-// 		const payment = await stripe.paymentIntents.create({
-// 			amount,
-// 			currency: "USD",
-// 			description: "Online learning platform",
-// 			payment_method: id,
-// 			confirm: true
-// 		})
-// 		console.log("Payment", payment)
-// 		res.json({
-// 			message: "Payment successful",
-// 			success: true
-// 		})
-// 	} catch (error) {
-// 		console.log("Error", error)
-// 		res.json({
-// 			message: "Payment failed",
-// 			success: false
-// 		})
-// 	}
-// })
 
 //Add a Discount and Set its expiration date 
 const addPromotion=asyncHandler(async (req,res)=>{
