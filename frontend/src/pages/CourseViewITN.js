@@ -54,6 +54,12 @@ const CourseViewITN=()=>{
 
 
     //Button Clicking 
+   const handleRequestRefund=async(e)=>{
+
+    const response=await axios.post(`http://localhost:5000/api/refund/requestRefund/${traineeid}/${courseid}`)
+
+
+   }
    
 
   
@@ -184,7 +190,7 @@ const CourseViewITN=()=>{
 
                            {(() => {
                          if (isProgressLow) {
-                        return   <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                        return   <Button onClick={handleRequestRefund} style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
                                        Request Refund
                                  </Button> 
                                                      ;
