@@ -21,7 +21,9 @@ const { getCourseById,
     searchInstructorCourses,
     acceptContract,
     acceptPolicy } = require('../controllers/courseController')   //destructuring
-    
+
+router.get('/instructor/search', searchInstructorCourses)
+router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
 //router.route('/:id').get(getCourseById) // get course by id

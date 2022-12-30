@@ -2,8 +2,10 @@ import CorporateTraineeHomeNavBar from '../components/CorporateTraineeHomeNavBar
 import CorporateTraineeSearch from '../components/CorporateTraineeSearch';
 import React, { useState } from "react";
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export default function CorporateTraineeMyCourses() {
+    const navigate = useNavigate();
 
     const [courses, setCourses] = useState("");
     let params = new URLSearchParams(document.location.search);
@@ -60,7 +62,7 @@ export default function CorporateTraineeMyCourses() {
                         {/* Corporate Course view */}
                         <div className="card-container">
                             {courses  && courses.map((course) =>( 
-                                <div className="card">
+                                <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTR`)} }>
                                 <img src="assets/images/courseCard.jpg"/>
                                 <div className="content">
                                     <h3> {course.title} </h3>

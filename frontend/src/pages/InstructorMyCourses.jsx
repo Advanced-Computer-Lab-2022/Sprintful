@@ -15,8 +15,10 @@ export default function InstructorMyCourses() {
     const [courses2,setCourses2] = useState([])
     const [searchTerm,setSearchTerm] = useState(null)
     const [searched,setSearched] = useState(false)
+    const [filtered,setFiltered] = useState(false)
 
-    const[filterPrice,setFilterPrice] = useState(null)
+
+    const [filterPrice,setFilterPrice] = useState(null)
     const [filterSubject, setFilterSubject] = useState(null)
     const [filterData,setFilterData]=useState([]);
 
@@ -28,19 +30,19 @@ export default function InstructorMyCourses() {
     const [price ,setPrice]=useState('')
     const [totalhours,setTotalHours]=useState('')
     const [shortsummary,setShortSummary]=useState('')
-    const[previewvideolink,setPreviewVideoLink]=useState('')
+    const [previewvideolink,setPreviewVideoLink]=useState('')
     const [discount,setDiscount]=useState('')
     const [subject,setSubject]=useState('Computer Science')
     // const [contract,setContract] =useState(false)
 
-    const[instructorCourses,setInstructorCourses] = useState([])
+    const [instructorCourses,setInstructorCourses] = useState([])
     const [option, setOption] = useState("");
     const [subtitleOption, setSubtitleOption]= useState("");
     const [subtitles, setSubtitles] = useState([]);
     const [titleTask,setTitleTask] = useState("");
-    const[subId, setSubId]=useState(null);
-    const[courseRef, setCourseRef]= useState(false)
-    const[task, setTask] = useState([])
+    const [subId, setSubId]=useState(null);
+    const [courseRef, setCourseRef]= useState(false)
+    const [task, setTask] = useState([])
 
 
     const navigate=useNavigate();
@@ -62,6 +64,7 @@ export default function InstructorMyCourses() {
         setFilterSubject(b)
         var c = document.getElementById('price').value  ;
         setFilterPrice(c)
+        setFiltered(true);
         setCourses([])
     }
 
@@ -220,6 +223,7 @@ export default function InstructorMyCourses() {
             .then((res) => {
                console.log(res.data)
                setCourses(res.data)
+
             })
            .catch(errors => {
                // react on errors.
@@ -238,7 +242,7 @@ export default function InstructorMyCourses() {
 
        setSearchTerm(null)
 
-    }, [searchTerm,searched,filterData,filterPrice,filterSubject]);
+    }, [searchTerm,searched,filterData,filterPrice,filterSubject,filtered]);
    
     const handleOnChange = async(e) =>{
         e.preventDefault()
@@ -415,10 +419,10 @@ export default function InstructorMyCourses() {
 
                         </div>
                         <div className="col-lg-12">
-                            { 
+                            { filtered &&
                                 <div className="card-container"  style={{position:"relative", top:"-160px"}}>
                                     {filterData  && filterData.map((course) =>( 
-                                        <div className="card">
+                                        <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/InstructorCourse`)} }>
                                         <img src="assets/images/courseCard.jpg"/>
                                         <div className="content">
                                             <h3> {course.title} </h3>
@@ -433,7 +437,7 @@ export default function InstructorMyCourses() {
                             { searched &&
                                 <div className="card-container" style={{position:"relative", top:"-160px"}}>
                                     {courses2  && courses2.map((course) =>( 
-                                        <div className="card"  >
+                                        <div className="card"  onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/InstructorCourse`)} }>
                                             <img src="assets/images/courseCard.jpg"/>
                                             <div className="content">
                                                 <h3> {course.title} </h3>
@@ -445,10 +449,10 @@ export default function InstructorMyCourses() {
                                 </div>
                             } 
                             {/* Instructor Course view */}
-                            { !searched  &&
+                            { !searched  && !filtered &&
                             <div className="card-container" style={{position:"relative", top:"-160px"}} >
                                 {courses  && courses.map((course) =>( 
-                                    <div className="card"  >
+                                    <div className="card"  onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/InstructorCourse`)} }>
                                         <img src="assets/images/courseCard.jpg"/>
                                         <div className="content" >
                                             <h3> {course.title} </h3>
