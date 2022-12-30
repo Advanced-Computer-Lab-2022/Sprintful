@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { changePassword ,login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress} = require('../controllers/individualTraineeController')
+const { changePassword ,login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress,getProgressforCourse} = require('../controllers/individualTraineeController')
 const {requireAuth} = require('../middleware/authMiddleware')
 
 router.put('/changePassword',changePassword);
@@ -12,6 +12,6 @@ router.get('/viewMoney/:individualTraineeId', viewMoney)
 
 router.patch('/updateProgress/:traineeid/:courseid',updateProgress)
 router.patch('/insertProgress/:traineeid/:courseid',insertProgress)
-
+router.get('/getProgress/:traineeid/:courseid',getProgressforCourse)
 
 module.exports = router;

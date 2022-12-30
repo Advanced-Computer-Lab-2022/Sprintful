@@ -161,5 +161,42 @@ const updateProgress=asyncHandler(async(req,res)=>{
 })
 
 
+//Get Progress 
+const getProgressforCourse=asyncHandler(async (req, res) => 
+    {  const traineeid=req.params.traineeid;
+       const courseid=req.params.courseid;
 
-module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress}
+       //getting progress array
+       const  ProgressArray=await IndividualTrainee.findOne({_id:traineeid},'-_id progress')
+        const array=ProgressArray.progress   //getting progress array
+
+        //search for the course in progress array using course id 
+
+        let coursedocument;
+        let progress;
+   
+
+        for(let i=0;i<array.length;i++){
+           coursedocument=array[i];
+            //x=coursedocument.course.toString()==courseid;
+           if(coursedocument.course==courseid){
+              progress =coursedocument.progressvalue
+               console.log("found")
+            break;
+            }
+       }
+
+       res.json({progress:progress})
+
+
+    
+    
+    
+       
+    }
+
+)
+
+
+
+module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress,getProgressforCourse}
