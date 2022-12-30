@@ -63,6 +63,7 @@ import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
 import CourseViewInstructor2 from './pages/CourseViewInstructor2';
 import  CourseViewCTN from './pages/CourseViewCTN';
 import CourseViewITN from './pages/CourseViewITN';
+import SubtitleViewIT from './pages/SubtitleViewIT';
 
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
@@ -72,6 +73,7 @@ import ChangeIndividualTraineePassword from './components/ChangeIndividualTraine
 import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
 import ChangeAdminPassword from './components/ChangeAdminPassword';
 import ChangeInstructorPassword from './components/ChangeInstructorPassword';
+
 function App() {
   return (
     <div className="App">
@@ -146,7 +148,7 @@ function App() {
 
            <Route 
             exact path="/api/subtitles/getSubtitle/:subtitleid/ITE/:traineeid/:courseid"
-            element={<SubtitleViewCT/>}/>
+            element={<SubtitleViewIT/>}/>
 
              <Route
               exact path="/api/subtitles/getSubtitle/:subtitleid/Instructor"
