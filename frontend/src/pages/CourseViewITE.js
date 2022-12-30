@@ -209,7 +209,8 @@ const CourseViewITE=()=>{
                          Enroll
                            </Button>
 
-                           <Button   style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40,ml:2 }}>
+                           <Button   style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40,ml:2 }}
+                            onClick={() => window.location.href = `/Video?link=${course.previewvideolink}`}>
                          Watch a preview video
                            </Button>
                     </Box>

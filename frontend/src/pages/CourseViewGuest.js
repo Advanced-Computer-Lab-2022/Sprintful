@@ -11,12 +11,15 @@ import SubtitleCard from '../components/SubtitleCard'
 // import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import {useNavigate} from "react-router";
 
 //stylings custom css
 
 
 
 const CourseViewGuest=()=>{
+  const navigate=useNavigate();
+
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
@@ -209,7 +212,8 @@ const CourseViewGuest=()=>{
                           
                            >
                             
-                         <Button  style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                         <Button  style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}
+                          onClick={() => window.location.href = `/Video?link=${course.previewvideolink}`}>
                           Watch a preview video 
                            </Button>
                     </Box>
