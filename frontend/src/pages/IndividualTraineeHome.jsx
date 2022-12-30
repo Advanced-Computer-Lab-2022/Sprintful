@@ -1,5 +1,6 @@
 import HomeSearch from '../components/HomeSearch';
 import IndividualTraineeHomeNavBar from '../components/IndividualTraineeHomeNavBar';
+import IndividualTraineeSearch from '../components/IndividualTraineeSearch';
 export default function IndividualTraineeHome() {
     return (
 
@@ -49,7 +50,7 @@ export default function IndividualTraineeHome() {
                             </ul>
                         </div>
                         <div className="col-lg-12">
-                           <HomeSearch/> 
+                           <IndividualTraineeSearch/> 
                         </div>=
                     </div>
                 </div>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const CorporateTraineeSearch = () => {
+    const navigate = useNavigate();
     const [courses,setCourses] = useState([])
     const [searchTerm,setSearchTerm] = useState(null)
     const [searched,setSearched] = useState(false)
@@ -146,7 +148,7 @@ const styleRating ={
     { 
         <div className="card-container">
             {filterData  && filterData.map((course) =>( 
-                  <div className="card">
+                  <div className="card"  onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTR`)} }>
                   <img src="assets/images/courseCard.jpg"/>
                   <div className="content">
                       <h3> {course.title} </h3>
@@ -164,7 +166,7 @@ const styleRating ={
         { searched &&
             <div className="card-container">
                 {courses  && courses.map((course) =>( 
-                      <div className="card">
+                      <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTR`)} }>
                       <img src="assets/images/courseCard.jpg"/>
                       <div className="content">
                           <h3> {course.title} </h3>
