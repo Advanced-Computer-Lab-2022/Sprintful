@@ -34,8 +34,9 @@ const corporateTraineeSchema = mongoose.Schema({
 
     progress:[{
         course:{type: mongoose.Schema.Types.ObjectId,
-        ref: 'Course', 
+              ref: 'Course', 
                },
+
         progressvalue:{type:Number}       
 
              }
