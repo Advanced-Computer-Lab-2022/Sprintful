@@ -41,10 +41,11 @@ const CourseViewCTN=()=>{
     const [courseStates,setCourseStates]=useState({
         course:null,
         coursePriceAfterDiscount:'',
-        courseSubtitles:[]
+        courseSubtitles:[],
+        progress:0
      });
     ///api/courses
-    const {courseid}=useParams();
+    const {courseid,traineeid}=useParams();
 
     //useNavigate
     const navigate=useNavigate();
@@ -103,10 +104,17 @@ const CourseViewCTN=()=>{
             const subtitlesArray=response2.data;
             //setCourseSubtitles(subtitlesArray);
 
+
+            //getting the corporateTrainee progress in course 
+            const response3=await axios.get(`http://localhost:5000/api/corporateTrainee/getProgress/${traineeid}/${courseid}`)
+            const progressdata=response3.data.progress
+            const progressPercentage=Math.trunc(progressdata*100)
+
             setCourseStates({
                 course:coursedata,
                 coursePriceAfterDiscount:finalPrice,
-                courseSubtitles:subtitlesArray
+                courseSubtitles:subtitlesArray,
+                progress:progressPercentage
 
 
 
@@ -128,7 +136,7 @@ const CourseViewCTN=()=>{
         ,[] );
 
 
-        const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates
+        const {course, coursePriceAfterDiscount,courseSubtitles,progress}=courseStates
 
 
 
@@ -141,6 +149,7 @@ const CourseViewCTN=()=>{
                <h3> {course && course.title} </h3>
                <h6>Total Hours :{course&&course.totalhours}</h6>
                <h6>Price:  {course && coursePriceAfterDiscount}</h6>
+               <h6>Your Progress: {course && progress} %</h6>
                
                </StyledCourseHeader>
                 
