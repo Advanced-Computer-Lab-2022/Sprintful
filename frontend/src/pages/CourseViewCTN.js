@@ -13,7 +13,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
-import SubtitleCardClickableTrainee from '../components/SubtitleCardClickableTrainee';
+
+import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableTraineeCT';
 
 
 
@@ -186,7 +187,7 @@ const CourseViewCTN=()=>{
                  {/* subtitles */}
 
                   {course &&courseSubtitles.map((subtitle)=>(
-                        <SubtitleCardClickableTrainee key={subtitle._id}  subtitle={subtitle}/> 
+                        <SubtitleCardClickableTraineeCT key={subtitle._id}  subtitle={subtitle}  traineeid={traineeid}  courseid={courseid}/> 
                          ))}
                     </div>
 

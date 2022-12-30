@@ -19,7 +19,11 @@ export default function SubtitleViewCT() {
     const  [subtitle,setSubtitle]=useState(null);
 
     //subtitle_id
-    const {subtitleid}=useParams();
+    const subtitleid=useParams().subtitleid;
+    //traineeid
+    const traineeid=useParams().traineeid;
+    //courseid
+    const courseid=useParams().courseid;
 
     //using useEffect
 
@@ -29,6 +33,17 @@ export default function SubtitleViewCT() {
             const response= await axios.get(`http://localhost:5000/api/subtitles/${subtitleid}`);
             const subtitledata=response.data;
             setSubtitle(subtitledata);
+
+            const response2= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
+            const coursehours=response2.data.totalhours
+
+
+
+      const addedProgress=subtitledata.totalHours/coursehours;
+
+        const update ={addedprogress:addedProgress}
+         
+        const response3=await axios.patch(`http://localhost:5000/api/corporateTrainee/updateProgress/${traineeid}/${courseid}`,update);
 
 
         }
