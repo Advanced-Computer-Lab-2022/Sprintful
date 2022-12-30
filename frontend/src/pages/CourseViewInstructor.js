@@ -71,8 +71,9 @@ const CourseViewInstructor=()=>{
                const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
                const coursedata=response.data;
                let finalPrice=0;
-    
-               //handling setting course price according to discount and its expiry date 
+
+
+                //handling setting course price according to discount and its expiry date 
                    //checking if expiry date has passed
                       //getting today's date (day 1)
                       let currentdate  =new Date();
@@ -81,13 +82,22 @@ const CourseViewInstructor=()=>{
                       let day =currentdate.getDate();
                       let dateCformat=`${year}-${month}-${day}`  //current date in appropriate format.
                       let dateC=new Date(dateCformat);
-                      //console.log(dateCformat);
+                      //console.log(currentdate);
+                      console.log(dateC)
+
 
                       //getting expiry date from DB "through server response"
-                      const expirydate=coursedata.discountExpireAt;
-                      const dateEformat=expirydate.substring(0,10);  //Put it in appropriate format
+                      const expirydate=coursedata.discountExpireAt+"";
+                      const dateformat=new Date(expirydate)
+
+                      let year2=dateformat.getFullYear();
+                      let month2=dateformat.getMonth()+1; //because it outputs a number from 0-11 ex:3-->April
+                      let day2 =dateformat.getDate();
+                      //const dateEformat=expirydate.substring(0,10);  //Put it in appropriate format
+                      const dateEformat =`${year2}-${month2}-${day2}`
                       const dateE=new Date(dateEformat);
-                      //console.log(dateEformat);
+                      //console.log(expirydate);
+                      console.log(dateE);
 
                       //Comparing current date with expiry date 
                       console.log(dateC.getTime()<=dateE.getTime());
@@ -100,6 +110,37 @@ const CourseViewInstructor=()=>{
                        else{
                         finalPrice=coursedata.price;
                           }
+
+
+    
+              //  //handling setting course price according to discount and its expiry date 
+              //      //checking if expiry date has passed
+              //         //getting today's date (day 1)
+              //         let currentdate  =new Date();
+              //         let year=currentdate.getFullYear();
+              //         let month=currentdate.getMonth()+1; //because it outputs a number from 0-11 ex:3-->April
+              //         let day =currentdate.getDate();
+              //         let dateCformat=`${year}-${month}-${day}`  //current date in appropriate format.
+              //         let dateC=new Date(dateCformat);
+              //         //console.log(dateCformat);
+
+              //         //getting expiry date from DB "through server response"
+              //         const expirydate=coursedata.discountExpireAt;
+              //         const dateEformat=expirydate.substring(0,10);  //Put it in appropriate format
+              //         const dateE=new Date(dateEformat);
+              //         //console.log(dateEformat);
+
+              //         //Comparing current date with expiry date 
+              //         console.log(dateC.getTime()<=dateE.getTime());
+              //         if(dateC.getTime()<=dateE.getTime()){
+
+              //           const newPrice=coursedata.discount*coursedata.price;
+              //           finalPrice=newPrice;
+              //          }
+
+              //          else{
+              //           finalPrice=coursedata.price;
+              //             }
 
 
 
