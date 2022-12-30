@@ -115,4 +115,30 @@ const getCorporateTraineeProfile = asyncHandler(async (req, res) => {
 })
 
 
-module.exports = { createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile}
+const updateProgress=asyncHandler(async(req,res)=>{
+    const traineeid=req.params.traineeid;
+    const courseid=req.params.courseid;
+    const addedProgress=req.body.addedprogress;
+
+    //Getting the Past Progress 
+    const  ProgressArray=await CorporateTrainee.findOne({_id:traineeid},'-_id progress')
+    res.json(ProgressArray);
+    let coursedocument;
+
+     for(let i=0;i<ProgressArray.length;i++){
+        coursedocument=ProgressArray[i];
+        if(coursedocument.course.toString()===courseid){
+            coursedocument.progressvalue=coursedocument.progressvalue+addedProgress
+            break;
+         }
+     }
+
+     res.json(coursedocument)
+
+
+
+
+})
+
+
+module.exports = { createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress}
