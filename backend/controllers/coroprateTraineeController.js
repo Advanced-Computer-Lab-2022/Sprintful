@@ -114,7 +114,33 @@ const getCorporateTraineeProfile = asyncHandler(async (req, res) => {
     }
 })
 
+//inserting progress of a certain course
+const insertProgress=asyncHandler(async(req,res)=>{
+    const traineeid=req.params.traineeid;
+    const courseid=req.params.courseid;
+    const addedProgress=req.body.addedprogress;
 
+    //Updating progressArray
+       //update 
+       const newcourseProgress={course:courseid,progressvalue:addedProgress}
+       const partialprogressarray=[newcourseProgress]
+       const newProgressArray = (await CorporateTrainee.findById(traineeid)).progress.concat(partialprogressarray)
+
+
+
+
+
+
+       //Updating progressArray
+       const updatingprogress=await CorporateTrainee.findOneAndUpdate({_id:traineeid},{progress:newProgressArray},{new:true});
+       res.json(updatingprogress)
+
+}
+
+)
+
+
+//Updating progress of a certain course
 const updateProgress=asyncHandler(async(req,res)=>{
     const traineeid=req.params.traineeid;
     const courseid=req.params.courseid;
