@@ -168,7 +168,7 @@ const HomeSearch = () => {
     { 
         <div className="card-container">
             {filterData  && filterData.map((course) =>( 
-                  <div className="card">
+                  <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/guest`)} }>
                   <img src="assets/images/courseCard.jpg"/>
                   <div className="content">
                       <h3> {course.title} </h3>
@@ -199,46 +199,6 @@ const HomeSearch = () => {
                       </div>
                 ))}
               
-{/*             
-                <div className="card">
-                <img src="https://placeimg.com/800/500/arch"/>
-                <div className="content">
-                    <h3>Architecture is wonderful.</h3>
-                    <p>Override the digital divide with additional clickthroughs from DevOps.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/nature"/>
-                <div className="content">
-                    <h3>Be one with mother nature.</h3>
-                    <p>Capitalize on low hanging fruit to identify a ballpark value added activity to beta test.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/people"/>
-                <div className="content">
-                    <h3>There's billions of people, let's be excellent to them.</h3>
-                    <p>Leverage agile frameworks to provide a robust synopsis for high level overviews.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/tech"/>
-                <div className="content">
-                    <h3>Technology is life...</h3>
-                    <p>Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
-                </div>
-                </div>
-            
-                <div className="card">
-                <img src="https://placeimg.com/800/500/any"/>
-                <div className="content">
-                    <h3>Do you feel lucky?</h3>
-                    <p>Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition.</p>
-                </div>
-                </div> */}
                 
             </div>
         }
