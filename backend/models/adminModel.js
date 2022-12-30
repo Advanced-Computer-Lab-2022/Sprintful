@@ -14,6 +14,15 @@ const adminSchema = mongoose.Schema({
         required: [true, 'Please add a password'],
         minlength: [6, 'Password cannot be less than 6 characters'],
     },
+   
+    RefundsRequests:[{
+        
+       traineeName:{type:String },
+       course:{type: mongoose.Schema.Types.ObjectId,
+                ref: 'Course', 
+                 },
+                     }
+                     ],
     // role:{
     //     type: String,
     //     required: [true]
