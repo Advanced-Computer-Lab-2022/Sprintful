@@ -32,6 +32,30 @@ app.use('/api/answers', require('./routes/answerRoutes'))
 app.use('/api/questions', require('./routes/questionRoutes'))
 app.use('/api/report', require('./routes/reportRoutes'))
 app.use('/api/requestAccess', require('./routes/requestAccessRoutes'))
+app.use('/api/refund', require('./routes/refundRequestRoutes'))
+app.post("/payment", async (req, res) => {
+	let { amount, id } = req.body
+	try {
+		const payment = await stripe.paymentIntents.create({
+			amount,
+			currency: "USD",
+			description: "Online learning platform",
+			payment_method: id,
+			confirm: true
+		})
+		console.log("Payment", payment)
+		res.json({
+			message: "Payment successful",
+			success: true
+		})
+	} catch (error) {
+		console.log("Error", error)
+		res.json({
+			message: "Payment failed",
+			success: false
+		})
+	}
+})
 
 app.listen(port, () => { 
     console.log(`Server running in ${process.env.NODE_ENV} mode on port ${port}`.yellow.bold)
