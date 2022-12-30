@@ -167,4 +167,4 @@ const updateProgress=asyncHandler(async(req,res)=>{
 })
 
 
-module.exports = { createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress}
+module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress}
