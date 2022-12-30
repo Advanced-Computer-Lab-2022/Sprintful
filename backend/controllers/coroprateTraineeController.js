@@ -179,4 +179,53 @@ const updateProgress=asyncHandler(async(req,res)=>{
 })
 
 
-module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress}
+//Get Progress 
+const getProgressforCourse=asyncHandler(async (req, res) => 
+    {  const traineeid=req.params.traineeid;
+       const courseid=req.params.courseid;
+
+       //getting progress array
+       const  ProgressArray=await CorporateTrainee.findOne({_id:traineeid},'-_id progress')
+        const array=ProgressArray.progress   //getting progress array
+
+        //search for the course in progress array using course id 
+
+        let coursedocument;
+        let progress;
+   
+
+        for(let i=0;i<array.length;i++){
+           coursedocument=array[i];
+            //x=coursedocument.course.toString()==courseid;
+           if(coursedocument.course==courseid){
+              progress =coursedocument.progressvalue
+               console.log("found")
+            break;
+            }
+       }
+
+       res.json({progress:progress})
+
+
+    
+    
+    
+       
+    }
+
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse}

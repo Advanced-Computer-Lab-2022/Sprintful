@@ -13,4 +13,5 @@ router.get('/viewMoney/:individualTraineeId', viewMoney)
 router.patch('/updateProgress/:traineeid/:courseid',updateProgress)
 router.patch('/insertProgress/:traineeid/:courseid',insertProgress)
 
+
 module.exports = router;
