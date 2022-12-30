@@ -62,6 +62,7 @@ import SubtitleViewCT from './pages/SubtitleViewCT';
 import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
 import CourseViewInstructor2 from './pages/CourseViewInstructor2';
 import  CourseViewCTN from './pages/CourseViewCTN';
+import CourseViewITN from './pages/CourseViewITN';
 
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
@@ -129,8 +130,8 @@ function App() {
             {/* //IndividualTrainee view Course Page after enrolling  "same Page as Corporate Trainee*/}
 
             <Route 
-            exact path="/api/courses/getCourse/:courseid/ITN"
-            element={<CourseViewCTN/>}/>
+            exact path="/api/courses/getCourse/:courseid/ITN/:traineeid"
+            element={<CourseViewITN/>}/>
 
 
   
