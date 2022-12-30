@@ -141,11 +141,11 @@ function App() {
  
             {/* subtitleViews */}
             <Route 
-            exact path="//api/subtitles/getSubtitle/:subtitleid/CTE"
+            exact path="/api/subtitles/getSubtitle/:subtitleid/CTE/:traineeid/:courseid"
             element={<SubtitleViewCT/>}/>
 
            <Route 
-            exact path="/api/subtitles/getSubtitle/:subtitleid/ITE"
+            exact path="/api/subtitles/getSubtitle/:subtitleid/ITE/:traineeid/:courseid"
             element={<SubtitleViewCT/>}/>
 
              <Route
