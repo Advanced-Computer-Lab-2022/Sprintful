@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
 import { useParams } from 'react-router-dom';
+import {useNavigate} from "react-router";
 import { makeStyles } from '@mui/styles';
 import {Typography} from '@mui/material';
 import { blue } from '@mui/material/colors';
@@ -21,6 +22,12 @@ import { positions } from '@mui/system';
 
 
 const CourseViewITE=()=>{
+
+  let params = new URLSearchParams(document.location.search);
+  let id = params.get("id");
+
+  const navigate=useNavigate();
+
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
@@ -157,7 +164,8 @@ const CourseViewITE=()=>{
                           
                            >
                             
-                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }} 
+                           onClick ={ () => { navigate(`/payment/${courseid}/${id}`) }}>
                          Enroll
                            </Button>
 

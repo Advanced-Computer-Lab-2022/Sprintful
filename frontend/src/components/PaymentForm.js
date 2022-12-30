@@ -22,7 +22,7 @@ const CARD_OPTIONS = {
 		}
 	}
 }
-export default function PaymentForm() {
+export default function PaymentForm({individualId}, {courseId}) {
     const [success,setSuccess] = useState(false)
     const stripe = useStripe()
     const elements = useElements()
@@ -35,11 +35,14 @@ export default function PaymentForm() {
         })
         if(!error){
             try{
-                const {id} =paymentMethod
-                const response = await axios.post('http://localhost:5000/payment',{
-                    amount: 1000, // in cents
-                    id
+                const {id} = paymentMethod
+                const response = await axios.post(`http://localhost:5000/api/courses/individual/payCredit`,{
+                    params : { courseId: courseId , individualId :individualId },
+                    paymentMethod: id
+                    
                 })
+                console.log(courseId)
+                console.log(individualId)
                 if(response.data.success){
                     console.log("Successful Payment")
                     setSuccess(true)

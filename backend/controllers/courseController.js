@@ -5,12 +5,71 @@ const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const Instructor = require('../models/instructorModel')
 const Subtitle = require('../models/subtitleModel.js')
+const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 
 // @desc    Get course by id
 // @route   GET /api/courses/:id
 // @access  Public
 
-var searchedCourses = []
+var searchedCourses = [];
+
+const payCredit = asyncHandler(async (req, res)  => {
+    const id = req.body.paymentMethod
+    const courseId = req.params.courseId;
+    const individualId = req.params.individualId;
+    const course = await Course.find({_id: courseId});
+    let discount = course[0].discount;
+    let price = course[0].price;
+    let amount = Math.ceil(price-(price*discount));
+    console.log(amount);
+    	try {
+		const payment = await stripe.paymentIntents.create({
+			amount,
+			currency: "EGP",
+			description: "Online learning platform",
+			payment_method: id,
+			confirm: true
+		})
+		console.log("Payment", payment)
+        const newCoursesList = ((await IndividualTrainee.findById(individualId)).courses).concat(courseId)
+        const response =await IndividualTrainee.findByIdAndUpdate(individualId,{courses: newCoursesList }).exec()
+		res.json({
+			message: "Payment successful",
+			success: true,
+            response:response
+		})
+	} catch (error) {
+		console.log("Error", error)
+		res.json({
+			message: "Payment failed",
+			success: false
+		})
+	}
+})
+
+// app.post("/payment", async (req, res) => {
+// 	let { amount, id } = req.body
+// 	try {
+// 		const payment = await stripe.paymentIntents.create({
+// 			amount,
+// 			currency: "USD",
+// 			description: "Online learning platform",
+// 			payment_method: id,
+// 			confirm: true
+// 		})
+// 		console.log("Payment", payment)
+// 		res.json({
+// 			message: "Payment successful",
+// 			success: true
+// 		})
+// 	} catch (error) {
+// 		console.log("Error", error)
+// 		res.json({
+// 			message: "Payment failed",
+// 			success: false
+// 		})
+// 	}
+// })
 
 //Add a Discount and Set its expiration date 
 const addPromotion=asyncHandler(async (req,res)=>{
@@ -614,5 +673,6 @@ module.exports = {
     searchInstructorCourses,
     acceptContract,
     acceptPolicy,
-    filterInstructorCourses
+    filterInstructorCourses,
+    payCredit
 }

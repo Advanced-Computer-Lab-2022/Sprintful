@@ -20,8 +20,10 @@ const { getCourseById,
     getSubtitleId,addPromotion,getSubtitlesforCourse,
     searchInstructorCourses,
     acceptContract,
-    acceptPolicy } = require('../controllers/courseController')   //destructuring
+    acceptPolicy, 
+    payCredit } = require('../controllers/courseController')   //destructuring
 
+router.post('/individual/payCredit/:courseId/:individualId/', payCredit)
 router.get('/instructor/search', searchInstructorCourses)
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
 router.get('/instructor', instructorCourses) // get all courses for instructor

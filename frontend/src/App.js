@@ -267,7 +267,7 @@ function App() {
 
             {/* Hoda */}
             <Route
-              exact path="/payment"
+              exact path="/payment/:courseId/:individualId"
               element={<StripeContainer/>}
             />
             <Route

@@ -3,6 +3,9 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 export default function IndividualTraineeSearch() {
+
+    let params = new URLSearchParams(document.location.search);
+    let id = params.get("id");
     const navigate = useNavigate();
 
     const [courses,setCourses] = useState([])
@@ -40,7 +43,6 @@ export default function IndividualTraineeSearch() {
                   console.log("entered empty check")
                   setFilterData([])
                 }
-      
             })
           }
           response()
@@ -113,7 +115,7 @@ export default function IndividualTraineeSearch() {
     </form> }
     <div className="col-lg-12">
     <div>
-{ <form id="search-form" name="gs" method="submit" role="search" action="#"  style={styleFilterForm}>
+{ <form id="search-form" name="gs" method="submit" role="search" action="#" style={styleFilterForm}>
     <div className="row">
         <div className="col-lg-3 align-self-center">
             <fieldset>
@@ -166,7 +168,7 @@ export default function IndividualTraineeSearch() {
 { 
     <div className="card-container">
         {filterData  && filterData.map((course) =>( 
-              <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/ITE`)} }>
+              <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/ITE?id=${id}`)} }>
               <img src="assets/images/courseCard.jpg"/>
               <div className="content">
                   <h3> {course.title} </h3>
@@ -185,7 +187,7 @@ export default function IndividualTraineeSearch() {
         
         <div className="card-container">
             {courses  && courses.map((course) =>( 
-                  <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/ITE`)} }>
+                  <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/ITE?id=${id}`)} }>
                     {/* :courseid */}
                   <img src="assets/images/courseCard.jpg"/>
                   <div className="content">
