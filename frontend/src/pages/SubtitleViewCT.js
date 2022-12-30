@@ -39,7 +39,7 @@ export default function SubtitleViewCT() {
 
 
 
-      const addedProgress=subtitledata.totalHours/coursehours;
+      const addedProgress=(subtitledata.totalHours-0.5)/coursehours;
 
         const update ={addedprogress:addedProgress}
          
