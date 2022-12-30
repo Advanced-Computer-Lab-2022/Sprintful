@@ -51,8 +51,18 @@ import StripeContainer from './components/StripeContainer';
 // import '../src/pages/Signup.css'
 
 import AddPromotionCourse from './pages/AddPromotionCourse';
-import CourseView from './pages/CourseView';
-import CourseViewPage from './pages/CourseViewPage';
+import CourseViewGuest from './pages/CourseViewGuest';
+
+//test
+import TestCard from './pages/TestCard';
+import CourseViewCTR from './pages/CourseViewCTR';
+import CourseViewITE from './pages/CourseViewITE';
+import CourseViewInstructor from './pages/CourseViewInstructor';
+import SubtitleViewCT from './pages/SubtitleViewCT';
+import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
+import CourseViewInstructor2 from './pages/CourseViewInstructor2';
+import  CourseViewCTN from './pages/CourseViewCTN';
+
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
 
@@ -81,17 +91,69 @@ function App() {
               exact path="/api/subtitles/addVideoLink/:subtitleid"
               element={<AddVideoLinkSubtitle />}
             />
-            <Route
-              exact path="/api/subtitles/:subtitleid/Instructor"
-              element={<SubtitlePageInst />}
-            />
+            
             <Route 
             exact path ="/api/courses/addPromotion/:courseid"
             element ={<AddPromotionCourse/>} />
 
             <Route 
-            exact path="/api/courses/getCourse/:courseid"
-            element={<CourseView/>} />
+            exact path="/api/courses/getCourse/:courseid/guest"
+            element={<CourseViewGuest/>} />
+            {/* test Route */}
+            {/* <Route 
+            exact path="/api/teesst"
+            element={<TestCard/>}/> */}
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/CTR"
+            element={<CourseViewCTR/>}/>
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/ITE"
+            element={<CourseViewITE/>}/>
+
+             {/* Instructor Viweing His own Course */}
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/InstructorCourse"
+            element={<CourseViewInstructor/>}/>
+
+
+          {/* Instructor viewing not his own course */}
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/Instructor"
+            element={<CourseViewInstructor2/>}/>
+
+            {/* Corporate Trainee view  course page after enrolling  */}
+           <Route 
+            exact path="/api/courses/getCourse/:courseid/CTN"
+            element={<CourseViewCTN/>}/>
+
+            {/* //IndividualTrainee view Course Page after enrolling  "same Page as Corporate Trainee*/}
+
+            <Route 
+            exact path="/api/courses/getCourse/:courseid/ITN"
+            element={<CourseViewCTN/>}/>
+
+
+  
+
+
+
+ 
+            {/* subtitleViews */}
+            <Route 
+            exact path="//api/subtitles/getSubtitle/:subtitleid/CTE"
+            element={<SubtitleViewCT/>}/>
+
+           <Route 
+            exact path="/api/subtitles/getSubtitle/:subtitleid/ITE"
+            element={<SubtitleViewCT/>}/>
+
+             <Route
+              exact path="/api/subtitles/getSubtitle/:subtitleid/Instructor"
+              element={<SubtitlePageInstructorNew />}
+            />
+
+             
+            
 
             {/* Nada */}
             <Route

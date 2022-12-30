@@ -12,6 +12,8 @@ box-shadow :0 0 5px rgba (0,0,0,0.15);
 margin:5px 5px 5px;
 padding :0px;
 position :relative;
+width: 900px;
+
 
 h6{
    margin :5px 5px 10px;

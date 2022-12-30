@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {useEffect, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import {Typography} from '@mui/material';
 import { blue } from '@mui/material/colors';
@@ -11,19 +11,24 @@ import SubtitleCard from '../components/SubtitleCard'
 // import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import { spacing } from '@mui/system';
+import { positions } from '@mui/system';
+import SubtitleCardClickableTrainee from '../components/SubtitleCardClickableTrainee';
+
+
 
 //stylings custom css
 
 
 
-const CourseViewGuest=()=>{
+const CourseViewCTN=()=>{
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
     //         color:blue,
     
     
-    
+     
     //     }
     // })
 
@@ -33,17 +38,20 @@ const CourseViewGuest=()=>{
     // const [course,setCourse]=useState(null);
     // const [coursePriceAfterDiscount,setPrice]=useState('');
     // const [courseSubtitles,setCourseSubtitles]=useState([]);
-
-
     const [courseStates,setCourseStates]=useState({
-      course:null,
-      coursePriceAfterDiscount:'',
-      courseSubtitles:[]
-   });
-    
+        course:null,
+        coursePriceAfterDiscount:'',
+        courseSubtitles:[]
+     });
     ///api/courses
     const {courseid}=useParams();
 
+    //useNavigate
+    const navigate=useNavigate();
+
+
+    //Button Clicking 
+   
 
   
     //Using useEffect to run only on 1st render to display the course's data
@@ -51,22 +59,22 @@ const CourseViewGuest=()=>{
         const getCourseanditsSubtitle=async()=>{
 
        
-            try{
+           
             //Sending a get request to the server to get course
                const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
                const coursedata=response.data;
-               let finalPrice=0;
-              
+               //setCourse(coursedata);
     
+               let finalPrice=0;
                //handling setting course price according to discount and its expiry date 
                    //checking if expiry date has passed
                       //getting today's date (day 1)
-                      let currentdate  =new Date();
-                      let year=currentdate.getFullYear();
-                      let month=currentdate.getMonth()+1; //because it outputs a number from 0-11 ex:3-->April
-                      let day =currentdate.getDate();
-                      let dateCformat=`${year}-${month}-${day}`  //current date in appropriate format.
-                      let dateC=new Date(dateCformat);
+                      const currentdate  =new Date();
+                      const year=currentdate.getFullYear();
+                      const month=currentdate.getMonth()+1; //because it outputs a number from 0-11 ex:3-->April
+                      const day =currentdate.getDate();
+                      const dateCformat=`${year}-${month}-${day}`  //current date in appropriate format.
+                      const dateC=new Date(dateCformat);
                       //console.log(dateCformat);
 
                       //getting expiry date from DB "through server response"
@@ -76,15 +84,16 @@ const CourseViewGuest=()=>{
                       //console.log(dateEformat);
 
                       //Comparing current date with expiry date 
-                      console.log(dateC.getTime()<=dateE.getTime());
+                      //console.log(dateC.getTime()<=dateE.getTime());
                        if(dateC.getTime()<=dateE.getTime()){
 
                         const newPrice=coursedata.discount*coursedata.price;
                         finalPrice=newPrice;
+                        console.log('heree')
                        }
 
                        else{
-                        finalPrice=coursedata.price;
+                       finalPrice=coursedata.price;
                           }
 
 
@@ -95,13 +104,15 @@ const CourseViewGuest=()=>{
             //setCourseSubtitles(subtitlesArray);
 
             setCourseStates({
-              course:coursedata,
-              coursePriceAfterDiscount:finalPrice,
-              courseSubtitles:subtitlesArray
+                course:coursedata,
+                coursePriceAfterDiscount:finalPrice,
+                courseSubtitles:subtitlesArray
 
 
 
-          })
+            })
+
+
 
     
     
@@ -109,43 +120,27 @@ const CourseViewGuest=()=>{
     
             }
             //catching any request error
-            catch (error){
+            
     
-            }
-    
-          }
+          
          
-         getCourseanditsSubtitle(); } 
-        ,[courseid] );
+         getCourseanditsSubtitle()}  
+        ,[] );
 
 
-        const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates    //destructuring 
+        const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates
+
 
 
     return (
 
         <div>
             <div>
-               {/* we check that course is not null before getting its attributes using boolean operator && AND
-                <Typography
-                variant="h5"
-                color="primary">{course&&course.title}
-                </Typography>
-                <Typography
-                variant="h6"
-                color="secondary"
-                >Total Hours :{course&&course.totalhours}
-                </Typography>
-
-                <Typography
-                variant="h6"
-                color="primary"
-                >Price:  {course&&coursePriceAfterDiscount}
-                </Typography> */}
+               
                < StyledCourseHeader>
-               <h3> {course&&course.title} </h3>
+               <h3> {course && course.title} </h3>
                <h6>Total Hours :{course&&course.totalhours}</h6>
-               <h6>Price:  {course&&coursePriceAfterDiscount}</h6>
+               <h6>Price:  {course && coursePriceAfterDiscount}</h6>
                
                </StyledCourseHeader>
                 
@@ -154,13 +149,13 @@ const CourseViewGuest=()=>{
 
 
 
-                   <Box
+                    <Box
                          //margin
                         mt={1}
                         ml={0}
                         pl={0}
                        
-                          
+                        
 
                         
                          display="flex"
@@ -169,9 +164,8 @@ const CourseViewGuest=()=>{
                           
                            >
                             
-                         <Button  style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
-                          Watch a preview video 
-                           </Button>
+                        
+                       
                     </Box>
 
 
@@ -181,38 +175,11 @@ const CourseViewGuest=()=>{
 
               <div>
                  {/* subtitles */}
-                 
-    
-                  {/* {courseSubtitles.map((subtitle)=>(
-                    <div  key={subtitle._id}>
-                       <h5>{subtitle.title}</h5>
-                       <h6>total hours :{subtitle.totalHours}</h6>
-                       {subtitle.tasks.map((task)=>(
-                        <div key={task._id}>
-                          <p>  {task.title}</p>
-                        </div>
 
-                       ))} */}
-
-
-                      {courseSubtitles.map((subtitle)=>(
-                        <SubtitleCard key={subtitle._id}  subtitle={subtitle}/> 
+                  {course &&courseSubtitles.map((subtitle)=>(
+                        <SubtitleCardClickableTrainee key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
-                        
-
-
-                  
-
-
-                 
-
-
-
-
-
-
-
-             </div>
+                    </div>
 
 
 
@@ -220,4 +187,4 @@ const CourseViewGuest=()=>{
     )
 }
 
-export default CourseViewGuest;
+export default CourseViewCTN;

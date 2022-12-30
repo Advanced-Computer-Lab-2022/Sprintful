@@ -5,17 +5,19 @@ import { makeStyles } from '@mui/styles';
 import {Typography} from '@mui/material';
 import { blue } from '@mui/material/colors';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
-import Card from '../components/Card'
+import SubtitleCard from '../components/SubtitleCard'
 // import Card from '@mui/material/Card';
 // import CardActions from '@mui/material/CardActions';
 // import CardContent from '@mui/material/CardContent';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
 
 
 //stylings custom css
 
 
 
-const CourseView=()=>{
+const CourseViewInstructor2=()=>{
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
@@ -29,10 +31,18 @@ const CourseView=()=>{
     //styles
     // const classes=useStyles();
 
-    const [course,setCourse]=useState(null);
-    const [coursePriceAfterDiscount,setPrice]=useState('');
-    const [courseSubtitles,setCourseSubtitles]=useState([]);
+    // const [course,setCourse]=useState(null);
+    // const [coursePriceAfterDiscount,setPrice]=useState('');
+    // const [courseSubtitles,setCourseSubtitles]=useState([]);
     
+
+    //state document 
+    const [courseStates,setCourseStates]=useState({
+      course:null,
+      coursePriceAfterDiscount:'',
+      courseSubtitles:[]
+   });
+
     ///api/courses
     const {courseid}=useParams();
 
@@ -47,7 +57,9 @@ const CourseView=()=>{
             //Sending a get request to the server to get course
                const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
                const coursedata=response.data;
-               setCourse(coursedata);
+               
+               let finalPrice=0;
+              
     
                //handling setting course price according to discount and its expiry date 
                    //checking if expiry date has passed
@@ -68,22 +80,31 @@ const CourseView=()=>{
 
                       //Comparing current date with expiry date 
                       console.log(dateC.getTime()<=dateE.getTime());
-                       if(dateC.getTime()<=dateE.getTime()){
+                      if(dateC.getTime()<=dateE.getTime()){
 
-                        const newPrice=course.discount*course.price;
-                        setPrice(newPrice);
+                        const newPrice=coursedata.discount*coursedata.price;
+                        finalPrice=newPrice;
                        }
 
                        else{
-                        setPrice(coursedata.price);
+                        finalPrice=coursedata.price;
                           }
+
 
 
 
             //Sending a get request to server to get this course's Subtitles
             const response2=await axios.get(`http://localhost:5000/api/courses/getSubtitlesforCourse/${courseid}`);
             const subtitlesArray=response2.data;
-            setCourseSubtitles(subtitlesArray);
+            //setCourseSubtitles(subtitlesArray);
+            setCourseStates({
+              course:coursedata,
+              coursePriceAfterDiscount:finalPrice,
+              courseSubtitles:subtitlesArray
+
+
+
+          })
 
     
     
@@ -100,7 +121,8 @@ const CourseView=()=>{
          getCourseanditsSubtitle(); } 
         ,[courseid] );
 
-
+  
+        const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates    //destructuring 
 
 
 
@@ -125,7 +147,9 @@ const CourseView=()=>{
                 >Price:  {course&&coursePriceAfterDiscount}
                 </Typography> */}
                < StyledCourseHeader>
-               <h3> {course&&course.title} </h3>
+               <h3>{course && course.title}</h3>
+               <h6>Total Hours:{course && course.totalhours}</h6>
+               <h6>Price:{course && coursePriceAfterDiscount}</h6>
                
                </StyledCourseHeader>
                 
@@ -133,6 +157,25 @@ const CourseView=()=>{
              </div>
 
 
+             <Box
+                         //margin
+                        mt={1}
+                        ml={0}
+                        pl={0}
+                       
+                          
+
+                        
+                         display="flex"
+                        justifyContent="flex-start"
+                        alignItems="flex-start"
+                          
+                           >
+                            
+                         <Button  style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                          Watch a preview video 
+                           </Button>
+                    </Box>
 
 
              
@@ -141,20 +184,11 @@ const CourseView=()=>{
                  {/* subtitles */}
                  
     
-                  {/* {courseSubtitles.map((subtitle)=>(
-                    <div  key={subtitle._id}>
-                       <h5>{subtitle.title}</h5>
-                       <h6>total hours :{subtitle.totalHours}</h6>
-                       {subtitle.tasks.map((task)=>(
-                        <div key={task._id}>
-                          <p>  {task.title}</p>
-                        </div>
-
-                       ))} */}
+                 
 
 
-                      {courseSubtitles.map((subtitle)=>(
-                        <Card key={subtitle._id}  subtitle={subtitle}/> 
+                      {course && courseSubtitles.map((subtitle)=>(
+                        <SubtitleCard key={subtitle._id} subtitle={subtitle}/> 
                          ))}
                         
 
@@ -178,4 +212,4 @@ const CourseView=()=>{
     )
 }
 
-export default CourseView;
+export default CourseViewInstructor2;

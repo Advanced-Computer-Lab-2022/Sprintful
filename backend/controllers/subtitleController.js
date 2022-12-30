@@ -57,9 +57,35 @@ const addYoutubeLinkAndDescript =asyncHandler(async (req,res)=>{
 
 const getSubtitle=asyncHandler(async(req,res)=>{
     const subtitleid=req.params.subtitleid;
-    const subtitle=await Subtitle.findById(subtitleid).exec();
+    // const subtitle=await Subtitle.findById(subtitleid).exec();
+    //  res.json(subtitle);
+    const idArray=subtitleid.split("\n")
+    const newid=idArray[0];
+    const subtitle= await Subtitle.findOne({_id:newid}).populate('tasks')
     res.json(subtitle);
 }    
 )
 
-module.exports = { addSubtitle,addYoutubeLinkAndDescript,getSubtitle}
+
+const addContent=asyncHandler(async(req,res)=>{
+
+    const subtitle_id=req.params.subtitleid  ;
+    const idArray=subtitle_id.split("\n")
+    const newid=idArray[0];
+    const content =req.body.content;
+   
+    const update ={content:content};
+  
+    const subtitleupdated=await Subtitle.findOneAndUpdate({_id :newid},update,{new : true});
+    if(subtitleupdated){
+    res.json(subtitleupdated);
+    }
+    
+    else{
+      res.json({message:"This subtitle is not found"})
+    }
+   
+}    
+)
+
+module.exports = { addSubtitle,addYoutubeLinkAndDescript,getSubtitle,addContent}
