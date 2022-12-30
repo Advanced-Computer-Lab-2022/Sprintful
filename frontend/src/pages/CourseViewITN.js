@@ -43,7 +43,8 @@ const CourseViewITN=()=>{
         course:null,
         coursePriceAfterDiscount:'',
         courseSubtitles:[],
-        progress:0
+        progress:0,
+        isProgressLow:null
      });
     ///api/courses
     const {courseid,traineeid}=useParams();
@@ -107,15 +108,22 @@ const CourseViewITN=()=>{
 
 
             //getting the corporateTrainee progress in course 
+            //to check if progress <50
+            let lowProgress=null
             const response3=await axios.get(`http://localhost:5000/api/individualTrainee/getProgress/${traineeid}/${courseid}`)
             const progressdata=response3.data.progress
+            if(progressdata<0.5){
+                lowProgress=" "
+            }
+
             const progressPercentage=Math.trunc(progressdata*100)
 
             setCourseStates({
                 course:coursedata,
                 coursePriceAfterDiscount:finalPrice,
                 courseSubtitles:subtitlesArray,
-                progress:progressPercentage
+                progress:progressPercentage,
+                isProgressLow:lowProgress
 
 
 
@@ -137,7 +145,7 @@ const CourseViewITN=()=>{
         ,[] );
 
 
-        const {course, coursePriceAfterDiscount,courseSubtitles,progress}=courseStates
+        const {course, coursePriceAfterDiscount,courseSubtitles,progress,isProgressLow}=courseStates
 
 
 
@@ -173,8 +181,15 @@ const CourseViewITN=()=>{
                         alignItems="flex-start"
                           
                            >
-                            
-                        
+
+                           {(() => {
+                         if (isProgressLow) {
+                        return   <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                                       Request Refund
+                                 </Button> 
+                                                     ;
+                                            } 
+                                                   })()}
                        
                     </Box>
 
