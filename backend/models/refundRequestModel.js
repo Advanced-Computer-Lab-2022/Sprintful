@@ -14,7 +14,12 @@ const RefundRequestSchema = mongoose.Schema({
     amount:{
         type:Number
     }  ,
-                  
+               
+    
+    isAccepted:{
+        type:Boolean,
+        default:false
+    }
 
 
     }, {timestamps: true
