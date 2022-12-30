@@ -14,7 +14,7 @@ import Button from '@mui/material/Button';
 import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
 
-import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableTraineeCT';
+import SubtitleCardClickableTraineeIT from '../components/SubtitleCardClickableTraineeIT';
 
 
 
@@ -22,7 +22,7 @@ import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableT
 
 
 
-const CourseViewCTN=()=>{
+const CourseViewITN=()=>{
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
@@ -107,7 +107,7 @@ const CourseViewCTN=()=>{
 
 
             //getting the corporateTrainee progress in course 
-            const response3=await axios.get(`http://localhost:5000/api/corporateTrainee/getProgress/${traineeid}/${courseid}`)
+            const response3=await axios.get(`http://localhost:5000/api/individualTrainee/getProgress/${traineeid}/${courseid}`)
             const progressdata=response3.data.progress
             const progressPercentage=Math.trunc(progressdata*100)
 
@@ -187,9 +187,11 @@ const CourseViewCTN=()=>{
                  {/* subtitles */}
 
                   {course &&courseSubtitles.map((subtitle)=>(
-                        <SubtitleCardClickableTraineeCT key={subtitle._id}  subtitle={subtitle}  traineeid={traineeid}  courseid={courseid}/> 
+                        <SubtitleCardClickableTraineeIT key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
                     </div>
+
+                 
 
 
 
@@ -197,4 +199,4 @@ const CourseViewCTN=()=>{
     )
 }
 
-export default CourseViewCTN;
+export default CourseViewITN;

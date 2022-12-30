@@ -63,6 +63,8 @@ import SubtitleViewCT from './pages/SubtitleViewCT';
 import SubtitlePageInstructorNew from './pages/SubtitlePageInstructorNew';
 import CourseViewInstructor2 from './pages/CourseViewInstructor2';
 import  CourseViewCTN from './pages/CourseViewCTN';
+import CourseViewITN from './pages/CourseViewITN';
+import SubtitleViewIT from './pages/SubtitleViewIT';
 
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
@@ -72,6 +74,7 @@ import ChangeIndividualTraineePassword from './components/ChangeIndividualTraine
 import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
 import ChangeAdminPassword from './components/ChangeAdminPassword';
 import ChangeInstructorPassword from './components/ChangeInstructorPassword';
+
 function App() {
   return (
     <div className="App">
@@ -124,24 +127,24 @@ function App() {
 
             {/* Corporate Trainee view course page after enrolling  */}
            <Route 
-            exact path="/api/courses/getCourse/:courseid/CTN"
+            exact path="/api/courses/getCourse/:courseid/CTN/:traineeid"
             element={<CourseViewCTN/>}/>
 
             {/* //IndividualTrainee view Course Page after enrolling  "same Page as Corporate Trainee*/}
 
             <Route 
-            exact path="/api/courses/getCourse/:courseid/ITN"
-            element={<CourseViewCTN/>}/>
+            exact path="/api/courses/getCourse/:courseid/ITN/:traineeid"
+            element={<CourseViewITN/>}/>
 
 
             {/* subtitleViews */}
             <Route 
-            exact path="//api/subtitles/getSubtitle/:subtitleid/CTE"
+            exact path="/api/subtitles/getSubtitle/:subtitleid/CTE/:traineeid/:courseid"
             element={<SubtitleViewCT/>}/>
 
            <Route 
-            exact path="/api/subtitles/getSubtitle/:subtitleid/ITE"
-            element={<SubtitleViewCT/>}/>
+            exact path="/api/subtitles/getSubtitle/:subtitleid/ITE/:traineeid/:courseid"
+            element={<SubtitleViewIT/>}/>
 
              <Route
               exact path="/api/subtitles/getSubtitle/:subtitleid/Instructor"

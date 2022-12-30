@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom';
 //Stylings
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 
-export default function SubtitleViewCT() {
+export default function SubtitleViewIT() {
       //states
     const  [subtitle,setSubtitle]=useState(null);
 
@@ -43,7 +43,7 @@ export default function SubtitleViewCT() {
 
         const update ={addedprogress:addedProgress}
          
-        const response3=await axios.patch(`http://localhost:5000/api/corporateTrainee/updateProgress/${traineeid}/${courseid}`,update);
+        const response3=await axios.patch(`http://localhost:5000/api/individualTrainee/updateProgress/${traineeid}/${courseid}`,update);
 
 
         }

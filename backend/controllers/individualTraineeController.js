@@ -96,5 +96,107 @@ else{
 }
 })
 
+//inserting progress of a certain course
+const insertProgress=asyncHandler(async(req,res)=>{
+    const traineeid=req.params.traineeid;
+    const courseid=req.params.courseid;
+    const addedProgress=req.body.addedprogress;
 
-module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile}
+    //Updating progressArray
+       //update 
+       const newcourseProgress={course:courseid,progressvalue:addedProgress}
+       const partialprogressarray=[newcourseProgress]
+       const newProgressArray = (await IndividualTrainee.findById(traineeid)).progress.concat(partialprogressarray)
+
+
+
+
+
+
+       //Updating progressArray
+       const updatingprogress=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{progress:newProgressArray},{new:true});
+       res.json(updatingprogress)
+
+}
+
+)
+
+
+//Updating progress of a certain course
+const updateProgress=asyncHandler(async(req,res)=>{
+    const traineeid=req.params.traineeid;
+    const courseid=req.params.courseid;
+    const addedProgress=req.body.addedprogress;
+
+    //Getting the Past Progress 
+    const  ProgressArray=await IndividualTrainee.findOne({_id:traineeid},'-_id progress')
+    const array=ProgressArray.progress
+
+
+   // res.json(array);
+    let coursedocument;
+    //let x;
+
+     for(let i=0;i<array.length;i++){
+        coursedocument=array[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.course==courseid){
+            coursedocument.progressvalue=coursedocument.progressvalue+addedProgress
+            array[i]=coursedocument;
+            console.log("updated")
+            break;
+         }
+     }
+
+     const updatingprogress=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{progress:array},{new:true});
+
+    // res.json(coursedocument)
+    // res.json({message:x});
+
+    res.json(updatingprogress)
+
+
+
+
+})
+
+
+//Get Progress 
+const getProgressforCourse=asyncHandler(async (req, res) => 
+    {  const traineeid=req.params.traineeid;
+       const courseid=req.params.courseid;
+
+       //getting progress array
+       const  ProgressArray=await IndividualTrainee.findOne({_id:traineeid},'-_id progress')
+        const array=ProgressArray.progress   //getting progress array
+
+        //search for the course in progress array using course id 
+
+        let coursedocument;
+        let progress;
+   
+
+        for(let i=0;i<array.length;i++){
+           coursedocument=array[i];
+            //x=coursedocument.course.toString()==courseid;
+           if(coursedocument.course==courseid){
+              progress =coursedocument.progressvalue
+               console.log("found")
+            break;
+            }
+       }
+
+       res.json({progress:progress})
+
+
+    
+    
+    
+       
+    }
+
+)
+
+
+
+module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress,getProgressforCourse}

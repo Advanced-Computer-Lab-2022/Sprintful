@@ -30,6 +30,17 @@ const corporateTraineeSchema = mongoose.Schema({
         required:[true,"Set the course id"],
         default:[]
     }],
+
+
+    progress:[{
+        course:{type: mongoose.Schema.Types.ObjectId,
+              ref: 'Course', 
+               },
+
+        progressvalue:{type:Number}       
+
+             }
+               ],
     // role:{
     //     type: String,
     //     required: [true]

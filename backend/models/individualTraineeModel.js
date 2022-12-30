@@ -38,7 +38,16 @@ const individualTraineeSchema = mongoose.Schema({
     money: {
         type: Number,
         default: 0
-    }
+    },
+    
+    progress:[{
+        course:{type: mongoose.Schema.Types.ObjectId,
+        ref: 'Course', 
+               },
+        progressvalue:{type:Number}       
+
+}
+],
     // role:{
     //     type: String,
     //     required: [true]
