@@ -164,6 +164,40 @@ const CourseViewCTR=()=>{
         const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates    //destructuring 
 
 
+        const requestAccess = async(e) => {
+          console.log(e)
+      
+          let axiosConfig = {
+            headers: {
+                'Content-Type': 'application/json;charset=UTF-8',
+                "Access-Control-Allow-Origin": "*",
+            }
+          };
+  
+          console.log(e)
+          const response = await axios.put(`http://localhost:5000/api/requestAccess/requestAccess?reportid=${e}`, {
+              status: status
+  
+          }, axiosConfig)
+          .then(function (response){
+              console.log(response)
+          })
+          .catch(function (error){
+              console.log(error);
+          })
+          (
+             (res) => {
+                 const report = res.data
+                 console.log(report)
+             }
+              );
+              if(response.ok){
+                  console.log(response)
+                  setStatus("")
+              }
+      }
+
+
     return (
 
         <div>
@@ -186,17 +220,13 @@ const CourseViewCTR=()=>{
                         mt={1}
                         ml={0}
                         pl={0}
-                       
-                        
-
-                        
+ 
                          display="flex"
                         justifyContent="flex-start"
-                        alignItems="flex-start"
-                          
-                           >
+                        alignItems="flex-start">
                             
-                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}
+                         onClick={() => requestAccess()}>
                          Request Access
                            </Button>
 
