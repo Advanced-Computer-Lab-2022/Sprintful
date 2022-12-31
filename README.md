@@ -1,6 +1,7 @@
 <a name="readme-top"></a>
 # Sprintful
-[A little brief about what the project is about]
+An Online Learning System through which individuals can attend pre-recorded
+courses online that have been created and uploaded on the website by their instructors.
 
 ## Motivation
 [letting the reader know why you created this project]
@@ -74,10 +75,10 @@ Distributed under the MIT License.See `LICENSE.txt` for more information.
 
 ## Contributors
 
-- [](https://github.com/)
-- []()
-- []()
-- []()
-- []()
+- [Hoda Ahmed](https://github.com/hoda27)
+- [Nada Aiman](https://github.com/nadaaaz)
+- [Somaya Elziady](https://github.com/SomayaElZiady)
+- [Ragaa Aly](https://github.com/ragaaaly)
+- [Reem Elsady](https://github.com/ReemElsady)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
