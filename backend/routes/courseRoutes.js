@@ -45,8 +45,8 @@ router.route('/:id').get(getCourseById) // get course by id
 router.route('/').get(getCourses) // get all courses
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
 router.post('/filter', filter) // This is a POST request to the /api/guest endpoint
-router.put('/review',requireAuth, addCourseReview);
-router.get('/reviewsnratings',requireAuth,getCourseRating)
+router.put('/review', addCourseReview);
+router.get('/reviewsnratings',getCourseRating)
 router.get('/getreviews/:id',requireAuth,getCourseReviews)
 
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint

@@ -74,6 +74,7 @@ import ChangeIndividualTraineePassword from './components/ChangeIndividualTraine
 import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
 import ChangeAdminPassword from './components/ChangeAdminPassword';
 import ChangeInstructorPassword from './components/ChangeInstructorPassword';
+import RateCourse from './components/RateCourse';
 
 function App() {
   return (
@@ -158,6 +159,10 @@ function App() {
             <Route
               exact path="/api/instructor/rate"
               element={<RateInstructor />}
+            />
+            <Route
+              exact path="/api/courses/rate"
+              element={<RateCourse />}
             />
             <Route
               exact path="/api/admin/createAdmin"

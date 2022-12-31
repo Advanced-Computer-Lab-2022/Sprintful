@@ -271,6 +271,12 @@ const addInstructorReview = asyncHandler(async (req, res, next) => {
     }
     const instructor = await Instructor.findById(instructorId);
     console.log(instructor._id);
+    if(comment == null){
+        res.status(401).json({ error: "Please add a review" });
+    }
+    if(rating == null){
+        res.status(400).json({ error: "Please add a rating" });
+    }
 
     /*const isReviewed = course.reviews.find(    //No authentication baby
         r => r.user.toString() === req.user._id.toString()

@@ -140,22 +140,11 @@ const CourseViewCTR=()=>{
               course:coursedata,
               coursePriceAfterDiscount:finalPrice,
               courseSubtitles:subtitlesArray
-
-
-
-          })
-
-    
-    
-    
-    
-            }
+          })}
             //catching any request error
             catch (error){
-    
-            }
-    
           }
+    }
          
          getCourseanditsSubtitle(); } 
         ,[courseid] );
@@ -173,10 +162,7 @@ const CourseViewCTR=()=>{
                 "Access-Control-Allow-Origin": "*",
             }
           };
-  
-          console.log(e)
-          const response = await axios.put(`http://localhost:5000/api/requestAccess/requestAccess?reportid=${e}`, {
-              status: status
+          const response = await axios.post('http://localhost:5000/api/requestAccess/requestAccess', {params: {id: traineeid}}, {
   
           }, axiosConfig)
           .then(function (response){
@@ -191,10 +177,10 @@ const CourseViewCTR=()=>{
                  console.log(report)
              }
               );
-              if(response.ok){
-                  console.log(response)
-                  setStatus("")
-              }
+              // if(response.ok){
+              //     console.log(response)
+              //     setStatus("")
+              // }
       }
 
 

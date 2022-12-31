@@ -497,7 +497,8 @@ const filterCorporate = asyncHandler(async (req, res) => {
 
 //add a review on a course
 const addCourseReview = asyncHandler(async (req, res, next) => {
-    const { rating, comment, courseId } = req.body;
+    const courseId = req.query.id;
+    const { rating, comment } = req.body;
     console.log("I am woring");
     const review = {
         // user: req.user._id,    //no authentication 
@@ -520,6 +521,13 @@ const addCourseReview = asyncHandler(async (req, res, next) => {
         });
     }*/
     //in else part
+    if(comment == null){
+        res.status(401).json({ error: "Please add a review" });
+    }
+    if(rating == null){
+        res.status(400).json({ error: "Please add a rating" });
+    }
+
     course.reviews.push(comment);
     course.numofReviews = course.reviews.length;
     //review.rating = Number (rating);
