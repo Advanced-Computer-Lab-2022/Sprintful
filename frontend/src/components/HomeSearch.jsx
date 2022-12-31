@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MostPopular from '../components/MostPopular';
+
 
 const HomeSearch = () => {
     const navigate = useNavigate();
@@ -83,28 +85,6 @@ const HomeSearch = () => {
         console.log(searchTerm)
     }
 
-    const handlePopular = async(e) =>{
-        e.preventDefault();
-        console.log("entered handlePopular")
-        const response = await fetch(`http://localhost:5000/api/courses/getAverage`)
-        console.log("stu=" +response)
-        console.log("hello popular")
-        const res =await fetch(`http://localhost:5000/api/courses/popular`,{
-            method:'GET',
-            body :JSON.stringify(response),
-            headers :{
-                'Content-Type':'application/json'
-            }
-           })
-        .then((res) => {
-            console.log(res)
-            setFilterData(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-
-    }
     const styleFilterForm = {
         position: "relative",
         top: "-40px",
@@ -135,6 +115,7 @@ const HomeSearch = () => {
     }
     return (
         <div>
+            {/* <MostPopular/> */}
         { <form id="search-form" name="gs" method="submit" role="search" action="#">
             <div className="row">
                 <div className="col-lg-3 align-self-center">
@@ -191,13 +172,16 @@ const HomeSearch = () => {
                         <option key="3" value="3">3 Stars</option>
                         <option key="4" value="4">4 Stars</option>
                         <option key="5" value="5">5 Stars</option>
-                        <option key="6" value="6" onClick={(e)=> handlePopular()}>Most popular</option>
+                        {/* <option key="6" value="6" >Most popular</option> */}
                     </select>
                 </fieldset>
+                <br/>
+
             </div>
             <div className="col-lg-3">
                 <fieldset>
-                    <button id="main-button" onClick={handlePopular} style={styleFilterButton}> Apply</button>
+                    {/* <button id="main-button" onClick={(e)=>handlePopular} >View Most Popular</button> */}
+                    <button id="main-button" onClick={(e) => handleFilter} style={styleFilterButton}> Apply</button>
                 </fieldset>
             </div>
         </div>
@@ -220,6 +204,7 @@ const HomeSearch = () => {
     }
     </div> 
         </div>
+        <MostPopular/>
         { searched &&
             
             <div className="card-container">

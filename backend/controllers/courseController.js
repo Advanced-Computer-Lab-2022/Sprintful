@@ -645,10 +645,24 @@ const getSubtitleId = asyncHandler(async (req, res) => {
     })
 
     const mostPopular = asyncHandler(async (req, res) => {
-        const students = req.body.students;
-        const courses = await Course.find({numofenrolledstudents: {$gte: students}})
-        if (courses){
-            res.status(200).json(courses);
+        //const students = req.body.students;
+        let num =0;
+        let count=0;
+        let i;
+        const courses = await Course.find({});
+        console.log("average working " + courses )
+        for(i=0; i<courses.length; i++){
+            num += courses[i].numofenrolledstudents;
+            count++;
+        }
+        const average = num/count;
+        console.log("average: " + average);
+        const response = await Course.find({numofenrolledstudents: {$gte: average}})
+        if (response){
+            res.status(200).json(response);
+        }
+        else{
+            res.status(400).json({error: "No courses found abouve average"})
         }
     })
 
@@ -677,6 +691,6 @@ module.exports = {
     acceptPolicy,
     filterInstructorCourses,
     payCredit,
-    averageEnrolled,
+    //averageEnrolled,
     mostPopular
 }

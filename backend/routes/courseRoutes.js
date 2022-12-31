@@ -54,7 +54,7 @@ router.post('/filterCorporate', filterCorporate) // This is a GET request to the
 router.get('/instructor/search', searchInstructorCourses)
 
 router.patch('/addPromotion/:courseid',addPromotion)
-router.get('/getAverage', averageEnrolled)
+//router.get('/getAverage', averageEnrolled)
 router.get('/popular', mostPopular)
 
 module.exports = router
