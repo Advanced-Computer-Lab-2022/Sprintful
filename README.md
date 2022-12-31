@@ -4,7 +4,15 @@ An Online Learning System through which individuals can attend pre-recorded
 courses online that have been created and uploaded on the website by their instructors.
 
 ## Motivation
-[letting the reader know why you created this project]
+This project is part of **Advanced Computer Lab** course studied at [The German University in Cairo](https://www.guc.edu.eg/) in the *fourth* year of **Computer Science and Engineering bachelor degree**, and the following are the **Project Objectives**:
+- Handle all aspects of web development projects, and greatly expanding our career opportunities by using MERN stack.
+- Learn how to properly use the Agile Methodology to plan out a project and develop
+the software.
+- Learn the process of following a given set of System Requirements to develop a
+software.
+- Learn how to work together as a team on GitHub.
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
