@@ -47,7 +47,7 @@ const CourseViewCTR=()=>{
     
     
     ///api/courses
-    const {courseid}=useParams();
+    const {courseid,traineeid}=useParams();
 
 
   
