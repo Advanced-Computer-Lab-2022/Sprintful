@@ -333,7 +333,30 @@ const getInstructorRating = asyncHandler(async (req, res) => {
 })
 
 const getInstructorProfile = asyncHandler(async (req, res) => {
-    const instructor = await Instructor.findById(req.query.id)
+
+    const id = req.query.instructorId;
+    const mycourses = await Course.find({ instructor: id });
+
+    const myCoursesDocuments = await Instructor.find({ _id: req.query.id }, '-_id courses').exec();
+    let coursesIds;
+    let flatArray;
+    if (myCoursesDocuments[0] != null) {
+        coursesIds = myCoursesDocuments[0].courses
+        const courses = []
+        for (let i = 0; i < coursesIds.length; i++) {
+            courses[i] = (await Course.find({ _id: coursesIds[i] }))// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+        }
+        flatArray = [].concat.apply([], courses);
+    }
+    console.log("courses",flatArray);
+    let amount = 0;
+    console.log("price", flatArray[0].price);
+    for(let i=0;i<flatArray.length;i++){
+        amount = amount + (flatArray[i].price) * (flatArray[i].discount) * (flatArray[i].numofenrolledstudents) * 0.7;
+    }
+    console.log("amount", amount)
+
+    const instructor = await Instructor.findByIdAndUpdate(req.query.id, {money: amount}, { new: true })
     console.log(instructor);
     if (instructor) {
         res.json(instructor)
@@ -344,13 +367,33 @@ const getInstructorProfile = asyncHandler(async (req, res) => {
 })
 
 const getAmount = asyncHandler(async (req, res) => {
-    const id = req.query.instructorid;
+    const id = req.query.instructorId;
     const mycourses = await Course.find({ instructor: id });
-    let amount = 0;
-    for(let i=0;i<mycourses.length;i++){
-        amount += (mycourses[i].price) * (mycourses[i].enrolledStudents);
+
+    const myCoursesDocuments = await Instructor.find({ _id: req.query.id }, '-_id courses').exec();
+    let coursesIds;
+    let flatArray;
+    if (myCoursesDocuments[0] != null) {
+        coursesIds = myCoursesDocuments[0].courses
+        const courses = []
+        for (let i = 0; i < coursesIds.length; i++) {
+            courses[i] = (await Course.find({ _id: coursesIds[i] }))// [ [{course1}], [{course2}], [{course3}] ] --> [ {course1}, {course2}, {course3}]
+        }
+        flatArray = [].concat.apply([], courses);
     }
-    res.status(200).json({ amount });
+    console.log("courses",flatArray);
+    let amount = 0;
+    console.log("price", flatArray[0].price);
+    for(let i=0;i<flatArray.length;i++){
+        amount = amount + (flatArray[i].price) * (flatArray[i].discount) * (flatArray[i].numofenrolledstudents) * 0.7;
+    }
+    console.log("amount", amount)
+    if(amount){
+        res.status(200).json({ amount });
+    }
+    else{
+        res.status(400).json({ error: "No money" });
+    }
 })
 
 module.exports = { getAmount, createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}

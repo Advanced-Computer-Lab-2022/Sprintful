@@ -81,6 +81,7 @@ export default function InstructorProfile() {
   
 
     const [instructor, setInstructor] = useState("");
+    const [amount, setAmount] = useState(0);
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
@@ -97,9 +98,15 @@ export default function InstructorProfile() {
       .catch((err) => {
           console.log(err);
       });
+     
+
+
     }       
     fetchData();
+
+    
     }, []);
+    
 
   return (
         <div>
@@ -188,6 +195,16 @@ export default function InstructorProfile() {
                      <div className="col-sm-9">
                        <p className="text-muted mb-0">{instructor.biography}</p>
                      </div>
+                  <hr/>
+                     <div className="row">
+                     <div className="col-sm-3">
+                       <p className="mb-0">Wallet</p>
+                     </div>
+                     <div className="col-sm-9">
+                       <p className="text-muted mb-0">{instructor.money}</p>
+                     </div>
+                   </div>
+                     
                    </div>
                  </div>
                </div>
