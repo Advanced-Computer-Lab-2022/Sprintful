@@ -186,6 +186,7 @@ const CourseViewInstructor=()=>{
                <h3> {course && course.title} </h3>
                <h6>Total Hours :{course&&course.totalhours}</h6>
                <h6>Price:  {course && coursePriceAfterDiscount}</h6>
+               <h6>Rating: {course&&course.rating}</h6>
                
                </StyledCourseHeader>
                 
@@ -215,7 +216,7 @@ const CourseViewInstructor=()=>{
                        
                     </Box>
 
-
+              
 
 
              
@@ -227,6 +228,32 @@ const CourseViewInstructor=()=>{
                         <SubtitleCardClickable key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
                     </div>
+
+                    <br/>
+                    <br/>
+                    <br/>
+
+                    <div>
+            {/* <div className="popular-categories">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="section-heading"> */}
+                            <br/>
+
+                              <h1 style = {{color: "black"}}> Course Reviews</h1>
+                              <div className="card-container">
+                                {course  && course.reviews.map((review) =>( 
+                                      <div className="card">
+                                      <div className="content">
+                                          <h3> {review} </h3>
+                                      </div>
+                                      </div>
+                                ))}
+                      
+        </div>
+                              
+                            </div>       
 
 
 
