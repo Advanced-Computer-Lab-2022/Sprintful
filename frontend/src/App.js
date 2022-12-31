@@ -108,7 +108,7 @@ function App() {
             exact path="/api/teesst"
             element={<TestCard/>}/> */}
             <Route 
-            exact path="/api/courses/getCourse/:courseid/CTR"
+            exact path="/api/courses/getCourse/:courseid/CTR/:traineeid"
             element={<CourseViewCTR/>}/>
             <Route 
             exact path="/api/courses/getCourse/:courseid/ITE"
