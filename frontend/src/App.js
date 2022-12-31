@@ -69,6 +69,8 @@ import SubtitleViewIT from './pages/SubtitleViewIT';
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
 
+import MostPopular from './components/MostPopular';
+
 import AccessRequests from './components/AccessRequests';
 import ChangeIndividualTraineePassword from './components/ChangeIndividualTraineePassword';
 import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
@@ -271,6 +273,11 @@ function App() {
             <Route
               exact path="/ReportDetails"
               element={[<ReportDetails/> ]}
+            />
+
+            <Route
+              exact path="/mostPopular"
+              element={[<MostPopular/> ]}
             />
 
 

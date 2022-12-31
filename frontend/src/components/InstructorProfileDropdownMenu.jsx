@@ -60,7 +60,7 @@ export default function IndividualProfileDropdownMenu() {
     <div id="app">
       <div className="text-end">
         <PopupMenu>
-            <button className="but">
+            <button className="but" style={{background:"#8d99af" ,color:"#fff"}}>
               My profile
             </button>
           <div className="card text-start">

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createInstructor, changePassword, addInstructorReview, getInstructorRating,
-    createChoice, createQuestion, createTask, getInstructorProfile ,login, editBioEmailPassword, logout} = require('../controllers/instructorController')
+    createChoice, createQuestion, createTask, getInstructorProfile ,login, editBioEmailPassword, logout, getAmount} = require('../controllers/instructorController')
 const {requireAuth} = require('../middleware/authMiddleware')
 
 router.post('/createInstructor', createInstructor);
@@ -16,5 +16,6 @@ router.put('/review', addInstructorReview)
 router.post('/login', login);
 router.get('/logout', logout)
 router.put('/editProfile', editBioEmailPassword)
+router.get('/amount', getAmount)
 
 module.exports = router;
