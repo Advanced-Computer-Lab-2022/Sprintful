@@ -619,13 +619,39 @@ const getCourseRating = asyncHandler(async (req, res) => {
 //get subtitle id from title
 const getSubtitleId = asyncHandler(async (req, res) => {
     const title = req.query.title;
-    const result = await subtitle.find({ title: title }).select('_id');
+    const result = await Subtitle.find({ title: title }).select('_id');
     if (result.length > 0) {
         res.status(200).json(result);
     }
     else {
         res.status(400).json({ error: "Subtitle not found" });
     }})
+
+    //view the most viewed/ most popular courses
+    const averageEnrolled = asyncHandler(async (req, res) => {
+        let num =0;
+        let count=0;
+        let i;
+        const courses = await Course.find({});
+        console.log("average working " + courses )
+        for(i=0; i<courses.length; i++){
+            num += courses[i].numofenrolledstudents;
+            count++;
+        }
+        const average = num/count;
+        console.log(average)
+        res.status(200).json(average);
+
+    })
+
+    const mostPopular = asyncHandler(async (req, res) => {
+        const students = req.body.students;
+        const courses = await Course.find({numofenrolledstudents: {$gte: students}})
+        if (courses){
+            res.status(200).json(courses);
+        }
+    })
+
 
 module.exports = {
     getCourseById,
@@ -650,5 +676,7 @@ module.exports = {
     acceptContract,
     acceptPolicy,
     filterInstructorCourses,
-    payCredit
+    payCredit,
+    averageEnrolled,
+    mostPopular
 }

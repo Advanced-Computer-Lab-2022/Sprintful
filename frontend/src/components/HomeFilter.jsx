@@ -112,8 +112,10 @@ return(
                         <option key="3" value="3">3 Stars</option>
                         <option key="4" value="4">4 Stars</option>
                         <option key="5" value="5">5 Stars</option>
+                        <option key="6">Most Popular</option>
                     </select>
                 </fieldset>
+               
             </div>
             <div className="col-lg-3">
                 <fieldset>

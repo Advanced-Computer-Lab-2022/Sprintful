@@ -343,4 +343,14 @@ const getInstructorProfile = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}
+const getAmount = asyncHandler(async (req, res) => {
+    const id = req.query.instructorid;
+    const mycourses = await Course.find({ instructor: id });
+    let amount = 0;
+    for(let i=0;i<mycourses.length;i++){
+        amount += (mycourses[i].price) * (mycourses[i].enrolledStudents);
+    }
+    res.status(200).json({ amount });
+})
+
+module.exports = { getAmount, createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}
