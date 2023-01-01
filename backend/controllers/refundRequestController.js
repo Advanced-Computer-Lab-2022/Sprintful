@@ -65,6 +65,7 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
 
 
     const request=new RefundRequest({
+        traineeid:traineeid,
         traineeName:traineeName,
         course:courseid,
         amount:finalPrice
@@ -83,5 +84,8 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
 }
 
 )
+
+
+const acceptRefund =asyncHandler
 
 module.exports = {addRefundRequest}
