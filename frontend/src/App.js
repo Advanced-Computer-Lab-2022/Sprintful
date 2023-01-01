@@ -154,10 +154,7 @@ function App() {
               exact path="/api/subtitles/getSubtitle/:subtitleid/Instructor"
               element={<SubtitlePageInstructorNew />}
             />
-
-             
             
-
             {/* Nada */}
             <Route
               exact path="/api/instructor/rate"
