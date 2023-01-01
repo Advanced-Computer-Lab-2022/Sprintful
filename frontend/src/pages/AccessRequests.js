@@ -97,6 +97,11 @@ const AccessRequests = () => {
                             ))}
                             
                          </div>
+                         <div  onClick={()=> navigate(`/admin?id=${id}`)} style={{color: 'white', 
+             padding: '15px 50px 5px 50px',
+             float: 'left',
+             fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
+             </div>
     </div>
   )
 }
