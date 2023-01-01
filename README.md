@@ -53,7 +53,34 @@ The project is implemented using the MERN Stack, a free and open-source JavaScri
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Installation
-[]
+1. Clone the repo
+   ```bash
+   > git clone https://github.com/Advanced-Computer-Lab-2022/Sprintful.git
+   ```
+2. Navigate to the frontend folder
+    ```bash
+    > cd Sprintful/frontend
+    ```
+3. Install frontend packages required
+    ```bash
+    > npm install 
+    ```
+4. Navigate back to the parent directory
+    ```bash
+    > cd .. 
+    ```
+5. Navigate to the backend folder
+    ```bash
+    > cd backend 
+    ```
+6. Install backend packeage required
+    ```bash
+    > npm install 
+    ```
+7. Run the server
+    ```bash
+    > npm run dev
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
