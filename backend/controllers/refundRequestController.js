@@ -192,4 +192,14 @@ const acceptRefund =asyncHandler(async(req,res)=>{
 
 )
 
-module.exports = {addRefundRequest,acceptRefund}
+
+
+const getRefundsRequests=asyncHandler(async(req,res)=>{
+
+    const RefundsRequests=await RefundRequest.find({})
+    res.json(RefundsRequests);
+
+}
+)
+
+module.exports = {addRefundRequest,acceptRefund,getRefundsRequests}
