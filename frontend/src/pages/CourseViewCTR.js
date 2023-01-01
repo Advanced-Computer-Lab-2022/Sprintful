@@ -46,7 +46,7 @@ const CourseViewCTR=()=>{
        
           
             //Sending a get request to the server to get course
-            const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
+            const response= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
             const coursedata=response.data;
             let finalPrice=0;
              //handling setting course price according to discount and its expiry date 
