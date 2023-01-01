@@ -34,7 +34,7 @@ router.post('/individual/:courseId/PayWithWallet', payWithWallet)
 router.post('/individual/:courseId/payCredit', payCredit)
 router.get('/instructor/search', searchInstructorCourses)
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
-        
+router.get('/getCourse/',getCourseById)      
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
 //router.route('/:id').get(getCourseById) // get course by id
