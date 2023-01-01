@@ -91,6 +91,7 @@ const acceptRefund =asyncHandler(async(req,res)=>{
     
     const traineeid=req.query.traineeid;
     const courseid=req.query.courseid;
+    const refundRequestid=req.params.refundid
 
     //removing course from the trainee array of courses 
 
@@ -132,6 +133,22 @@ const acceptRefund =asyncHandler(async(req,res)=>{
          array.splice(foundindex2,1)
     
          const updatingprogress=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{progress:array},{new:true});
+
+
+
+         //refunding amount to trainee wallet
+         const amountrefunded=(await RefundRequest.findById(refundRequestid)).amount
+         const pastWallet=(await IndividualTrainee.findById(traineeid)).money
+         const finalwallet=pastWallet+amountrefunded
+
+         const updatedwallet={money:finalwallet}
+         const updateTraineewallet=await IndividualTrainee.findOneAndUpdate({_id:traineeid},updatedwallet,{new:true})
+
+
+         
+         
+
+
     
         // res.json(coursedocument)
          res.json({message:"done"});
