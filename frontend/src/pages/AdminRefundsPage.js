@@ -23,7 +23,8 @@ const AdminRefundsPage=()=>{
     const handleAccept=async(traineeid,courseid,refundid)=>{
 
         const response2=await axios.get(`http://localhost:5000/api/refund/AcceptRefund/${refundid}/`,{params:{traineeid:traineeid,courseid:courseid}})
-    
+         const allRefunds=response2.data
+         setRefundsRequests(allRefunds);
     
        }
 
