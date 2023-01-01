@@ -77,6 +77,7 @@ import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineeP
 import ChangeAdminPassword from './components/ChangeAdminPassword';
 import ChangeInstructorPassword from './components/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
+import WriteNotes from './components/writeNotes';
 
 function App() {
   return (
@@ -222,7 +223,10 @@ function App() {
               exact path="/api/admin/changePassword"
               element={<ChangeAdminPassword />}
             />
-
+            <Route
+              exact path="/writeNotes"
+              element={<WriteNotes/>}
+            />
            
 
             {/* Ragaa */}
