@@ -27,7 +27,7 @@ export default function Promotion() {
             await axios.get(`http://localhost:5000/api/courses`)
 
                 .then((res) => {
-                    console.log(res.data);
+                    //console.log(res.data);
                     setCourses(res.data);
                 })
                 .catch((err) => {
@@ -38,7 +38,35 @@ export default function Promotion() {
     }, []);
 
     const handleAll = async() => {
-        
+        let ids=[];
+        for(let i=0; i<courses.length; i++){
+            ids.push(courses[i]._id);
+        }
+        for(let i=0; i<ids.length; i++){
+            let axiosConfig = {
+                headers: {
+                    'Content-Type': 'application/json;charset=UTF-8',
+                    "Access-Control-Allow-Origin": "*",
+                }
+              };
+       
+            axios.put(`http://localhost:5000/api/courses/addPromotion/${ids[i]}`, { //?id=${id}
+               discount: percentage,
+               discountExpireAt: duration,
+               
+          },axiosConfig)
+       
+          .then(function (response) {
+            console.log(response.data);
+            console.log(response.data[0])
+            console.log(response.data[1])      
+             setDone(true);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+       
+        }
     }
 
     const handlePromotion = async(courseid) => {
@@ -83,7 +111,7 @@ export default function Promotion() {
                         {/* <button onClick={() => addPromotion()}> Add promotion </button> */}
                     </form>
 
-                    <button onClick={()=>handleAll} style={{background:"maroon", width:"130px"}}>Set for All Courses</button>
+                    <button onClick={()=>handleAll()} style={{background:"maroon", width:"130px"}}>Set for All Courses</button>
 
             {courses && (
                 <div className="Promotion">
