@@ -7,7 +7,7 @@ const answerSchema = mongoose.Schema({
         required: [true, "Set Question id"]
     },
     choiceindex: {
-        type: Number,
+        type: String,
         required: [true, "Set choice index"],
     },
     corporate: {

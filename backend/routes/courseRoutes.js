@@ -22,8 +22,8 @@ const
     searchInstructorCourses,
     acceptContract,
     acceptPolicy, 
-    payCredit, 
-    averageEnrolled,
+    payCredit,
+    addPromotionForCourses,
     mostPopular,
     payWithWallet,
     getBalanceAndPrice} = require('../controllers/courseController')   //destructuring
@@ -34,6 +34,7 @@ router.post('/individual/:courseId/PayWithWallet', payWithWallet)
 router.post('/individual/:courseId/payCredit', payCredit)
 router.get('/instructor/search', searchInstructorCourses)
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
+        
 router.get('/instructor', instructorCourses) // get all courses for instructor
 router.get('/search', searchCourse)
 //router.route('/:id').get(getCourseById) // get course by id
@@ -57,6 +58,8 @@ router.get('/getreviews/:id',requireAuth,getCourseReviews)
 
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)
+router.put('/addPromotionForCourses', addPromotionForCourses)
+router.put('/addPromotion/:courseid', addPromotion)
 
 router.patch('/addPromotion/:courseid',addPromotion)
 //router.get('/getAverage', averageEnrolled)
