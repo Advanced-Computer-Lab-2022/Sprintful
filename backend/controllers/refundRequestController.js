@@ -86,6 +86,28 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
 )
 
 
-const acceptRefund =asyncHandler
+const acceptRefund =asyncHandler(async(req,res)=>{
+    const traineeid=req.query.traineeid;
+    const courseid=req.query.courseid;
 
-module.exports = {addRefundRequest}
+    const coursesArray=(await IndividualTrainee.findById(traineeid)).courses
+    let indexfound;
+    let coursedocument;
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.course==courseid){
+            coursedocument.progressvalue=coursedocument.progressvalue+addedProgress
+            array[i]=coursedocument;
+            console.log("updated")
+            break;
+         }
+     }
+
+
+     res.json(coursesArray);
+}
+
+)
+
+module.exports = {addRefundRequest,acceptRefund}
