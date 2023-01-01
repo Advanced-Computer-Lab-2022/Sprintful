@@ -23,20 +23,23 @@ const InstructorHomeNavBar = () => {
                                                                                     height: "60px",
                                                                                     right: "100px"}}/>
                             </a>
-                 <li></li>     
-                 <li></li>   
-                 <li></li>   
-                 <li></li>   
-                 <li></li>   
-                 <li></li>
-                 <li></li>   
-                 <li></li>
-                 <li></li>   
-                 <li></li>      
+                          
+                  
+                      
 
-                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>Home</a></li>
+                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Home</a></li>
                 <Country />
-                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li><a href=""  style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
+                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li></li>     
+                 <li></li>   
+                 <li></li> 
+                 <li></li> 
+                 <li></li> 
+                 <li></li>
+                 <li></li> 
+                
+                  
                 <InstructorProfileDropdownMenu />
              
             </ul>

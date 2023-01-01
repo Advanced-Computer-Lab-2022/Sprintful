@@ -148,6 +148,7 @@ export default function CorporateProfile() {
                 </div>
             </header>
             {/* <!-- ***** Header Area End ***** --> */}
+            <hr/>
             <div className="main-banner">
             <div id="page-wrapper" style={{width: "1200px", height: "700px",left: "100px", margin: 70, background: "#DCDCDC"}} >
              <br/>

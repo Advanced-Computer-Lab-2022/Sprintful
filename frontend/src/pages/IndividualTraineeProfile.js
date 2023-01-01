@@ -150,6 +150,7 @@ export default function IndividualProfile() {
                     </div>
                 </div>
             </header>
+            <hr/>
             {/* <!-- ***** Header Area End ***** --> */}
 
             <div className="main-banner">

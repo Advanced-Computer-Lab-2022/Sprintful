@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import Country from './Country';
+import CountryCom from './CountryCom';
 import InstructorProfileDropdownMenu from './InstructorProfileDropdownMenu'
 import {useNavigate} from "react-router";
 
@@ -39,17 +39,18 @@ const InstructorHomeNavBar = () => {
                  <li></li>     
                  <li></li>   
                  <li></li>   
-                 <li></li>   
-                 <li></li>   
-                 <li></li>
-                 <li></li>   
-                 <li></li>
-                 <li></li>   
-                 <li></li>      
+                 
+                       
 
-                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>Home</a></li>
-                <Country />
-                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  marginTop:-2, fontFamily: "Times New Roman"}}>Home</a></li>
+                <CountryCom />
+                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:-2, fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li></li>   
+                 <li></li>
+                 <li></li>   
+                 <li></li>
+                 <li></li>   
+                 <li></li>
                 <li style={{color: 'white', 
                 marginTop: "-4px", 
                 height: "7px",
