@@ -157,12 +157,25 @@ const acceptRefund =asyncHandler(async(req,res)=>{
         // const updatedwalletI=
          const updateInstructorwallet=await Instructor.findOneAndUpdate({_id:instructorid},{money:finalwalletI},{new:true})
 
+
+         //deacreasing Number of enrolled students 
+        const numberOfEnrolled =(await Course.findById(courseid)).numofenrolledstudents;
+        const decreased=numberOfEnrolled-1;
+        
+        const updatedCourse=await Course.findOneAndUpdate({_id:courseid},{numofenrolledstudents:decreased},{new:true})
+
+         
+         
+         
+         
+         //changing request state
+
          
 
 
     
         // res.json(coursedocument)
-         res.json(updateInstructorwallet);
+         res.json(updatedCourse);
     
         //res.json(updatingprogress)
     
