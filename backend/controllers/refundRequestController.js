@@ -109,10 +109,42 @@ const acceptRefund =asyncHandler(async(req,res)=>{
 
        const updatingcourseArray=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{courses:coursesArray},{new:true})
 
+        //removing the progress from the trainee progress array:
+
+        const  ProgressArray=await IndividualTrainee.findOne({_id:traineeid},'-_id progress')
+        const array=ProgressArray.progress
+    
+    
+       // res.json(array);
+        let courseprogress;
+        let foundindex2;
+        //let x;
+    
+         for(let i=0;i<array.length;i++){
+            courseprogress=array[i];
+             //x=coursedocument.course.toString()==courseid;
+            if(courseprogress.course==courseid){
+               foundindex2=i;
+                break;
+             }
+         }
+
+         array.splice(foundindex2,1)
+    
+         const updatingprogress=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{progress:array},{new:true});
+    
+        // res.json(coursedocument)
+         res.json({message:"done"});
+    
+        //res.json(updatingprogress)
+    
+    
+    
+    
 
 
 
-   res.json({message:updatingcourseArray});
+   //res.json({message:updatingcourseArray});
 }
 
 )
