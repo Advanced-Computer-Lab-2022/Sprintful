@@ -46,7 +46,7 @@ router.get('/getreviews/:id',requireAuth,getCourseReviews)
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)
 router.put('/addPromotionForCourses', addPromotionForCourses)
-router.patch('/addPromotion/:courseid', addPromotion)
+router.put('/addPromotion/:courseid', addPromotion)
 
 
 module.exports = router
