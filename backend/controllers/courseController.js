@@ -47,8 +47,38 @@ const payCredit = asyncHandler(async (req, res)  => {
 	}
 })
 
+const payWithWallet = asyncHandler (async (req, res)  => {
+    const courseId = req.params.courseId;
+    const individualId = req.query.individualId;
+
+    const course = await Course.find({_id: courseId});
+    let discount = course[0].discount;
+    let price = course[0].price;
+    let amount = Math.ceil(price-(price*discount)); // amount to be paid
+    let instructor = course[0].instructor;
+    const individualOldMoney = (await IndividualTrainee.findById(individualId)).money
+    if(individualOldMoney-amount>=0) {
+        const response = await IndividualTrainee.findByIdAndUpdate(individualId,{money: individualOldMoney-amount }).exec()
+        const instructorOldMoney = (await Instructor.findById(instructor)).money
+        const response2 =await Instructor.findByIdAndUpdate(instructor,{money: instructorOldMoney+ (0.7*amount) }).exec()
+        const newCoursesList = ((await IndividualTrainee.findById(individualId)).courses).concat(courseId)
+        const response3=await IndividualTrainee.findByIdAndUpdate(individualId,{courses: newCoursesList }).exec()
+        console.log(amount)
+        console.log(response2)
+        console.log(response3)
+
+        res.status(200).json({
+            message: "Payment successful",
+            success: true,
+        })
+    }
+    else{
+        res.status(400).json({ error: "Can't complete Transaction"});
+    }
+  
+})
 //Add a Discount and Set its expiration date 
-const addPromotion=asyncHandler(async (req,res)=>{
+const addPromotion = asyncHandler(async (req,res)=>{
     const courseid=req.params.courseid;
     const discount=req.body.discount;
     const discountExpireAt=req.body.discountExpireAt;
@@ -700,5 +730,6 @@ module.exports = {
     filterInstructorCourses,
     payCredit,
     //averageEnrolled,
-    mostPopular
+    mostPopular,
+    payWithWallet
 }

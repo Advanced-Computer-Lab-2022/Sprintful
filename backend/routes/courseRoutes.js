@@ -24,8 +24,10 @@ const
     acceptPolicy, 
     payCredit, 
     averageEnrolled,
-    mostPopular} = require('../controllers/courseController')   //destructuring
+    mostPopular,
+    payWithWallet} = require('../controllers/courseController')   //destructuring
 
+router.post('/individual/:courseId/PayWithWallet', payWithWallet)
 router.post('/individual/:courseId/payCredit', payCredit)
 router.get('/instructor/search', searchInstructorCourses)
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
