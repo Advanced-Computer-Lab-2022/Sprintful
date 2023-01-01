@@ -2,6 +2,7 @@
 const RefundRequest=require('../models/refundRequestModel')
 const IndividualTrainee=require('../models/individualTraineeModel')
 const Course = require('../models/courseModel')
+const Instructor = require('../models/instructorModel')
 const asyncHandler = require('express-async-handler')
 
 
@@ -144,14 +145,24 @@ const acceptRefund =asyncHandler(async(req,res)=>{
          const updatedwallet={money:finalwallet}
          const updateTraineewallet=await IndividualTrainee.findOneAndUpdate({_id:traineeid},updatedwallet,{new:true})
 
+         //Decreasing amount from the instructor 
+         const instructorid=(await Course.findById(courseid)).instructor
+         //console.log(courseid);
+         const amountrefundedI=(await RefundRequest.findById(refundRequestid)).amount
+         const pastWalletI=(await Instructor.findById(instructorid)).money
+         //console.log(pastWalletI);
+         const finalwalletI=pastWalletI-amountrefundedI
+          console.log(finalwalletI)
 
-         
+        // const updatedwalletI=
+         const updateInstructorwallet=await Instructor.findOneAndUpdate({_id:instructorid},{money:finalwalletI},{new:true})
+
          
 
 
     
         // res.json(coursedocument)
-         res.json({message:"done"});
+         res.json(updateInstructorwallet);
     
         //res.json(updatingprogress)
     
