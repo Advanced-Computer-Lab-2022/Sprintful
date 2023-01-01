@@ -56,7 +56,7 @@ const CourseViewCTR=()=>{
         const getCourseanditsSubtitle=async()=>{
 
        
-            try{
+          
             //Sending a get request to the server to get course
             const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
             const coursedata=response.data;
@@ -149,12 +149,9 @@ const CourseViewCTR=()=>{
     
     
     
-            }
+            
             //catching any request error
-            catch (error){
-    
-            }
-    
+            
           }
          
          getCourseanditsSubtitle(); } 
