@@ -2,6 +2,7 @@
 const RefundRequest=require('../models/refundRequestModel')
 const IndividualTrainee=require('../models/individualTraineeModel')
 const Course = require('../models/courseModel')
+const Instructor = require('../models/instructorModel')
 const asyncHandler = require('express-async-handler')
 
 
@@ -65,6 +66,7 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
 
 
     const request=new RefundRequest({
+        traineeid:traineeid,
         traineeName:traineeName,
         course:courseid,
         amount:finalPrice
@@ -84,4 +86,124 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
 
 )
 
-module.exports = {addRefundRequest}
+
+const acceptRefund =asyncHandler(async(req,res)=>{
+
+    
+    const traineeid=req.query.traineeid;
+    const courseid=req.query.courseid;
+    const refundRequestid=req.params.refundid
+
+    //removing course from the trainee array of courses 
+
+    const coursesArray=(await IndividualTrainee.findById(traineeid)).courses
+    let indexfound;
+    let coursedocument;
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.toString()==courseid){
+           indexfound=i;
+            break;
+         }
+     }
+       coursesArray.splice(indexfound,1);
+
+       const updatingcourseArray=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{courses:coursesArray},{new:true})
+
+        //removing the progress from the trainee progress array:
+
+        const  ProgressArray=await IndividualTrainee.findOne({_id:traineeid},'-_id progress')
+        const array=ProgressArray.progress
+    
+    
+       // res.json(array);
+        let courseprogress;
+        let foundindex2;
+        //let x;
+    
+         for(let i=0;i<array.length;i++){
+            courseprogress=array[i];
+             //x=coursedocument.course.toString()==courseid;
+            if(courseprogress.course==courseid){
+               foundindex2=i;
+                break;
+             }
+         }
+
+         array.splice(foundindex2,1)
+    
+         const updatingprogress=await IndividualTrainee.findOneAndUpdate({_id:traineeid},{progress:array},{new:true});
+
+
+
+         //refunding amount to trainee wallet
+         const amountrefunded=(await RefundRequest.findById(refundRequestid)).amount
+         const pastWallet=(await IndividualTrainee.findById(traineeid)).money
+         const finalwallet=pastWallet+amountrefunded
+
+         const updatedwallet={money:finalwallet}
+         const updateTraineewallet=await IndividualTrainee.findOneAndUpdate({_id:traineeid},updatedwallet,{new:true})
+
+         //Decreasing amount from the instructor 
+         const instructorid=(await Course.findById(courseid)).instructor
+         //console.log(courseid);
+         const amountrefundedI=(await RefundRequest.findById(refundRequestid)).amount
+         const pastWalletI=(await Instructor.findById(instructorid)).money
+         //console.log(pastWalletI);
+         const finalwalletI=pastWalletI-amountrefundedI
+          console.log(finalwalletI)
+
+        // const updatedwalletI=
+         const updateInstructorwallet=await Instructor.findOneAndUpdate({_id:instructorid},{money:finalwalletI},{new:true})
+
+
+         //deacreasing Number of enrolled students 
+        const numberOfEnrolled =(await Course.findById(courseid)).numofenrolledstudents;
+        const decreased=numberOfEnrolled-1;
+        
+        const updatedCourse=await Course.findOneAndUpdate({_id:courseid},{numofenrolledstudents:decreased},{new:true})
+
+         
+         
+         
+         
+         //changing request state
+         const updateRequestState=await RefundRequest.findOneAndUpdate({_id:refundRequestid},{isAccepted:true},{new:true})
+
+
+
+         //all Requests
+         const RefundsRequests=await RefundRequest.find({})
+          res.json(RefundsRequests);
+         
+
+
+    
+        // res.json(coursedocument)
+         //res.json(updateRequestState);
+    
+        //res.json(updatingprogress)
+    
+    
+    
+    
+
+
+
+   //res.json({message:updatingcourseArray});
+}
+
+)
+
+
+
+const getRefundsRequests=asyncHandler(async(req,res)=>{
+
+    const RefundsRequests=await RefundRequest.find({})
+    res.json(RefundsRequests);
+
+}
+)
+
+module.exports = {addRefundRequest,acceptRefund,getRefundsRequests}

@@ -1,6 +1,12 @@
 const mongoose = require('mongoose')
 
 const RefundRequestSchema = mongoose.Schema({
+    traineeid:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'IndividualTrainee',
+
+    }
+    ,
  
     traineeName:{
         type:String 
