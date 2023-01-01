@@ -13,13 +13,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
-
-
-
 //stylings custom css
-
-
-
 const CourseViewCTR=()=>{
     // const useStyles=makeStyles({
     //     courseTitle:{
@@ -30,14 +24,11 @@ const CourseViewCTR=()=>{
     
     //     }
     // })
-
     //styles
     // const classes=useStyles();
-
    // const [course,setCourse]=useState(null);
     //const [coursePriceAfterDiscount,setPrice]=useState('');
     //const [courseSubtitles,setCourseSubtitles]=useState([]);
-
     //state as a document (key-value pairs)
     const [courseStates,setCourseStates]=useState({
       course:null,
@@ -48,20 +39,16 @@ const CourseViewCTR=()=>{
     
     ///api/courses
     const {courseid,traineeid}=useParams();
-
-
   
     //Using useEffect to run only on 1st render to display the course's data
     useEffect( ()=>{
         const getCourseanditsSubtitle=async()=>{
-
        
             try{
             //Sending a get request to the server to get course
             const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
             const coursedata=response.data;
             let finalPrice=0;
-
              //handling setting course price according to discount and its expiry date 
                    //checking if expiry date has passed
                       //getting today's date (day 1)
@@ -73,12 +60,9 @@ const CourseViewCTR=()=>{
                       let dateC=new Date(dateCformat);
                       //console.log(currentdate);
                       console.log(dateC)
-
-
                       //getting expiry date from DB "through server response"
                       const expirydate=coursedata.discountExpireAt+"";
                       const dateformat=new Date(expirydate)
-
                       let year2=dateformat.getFullYear();
                       let month2=dateformat.getMonth()+1; //because it outputs a number from 0-11 ex:3-->April
                       let day2 =dateformat.getDate();
@@ -87,20 +71,15 @@ const CourseViewCTR=()=>{
                       const dateE=new Date(dateEformat);
                       //console.log(expirydate);
                       console.log(dateE);
-
                       //Comparing current date with expiry date 
                       console.log(dateC.getTime()<=dateE.getTime());
                       if(dateC.getTime()<=dateE.getTime()){
-
                         const newPrice=coursedata.discount*coursedata.price;
                         finalPrice=newPrice;
                        }
-
                        else{
                         finalPrice=coursedata.price;
                           }
-
-
            
               //  //handling setting course price according to discount and its expiry date 
               //      //checking if expiry date has passed
@@ -112,27 +91,20 @@ const CourseViewCTR=()=>{
               //         let dateCformat=`${year}-${month}-${day}`  //current date in appropriate format.
               //         let dateC=new Date(dateCformat);
               //         //console.log(dateCformat);
-
               //         //getting expiry date from DB "through server response"
               //         const expirydate=coursedata.discountExpireAt;
               //         const dateEformat=expirydate.substring(0,10);  //Put it in appropriate format
               //         const dateE=new Date(dateEformat);
               //         //console.log(dateEformat);
-
               //         //Comparing current date with expiry date 
               //         console.log(dateC.getTime()<=dateE.getTime());
               //         if(dateC.getTime()<=dateE.getTime()){
-
               //           const newPrice=coursedata.discount*coursedata.price;
               //           finalPrice=newPrice;
               //          }
-
               //          else{
               //           finalPrice=coursedata.price;
               //             }
-
-
-
             //Sending a get request to server to get this course's Subtitles
             const response2=await axios.get(`http://localhost:5000/api/courses/getSubtitlesforCourse/${courseid}`);
             const subtitlesArray=response2.data;
@@ -140,52 +112,23 @@ const CourseViewCTR=()=>{
               course:coursedata,
               coursePriceAfterDiscount:finalPrice,
               courseSubtitles:subtitlesArray
-          })}
+          })
+    
+    
+    
+    
+            }
             //catching any request error
             catch (error){
+    
+            }
+    
           }
-    }
          
          getCourseanditsSubtitle(); } 
         ,[courseid] );
-
-
         const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates    //destructuring 
-
-
-        const requestAccess = async(e) => {
-          console.log(e)
-      
-          let axiosConfig = {
-            headers: {
-                'Content-Type': 'application/json;charset=UTF-8',
-                "Access-Control-Allow-Origin": "*",
-            }
-          };
-          const response = await axios.post('http://localhost:5000/api/requestAccess/requestAccess', {params: {id: traineeid}}, {
-  
-          }, axiosConfig)
-          .then(function (response){
-              console.log(response)
-          })
-          .catch(function (error){
-              console.log(error);
-          })
-          (
-             (res) => {
-                 const report = res.data
-                 console.log(report)
-             }
-              );
-              // if(response.ok){
-              //     console.log(response)
-              //     setStatus("")
-              // }
-      }
-
-
     return (
-
         <div>
             <div>
                
@@ -196,23 +139,22 @@ const CourseViewCTR=()=>{
                
                </StyledCourseHeader>
                 
-
              </div>
-
-
-
                     <Box
                          //margin
                         mt={1}
                         ml={0}
                         pl={0}
- 
+                       
+                        
+                        
                          display="flex"
                         justifyContent="flex-start"
-                        alignItems="flex-start">
+                        alignItems="flex-start"
+                          
+                           >
                             
-                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}
-                         onClick={() => requestAccess()}>
+                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
                          Request Access
                            </Button>
 
@@ -221,38 +163,17 @@ const CourseViewCTR=()=>{
                          Watch a preview video
                            </Button>
                     </Box>
-
-
-
-
              
-
               <div>
                  {/* subtitles */}
-
                   {courseSubtitles.map((subtitle)=>(
                         <SubtitleCard key={subtitle._id}  subtitle={subtitle}/> 
                          ))}
                         
-
-
                   
-
-
                  
-
-
-
-
-
-
-
              </div>
-
-
-
     </div>
     )
 }
-
 export default CourseViewCTR;
