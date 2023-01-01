@@ -65,6 +65,7 @@ import CourseViewInstructor2 from './pages/CourseViewInstructor2';
 import  CourseViewCTN from './pages/CourseViewCTN';
 import CourseViewITN from './pages/CourseViewITN';
 import SubtitleViewIT from './pages/SubtitleViewIT';
+import AdminRefundsPage from './pages/AdminRefundsPage';
 
 import ReportProblem from './components/ReportProblem';
 import AdminHome from './pages/AdminHome'
@@ -150,7 +151,10 @@ function App() {
               exact path="/api/subtitles/getSubtitle/:subtitleid/Instructor"
               element={<SubtitlePageInstructorNew />}
             />
-
+  
+            <Route 
+            exact path="/api/admin/RefundsRequests"
+            element={<AdminRefundsPage/>}/>
              
             
 
