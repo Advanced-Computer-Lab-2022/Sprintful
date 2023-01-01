@@ -18,6 +18,15 @@ const AdminRefundsPage=()=>{
 
     const [RefundsRequests,setRefundsRequests]=useState([]);
 
+    
+
+    const handleAccept=async(traineeid,courseid,refundid)=>{
+
+        const response2=await axios.get(`http://localhost:5000/api/refund/AcceptRefund/${refundid}/`,{params:{traineeid:traineeid,courseid:courseid}})
+    
+    
+       }
+
     useEffect(()=>{
         const getRefundsRequests=async()=>{
 
@@ -50,12 +59,12 @@ return (
                                    Trainee Name :{request.traineeName}
                             </Typography>
                             <br></br>
-                            <Typography utterBottom variant="h5" component="div">
+                            <Typography gutterBottom variant="h5" component="div">
                                 Course ID:{request.course}
                              </Typography>
                                 <br></br>
 
-                            <Typography utterBottom variant="h5" component="div">
+                            <Typography gutterBottom variant="h5" component="div">
                                 Refund Amount :{request.amount} L.E
                             </Typography>    
 
@@ -63,10 +72,28 @@ return (
                             <br></br>
                             </CardContent>
                             <CardActions>
-                              <Button size="Large">
+                            {(() => {
+                         if (request.isAccepted) {
+                        return   <Typography gutterBottom variant="h6" component="div" color="primary">
+                                  Accepted
+                                </Typography>
+                                                     ;
+                                            } 
+
+                           else{ 
+                        return   <Button onClick={()=>{handleAccept(request.traineeid,request.course,request._id )}} size="Large">
+                                   <h5>Accept</h5>
+                                 </Button>
+                           }                 
+                                                   })()}
+
+
+
+
+                              {/* <Button size="Large">
                                 <h5>Accept</h5>
                                 </Button>
-      
+       */}
                              </CardActions>
                     </Card>
                 </div>
