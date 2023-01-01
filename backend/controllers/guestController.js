@@ -4,7 +4,7 @@ const { appendFile } = require('fs')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const Admin = require('../models/adminModel')
-const Instructor = require('../models/instructorModel')
+const Instructor = require('../models/InstructorModel')
 
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');

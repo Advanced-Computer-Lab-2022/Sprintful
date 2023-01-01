@@ -3,7 +3,7 @@ const courseModel = require('../models/courseModel')
 const Course = require('../models/courseModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
-const Instructor = require('../models/instructorModel')
+const Instructor = require('../models/InstructorModel')
 const Subtitle = require('../models/subtitleModel.js')
 const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 

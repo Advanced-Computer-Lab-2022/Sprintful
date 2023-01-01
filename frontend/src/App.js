@@ -4,7 +4,7 @@ import Quiz from './components/Quiz'
 // import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
-import InstructorForm from './components/InstructorForm'
+import InstructorForm from './pages/InstructorForm'
 import Navbar2 from './components/Navbar2';
 import GuestHome from './pages/GuestHome';
 //import AdminHomePage from './components/AdminHomePage';
@@ -15,8 +15,8 @@ import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/corporateTraineeForm';
-import AdminForm from './components/AdminForm'
+import CorporateTraineeForm from './pages/CorporateTraineeForm';
+import AdminForm from './pages/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
 import EditInstructorProfile from './components/EditInstructorProfile';
 import CorporateTraineeProfile from './components/CorporateTraineeProfile';
@@ -71,10 +71,10 @@ import AdminHome from './pages/AdminHome'
 
 import MostPopular from './components/MostPopular';
 
-import AccessRequests from './components/AccessRequests';
+import AccessRequests from './pages/AccessRequests';
 import ChangeIndividualTraineePassword from './components/ChangeIndividualTraineePassword';
 import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
-import ChangeAdminPassword from './components/ChangeAdminPassword';
+import ChangeAdminPassword from './pages/ChangeAdminPassword';
 import ChangeInstructorPassword from './components/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
 import WriteNotes from './components/writeNotes';
@@ -227,6 +227,10 @@ function App() {
               exact path="/writeNotes"
               element={<WriteNotes/>}
             />
+            <Route
+              path="/admin/"
+              element={<AdminHome />}
+            />
            
 
             {/* Ragaa */}
@@ -357,10 +361,6 @@ function App() {
             <Route
               path="/Login"
               element={<Login />}
-            />
-            <Route
-              path="/admin/"
-              element={<AdminHome />}
             />
           </Routes>
           {/* <Routes>

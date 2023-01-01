@@ -14,6 +14,7 @@ const requestAccess = async(req, res, next) => {
 
         const corporateTrainee = await CorporateTrainee.findById(corporateTraineeId)
         const corporateTraineeUsername = corporateTrainee.username
+        const corporate = corporateTrainee.corporate
         console.log("traineeeee", corporateTraineeUsername)
         const course = await Courses.findById(courseId)
         const courseName = course.title
@@ -24,7 +25,8 @@ const requestAccess = async(req, res, next) => {
             corporateTraineeUsername,
             courseId,
             courseName,
-            state: "pending"
+            state: "pending",
+            corporate
         })
         console.log("Request Access5");
         if (request) {
@@ -34,7 +36,8 @@ const requestAccess = async(req, res, next) => {
                 corporateTraineeUsername: request.corporateTraineeUsername,
                 courseId: request.courseId,
                 courseName: request.courseName,
-                state: request.state
+                state: request.state,
+                corporate: request.corporate
             })
         }
         else {

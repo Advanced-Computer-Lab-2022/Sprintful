@@ -5,7 +5,19 @@ import Table from '@mui/material/Table';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';  
 //const { useState } = require("react");
+import {useNavigate} from "react-router";
+
+
 const ChangeAdminPassword = () => {
+  const header = {
+    color: "darkRed",
+    fontFamily: "Times New Roman",
+    fontSize: "28px",
+    textAlign: "center",
+    fontWeight: "bold"
+    
+  };
+  const navigate=useNavigate();
     const [admin, setAdmin] = useState("");
     const [currentPassword, setCurrentPassword] = useState(admin.currentPassword);
     const [password, setPassword] = useState(admin.password);
@@ -56,20 +68,50 @@ const ChangeAdminPassword = () => {
    });
 
     }
+    function myFunction() {
+      var x = document.getElementById("myInput");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
 
     return (
       <div>
-        <form onSubmit={handleSubmit}> 
+        <div>
+      <nav className="navbar navbar-default navbar-cls-top " role="navigation" style = {{marginBottom: '0'}}> 
+         
+      {/* <div className="navbar-header"> */}
+          <a  style={{color: 'white',
+                      fontWeight: "bold", 
+                      float: "left",
+                      fontSize: '25px',
+                      testAlign: "left"}}>Canadian Chamber of Commerce</a> 
+      {/* </div> */}
+<div  style={{color: 'white', 
+          padding: '15px 50px 5px 50px',
+          float: 'right',
+          fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust">Logout</a> 
+
+</div>
+  </nav>
+  </div>
+
+  <hr/> 
+  <br/>  
+  <div style={header}>Change my Password</div>
+  <br/>
+  <br/>
+      <div>
+      <p style= {{ marginLeft: "540px", fontSize:"16px", color:"black"}}>
+            <label style={{fontSize:"16px", color:"black", textAlign: "center"}}>User name: </label>
+            <label style={{fontSize:"16px", color:"black", textAlign: "center"}}>{admin.username}</label>
+            </p>
+        <form className="create" onSubmit={handleSubmit}> 
       <div className="ChangeAdminPassword">
          
           <div>
-           <p>
-            <label style={{fontSize:"16px"}}>User name: </label>
-            <label style={{fontSize:"16px"}}>{admin.username}</label>
-            </p>
-        <p>
-        <label> Change Password </label>
-        </p>
         <br/>
 
         <label>Current Password: </label>
@@ -83,7 +125,8 @@ const ChangeAdminPassword = () => {
                    }}
             type="text"
             onChange={(e) => setCurrentPassword(e.target.value)}
-            value={currentPassword}/> 
+            value={currentPassword}
+            required/>
             <br/>
 
         <label>New Password: </label>
@@ -97,14 +140,34 @@ const ChangeAdminPassword = () => {
                    }}
                   type="text"
                   onChange={(e) => setPassword(e.target.value)}
-                  value={password}/>
+                  value={password}
+                  required/>
            
             </div>
       
         </div>
         <br/>
-            <button style={{width: "50px"}}> Apply </button>
+        <button style={{backgroundColor:"#dc3545", 
+                                                    borderRadius:"3px", 
+                                                    color: 'white', 
+                                                    // padding: '15px 50px 5px 50px',
+                                                    float: 'center',
+                                                    fontSize: '10px',
+                                                    minHeight:"30px", 
+                                                    minWidth: "50px",
+                                                    position: "relative",
+                                                    left: "200px"}}> Apply </button> 
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
         </form>
+        </div>
+        <div  onClick={()=> navigate(`/admin?id=${id}`)} style={{color: 'white', 
+             padding: '15px 50px 5px 50px',
+             float: 'left',
+             fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
+             </div>
         </div>
 
     )
