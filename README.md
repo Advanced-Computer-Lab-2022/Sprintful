@@ -64,7 +64,7 @@ The project is implemented using the MERN Stack, a free and open-source JavaScri
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Features
-[all extra features have been done in your project. Basically, this is where you try to make your project stand out from the rest.]
+You can view the full project requirements from [**here**](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1H6UElFJV09XHmQqytyiD0x04cvbdKksWqvOHPyHwMLyGjQ3wAjjAlgDcE4_zWw/pubhtml).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
