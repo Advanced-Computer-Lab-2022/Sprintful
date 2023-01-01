@@ -105,8 +105,8 @@ const ChangeAdminPassword = () => {
   <br/>
       <div>
       <p style= {{ marginLeft: "540px", fontSize:"16px", color:"black"}}>
-            <label style={{fontSize:"16px", color:"black", textAlign: "center"}}>User name: </label>
-            <label style={{fontSize:"16px", color:"black", textAlign: "center"}}>{admin.username}</label>
+            <label style={{fontSize:"16px", color:"black", textAlign: "center", fontFamily: "Times New Roman"}}>User name: </label>
+            <label style={{fontSize:"16px", color:"black", textAlign: "center", fontFamily: "Times New Roman"}}>{admin.username}</label>
             </p>
         <form className="create" onSubmit={handleSubmit}> 
       <div className="ChangeAdminPassword">
@@ -114,7 +114,7 @@ const ChangeAdminPassword = () => {
           <div>
         <br/>
 
-        <label>Current Password: </label>
+        <label style={{color: "black", fontFamily: "Times New Roman"}}>Current Password: </label>
              <input style = {{ //.create input, .create textarea, .create select
                     padding: "6px 10px",
                     margin: "10px 0",
@@ -129,7 +129,7 @@ const ChangeAdminPassword = () => {
             required/>
             <br/>
 
-        <label>New Password: </label>
+        <label style={{color: "black", fontFamily: "Times New Roman"}}>New Password: </label>
             <input style = {{ //.create input, .create textarea, .create select
                     padding: "6px 10px",
                     margin: "10px 0",

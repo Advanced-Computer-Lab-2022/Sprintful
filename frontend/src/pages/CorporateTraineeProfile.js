@@ -2,11 +2,8 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import HomeNavBar from '../components/HomeNavBar';
+import CorporateTraineesNavBarCom from '../components/CorporateTraineesNavBarCom';
 import '../pages/css/templatemo-plot-listing.css'
-
-
-
 
 export default function CorporateProfile() {
 
@@ -84,6 +81,14 @@ export default function CorporateProfile() {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
+    const header = {
+        color: "darkRed",
+        fontFamily: "Times New Roman",
+        fontSize: "28px",
+        textAlign: "center",
+        fontWeight: "bold",
+        
+      };
 
     const navigate = useNavigate();
     useEffect(() => {
@@ -102,26 +107,59 @@ export default function CorporateProfile() {
     }, []);
 
   return (
-        <div>
+    <div>
+    <div id="topbar" class="">
+         <div class="container">
+             <div class="row">
+                 <div class="col-md-6 p-0 text-center">
+                     <ul class="top-menu">
+                         <li><a href="tel:+201001004070">Phone:
+                                 +201001004070</a></li>
+                         <li><a href="mailto:info@cancham.org.eg">Email:
+                                 info@cancham.org.eg</a></li>
+                     </ul>
+                 </div>
+                 <div class="col-md-6 hidden-sm hidden-xs">
+                     <div class="social-icons social-icons-colored-hover">
+                         <ul>
+                             <li class="social-facebook"><a href="https://www.facebook.com/CanCham/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                             <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                             <li class="social-youtube"><a href="https://www.youtube.com/channel/UC1ykoFKsMjVQCx3TeLIXDbg" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                             <li class="social-gplus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                             <li class="social-linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                         </ul>
+                     </div>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <br/>
+     <br/>
+     <br/>
             
             {/* <!-- ***** Header Area Start ***** --> */}
             <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <HomeNavBar />
+                            <CorporateTraineesNavBarCom />
                         </div>
                     </div>
                 </div>
             </header>
             {/* <!-- ***** Header Area End ***** --> */}
-
             <div className="main-banner">
+            <div id="page-wrapper" style={{width: "1200px", height: "700px",left: "100px", margin: 70, background: "#DCDCDC"}} >
+             <br/>
+             <div id="page-inner" style={{width: "1100px", height: "600px", margin: 40, background: "white"}}>
+                <br/>
                 <div className="container">
+                <div style={header}>My Profile</div>
                     <div className="row">
+
                         <div className="col-lg-12">
                         {trainee && (
-                        <div className="profile" style={{backgroundColor: "#eee"}}>
+                        <div className="profile">
          
     
          <div className="container py-5">
@@ -132,31 +170,31 @@ export default function CorporateProfile() {
            </div>
        
            <div className="row">
-             <div className="col-lg-4">
+             <div className="col-lg-4" style={{boxShadow: "5px 10px 8px #888888"}}>
                <div className="card mb-4">
                  <div className="card-body text-center">
                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                      className="rounded-circle img-fluid" style={{width: "150px"}}/>
                    <h5 className="my-3">{trainee.firstName} {trainee.lastName}</h5>
-                   {/* <p className="text-muted mb-1">Wallet Amount: {trainee.money}</p> */}
+                   <p className="text-muted mb-1" style={{color: "black", fontFamily: "Times New Roman"}}>Wallet Amount: {trainee.money}</p>
                  </div>
                </div>
              </div>
-             <div className="col-lg-8">
+             <div className="col-lg-8"  style={{boxShadow: "5px 10px 8px #888888"}}>
                <div className="card mb-4">
                  <div className="card-body">
                    <div className="row">
                      <div className="col-sm-3">
-                       <p className="mb-0">Username</p>
+                       <p className="mb-0" style={{color: "black", fontFamily: "Times New Roman"}}>Username</p>
                      </div>
                      <div className="col-sm-9">
                        <p className="text-muted mb-0">{trainee.username}</p>
+                     </div>
                    </div>
-                     <hr/>
-
+                   <hr/>
                    <div className="row">
                      <div className="col-sm-3">
-                       <p className="mb-0">First Name</p>
+                       <p className="mb-0" style={{color: "black", fontFamily: "Times New Roman"}}>First Name</p>
                      </div>
                      <div className="col-sm-9">
                        <p className="text-muted mb-0">{trainee.firstName}</p>
@@ -165,7 +203,7 @@ export default function CorporateProfile() {
                    <hr/>
                    <div className="row">
                      <div className="col-sm-3">
-                       <p className="mb-0">Last Name</p>
+                       <p className="mb-0" style={{color: "black", fontFamily: "Times New Roman"}}>Last Name</p>
                      </div>
                      <div className="col-sm-9">
                        <p className="text-muted mb-0">{trainee.lastName}</p>
@@ -174,112 +212,89 @@ export default function CorporateProfile() {
                    <hr/>
                    <div className="row">
                      <div className="col-sm-3">
-                       <p className="mb-0">Corporate</p>
+                       <p className="mb-0" style={{color: "black", fontFamily: "Times New Roman"}}>Corporate</p>
                      </div>
                      <div className="col-sm-9">
                        <p className="text-muted mb-0">{trainee.corporate}</p>
-                     </div>
+                       </div>
                    </div>
-                     </div>
-                   <hr/>
-                   {/* <div className="row">
-                     <div className="col-sm-3">
-                       <p className="mb-0">Biography</p>
-                     </div>
-                     <div className="col-sm-9">
-                       <p className="text-muted mb-0">{trainee.biography}</p>
-                     </div>
-                   </div> */}
+                     
+                   </div>
                  </div>
                </div>
              </div>
            </div>
          </div>
-                        </div>
+                        
             )}
-                    <br/>
-                      <button style={{width: "150px", textAlign: "center", justifyContent: "center", marginLeft: "69.8em", height: "30px", fontSize: "14px"}} onClick={()=> navigate(`/api/corporateTrainee/changePassword?id=${id}`)}>Change Password</button>
-                    
-                    </div>
+                      <br/>
+                    <button style={{backgroundColor:"#dc3545", width: "150px", textAlign: "center", justifyContent: "center", marginLeft: "72.5em", height: "30px",
+                                                    borderRadius:"3px", 
+                                                    color: 'white', 
+                                                    // padding: '15px 50px 5px 50px',
+                                                    float: 'center',
+                                                    fontSize: '10px',
+                                                    minHeight:"30px", 
+                                                    minWidth: "50px",
+                                                    position: "relative",
+                                                    left: "200px"}}   onClick={()=> navigate(`/api/corporateTrainee/changePassword?id=${id}`)}>Change Password</button>
+
+
+</div>
                 </div>
+            </div>
+           
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <div  onClick={()=> navigate(`/individual?id=${id}`)} style={{color: 'white', 
+             padding: '15px 50px 5px 50px',
+             float: 'left',
+             fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
+             </div>
             </div>
             </div>
             
-            <div>
-            {/* <div className="popular-categories">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="section-heading"> */}
-                            <br/>
-                              
-                            </div>
-                        {/* </div>
-                    </div>
-                </div>
-            </div> */}
+            </div>
            
-            <footer>
-                <div className="container">
+            <footer style={{height: "100px"}}>
+                <div className="container" style={{height: "20px"}}>
                     <div className="row">
-                        <div className="col-lg-4">
+                    <div className="col-lg-4">
                             <div className="about">
-                                <div className="logo">
-                                    {/* <img src="assets/images/black-logo.png" alt="Plot Listing" /> */}
-                                </div>
-                                <p>If you consider that <a rel="nofollow" href="https://templatemo.com/tm-564-plot-listing" target="_parent">Plot Listing template</a> is useful for your website, please <a rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a little via PayPal.</p>
+                                    <img src="/upload/logo.png" alt="Homepage" style={{width: "180px", 
+                                                                                    height: "70px"}}/>
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <div className="helpful-links">
-                                <h4>Helpful Links</h4>
-                                <div className="row">
-                                    <div className="col-lg-6 col-sm-6">
-                                        <ul>
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Reviews</a></li>
-                                            <li><a href="#">Listing</a></li>
-                                            <li><a href="#">Contact Us</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <ul>
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">Awards</a></li>
-                                            <li><a href="#">Useful Sites</a></li>
-                                            <li><a href="#">Privacy Policy</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div className="contact-us">
+                                <h4 style= {{color: "black",  fontFamily: "Times New Roman"}}>Contact Us</h4>
+                                <p style={{ fontFamily: "Times New Roman"}}>If you have any suggestions email us on info@cancham.org.eg</p>
+                                <p style={{ fontFamily: "Times New Roman"}}>Call us +201001004070 from 9 AM to 4 PM</p>
                             </div>
                         </div>
                         <div className="col-lg-4">
                             <div className="contact-us">
-                                <h4>Contact Us</h4>
-                                <p>27th Street of New Town, Digital Villa</p>
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <a href="#">010-020-0340</a>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <a href="#">090-080-0760</a>
-                                    </div>
-                                </div>
+                                <h4 style= {{color: "black",  fontFamily: "Times New Roman"}}>Location</h4>
+                                <p style={{ fontFamily: "Times New Roman"}}>Villa 25 Mourad street off Orouba, Heliopolis، Almazah, Heliopolis, Cairo Governorate 11475</p>
                             </div>
                         </div>
                         <div className="col-lg-12">
                             <div className="sub-footer">
-                                <p>Copyright © 2021 Plot Listing Co., Ltd. All Rights Reserved.
-                                    <br />
-                                    Design: <a rel="nofollow" href="https://templatemo.com" title="CSS Templates">TemplateMo</a></p>
+                                <label>© 2023 CANADIAN CHAMBER OF COMMERCE. ALL RIGHTS RESERVED.</label>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
             </footer>
 
-      
-        </div>
+      </div>
     )
 }
 

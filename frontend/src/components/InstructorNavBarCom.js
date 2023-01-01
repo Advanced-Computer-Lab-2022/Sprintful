@@ -10,6 +10,19 @@ const InstructorHomeNavBar = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
+    const handleOnClick = async(e) =>{
+        e.preventDefault()
+        axios.get(`http://localhost:5000/api/instructor/logout`)
+        .then((res) => {
+          navigate('/');
+          navigate(0);
+        })
+        .catch((err) => {
+          console.log(err);
+      });
+    
+    }
+
     return (
         <nav className="main-nav" style={{background: "white", height: "20px"}}>
             <br/>
@@ -37,7 +50,14 @@ const InstructorHomeNavBar = () => {
                 <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>Home</a></li>
                 <Country />
                 <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>My Courses</a></li>
-                <InstructorProfileDropdownMenu />
+                <li style={{color: 'white', 
+                marginTop: "-4px", 
+                height: "7px",
+                fontSize: '10px'}}>
+               &nbsp; <a className="btn btn-danger square-btn-adjust" onClick={handleOnClick}>Logout</a> 
+    
+   
+                </li>
              
             </ul>
             </div>

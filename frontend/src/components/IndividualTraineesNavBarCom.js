@@ -10,8 +10,21 @@ const InstructorHomeNavBar = () => {
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
 
+    const handleOnClick = async(e) =>{
+        e.preventDefault()
+        axios.get(`http://localhost:5000/api/instructor/logout`)
+        .then((res) => {
+          navigate('/');
+          navigate(0);
+        })
+        .catch((err) => {
+          console.log(err);
+      });
+    
+    }
+
     return (
-        <nav className="main-nav" style={{background: "white", height: "20px"}}>
+        <nav className="main-nav" style={{background: "white", height: "30px"}}>
             <br/>
             {/* <!-- ***** Logo Start ***** --> */}
             <div id="salata" style={{right: "100px"}}>
@@ -34,10 +47,16 @@ const InstructorHomeNavBar = () => {
                  <li></li>   
                  <li></li>      
 
-                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>Home</a></li>
+                <li><a onClick={()=>window.location.href =`/individual?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>Home</a></li>
                 <Country />
-                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>My Courses</a></li>
-                <InstructorProfileDropdownMenu />
+                <li><a onClick={() => window.location.href = `/MyEnrolledCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:8, fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li style={{color: 'white',   height: "4px",
+                marginTop: "-2px", 
+                fontSize: '5px'}}>
+               &nbsp; <a className="btn btn-danger square-btn-adjust" onClick={handleOnClick}>Logout</a> 
+    
+   
+                </li>
              
             </ul>
             </div>

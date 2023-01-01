@@ -18,9 +18,9 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import CorporateTraineeForm from './pages/CorporateTraineeForm';
 import AdminForm from './pages/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
-import EditInstructorProfile from './components/EditInstructorProfile';
-import CorporateTraineeProfile from './components/CorporateTraineeProfile';
-import IndividualTraineeProfile from './components/IndividualTraineeProfile';
+import EditInstructorProfile from './pages/EditInstructorProfile';
+import CorporateTraineeProfile from './pages/CorporateTraineeProfile';
+import IndividualTraineeProfile from './pages/IndividualTraineeProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -72,12 +72,12 @@ import AdminHome from './pages/AdminHome'
 import MostPopular from './components/MostPopular';
 
 import AccessRequests from './pages/AccessRequests';
-import ChangeIndividualTraineePassword from './components/ChangeIndividualTraineePassword';
-import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
+import ChangeIndividualTraineePassword from './pages/ChangeIndividualTraineePassword';
+import ChangeCorporateTraineePassword from './pages/ChangeCorporateTraineePassword';
 import ChangeAdminPassword from './pages/ChangeAdminPassword';
-import ChangeInstructorPassword from './components/ChangeInstructorPassword';
+import ChangeInstructorPassword from './pages/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/writeNotes';
+import WriteNotes from './components/WriteNotes';
 
 import TestLogin from './pages/TestLogin';
 import TestHome from './pages/TestHome';

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import Country from '../components/Country';
+import CountryGuest from '../components/CountryGuest';
 
 const HomeNavBar = () => {
 
@@ -25,7 +25,7 @@ const HomeNavBar = () => {
                       
            
                 <li><a href="/home" style= {{color: "black", left: "400px"}} >Home</a></li>
-                <Country />
+                <CountryGuest />
                 <li><a href=""  style= {{color: "black", left: "400px"}}>Contact Us</a></li>
                 <li><a href="/logme"  style= {{color: "black", left: "400px"}}>Log in</a></li>
                 <li><a href="/Signup"  style= {{color: "black", left: "400px"}}>Sign up</a></li>
