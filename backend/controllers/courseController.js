@@ -47,6 +47,24 @@ const payCredit = asyncHandler(async (req, res)  => {
 	}
 })
 
+const getBalanceAndPrice = asyncHandler (async (req, res)  => {
+    const courseId = req.params.courseId;
+    const individualId = req.query.individualId;
+
+    const course = await Course.find({_id: courseId});
+    let discount = course[0].discount;
+    let price = course[0].price;
+    let amount = Math.ceil(price-(price*discount)); // amount to be paid
+    const individualOldMoney = (await IndividualTrainee.findById(individualId)).money
+
+    res.status(200).json(
+        {
+            individualOldMoney: individualOldMoney,
+            amount:amount
+        }
+    )
+
+})
 const payWithWallet = asyncHandler (async (req, res)  => {
     const courseId = req.params.courseId;
     const individualId = req.query.individualId;
@@ -731,5 +749,6 @@ module.exports = {
     payCredit,
     //averageEnrolled,
     mostPopular,
-    payWithWallet
+    payWithWallet,
+    getBalanceAndPrice
 }

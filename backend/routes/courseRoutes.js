@@ -25,8 +25,11 @@ const
     payCredit, 
     averageEnrolled,
     mostPopular,
-    payWithWallet} = require('../controllers/courseController')   //destructuring
+    payWithWallet,
+    getBalanceAndPrice} = require('../controllers/courseController')   //destructuring
 
+router.get('/individual/:courseId/getBalanceAndPrice', getBalanceAndPrice)
+router.post('/individual/:courseId/PayWithWallet', payWithWallet)
 router.post('/individual/:courseId/PayWithWallet', payWithWallet)
 router.post('/individual/:courseId/payCredit', payCredit)
 router.get('/instructor/search', searchInstructorCourses)
