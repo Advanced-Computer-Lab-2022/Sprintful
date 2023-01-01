@@ -169,13 +169,15 @@ const acceptRefund =asyncHandler(async(req,res)=>{
          
          
          //changing request state
+         const updateRequestState=await RefundRequest.findOneAndUpdate({_id:refundRequestid},{isAccepted:true},{new:true})
+
 
          
 
 
     
         // res.json(coursedocument)
-         res.json(updatedCourse);
+         res.json(updateRequestState);
     
         //res.json(updatingprogress)
     
