@@ -22,7 +22,28 @@ software.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Code Style
-[MVC?]
+### All languages
+* Following Single-responsibility principle
+* Single quotes are preferred over double. Reason: HTML uses double quotes.
+* Use `void 0` instead of `undefined`, because `undefined` could have been
+redefined.
+* Write code in functional style with minimum side effects.
+* Don't use function statements. Instead, create anonymous functions and
+assing them to vars for consistency with other vars.
+### Git
+* Keep your repository clean. Don’t commit big files unless they absolutely
+  require git. Even in this case, prefer storing all big files in a separate
+  submodule. That’s because git history can become very big and it will be pain
+  for others to use the repo.
+* Commit message:
+    *  Capitalize the first word and do not end in punctuation   
+    * Complte the sentence "This commit will"
+* Branch naming:
+    * Use slashes as word separator.
+    * Use namespaces, for example,
+        * `[ContributerName]/[SprintNumber]/Feature/[FeatureName]` or
+        * `[ContributerName]/[SprintNumber]/Bug/[BugFixed]`
+        * like:  `Ragaa/Sprint2/Feature/Quiz`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
