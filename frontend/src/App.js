@@ -79,6 +79,9 @@ import ChangeInstructorPassword from './components/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
 import WriteNotes from './components/writeNotes';
 
+import TestLogin from './pages/TestLogin';
+import TestHome from './pages/TestHome';
+
 function App() {
   return (
     <div className="App">
@@ -231,6 +234,15 @@ function App() {
               path="/admin/"
               element={<AdminHome />}
             />
+            <Route
+              exact path="/logme"
+              element={<TestLogin />}
+            />
+             <Route
+              exact path="/homie"
+              element={<TestHome />}
+            />
+           
            
 
             {/* Ragaa */}
