@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MostPopular from '../components/MostPopular';
+
 
 const HomeSearch = () => {
     const navigate = useNavigate();
@@ -14,11 +16,19 @@ const HomeSearch = () => {
     const [subject, setSubject] = useState(null)
     const [rating, setRating] = useState(null)
     const [filterData,setFilterData]=useState([]);
+    const[popular, setPopular]= useState(false)
+    const [students, setStudents] = useState(null)
 
     const handleFilter =  async(e) =>{
         e.preventDefault()
         var a = document.getElementById('rating').value  ;
+        if(a == 6){
+        setPopular(true);
+        setRating(null);
+        }
+        else{
         setRating(a)
+        }
         var b = document.getElementById('subject').value  ;
         setSubject(b)
         var c = document.getElementById('price').value  ;
@@ -26,40 +36,45 @@ const HomeSearch = () => {
         setCourses([])
       }
 
-    useEffect(() => {
-        const response = async() =>{
-            console.log("hello")
-            console.log(price +" " + subject + " " + rating)
-          await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
-          .then((res) => { 
-                const course = res.data
-                if(res.status===200){
-                  console.log("check success")
-                  console.log(course)
-                  setFilterData(course)
-                }
-                else{
-                  console.log("entered empty check")
-                  setFilterData([])
-                }
-      
-            })
-          }
-          response()
-          setPrice(null)
-          setSubject(null)
-          setRating(null)
+    // useEffect(() => {
 
-        axios.get(`http://localhost:5000/api/courses/search?searchTerm=${searchTerm}`)
-        .then((res) => {
-            console.log(res.data)
-            setCourses(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        });
-        setSearchTerm(null)
-    }, [searchTerm,searched,price,subject,rating,filterData]);
+        
+    //     const response = async() =>{
+            
+    //         console.log("hello")
+    //         console.log(price +" " + subject + " " + rating)
+    //       await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
+    //       .then((res) => { 
+    //             const course = res.data
+    //             if(res.status===200){
+    //               console.log("check success")
+    //               console.log(course)
+    //               setFilterData(course)
+    //             }
+    //             else{
+    //               console.log("entered empty check")
+    //               setFilterData([])
+    //             }
+      
+    //         })
+    // }
+    //       response()
+    //       setPrice(null)
+    //       setSubject(null)
+    //       setRating(null)
+    //       setPopular(false)
+
+    //     axios.get(`http://localhost:5000/api/courses/search?searchTerm=${searchTerm}`)
+    //     .then((res) => {
+    //         console.log(res.data)
+    //         setCourses(res.data);
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     });
+    //     setSearchTerm(null)
+    // }, 
+    //[searchTerm,searched,price,subject,rating,popular, filterData ]);
 
     const handleOnChange = async(e) =>{
         e.preventDefault()
@@ -69,6 +84,7 @@ const HomeSearch = () => {
         setFilterData([])
         console.log(searchTerm)
     }
+
     const styleFilterForm = {
         position: "relative",
         top: "-40px",
@@ -99,6 +115,7 @@ const HomeSearch = () => {
     }
     return (
         <div>
+            {/* <MostPopular/> */}
         { <form id="search-form" name="gs" method="submit" role="search" action="#">
             <div className="row">
                 <div className="col-lg-3 align-self-center">
@@ -155,12 +172,16 @@ const HomeSearch = () => {
                         <option key="3" value="3">3 Stars</option>
                         <option key="4" value="4">4 Stars</option>
                         <option key="5" value="5">5 Stars</option>
+                        {/* <option key="6" value="6" >Most popular</option> */}
                     </select>
                 </fieldset>
+                <br/>
+
             </div>
             <div className="col-lg-3">
                 <fieldset>
-                    <button id="main-button" onClick={handleFilter} style={styleFilterButton}> Apply</button>
+                    {/* <button id="main-button" onClick={(e)=>handlePopular} >View Most Popular</button> */}
+                    <button id="main-button" onClick={(e) => handleFilter} style={styleFilterButton}> Apply</button>
                 </fieldset>
             </div>
         </div>
@@ -183,6 +204,7 @@ const HomeSearch = () => {
     }
     </div> 
         </div>
+        <MostPopular/>
         { searched &&
             
             <div className="card-container">

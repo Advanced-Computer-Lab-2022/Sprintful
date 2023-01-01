@@ -9,10 +9,12 @@ const ReportDetails = () => {
     const [status, setStatus] = useState("UnSeen")
     const params = new URLSearchParams(window.location.search);
         const id = params.get('reportid');
+        console.log("report id: "+id)
 
 
     useEffect( ()=>{
         const fetchReport =async () =>{
+            console.log("trying to fetch")
             await axios.get(`http://localhost:5000/api/report/${id}`).then(
            (res) => { 
                const response = res.data

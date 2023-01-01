@@ -14,6 +14,9 @@ import Button from '@mui/material/Button';
 import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
 
+import RateCourse from '../components/RateCourse';
+import RateInstructor from '../components/RateInstructor';
+
 import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableTraineeCT';
 
 
@@ -205,23 +208,10 @@ const CourseViewCTN=()=>{
                         ml={0}
                         pl={0}
                        
-                        
-
-                        
                          display="flex"
                         justifyContent="flex-start"
-                        alignItems="flex-start"
-                          
-                           >
-                            
-                        
-                       
+                        alignItems="flex-start">
                     </Box>
-
-
-
-
-             
 
               <div>
                  {/* subtitles */}
@@ -230,6 +220,12 @@ const CourseViewCTN=()=>{
                         <SubtitleCardClickableTraineeCT key={subtitle._id}  subtitle={subtitle}  traineeid={traineeid}  courseid={courseid}/> 
                          ))}
                     </div>
+
+                    <label>Rate your course</label>
+                    <RateCourse/>
+
+                    <label>Rate your instructor</label>
+                    <RateInstructor/>
 
 
 

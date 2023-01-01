@@ -78,8 +78,6 @@ const courseSchema = mongoose.Schema({
         type :Date ,
         default:'2025-01-01'
     },
-
-
 }, {
     timestamps: true
 })

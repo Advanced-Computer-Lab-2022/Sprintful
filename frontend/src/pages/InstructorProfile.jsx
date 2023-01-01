@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import HomeNavBar from '../components/HomeNavBar';
+import InstructorHomeNavBar from '../components/InstructorHomeNavBar';
 import './css/templatemo-plot-listing.css'
 
 
@@ -81,6 +81,7 @@ export default function InstructorProfile() {
   
 
     const [instructor, setInstructor] = useState("");
+    const [amount, setAmount] = useState(0);
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
@@ -97,9 +98,15 @@ export default function InstructorProfile() {
       .catch((err) => {
           console.log(err);
       });
+     
+
+
     }       
     fetchData();
+
+    
     }, []);
+    
 
   return (
         <div>
@@ -109,7 +116,7 @@ export default function InstructorProfile() {
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <HomeNavBar />
+                            <InstructorHomeNavBar />
                         </div>
                     </div>
                 </div>
@@ -137,7 +144,7 @@ export default function InstructorProfile() {
                  <div className="card-body text-center">
                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                      className="rounded-circle img-fluid" style={{width: "150px"}}/>
-                   <h5 className="my-3">John Smith</h5>
+                   <h5 className="my-3">{instructor.firstName} {instructor.lastName}</h5>
                    <p className="text-muted mb-1">Rating: {instructor.rating}</p>
                  </div>
                </div>
@@ -188,6 +195,16 @@ export default function InstructorProfile() {
                      <div className="col-sm-9">
                        <p className="text-muted mb-0">{instructor.biography}</p>
                      </div>
+                  <hr/>
+                     <div className="row">
+                     <div className="col-sm-3">
+                       <p className="mb-0">Wallet</p>
+                     </div>
+                     <div className="col-sm-9">
+                       <p className="text-muted mb-0">{instructor.money}</p>
+                     </div>
+                   </div>
+                     
                    </div>
                  </div>
                </div>

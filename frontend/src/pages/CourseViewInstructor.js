@@ -229,16 +229,11 @@ const CourseViewInstructor=()=>{
                          ))}
                     </div>
 
-                    <br/>
+                    {/* <br/>
                     <br/>
                     <br/>
 
                     <div>
-            {/* <div className="popular-categories">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="section-heading"> */}
                             <br/>
 
                               <h1 style = {{color: "black"}}> Course Reviews</h1>
@@ -253,7 +248,7 @@ const CourseViewInstructor=()=>{
                       
         </div>
                               
-                            </div>       
+                            </div>        */}
 
 
 
