@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import Country from './Country';
+import CountryCom from './CountryCom';
 import InstructorProfileDropdownMenu from './InstructorProfileDropdownMenu'
 import {useNavigate} from "react-router";
 
@@ -9,6 +9,19 @@ const InstructorHomeNavBar = () => {
     const navigate = useNavigate();
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
+
+    const handleOnClick = async(e) =>{
+        e.preventDefault()
+        axios.get(`http://localhost:5000/api/instructor/logout`)
+        .then((res) => {
+          navigate('/');
+          navigate(0);
+        })
+        .catch((err) => {
+          console.log(err);
+      });
+    
+    }
 
     return (
         <nav className="main-nav" style={{background: "white", height: "20px"}}>
@@ -23,24 +36,29 @@ const InstructorHomeNavBar = () => {
                                                                                     height: "60px",
                                                                                     right: "100px"}}/>
                             </a>
-                          
-                  
-                      
-
-                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Home</a></li>
-                <Country />
-                <li><a href=""  style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
-                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
-                <li></li>     
+                 <li></li>     
                  <li></li>   
-                 <li></li> 
-                 <li></li> 
-                 <li></li> 
+                 <li></li>   
+                 
+                       
+
+                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  marginTop:-2, fontFamily: "Times New Roman"}}>Home</a></li>
+                <CountryCom />
+                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  marginTop:-2, fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li></li>   
                  <li></li>
-                 <li></li> 
-                
-                  
-                <InstructorProfileDropdownMenu />
+                 <li></li>   
+                 <li></li>
+                 <li></li>   
+                 <li></li>
+                <li style={{color: 'white', 
+                marginTop: "-4px", 
+                height: "7px",
+                fontSize: '10px'}}>
+               &nbsp; <a className="btn btn-danger square-btn-adjust" onClick={handleOnClick}>Logout</a> 
+    
+   
+                </li>
              
             </ul>
             </div>

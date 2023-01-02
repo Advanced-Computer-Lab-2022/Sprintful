@@ -4,7 +4,7 @@ import Quiz from './components/Quiz'
 // import "./App.css"
 import Searchbar from "./components/SearchBar";
 import CourseForm from './components/CourseForm';
-import InstructorForm from './components/InstructorForm'
+import InstructorForm from './pages/InstructorForm'
 import Navbar2 from './components/Navbar2';
 import GuestHome from './pages/GuestHome';
 //import AdminHomePage from './components/AdminHomePage';
@@ -15,12 +15,12 @@ import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
 import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
-import CorporateTraineeForm from './components/corporateTraineeForm';
-import AdminForm from './components/AdminForm'
+import CorporateTraineeForm from './pages/CorporateTraineeForm';
+import AdminForm from './pages/AdminForm'
 import InstructorProfile from './pages/InstructorProfile';
-import EditInstructorProfile from './components/EditInstructorProfile';
-import CorporateTraineeProfile from './components/CorporateTraineeProfile';
-import IndividualTraineeProfile from './components/IndividualTraineeProfile';
+import EditInstructorProfile from './pages/EditInstructorProfile';
+import CorporateTraineeProfile from './pages/CorporateTraineeProfile';
+import IndividualTraineeProfile from './pages/IndividualTraineeProfile';
 import RateInstructor from './components/RateInstructor';
 import SubtitleForm from './components/SubtitleForm';
 import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
@@ -67,20 +67,32 @@ import CourseViewITN from './pages/CourseViewITN';
 import SubtitleViewIT from './pages/SubtitleViewIT';
 import AdminRefundsPage from './pages/AdminRefundsPage';
 
-import ReportProblem from './components/ReportProblem';
+import InstructorReportProblem from './pages/InstructorReportProblem';
+import IndividualTraineeReportProblem from './pages/IndividualTraineeReportProblem';
+import CorporateTraineeReportProblem from './pages/CorporateTraineeReportProblem';
 import AdminHome from './pages/AdminHome'
 import QuizAnswers from './components/QuizAnswers';
 import Promotion from './pages/Promotion';
 
 import MostPopular from './components/MostPopular';
 
-import AccessRequests from './components/AccessRequests';
-import ChangeIndividualTraineePassword from './components/ChangeIndividualTraineePassword';
-import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineePassword';
-import ChangeAdminPassword from './components/ChangeAdminPassword';
-import ChangeInstructorPassword from './components/ChangeInstructorPassword';
+import AccessRequests from './pages/AccessRequests';
+import ChangeIndividualTraineePassword from './pages/ChangeIndividualTraineePassword';
+import ChangeCorporateTraineePassword from './pages/ChangeCorporateTraineePassword';
+import ChangeAdminPassword from './pages/ChangeAdminPassword';
+import ChangeInstructorPassword from './pages/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/writeNotes';
+import WriteNotes from './components/WriteNotes';
+
+import TestLogin from './pages/TestLogin';
+import TestHome from './pages/TestHome';
+
+import InstructorViewReports from './pages/InstructorViewReports'
+import IndividualTraineeViewReports from './pages/IndividualTraineeViewReports'
+import CorporateTraineeViewReports from './pages/CorporateTraineeViewReports'
+import InstructorReportDetails from './pages/InstructorReportDetails'
+import IndividualTraineeReportDetails from './pages/IndividualTraineeReportDetails'
+import CorporateTraineeReportDetails from './pages/CorporateTraineeReportDetails'
 
 function App() {
   return (
@@ -228,9 +240,17 @@ function App() {
               exact path="reviews"
               element={<Reviews />}
             />
+             <Route
+              exact path="/api/instructor/reportProblem"
+              element={<InstructorReportProblem />}
+            />
             <Route
-              exact path="/api/reportProblem"
-              element={<ReportProblem />}
+              exact path="/api/individualTrainee/reportProblem"
+              element={<IndividualTraineeReportProblem />}
+            />
+            <Route
+              exact path="/api/corporateTrainee/reportProblem"
+              element={<CorporateTraineeReportProblem />}
             />
             <Route
               exact path="/api/admin/accessRequests"
@@ -244,6 +264,19 @@ function App() {
               exact path="/WriteNotes"
               element={<WriteNotes/>}
             />
+            <Route
+              path="/admin/"
+              element={<AdminHome />}
+            />
+            <Route
+              exact path="/logme"
+              element={<TestLogin />}
+            />
+             <Route
+              exact path="/homie"
+              element={<TestHome />}
+            />
+           
            
 
 
@@ -294,7 +327,7 @@ function App() {
             />
             <Route
               exact path="/ViewReports"
-              element={[<UsersViewReports />]}
+              element={[<UsersViewReports/> ]} 
             />
             <Route
               exact path="/ReportDetailsAdmin"
@@ -302,7 +335,7 @@ function App() {
             />
             <Route
               exact path="/ReportDetails"
-              element={[<ReportDetails />]}
+              element={[<ReportDetails/> ]}
             />
 
             <Route
@@ -383,10 +416,6 @@ function App() {
             <Route
               path="/Login"
               element={<Login />}
-            />
-            <Route
-              path="/admin/"
-              element={<AdminHome />}
             />
           </Routes>
           {/* <Routes>

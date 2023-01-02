@@ -5,7 +5,7 @@ import axios from 'axios';
 import "../pages/Signup.css"
 import HomeNavBar from "../components/HomeNavBar";
 
-export default function Signup() {
+export default function TestLogin() {
 const [isHovering, setIsHovering] = useState(false);
 const handleMouseEnter = () => {
   setIsHovering(true);
@@ -16,12 +16,7 @@ const handleMouseLeave = () => {
 const navigate=useNavigate();
 
 const[username,setUsername]=useState('') 
-const [email ,setEmail]=useState('')
-const [password,setPassword]=useState('')
-const [firstName,setFirstName]=useState('')
-const[lastName,setLastName]=useState('')
-const [gender,setGender]=useState(null)
-const [chekced,setChecked]=useState(false)
+const [password ,setPassword]=useState('')
 const [display,setDisplay]=useState(false)
 let axiosConfig = {
     headers: {
@@ -31,35 +26,55 @@ let axiosConfig = {
 };
 const handleSubmit= async (e)=>{
     e.preventDefault()
-    if(chekced){
-      console.log(gender)
-      const response=  axios.post(`http://localhost:5000/api/guest/signUp`, { 
-          username: username ,
-          email: email,
-          password: password,
-          firstName: firstName,
-          lastName: lastName,
-          gender: gender,
-      },axiosConfig)
-      .then(function (response) {
-          navigate('/Login')
-      })
-      .catch(function (error) {
-      console.log(error);
-      })
+    let role;
+    let id;
+    let axiosConfig = {
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+        }
+    };
+    axios.post('http://localhost:5000/api/guest/login',
+  {
+    username: username,
+    password: password
+  }, axiosConfig)
 
-      setUsername('')
-      setPassword('')
-      setEmail('')
-      setFirstName('')
-      setLastName('')
-      setGender('')
-    }
-    else{
-      setDisplay(true);
-    }
-
+  .then((res) => {
+      console.log(res.data.role)
+      role = res.data.role
+      id = res.data._id
+      if(role =="Corporate"){
+        navigate(`/corporate?id=${id}`)
+        navigate(0)
+      }
+      else if(role =="Instructor"){
+        if(res.data.policy== false){
+          navigate(`/PaymentPolicyInstructor?id=${id}`)
+          navigate(0)
+        }
+        else{
+          navigate(`/instructor?id=${id}`)
+          navigate(0)
+        }
+      }
+      else if(role =="Individual"){
+        navigate(`/individual?id=${id}`)
+        navigate(0)
+      }
+      else{
+        navigate(`/admin?id=${id}`)
+        navigate(0)
+      }
+  })
+  .catch((err) => {
+      console.log(err);
+  });
+  console.log(username)
+  console.log(password)
+  
 }
+
 const style10 ={ //.signup__input
     border: "0",
     outline: "none",
@@ -131,50 +146,22 @@ return(
         <br/>
             <div id="page-inner" style={{width: "1100px", margin: 20}}>
                 <br/>
-    <body className="main" >
+    <body className="main"  >
     <form className="signup" onSubmit={handleSubmit} autoComplete="off" style={{boxShadow: "5px 10px 8px #888888"}}>
-    <h1 className="CreateAccount">Create account</h1>
-    <h2 className="HaveAnAccount" >Already have an account? <span onClick={() => navigate('/logme')}>Sign in</span></h2>
+    <h1 className="CreateAccount">Login</h1>
+
     <div  className="signup__field">
       <input  className="signup__input" style={style10} type="text" onChange={(e)=>setUsername(e.target.value)} value={username} name="username" id="username" required />
       <label className="signup__label" htmlFor="username">Username</label>
-    </div>
-    <div  className="signup__field">
-      <input className="signup__input" style={style10}  type="text" onChange={(e)=>setEmail(e.target.value)} value={email} name="email" id="email" required />
-      <label className="signup__label" htmlFor="email">Email</label>
     </div>
     <div  className="pass">
       <input className="pass2" type="password" style={style10} onChange={(e)=>setPassword(e.target.value)} value={password}  name="password" id="username" required />
       <label className="signup__label" htmlFor="password">Password</label>
     </div>
-    <div  className="signup__field">
-      <input className="signup__input" style={style10} onChange={(e)=>setFirstName(e.target.value)} value={firstName} type="text" name="First Name" id="email" required />
-      <label className="signup__label" htmlFor="First Name">First Name</label>
-    </div>
-    <div  className="signup__field">
-      <input  className="signup__input" style={style10} onChange={(e)=>setLastName(e.target.value)} value={lastName} type="text" name="Last Name" id="email" required />
-      <label  className="signup__label" htmlFor="Last Name">Last Name</label>
-    </div>
-    <div  className="s">
-      <label className="signup__label" style={{position:"relative", top:"-10px"}}htmlFor="gender"> Gender</label>
-      <div class="custom02">
-          <input type="radio" onChange={(e)=>setGender('female')} id="radio03-01" name="demo03" /><label for="radio03-01">Female</label>
-          <input type="radio" onChange={(e)=>setGender('male')}id="radio03-02" name="demo03" /><label for="radio03-02">Male</label>
-      </div>
-    </div>
-      <div className="new">
-        <form>
-          <div className="form-group">
-            <input type="checkbox" id="terms of use" onChange={() => setChecked(!chekced)}/>
-            <label className="paymentLabel" for="terms of use">I hereby agree to the <span className="terms" onClick={() => navigate('/policy')}>terms of use</span> </label>
-          </div>
-        </form>
-      </div>  
-      {
-        display && <p style={{fontSize:"12px",color:"red",whiteSpace: "nowrap", position:"relative", top:"-60px"}}>Accepting terms of use is required</p>
-      }
-    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Sign up</button> 
+     
+    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Login</button> 
   </form>
+  
   </body>
   <br/>
   <br/>
@@ -192,13 +179,18 @@ return(
   <br/>
   <br/>
   <br/>
-  <div  onClick={()=> navigate(`/`)} style={{color: 'white', 
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <div onClick={()=> navigate(`/`)} style={{color: 'white', 
              padding: '15px 50px 5px 50px',
              float: 'left',
              fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
-             </div>
+    </div>
   </div>
-  
   </div>
 
   <footer style={{height: "100px"}}>
@@ -231,6 +223,6 @@ return(
                     
                 </div>
             </footer>
-  </div>
+          </div>
 )
 }

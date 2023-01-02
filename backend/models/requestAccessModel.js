@@ -24,7 +24,11 @@ const requestAccessSchema = mongoose.Schema({
     state: {   //could be pending, false, true
         type: String,
         default: "false"
+    },
+    Corporate: {   //could be pending, false, true
+        type: String
     }
+
 },
  {
     timestamps: true

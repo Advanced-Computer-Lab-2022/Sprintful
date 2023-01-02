@@ -1,15 +1,23 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
+import { Button } from 'react-bootstrap';
 import {useNavigate} from "react-router";
 
 
 
 const ViewReports = () => {
+
+  const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log(id);
     
         const header = {
-          color: "#911E04",
-          fontSize: "30px",
+          color: "darkRed",
+          fontFamily: "Times New Roman",
+          fontSize: "28px",
           textAlign: "center",
+          fontWeight: "bold",
+          
         };
 
         const navigate=useNavigate();
@@ -46,29 +54,52 @@ const ViewReports = () => {
     
   return (
     <div>
-    <div style={{backgroundColor: "#999DA0", padding: "20px"}}>
-    <div style={header}>ViewReports</div>
-    </div>
-    {/* {reports.map((report) => (
-      <div style={{border: '20px black'}}>
-        <div>{report.subject}</div>
-      </div>
 
-    ))}    */}
+<nav className="navbar navbar-default navbar-cls-top " role="navigation" style = {{marginBottom: '0'}}> 
+         
+         {/* <div className="navbar-header"> */}
+             <a  style={{color: 'white',
+                         fontWeight: "bold", 
+                         float: "left",
+                         fontSize: '25px',
+                         testAlign: "left"}}>Canadian Chamber of Commerce</a> 
+         {/* </div> */}
+ <div  style={{color: 'white', 
+             padding: '15px 50px 5px 50px',
+             float: 'right',
+             fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust">Logout</a> 
+ 
+ </div>
+     </nav>
 
-<div className="card-container" >
+     <hr/> 
+     <br/>  
+ <div style={header}>UnResolved Reports</div>
+<div className="card-container">
                             {reports  && reports.map((report) =>( 
-                                <div onClick={()=>navigate(`/ReportDetailsAdmin?reportid=${report._id}`)} className="card" style={{height: "30em"}} >
+                                <div onClick={()=>navigate(`/ReportDetailsAdmin?reportid=${report._id}`)} className="card" style={{height: "15em", cursor: "pointer"}}  >
                                 {/* <img src="assets/images/courseCard.jpg"/> */}
                                 <div className="content">
-                                    <h3> {report.subject} </h3>
-                                    <p>type: {report.type}</p>
-                                    <p>status: {report.status}</p>
+                                    <h3 style={{fontWeight: "bold"}}> {report.subject} </h3>
+                                    <p style={{color: "black"}} > Type: {report.type}</p>
+                                    <p style={{color: "black"}}> Status: {report.status}</p>
                                     {/* <p>Price: {course.price}</p> */}
                                 </div>
                                 </div>
                             ))}
                          </div>
+                         <br/>
+                         <br/>
+                         <br/>
+                         <br/>
+                         <br/>
+                         <br/>
+
+             <div  onClick={()=> navigate(`/admin?id=${id}`)} style={{color: 'white', 
+             padding: '15px 50px 5px 50px',
+             float: 'left',
+             fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
+             </div>
 
 
     </div>

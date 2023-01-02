@@ -2,7 +2,7 @@ const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const { model } = require('mongoose')
 const Report = require('../models/reportModel')
-const Instructor = require('../models/instructorModel')
+const Instructor = require('../models/InstructorModel')
 const IndividualTrainee = require('../models/individualTraineeModel')
 const CorporateTrainee = require('../models/corporateTraineeModel')
 

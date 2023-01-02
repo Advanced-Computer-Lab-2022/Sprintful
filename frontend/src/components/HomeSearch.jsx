@@ -125,6 +125,16 @@ const HomeSearch = () => {
                 </div>
                 <div className="col-lg-3">
                     <fieldset>
+                    {/* <button style={{backgroundColor:"#dc3545", 
+                                                    borderRadius:"3px", 
+                                                    color: 'white', 
+                                                    // padding: '15px 50px 5px 50px',
+                                                    float: 'center',
+                                                    fontSize: '10px',
+                                                    minHeight:"30px", 
+                                                    minWidth: "50px",
+                                                    position: "relative",
+                                                    left: "200px"}}> Create </button>  */}
                         <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
                     </fieldset>
                 </div>
