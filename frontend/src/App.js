@@ -77,7 +77,7 @@ import ChangeCorporateTraineePassword from './components/ChangeCorporateTraineeP
 import ChangeAdminPassword from './components/ChangeAdminPassword';
 import ChangeInstructorPassword from './components/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/writeNotes';
+import WriteNotes from './components/WriteNotes';
 
 function App() {
   return (
