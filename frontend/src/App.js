@@ -241,7 +241,7 @@ function App() {
               element={<ChangeAdminPassword />}
             />
             <Route
-              exact path="/writeNotes"
+              exact path="/WriteNotes"
               element={<WriteNotes/>}
             />
            
