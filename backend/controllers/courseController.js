@@ -362,7 +362,7 @@ const CorporateCourses = asyncHandler(async (req, res) => {
     console.log(flatArray)
     res.status(200).json(flatArray)
 });
-
+let searchedCourses =[]
 const searchCourse = asyncHandler(async (req, res) => {
     const searchTerm = req.query.searchTerm
     let result1, result2, result3, result4, instructorId
