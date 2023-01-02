@@ -61,7 +61,7 @@ export default function AdminHome(){
                         <a   onClick={()=>  navigate(`/api/admin/createCorporateTrainee`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "100px"}}></i> Add a Corporate Trainee </a>
                     </li>
                     <li  >
-                        <a  onClick={()=>  navigate(``)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
+                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests`)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
                     </li>
                     <li  >
                         <a   onClick={()=>  navigate(``)} style={{  cursor: "pointer"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "130px"}}></i> Set a Promotion </a>

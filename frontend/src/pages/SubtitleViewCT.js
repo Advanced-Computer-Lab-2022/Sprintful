@@ -34,7 +34,7 @@ export default function SubtitleViewCT() {
             const subtitledata=response.data;
             setSubtitle(subtitledata);
 
-            const response2= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
+            const response2= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
             const coursehours=response2.data.totalhours
 
 

@@ -4,7 +4,15 @@ An Online Learning System through which individuals can attend pre-recorded
 courses online that have been created and uploaded on the website by their instructors.
 
 ## Motivation
-[letting the reader know why you created this project]
+This project is part of **Advanced Computer Lab** course studied at [The German University in Cairo](https://www.guc.edu.eg/) in the *fourth* year of **Computer Science and Engineering bachelor degree**, and the following are the **Project Objectives**:
+- Handle all aspects of web development projects, and greatly expanding our career opportunities by using MERN stack.
+- Learn how to properly use the Agile Methodology to plan out a project and develop
+the software.
+- Learn the process of following a given set of System Requirements to develop a
+software.
+- Learn how to work together as a team on GitHub.
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -14,7 +22,28 @@ courses online that have been created and uploaded on the website by their instr
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Code Style
-[MVC?]
+### All languages
+* Following Single-responsibility principle
+* Single quotes are preferred over double. Reason: HTML uses double quotes.
+* Use `void 0` instead of `undefined`, because `undefined` could have been
+redefined.
+* Write code in functional style with minimum side effects.
+* Don't use function statements. Instead, create anonymous functions and
+assing them to vars for consistency with other vars.
+### Git
+* Keep your repository clean. Don’t commit big files unless they absolutely
+  require git. Even in this case, prefer storing all big files in a separate
+  submodule. That’s because git history can become very big and it will be pain
+  for others to use the repo.
+* Commit message:
+    *  Capitalize the first word and do not end in punctuation   
+    * Complte the sentence "This commit will"
+* Branch naming:
+    * Use slashes as word separator.
+    * Use namespaces, for example,
+        * `[ContributerName]/[SprintNumber]/Feature/[FeatureName]` or
+        * `[ContributerName]/[SprintNumber]/Bug/[BugFixed]`
+        * like:  `Ragaa/Sprint2/Feature/Quiz`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -23,8 +52,14 @@ courses online that have been created and uploaded on the website by their instr
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Tech/Framework used
-[]
+## Framework used
+The project is implemented using the MERN Stack, a free and open-source JavaScript software stack for building dynamic web sites and web applications, MERN stands for MongoDB, Express, React, Node, after the four key technologies that make up the stack.
+
+- [Mongo DB](https://www.mongodb.com/docs/) is an open-source NoSQL cross-platform document-oriented database.
+- [Express JS](https://expressjs.com/) is a web-based application framework work with Node JS, It helps to build web apps and RESTful APIs.
+- [React](https://reactjs.org/) is a JavaScript library created by Facebook. React is a User Interface (UI) library. React is a tool for building UI components.
+- [Node JS](https://nodejs.org/en/) is a free JavaScript run-time environment, It executes JavaScript code outside of a browser. It is available for macOS, Windows, Linux, and Unix.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -39,7 +74,34 @@ courses online that have been created and uploaded on the website by their instr
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Installation
-[]
+1. Clone the repo
+   ```bash
+   > git clone https://github.com/Advanced-Computer-Lab-2022/Sprintful.git
+   ```
+2. Navigate to the frontend folder
+    ```bash
+    > cd Sprintful/frontend
+    ```
+3. Install frontend packages required
+    ```bash
+    > npm install 
+    ```
+4. Navigate back to the parent directory
+    ```bash
+    > cd .. 
+    ```
+5. Navigate to the backend folder
+    ```bash
+    > cd backend 
+    ```
+6. Install backend packeage required
+    ```bash
+    > npm install 
+    ```
+7. Run the server
+    ```bash
+    > npm run dev
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
