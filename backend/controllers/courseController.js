@@ -7,11 +7,50 @@ const Instructor = require('../models/instructorModel')
 const Subtitle = require('../models/subtitleModel.js')
 const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 var mongoose = require('mongoose');
+const nodemailer = require("nodemailer");
 
-// @desc    Get course by id
-// @route   GET /api/courses/:id
-// @access  Public
+const emailCertificate =  asyncHandler(async (req, res) => {
+    const id = req.query.id;
+    const individualEmail = (await IndividualTrainee.findById(id)).email
+    const corporateEmail = (await CorporateTrainee.findById(id)).email
+    console.log(individualEmail);
+    console.log(corporateEmail);
+    const account ={
+        user:"rosalyn.daniel@ethereal.email",
+        pass: "cWgVkFvxJ9uZ2mDQ9c"
+    }
+  let transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+      user: account.user, // generated ethereal user
+      pass: account.pass, // generated ethereal password
+    },
+  });
 
+  // send mail with defined transport object
+  let info = await transporter.sendMail({
+    from: '"Fred Foo " <foo@example.com>', // sender address
+    to: `bar@example.com, ${email}}`, // list of receivers
+    subject: "Hello ✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+
+  // Preview only available when sending through an Ethereal account
+  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+  // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+}
+
+)
+const downloadCertificate =  asyncHandler(async (req, res) => {
+
+    res.download("../backend/certificate.png")
+})
 const addPromotionForCourses = asyncHandler(async (req, res) => {
     // get courses ids
     const coursesIds = req.body.coursesIds
@@ -36,7 +75,7 @@ const addPromotionForCourses = asyncHandler(async (req, res) => {
 
 
 
-//var searchedCourses = [];
+var searchedCourses = [];
 
 const payCredit = asyncHandler(async (req, res)  => {
     const id = req.body.paymentMethod
@@ -362,7 +401,6 @@ const CorporateCourses = asyncHandler(async (req, res) => {
     console.log(flatArray)
     res.status(200).json(flatArray)
 });
-let searchedCourses =[]
 const searchCourse = asyncHandler(async (req, res) => {
     const searchTerm = req.query.searchTerm
     let result1, result2, result3, result4, instructorId
@@ -779,4 +817,6 @@ const getSubtitleId = asyncHandler(async (req, res) => {
         getBalanceAndPrice,
         filterInstructorCourses,
         addPromotionForCourses,
+        downloadCertificate,
+        emailCertificate
     }

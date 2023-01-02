@@ -20,6 +20,7 @@
     "formik": "^2.2.9",
     "http-proxy-middleware": "^2.0.6",
     "jquery": "^3.6.1",
+    "js-file-download": "^0.4.12",
     "jspdf": "^2.5.1",
     "mui": "^0.0.1",
     "popper.js": "^1.16.1",
