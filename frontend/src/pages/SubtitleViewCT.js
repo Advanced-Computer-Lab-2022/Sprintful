@@ -127,6 +127,29 @@ export default function SubtitleViewCT() {
 
 
              </div>
+
+             <div>
+             < StyledCourseHeader>
+                <h5>Video:</h5>
+                </StyledCourseHeader>
+
+                <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
+                         <CardContent>
+                         <a href={subtitle&&subtitle.youtubevideo}>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Video
+                            </Typography>
+                            </a>
+                            <Typography gutterBottom variant="h6" component="div">
+                              {subtitle && subtitle.videoDescription}
+                            </Typography>
+
+                            <br></br>
+                            <br></br>
+                            </CardContent>
+                    </Card>
+
+             </div >
                 
 
     </div>
