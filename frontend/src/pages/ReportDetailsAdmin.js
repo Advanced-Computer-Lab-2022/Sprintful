@@ -5,26 +5,35 @@ import axios from 'axios'
 
 const ReportDetails = () => {
     const [report, setReport] = useState([])
-    const[followups, setFollowups] = useState([])
-    const [status, setStatus] = useState("UnSeen")
+    const[status, setStatus] = useState(null)
+    const[followups, setFollowups] = useState(false)
+    const [submit, setSubmit] = useState(false)
     const params = new URLSearchParams(window.location.search);
-        const id = params.get('reportid');
-        console.log("report id: "+id)
+    const id = params.get('reportid');
 
 
     useEffect( ()=>{
         const fetchReport =async () =>{
-            console.log("trying to fetch")
             await axios.get(`http://localhost:5000/api/report/${id}`).then(
            (res) => { 
                const response = res.data
-               console.log(response)
-               setReport(response)
+               const stat=response.status
+               setStatus(stat)
+               console.log("status: " +status)
            }
             );
         }
         fetchReport()
-    }, [])
+    }, [status])
+
+    const handleSubmit = async (e) => {
+        //.preventDefault();
+        console.log("submit")
+        // var a = document.getElementById('button').value;
+        // setFollowupBody(a)
+
+
+    }
 
     const changeStatus = async(e) => {
         console.log(e)
@@ -57,20 +66,25 @@ const ReportDetails = () => {
                 console.log(response)
                 setStatus("")
             }
-    }
+        }
+        
+    
 
     return (
         <div>
-            <h1 style={{fontSize:"24px", color:'maroon'}}>{report.subject}</h1>
+        <div className='details'>
+            <h1 style={{fontSize:"24px", color: 'maroon'}}>{report.subject}</h1>
             <br/>
             <label style={{fontSize:"16px"}}>Report type: {report.type}</label>
             <br/>
             <label style={{fontSize:"16px", color:'black'}}>Report status: {report.status}</label>
             <br/>
             <p style={{fontSize:"16px", textAlign:"left"}}>Details: {report.body}</p>
-<br/>
-                    <label>Change Status: </label>
-                        <div style= {{width: "18em"}}>
+        </div>
+        <br/>
+        <br/>
+        <label>Change Status: </label>
+        <div style= {{width: "18em"}}>
                             <select style={{width: "100%",
                                             padding: "6px 10px",
                                             margin: "10px 0",
@@ -86,26 +100,27 @@ const ReportDetails = () => {
                         </div>
                     <button style={{ width:"2%", background: "#8d99af", color: "#fff", border: "0",
                         padding: "6px",borderRadius: "6px",cursor: "pointer" }}onClick={() => changeStatus(report._id)}> 
-                        Apply </button>
-<br/>
+                        Apply </button>      
+
+                        <br/>
 <br/>
 <br/>
 <hr/>
 
-                 <label style={{color:"#8d99af", fontSize:"20px"}}>Followups</label> 
+<label style={{color:"#8d99af", fontSize:"20px"}}>Followups</label> 
                 <br/>
-            {/* <div className="followup" style={{borderWidth:"1px", borderStyle:"solid",borderColor:"grey"}}>  */}
-            <div className="followup">
+                <div className="followup">
                 <ul >
-                    { report.followups.map((followup) => (
+                    { report.followups && report.followups.map((followup) => (
                         <li style={{fontSize: "14px"}}>
                            - {followup}
                         </li>
                     ))}
                 </ul>
             </div>
-            <br/>
            
+                     
+
         </div>
     )
 }
