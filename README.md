@@ -210,7 +210,19 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Contribute
-[This is where you let them know that they can contribute and help you out. A guideline on how to contribute is also helpful]
+The following is a set of guidelines for contributing to Sprintful. 
+
+### I don't want to contribute I just have a question:
+  
+  Send us your question via 'sprintful.team@gmail.com' 
+
+
+ ### How Can I Contribute?
+
+   - Reporting Bugs or Suggesting Enhancements via via 'sprintful.team@gmail.com' 
+   - Pull Requests on GitHub
+    
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
