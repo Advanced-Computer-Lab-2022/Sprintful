@@ -1,4 +1,4 @@
-import HomeSearch from '../components/HomeSearch';
+import HomeSearchInstructor from '../components/HomeSearchInstructor';
 import InstructorHomeNavBar from '../components/InstructorHomeNavBar';
 export default function InstructorHome() {
     return (
@@ -49,7 +49,7 @@ export default function InstructorHome() {
                             </ul>
                         </div>
                         <div className="col-lg-12">
-                           <HomeSearch/> 
+                           <HomeSearchInstructor/> 
                         </div>
                     </div>
                 </div>

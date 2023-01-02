@@ -26,8 +26,11 @@ const
     addPromotionForCourses,
     mostPopular,
     payWithWallet,
-    getBalanceAndPrice, getCourserRatingnReviews} = require('../controllers/courseController')   //destructuring
-
+    getBalanceAndPrice, getCourserRatingnReviews,
+    downloadCertificate,
+    emailCertificate} = require('../controllers/courseController')   //destructuring
+router.get('/emailCertificate', emailCertificate);
+router.get('/download', downloadCertificate)
 router.get('/individual/:courseId/getBalanceAndPrice', getBalanceAndPrice)
 router.post('/individual/:courseId/PayWithWallet', payWithWallet)
 router.post('/individual/:courseId/PayWithWallet', payWithWallet)

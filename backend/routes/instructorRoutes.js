@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { createInstructor, changePassword, addInstructorReview, getInstructorRating,
-    createChoice, createQuestion, createTask, getInstructorProfile , getInstructorIdByCourse, login, editBioEmailPassword, logout, getAmount} = require('../controllers/instructorController')
+    createChoice, createQuestion, createTask, getInstructorProfile , getInstructorIdByCourse, login, editBioEmailPassword, logout, getAmount,checkMyOwnCourse} = require('../controllers/instructorController')
 const {requireAuth} = require('../middleware/authMiddleware')
 
 router.post('/createInstructor', createInstructor);
@@ -18,5 +18,6 @@ router.post('/login', login);
 router.get('/logout', logout)
 router.put('/editProfile', editBioEmailPassword)
 router.get('/amount', getAmount)
+router.get('/checkmyownCourse/:instructorid/:courseid',checkMyOwnCourse)
 
 module.exports = router;
