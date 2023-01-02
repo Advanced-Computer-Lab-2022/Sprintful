@@ -1,30 +1,42 @@
 import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
-import Country from '../components/Country';
+import CountryGuest from '../components/CountryGuest';
 
 const HomeNavBar = () => {
 
     return (
-        <nav className="main-nav">
+        <div>
+            
+        <nav className="main-nav" style={{background: "white", height: "20px"}}>
             {/* <!-- ***** Logo Start ***** --> */}
-            <a href="index.html" className="logo">
-            </a>
-            {/* <!-- ***** Logo End ***** --> */}
-            {/* <!-- ***** Menu Start ***** --> */}
-            <ul className="nav">
-                <li><a href="index.html" className="active">Home</a></li>
-                <Country />
-                <li><a href="contact.html">Contact Us</a></li>
-                <li><a href="/Login">Log in</a></li>
-                <li><a href="/Signup">Sign up</a></li>
+            {/* <a class="logo" data-dark-logo="/upload/logo.png"></a> */}
+            
+            <br/>
+            <div id="salata" style={{right: "100px"}}>
+            <ul className="nav" style={{width: "1360px"}}>
+                            <a class="salata" data-dark-logo="/upload/logo.png" syle={{position: "relative",
+                                                                                    right: "100px"}}>
+
+                                <img src="/upload/logo.png" alt="Homepage" style={{width: "140px", 
+                                                                                    height: "60px",
+                                                                                    right: "100px"}}/>
+                            </a>
+                      
+           
+                <li><a href="/home" style= {{color: "black", left: "400px"}} >Home</a></li>
+                <CountryGuest />
+                <li><a href=""  style= {{color: "black", left: "400px"}}>Contact Us</a></li>
+                <li><a href="/logme"  style= {{color: "black", left: "400px"}}>Log in</a></li>
+                <li><a href="/Signup"  style= {{color: "black", left: "400px"}}>Sign up</a></li>
                 <li></li>
+
             </ul>
-            <a className='menu-trigger'>
-                <span>Menu</span>
-            </a>
-            {/* <!-- ***** Menu End ***** --> */}
+          
+            </div>
+   
         </nav>
+        </div>
     )
 }
 

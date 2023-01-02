@@ -5,9 +5,14 @@ const asyncHandler = require('express-async-handler')
 const { builtinModules } = require('module')
 const { model } = require('mongoose')
 const Admin = require('../models/adminModel')
-const Report = require('../models/reportModel')
+const Reports = require('../models/reportModel')
 const Corporates = require('../models/corporatesModel')
-
+const Instructors = require('../models/InstructorModel')
+const Requests = require('../models/requestAccessModel')
+const CorporateTrainees = require('../models/corporateTraineeModel')
+const IndividualTrainees = require('../models/individualTraineeModel')
+const Courses = require('../models/courseModel')
+const Refunds = require('../models/refundRequestModel')
 
 const getAdmin = asyncHandler(async (req, res) => {
     const { _id, username,password }= await Admin.findById(req.admin.id)
@@ -168,6 +173,35 @@ const generateToken =(id) =>{
     })
 }
 
+const getStats = asyncHandler(async (req, res) => {
+    var numInstructors = await Instructors.count();
+    console.log("step1", numInstructors)
+    const numCorporateTrainees = await CorporateTrainees.count();
+    console.log("step2", numCorporateTrainees)
+    const numInsdividualTrainees = await IndividualTrainees.count();
+    console.log("step3")
+    const numCourses = await Courses.count();
+    const numCorporates = await Corporates.count();
+    const numRequests = await Requests.find({state: "pending"}).count();
+    const numReportsUnseen = await Reports.find({status: "unseen"}).count();
+    const numReportsPending = await Reports.find({status: "pending"}).count();
+    const numReportsUnResolved = numReportsPending+numReportsUnseen;
+    const numRefunds = await Refunds.find({isAccepted: false}).count();
+    {
+        res.status(200).json({
+            numInstructors: numInstructors,
+            numCorporateTrainees: numCorporateTrainees,
+            numInsdividualTrainees: numInsdividualTrainees,
+            numCourses: numCourses,
+            numCorporates: numCorporates,
+            numReportsUnResolved: numReportsUnResolved,
+            numRequests: numRequests,
+            numRefunds: numRefunds
+
+        })
+    }
+})
 
 
-module.exports = { createAdmin, loginAdmin, getAdmin, logout, addCorporate, changePassword, getAdminProfile}
+
+module.exports = { createAdmin, loginAdmin, getAdmin, logout, addCorporate, changePassword, getAdminProfile, getStats}

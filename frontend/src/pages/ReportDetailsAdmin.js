@@ -9,6 +9,7 @@ const ReportDetails = () => {
     const [status, setStatus] = useState("UnSeen")
     const params = new URLSearchParams(window.location.search);
         const id = params.get('reportid');
+        console.log(id);
         console.log("report id: "+id)
 
 

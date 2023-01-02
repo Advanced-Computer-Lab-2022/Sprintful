@@ -60,13 +60,15 @@ export default function IndividualProfileDropdownMenu() {
     <div id="app">
       <div className="text-end">
         <PopupMenu>
-            <button className="but" style={{background:"#8d99af" ,color:"#fff"}}>
-              My profile
+            <button>
+            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                     className="rounded-circle img-fluid" style={{width: "30px", height: "30px", marginTop:12, float: "right"}}/>
             </button>
           <div className="card text-start">
             <div className="card-body px-4 py-4">
-              <div id="circle-avatar" className="text-center mx-auto mb-4">
-                <span>K</span>
+              <div>
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                     className="rounded-circle img-fluid" style={{width: "50px", height: "50px"}}/>
               </div>
 
               <h5 className="text-center mb-0" style={{
@@ -79,45 +81,32 @@ export default function IndividualProfileDropdownMenu() {
           >{instructor.username}</h5>
               <p className="text-center mb-2">{instructor.email}</p>
 
-              {/*<hr />
-
-               <p
-                className="mb-0"
-                style={{ color: "#bebebe", fontWeight: "bold", fontSize: 12 }}
-              >
-                ROLES
-              </p>
-              <p style={{ fontSize: 12 }}>
-                {["Submitter", "Project manager", "Change control board"].join(
-                  ", "
-                )}
-              </p> */}
-
               <hr className="mb-0" style={{ margin: "0 -24px 0" }} />
 
               <div
                 className="list-group list-group-flush"
                 style={{ margin: "0 -24px 0" }}
               >
-                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`}>
-                  <small>My Courses</small>
+                <button className="list-group-item list-group-item-action px-4" onClick={() => navigate(`/api/instructor/reportProblem?id=${id}`)}>
+                  <small style={{color: "black", fontFamily: "Times New Roman"}}>Report a Problem</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/ViewReports?id=${id}`}>
-                  <small>My Reports</small>
+                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/api/instructor/ViewReports?id=${id}`}>
+                  <small style={{color: "black", fontFamily: "Times New Roman"}}>My Reports</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4" onClick={() => navigate(`/api/reportProblem?id=${id}`)}>
-                  <small>Add a new report</small>
-                </button>
-
-
               </div>
 
               <hr style={{ margin: "0 -24px 24px" }} />
 
               <div className="d-grid">
-                <button className="btn btn-secondary" onClick={handleOnClick}>
-                  <small>Logout</small>
-                </button>
+              <button onClick={handleOnClick} style={{backgroundColor:"#dc3545", 
+                                                            borderRadius:"3px", 
+                                                            color: 'white', 
+                                                            // padding: '15px 50px 5px 50px',
+                                                            float: 'center',
+                                                            fontSize: '10px',
+                                                            minHeight:"30px", 
+                                                            minWidth: "30px",
+                                                            position: "relative"}}> Logout </button> 
               </div>
             </div>
           </div>
