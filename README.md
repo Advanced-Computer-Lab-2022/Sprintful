@@ -220,7 +220,7 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
-Distributed under the MIT License.See `LICENSE.txt` for more information.
+Distributed under the [MIT License](LICENSE.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
