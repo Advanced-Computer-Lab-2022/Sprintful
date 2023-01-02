@@ -96,7 +96,7 @@ const RateInstructor = () => {
                         <input 
                         type="text"
                         onChange={(e) => setReview(e.target.value)}
-                        value={comment}/>
+                        value={comment} required/>
 
                  {/* <textarea id="area1" placeholder={handlePlaceHolder()}></textarea> 
                 /*setReview(document.getElementById('area1').value); */}

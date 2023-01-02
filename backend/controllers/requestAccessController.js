@@ -7,7 +7,7 @@ const RequestAccess = require('../models/requestAccessModel')
 const requestAccess = async(req, res, next) => {   
     console.log("Request Access");
     try{
-        const corporateTraineeId = req.query.id;
+        const corporateTraineeId = req.params.traineeid;
         const courseId = req.query.courseId;
         console.log("corporate", corporateTraineeId);
         console.log("course",   courseId);

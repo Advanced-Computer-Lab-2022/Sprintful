@@ -4,7 +4,7 @@ const { requestAccess, getAccessRequests, grantAccess }  = require('../controlle
 const {requireAuth} = require('../middleware/authMiddleware')
 
 
-router.post('/requestAccess', requestAccess)
+router.post('/:traineeid/requestAccess', requestAccess)
 router.get('/getRequestAccess', getAccessRequests)
 router.post('/grantAccess', grantAccess)
 module.exports = router;

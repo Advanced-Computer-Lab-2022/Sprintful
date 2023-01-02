@@ -571,9 +571,10 @@ const filterCorporate = asyncHandler(async (req, res) => {
 
 //add a review on a course
 const addCourseReview = asyncHandler(async (req, res, next) => {
-    const courseId = req.query.id;
+    const courseId = req.params.courseid;
     const { rating, comment } = req.body;
     console.log("I am woring");
+    console.log("iddd", courseId);
     const review = {
         // user: req.user._id,    //no authentication 
         //name: req.user.name,
@@ -581,6 +582,7 @@ const addCourseReview = asyncHandler(async (req, res, next) => {
         comment
 
     }
+    console.log("I can read",review);
     const course = await Course.findById(courseId);
     /*const isReviewed = course.reviews.find(    //No authentication baby
         r => r.user.toString() === req.user._id.toString()
@@ -595,12 +597,13 @@ const addCourseReview = asyncHandler(async (req, res, next) => {
         });
     }*/
     //in else part
-    if(comment == null){
-        res.status(401).json({ error: "Please add a review" });
-    }
-    if(rating == null){
-        res.status(400).json({ error: "Please add a rating" });
-    }
+    console.log("I can read2",course);
+    // if(comment == null){
+    //     res.status(401).json({ error: "Please add a review" });
+    // }
+    // if(rating == null){
+    //     res.status(400).json({ error: "Please add a rating" });
+    // }
 
     course.reviews.push(comment);
     course.numofReviews = course.reviews.length;
@@ -636,7 +639,7 @@ const addCourseReview = asyncHandler(async (req, res, next) => {
 
 //Not working and I am about to lose my mind, no idea whyyyyyyyyyyyyyyyyyyyyy
 const getCourseReviews = asyncHandler(async (req, res) => {
-    const course = await Course.findById(req.params.id)
+    const course = await Course.findById(req.query.id)
 
     /* if (course) {
          res.json(course)
@@ -696,6 +699,24 @@ const getCourseRating = asyncHandler(async (req, res) => {
     console.log(allReviews);
     console.log(rating);
 })
+
+
+const getCourserRatingnReviews = asyncHandler(async (req, res) => {
+    const course = await Course.findById(req.query.id)
+    let allReviews
+    let rating
+    allReviews = await course.reviews;
+    rating = await course.rating;
+    if (allReviews.length > 0 && rating > 0) {
+        res.status(200).json({ rating, allReviews });
+    }
+    else {
+        res.status(400).json({ error: "No reviews found" });
+    }
+    console.log(rating);
+    console.log(allReviews);
+})
+
 
 
 //get subtitle id from title
@@ -779,4 +800,5 @@ const getSubtitleId = asyncHandler(async (req, res) => {
         getBalanceAndPrice,
         filterInstructorCourses,
         addPromotionForCourses,
+        getCourserRatingnReviews
     }

@@ -125,6 +125,22 @@ const CourseViewCTR=()=>{
          getCourseanditsSubtitle(); } 
         ,[courseid] );
         const {course, coursePriceAfterDiscount,courseSubtitles}=courseStates    //destructuring 
+
+
+        const requestAccess = async(e) => {
+          console.log(e)
+          await axios.post(`http://localhost:5000/api/requestAccess/${traineeid}/requestAccess?courseId=${e}`).then(
+             (res) => { 
+                 const request = res.data
+                 console.log(request)
+             }
+              );
+      }
+
+
+
+
+
     return (
         <div>
             <div>
@@ -151,7 +167,8 @@ const CourseViewCTR=()=>{
                           
                            >
                             
-                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
+                         <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}
+                         onClick={() => requestAccess(courseid)}>
                          Request Access
                            </Button>
 

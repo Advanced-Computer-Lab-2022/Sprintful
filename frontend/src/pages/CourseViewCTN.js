@@ -13,9 +13,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
-
-import RateCourse from '../components/RateCourse';
-import RateInstructor from '../components/RateInstructor';
+import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableTraineeCT';
 
@@ -26,6 +24,9 @@ import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableT
 
 
 const CourseViewCTN=()=>{
+    const [rating, setRating] = useState(0);
+    const [comment, setReview] = useState("")
+    const [hoverStar, setHoverStar] = useState(undefined);
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
@@ -56,9 +57,47 @@ const CourseViewCTN=()=>{
 
 
     //Button Clicking 
+
+
+    const handleSubmit1= async(e)=>{
+        e.preventDefault();
+        console.log("im alive")
+        const NewRate = {rating, comment}
+    
+             const response = await fetch(`http://localhost:5000/api/courses/review/${courseid}`, {
+                 method: 'PUT',
+                 body :JSON.stringify(NewRate),
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             })
+             const json = await  response.json()
+             console.log('New review was added', json)
+                 setRating('')
+                 setReview('')
+       }
    
 
-  
+       const handleSubmit22= async(e)=>{
+        e.preventDefault();
+        console.log("im alive22")
+        const NewRate = {rating, comment}
+    
+             const response = await fetch(`http://localhost:5000/api/instructor/review/${courseid}`, {
+                 method: 'PUT',
+                 body :JSON.stringify(NewRate),
+                 headers: {
+                     'Content-Type': 'application/json'
+                 }
+             })
+             const json = await  response.json()
+             console.log('New review was added', json)
+                 setRating('')
+                 setReview('')
+       }
+       
+
+
     //Using useEffect to run only on 1st render to display the course's data
     useEffect( ()=>{
         const getCourseanditsSubtitle=async()=>{
@@ -221,13 +260,83 @@ const CourseViewCTN=()=>{
                          ))}
                     </div>
 
+                    
+
+                    <div>
                     <label>Rate your course</label>
-                    <RateCourse/>
+    <form onSubmit={handleSubmit1}> 
+          <div >
+                {Array(5).fill().map((_, index) =>
+                  rating >= index + 1 || hoverStar >= index + 1 ? (
+                    <AiFillStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  ) : (
+                    <AiOutlineStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  )
+                  
+                )} 
+            </div> 
 
-                    <label>Rate your instructor</label>
-                    <RateInstructor/>
+            <div>
+            <label>Review:</label>
+                        <input 
+                        type="text"
+                        onChange={(e) => setReview(e.target.value)}
+                        value={comment} required/>
+            </div>
+
+            <button> Submit </button>
+    </form>
+</div>
 
 
+<div>
+<label>Rate your instructor</label>
+    <form onSubmit={handleSubmit22}> 
+          <div >
+                {Array(5).fill().map((_, index) =>
+                  rating >= index + 1 || hoverStar >= index + 1 ? (
+                    <AiFillStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  ) : (
+                    <AiOutlineStar
+                      onMouseOver={() => !rating && setHoverStar(index + 1)}
+                      onMouseLeave={() => setHoverStar(undefined)}
+                      style={{ color: "orange" }}
+                      onClick={() => setRating(index + 1)}
+                    />
+                  )
+                  
+                )} 
+            </div> 
+
+            <div>
+            <label>Review:</label>
+                        <input 
+                        type="text"
+                        onChange={(e) => setReview(e.target.value)}
+                        value={comment} required/>
+
+                 {/* <textarea id="area1" placeholder={handlePlaceHolder()}></textarea> 
+                /*setReview(document.getElementById('area1').value); */}
+            </div>
+
+            <button> Submit </button>
+    </form>
+</div>
 
     </div>
     )

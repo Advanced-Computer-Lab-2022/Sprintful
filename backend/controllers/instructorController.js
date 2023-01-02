@@ -322,6 +322,37 @@ const addInstructorReview = asyncHandler(async (req, res, next) => {
     })
 })
 
+const getInstructorIdByCourse = asyncHandler(async (req, res) => {
+    let inst;
+    console.log("workinggggg");
+    const course = await Course.findById(req.params.courseid)
+    console.log("course", course)
+    const insts = await Instructor.find({})
+    console.log("workinggggg", insts);
+    var l = 0
+    var g = 0
+    for (l;l<insts.length;l++){
+        let courses = insts[l].courses
+        for(g; g< courses.length; g++){
+            if(courses[g]._id == req.params.courseid){
+                console.log("wwwwwwwwwwwwwwwwwiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnn")
+                inst = insts[l];
+                return;
+            }
+        }
+    }
+    console.log("please", inst)
+    // const instid = inst._id
+    
+    if (inst) {
+        res.status(200).json({ inst });
+    }
+    else {
+        res.status(400).json({ error: "No reviews found" });
+    }
+})
+
+
 const getInstructorRating = asyncHandler(async (req, res) => {
     const instructor = await Instructor.findById(req.query.id)
     let allReviews
@@ -402,4 +433,4 @@ const getAmount = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { getAmount, createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}
+module.exports = { getAmount, createInstructor, changePassword, addInstructorReview, getInstructorIdByCourse,getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}

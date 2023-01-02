@@ -26,7 +26,7 @@ const
     addPromotionForCourses,
     mostPopular,
     payWithWallet,
-    getBalanceAndPrice} = require('../controllers/courseController')   //destructuring
+    getBalanceAndPrice, getCourserRatingnReviews} = require('../controllers/courseController')   //destructuring
 
 router.get('/individual/:courseId/getBalanceAndPrice', getBalanceAndPrice)
 router.post('/individual/:courseId/PayWithWallet', payWithWallet)
@@ -52,9 +52,10 @@ router.get('/getSubtitleId',requireAuth, getSubtitleId) // get subtitle id from 
 router.route('/').get(getCourses) // get all courses
 router.post('/instructor/filterMyCourses',filterInstructorCourses) // get all courses for instructor filtered
 router.post('/filter', filter) // This is a POST request to the /api/guest endpoint
-router.put('/review', addCourseReview);
-router.get('/reviewsnratings',getCourseRating)
-router.get('/getreviews/:id',requireAuth,getCourseReviews)
+router.put('/review/:courseid', addCourseReview);
+// router.get('/reviewsnratings',getCourseRating)
+// router.get('/getreviews/:id',getCourseReviews)
+router.get('/reviewsnratings',getCourserRatingnReviews)
 
 router.post('/filterCorporate', filterCorporate) // This is a GET request to the /api/guest endpoint
 router.get('/instructor/search', searchInstructorCourses)

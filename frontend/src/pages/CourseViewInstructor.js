@@ -229,26 +229,25 @@ const CourseViewInstructor=()=>{
                          ))}
                     </div>
 
-                    {/* <br/>
-                    <br/>
-                    <br/>
-
                     <div>
                             <br/>
+                            <br/>
+                            <br/>
+                            <br/>
 
-                              <h1 style = {{color: "black"}}> Course Reviews</h1>
+                              <h3 style = {{color: "black"}}> Course Reviews</h3>
                               <div className="card-container">
                                 {course  && course.reviews.map((review) =>( 
                                       <div className="card">
                                       <div className="content">
-                                          <h3> {review} </h3>
+                                          <h4> {review} </h4>
                                       </div>
                                       </div>
                                 ))}
                       
-        </div>
+                              </div>
                               
-                            </div>        */}
+                    </div>
 
 
 

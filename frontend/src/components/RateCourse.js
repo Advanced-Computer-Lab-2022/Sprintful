@@ -19,8 +19,8 @@ const RateCourse = () => {
           console.log({id});
 
          const NewRate = {rating, comment}
-         
-         const response = await fetch(`http://localhost:5000/api/courses/review?id=${id}`, {
+         axios.get('http://localhost:5000/api/courses/getCourse/');
+         const response = await fetch(`http://localhost:5000/api/courses/review?id=${id}`,  {
              method: 'PUT',
              body :JSON.stringify(NewRate),
              headers: {
@@ -72,7 +72,7 @@ const RateCourse = () => {
                         <input 
                         type="text"
                         onChange={(e) => setReview(e.target.value)}
-                        value={comment}/>
+                        value={comment} required/>
             </div>
 
             <button> Submit </button>
