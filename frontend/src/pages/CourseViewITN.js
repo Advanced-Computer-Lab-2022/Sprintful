@@ -49,6 +49,9 @@ const CourseViewITN=()=>{
     ///api/courses
     const {courseid,traineeid}=useParams();
 
+    const [completed,setCompleted]= useState(0);
+    const [done,setDone]= useState(false);
+
     //useNavigate
     const navigate=useNavigate();
 
@@ -161,6 +164,11 @@ const CourseViewITN=()=>{
             let lowProgress=null
             const response3=await axios.get(`http://localhost:5000/api/individualTrainee/getProgress/${traineeid}/${courseid}`)
             const progressdata=response3.data.progress
+            setCompleted(progress);
+            if(completed == 1)
+            {
+                setDone(true);
+            }
             if(progressdata<0.5){
                 lowProgress=" "
             }
@@ -196,7 +204,9 @@ const CourseViewITN=()=>{
 
         const {course, coursePriceAfterDiscount,courseSubtitles,progress,isProgressLow}=courseStates
 
-
+            const handleOnCLick= async(e) =>{
+                e.preventDefault();
+                const response= await axios.get('http://localhost:5000/api/courses/download');            }
 
     return (
 
@@ -238,7 +248,12 @@ const CourseViewITN=()=>{
                                  </Button> 
                                                      ;
                                             } 
-                                                   })()}
+                            })()}
+                      {   done &&   <Button   style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40,ml:2 }}
+                            onClick={handleOnCLick}>
+                         Download Certificate 
+                           </Button>
+                        }
                        
                     </Box>
 
