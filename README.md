@@ -17,7 +17,9 @@ software.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Build Status
-[If there is a bug /error which needs addressing]
+- The website currently fulfil the requirements in [Features](#features) section.
+- For reporting bugs or offering contributions or enhancements please check our [Contribute](#contribute) section below.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -210,7 +212,19 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Contribute
-[This is where you let them know that they can contribute and help you out. A guideline on how to contribute is also helpful]
+The following is a set of guidelines for contributing to Sprintful. 
+
+### I don't want to contribute I just have a question:
+  
+  Send us your question via 'sprintful.team@gmail.com' 
+
+
+ ### How Can I Contribute?
+
+   - Reporting Bugs or Suggesting Enhancements via via 'sprintful.team@gmail.com' 
+   - Pull Requests on GitHub
+    
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -220,7 +234,7 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## License
-Distributed under the MIT License.See `LICENSE.txt` for more information.
+Distributed under the [MIT License](LICENSE.md).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
