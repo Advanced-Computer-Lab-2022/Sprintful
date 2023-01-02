@@ -17,7 +17,9 @@ software.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Build Status
-[If there is a bug /error which needs addressing]
+- The website currently fulfil the requirements in [Features](#features) section.
+- For reporting bugs or offering contributions or enhancements please check our [Contribute](#contribute) section below.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
