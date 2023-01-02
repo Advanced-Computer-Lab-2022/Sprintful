@@ -65,7 +65,7 @@ export default function ProfileDropdownMenu() {
         <PopupMenu>
             <button className="but">
             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                     className="rounded-circle img-fluid" style={{width: "30px", height: "30px", marginTop:12, float: "right"}}/>
+                     className="rounded-circle img-fluid" style={{width: "30px", height: "30px", marginTop:6, marginRight:6, float: "right"}}/>
             </button>
           <div className="card text-start">
             <div className="card-body px-4 py-4">

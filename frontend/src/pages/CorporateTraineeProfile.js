@@ -253,7 +253,7 @@ export default function CorporateProfile() {
             <br/>
             <br/>
 
-            <div  onClick={()=> navigate(`/individual?id=${id}`)} style={{color: 'white', 
+            <div  onClick={()=> navigate(`/corporate?id=${id}`)} style={{color: 'white', 
              padding: '15px 50px 5px 50px',
              float: 'left',
              fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 

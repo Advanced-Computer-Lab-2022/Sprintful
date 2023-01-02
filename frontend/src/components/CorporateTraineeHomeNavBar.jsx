@@ -27,10 +27,10 @@ const CorporateTraineeHomeNavBar = () => {
               
                   
 
-            <li><a onClick={()=>window.location.href =`/corporate?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Home</a></li>
+            <li><a onClick={()=> navigate(`/corporate?id=${id}`)} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Home</a></li>
             <Country />
             <li><a href=""  style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
-            <li><a onClick={() => window.location.href = `/MyCourses?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+            <li><a onClick={() => navigate(`/MyCourses?id=${id}`)} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
             <li></li>     
              <li></li>   
              <li></li> 
