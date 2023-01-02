@@ -87,10 +87,10 @@ export default function IndividualProfileDropdownMenu() {
                 className="list-group list-group-flush"
                 style={{ margin: "0 -24px 0" }}
               >
-                <button className="list-group-item list-group-item-action px-4" onClick={() => navigate(`/api/reportProblem?id=${id}`)}>
+                <button className="list-group-item list-group-item-action px-4" onClick={() => navigate(`/api/instructor/reportProblem?id=${id}`)}>
                   <small style={{color: "black", fontFamily: "Times New Roman"}}>Report a Problem</small>
                 </button>
-                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/ViewReports?id=${id}`}>
+                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/api/instructor/ViewReports?id=${id}`}>
                   <small style={{color: "black", fontFamily: "Times New Roman"}}>My Reports</small>
                 </button>
               </div>

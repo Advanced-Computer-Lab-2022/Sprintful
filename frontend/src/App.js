@@ -66,7 +66,9 @@ import  CourseViewCTN from './pages/CourseViewCTN';
 import CourseViewITN from './pages/CourseViewITN';
 import SubtitleViewIT from './pages/SubtitleViewIT';
 
-import ReportProblem from './components/ReportProblem';
+import InstructorReportProblem from './pages/InstructorReportProblem';
+import IndividualTraineeReportProblem from './pages/IndividualTraineeReportProblem';
+import CorporateTraineeReportProblem from './pages/CorporateTraineeReportProblem';
 import AdminHome from './pages/AdminHome'
 
 import MostPopular from './components/MostPopular';
@@ -81,6 +83,13 @@ import WriteNotes from './components/WriteNotes';
 
 import TestLogin from './pages/TestLogin';
 import TestHome from './pages/TestHome';
+
+import InstructorViewReports from './pages/InstructorViewReports'
+import IndividualTraineeViewReports from './pages/IndividualTraineeViewReports'
+import CorporateTraineeViewReports from './pages/CorporateTraineeViewReports'
+import InstructorReportDetails from './pages/InstructorReportDetails'
+import IndividualTraineeReportDetails from './pages/IndividualTraineeReportDetails'
+import CorporateTraineeReportDetails from './pages/CorporateTraineeReportDetails'
 
 function App() {
   return (
@@ -215,8 +224,16 @@ function App() {
               element={<Reviews />}
             />
              <Route
-              exact path="/api/reportProblem"
-              element={<ReportProblem />}
+              exact path="/api/instructor/reportProblem"
+              element={<InstructorReportProblem />}
+            />
+            <Route
+              exact path="/api/individualTrainee/reportProblem"
+              element={<IndividualTraineeReportProblem />}
+            />
+            <Route
+              exact path="/api/corporateTrainee/reportProblem"
+              element={<CorporateTraineeReportProblem />}
             />
             <Route
               exact path="/api/admin/accessRequests"
@@ -283,16 +300,32 @@ function App() {
               element={[<AdminViewReports/> ]} 
             />
             <Route
-              exact path="/ViewReports"
-              element={[<UsersViewReports/> ]} 
+              exact path="/api/instructor/ViewReports"
+              element={<InstructorViewReports/> } 
+            />
+             <Route
+              exact path="/api/individualTrainee/ViewReports"
+              element={<IndividualTraineeViewReports/> } 
+            />
+             <Route
+              exact path="/api/corporateTrainee/ViewReports"
+              element={<CorporateTraineeViewReports/> } 
             />
             <Route
               exact path="/ReportDetailsAdmin"
               element={[<ReportDetailsAdmin/> ]}
             />
             <Route
-              exact path="/ReportDetails"
-              element={[<ReportDetails/> ]}
+              exact path="/api/instructor/ReportDetails"
+              element={<InstructorReportDetails/> }
+            />
+            <Route
+              exact path="/api/individualTrainee/ReportDetails"
+              element={<IndividualTraineeReportDetails/> }
+            />
+            <Route
+              exact path="/api/corporateTrainee/ReportDetails"
+              element={<CorporateTraineeReportDetails/> }
             />
 
             <Route

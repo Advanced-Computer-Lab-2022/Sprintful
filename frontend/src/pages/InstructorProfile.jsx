@@ -152,9 +152,7 @@ export default function InstructorProfile() {
                      <div className="col-12" style={{height: "50px"}}>
                             <InstructorNavBarCom />
                         </div>
-                       
                     </div>
-                  
                 </div>
             </header>
               <hr/>

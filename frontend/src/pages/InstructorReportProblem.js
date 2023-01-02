@@ -1,78 +1,59 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Button from '@mui/material/Button';
-import Table from '@mui/material/Table';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';  
-//const { useState } = require("react");
-import {useNavigate} from "react-router";
-import InstructorNavBarCom from '../components/InstructorNavBarCom';
-import './css/templatemo-plot-listing.css'
+import { useState } from "react"
+import { useNavigate } from 'react-router-dom';
+import InstructorNavBarCom from '../components/InstructorNavBarCom'
+
+const ReportProblem = () => {
+    const [subject, setSubject] = useState('')
+    const [body, setBody] = useState('')
+    const [type, setType] = useState("Technical")
+    const[instructorId,setInstructorId]=useState('') 
+    const[individualTraineeId,setIndividualTraineeId]=useState('') 
+    const[corporateTraineeId,setCorporateTraineeId]=useState('')
 
 
-const ChangeInstructorPassword = () => {
-    const header = {
-        color: "darkRed",
-        fontFamily: "Times New Roman",
-        fontSize: "28px",
-        textAlign: "center",
-        fontWeight: "bold"
-        
-      };
-      const navigate=useNavigate();
-    const [instructor, setInstructor] = useState("");
-    const [currentPassword, setCurrentPassword] = useState(instructor.currentPassword);
-    const [password, setPassword] = useState(instructor.password);
-    
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
-
-    useEffect(() => {
-      const fetchData = async () => {
-        await axios.get(`http://localhost:5000/api/instructor/profile?id=${id}`)
-
-        .then((res) => {
-          setInstructor(res.data);
-          console.log(res.data);
-      })
-      .catch((err) => {
-          console.log(err);
-      });
-    }       
-    fetchData();
-    }, []);
-
+    const header = {
+      color: "darkRed",
+      fontFamily: "Times New Roman",
+      fontSize: "28px",
+      textAlign: "center",
+      fontWeight: "bold",
+      
+    };
+    const navigate=useNavigate();
+    
     const handleSubmit = async(e) => {
-        e.preventDefault()
-        console.log(e);
+       e.preventDefault()
+       const params = new URLSearchParams(window.location.search);
+       const id = params.get('id');
+       console.log(id)
 
-       let axiosConfig = {
-         headers: {
-             'Content-Type': 'application/json;charset=UTF-8',
-             "Access-Control-Allow-Origin": "*",
-         }
-       };
+        const NewReport = {subject, body, type}
+        const response = await fetch(`http://localhost:5000/api/report/addReport?id=${id}`, {
+            method: 'POST',
+            body :JSON.stringify(NewReport),
+            headers: {
+                'Content-Type' : 'application/json'
+            }
+        })
+        const json = await  response.json()
+        console.log('The problem has been reported', json)
+            setSubject('')
+            setBody('')
+            setType('')
 
-     axios.put(`http://localhost:5000/api/instructor/changePassword?id=${id}`, { //?id=${id}
-        currentPassword: currentPassword,
-        password: password
-   },axiosConfig)
-
-   .then(function (response) {
-    setInstructor(response.data);
-      console.log(response.data);
-      console.log(response.data[0])
-      console.log(response.data[1])
-   })
-   .catch(function (error) {
-     console.log(error);
-   });
-
+        if(response.ok){
+            setSubject('')
+            setBody('')
+            setType('')
+            console.log('The problem has been reported', json)
+        }
     }
 
     return (
-        <div>
+            <div>
         <div id="topbar" class="">
              <div class="container">
                  <div class="row">
@@ -116,7 +97,7 @@ const ChangeInstructorPassword = () => {
          </header>
            <hr/>
          {/* <!-- ***** Header Area End ***** --> */}
-        
+
          <div className="main-banner">
          <div id="page-wrapper" style={{width: "1200px", height: "800px",left: "100px", margin: 70, background: "#DCDCDC"}} >
           <br/>
@@ -124,23 +105,15 @@ const ChangeInstructorPassword = () => {
              <br/>
              <div className="container">
                
-                <div style={header}>Change my Password</div>
+                <div style={header}>Report your Problem</div>
                 <br/>
   <br/>
       <div>
-      <p style= {{ marginLeft: "540px", fontSize:"16px", color:"black"}}>
-            <label style={{fontSize:"16px", color:"black", marginLeft: "-135px", fontFamily: "Times New Roman"}}>User name: </label>
-            <label style={{fontSize:"16px", color:"black", textAlign: "center", fontFamily: "Times New Roman"}}>{instructor.username}</label>
-            </p>
         <form className="create" onSubmit={handleSubmit}> 
       <div className="ChangeInstructorPassword">
-         
           <div>
-      
-        <br/>
-
-        <label style={{color: "black", fontFamily: "Times New Roman"}}>Current Password: </label>
-             <input style = {{ //.create input, .create textarea, .create select
+          <label style={{color: "black", fontFamily: "Times New Roman"}}>Subject: </label>
+          <input style = {{ //.create input, .create textarea, .create select
                     padding: "6px 10px",
                     margin: "10px 0",
                     border: "1px solid #ddd",
@@ -148,14 +121,13 @@ const ChangeInstructorPassword = () => {
                     display: "block",
                     fontSize:"14px",
                    }}
-            type="text"
-            onChange={(e) => setCurrentPassword(e.target.value)}
-            value={currentPassword}
-            required/> 
-            <br/>
+                        type="text"
+                        onChange={(e) => setSubject(e.target.value)}
+                        value={subject}
+                        required/>
 
-        <label style={{color: "black", fontFamily: "Times New Roman"}}>New Password: </label>
-            <input style = {{ //.create input, .create textarea, .create select
+                     <label style={{color: "black", fontFamily: "Times New Roman"}}>Body: </label>
+                     <input style = {{ //.create input, .create textarea, .create select
                     padding: "6px 10px",
                     margin: "10px 0",
                     border: "1px solid #ddd",
@@ -163,11 +135,21 @@ const ChangeInstructorPassword = () => {
                     display: "block",
                     fontSize:"14px",
                    }}
-                  type="text"
-                  onChange={(e) => setPassword(e.target.value)}
-                  value={password}
-                  required/>
-           
+                        type="text"
+                        onChange={(e) => setBody(e.target.value)}
+                        value={body}
+                        required/>
+
+                    <label style={{color: "black", fontFamily: "Times New Roman"}}>Problem Type: </label>
+                    <div style= {{width: "18em"}}>
+                        <select value={type}  onChange={(e)=>setType(e.target.value)}>
+                            {/* <option value="noType">Choose a type </option> */}
+                            <option value="Technical">Technical</option>
+                            <option value="Financial">Financial</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                <br/>
             </div>
       
         </div>
@@ -181,7 +163,7 @@ const ChangeInstructorPassword = () => {
                                                     minHeight:"30px", 
                                                     minWidth: "50px",
                                                     position: "relative",
-                                                    left: "200px"}}> Apply </button> 
+                                                    left: "200px"}}> Report </button> 
                     <br/>
                     <br/>
                     <br/>
@@ -210,7 +192,7 @@ const ChangeInstructorPassword = () => {
         
         </div>
         </div>
-        
+
         <footer style={{height: "100px"}}>
                 <div className="container" style={{height: "20px"}}>
                     <div className="row">
@@ -243,7 +225,6 @@ const ChangeInstructorPassword = () => {
                 </div>
             </footer>
         </div>
-
     )
 }
-export default ChangeInstructorPassword;
+export default ReportProblem;
