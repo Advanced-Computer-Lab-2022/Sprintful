@@ -402,4 +402,26 @@ const getAmount = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports = { getAmount, createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout}
+const checkMyOwnCourse=asyncHandler(async(req,res)=>{
+    const instructorid=req.params.instructor;
+    const courseid=req.params.courseid;
+    const coursesArray=(await Instructor.findById(instructorid)).courses;
+
+    let found=false;
+    let coursedocument;
+
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.course==courseid){
+           found=true;
+            break;
+         }
+     }
+     
+     res.json({found:found})
+}
+
+)
+
+module.exports = { getAmount, createInstructor, changePassword, addInstructorReview, getInstructorRating, getInstructorProfile,login,editBioEmailPassword, logout,checkMyOwnCourse}

@@ -27,7 +27,7 @@ const AddVideoLinkSubtitle=()=>{
                //setVideoDescription(""); 
               // window.location.href=`/api/subtitles/${subtitleid}/Instructor`
 
-               navigate(`/api/subtitles/${subtitleid}/Instructor`);
+               navigate(`/api/subtitles/getSubtitle/${subtitleid}/Instructor`);
                navigate(0);
 
 

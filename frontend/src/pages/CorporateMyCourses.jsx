@@ -62,7 +62,7 @@ export default function CorporateTraineeMyCourses() {
                         {/* Corporate Course view */}
                         <div className="card-container">
                             {courses  && courses.map((course) =>( 
-                                <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTN`)} }>
+                                <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTN/${id}`)} }>
                                 <img src="assets/images/courseCard.jpg"/>
                                 <div className="content">
                                     <h3> {course.title} </h3>

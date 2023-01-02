@@ -34,7 +34,7 @@ export default function SubtitleViewCT() {
             const subtitledata=response.data;
             setSubtitle(subtitledata);
 
-            const response2= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
+            const response2= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
             const coursehours=response2.data.totalhours
 
 
@@ -127,6 +127,29 @@ export default function SubtitleViewCT() {
 
 
              </div>
+
+             <div>
+             < StyledCourseHeader>
+                <h5>Video:</h5>
+                </StyledCourseHeader>
+
+                <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
+                         <CardContent>
+                         <a href={subtitle&&subtitle.youtubevideo}>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Video
+                            </Typography>
+                            </a>
+                            <Typography gutterBottom variant="h6" component="div">
+                               Video Description :{subtitle && subtitle.videoDescription}
+                            </Typography>
+
+                            <br></br>
+                            <br></br>
+                            </CardContent>
+                    </Card>
+
+             </div >
                 
 
     </div>

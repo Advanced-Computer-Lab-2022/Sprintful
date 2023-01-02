@@ -64,7 +64,7 @@ The project is implemented using the MERN Stack, a free and open-source JavaScri
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Features
-[all extra features have been done in your project. Basically, this is where you try to make your project stand out from the rest.]
+You can view the full project requirements from [**here**](https://docs.google.com/spreadsheets/d/e/2PACX-1vQ1H6UElFJV09XHmQqytyiD0x04cvbdKksWqvOHPyHwMLyGjQ3wAjjAlgDcE4_zWw/pubhtml).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -106,7 +106,96 @@ The project is implemented using the MERN Stack, a free and open-source JavaScri
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## API reference
-[]
+
+Backend is divided into different routes, and each route has a set of **APIs**, here are some routes examples :
+  1. **Add Course**
+   - Route `/api/courses/addCourse`
+   - Request Type `POST`
+   - Request Body 
+  ``` 
+  {
+      title: 'Advanced Computer Lab',
+      subject: 'Computer Science',
+      price: 500,
+      totalhours: 4,
+      shortsummary: 'best course ever',
+      instructor: '63a6af07df4b397c30130fba',
+      previewvideolink: 'videolink',
+      discount: 0.1,
+   }
+  ```
+   - Response Body
+  ``` 
+  {   
+      success: false,
+      message: "Course could not be added. Error : ", 
+      err
+  }
+  or 
+  {   
+      success:  true,
+      message: "You have added a new course successfully"
+  }
+  ```
+2. **Get Instructor Profile**
+  - Route `/api/instructor/profile?id=63ac0000010ff17395982f50`
+  - Request type `GET`
+  - Response Body 
+  ```
+  {
+    "_id":"63ac0000010ff17395982f50",
+    "username":"slim",
+    "password":"$2a$10$5FkHQDkHOVauYEayMLRd2uEZ6B24vUNieMLsLx8YvKwlizlAFpc1C",
+    "firstName":"slim",
+    "lastName":"slim",
+    "email":"slim",
+    "rating":5,
+    "ratingsArray":[],
+    "courses":[],
+    "reviews":[],
+    "money":0,
+    "biography":"",
+    "contract":false,
+    "createdAt":"2022-12-28T08:36:16.751Z",
+    "updatedAt":"2022-12-28T08:36:16.751Z","__v":0
+  }
+  ```
+  
+3- **Admin Login**
+ - Route `/api/admin/loginAdmin`
+ - Request Type `POST`
+ - Request Body
+ ```
+ {
+    username:'hakimi',
+    password: 1234
+ }
+ ```
+- Redirects to `/AdminHome`
+- Response Body
+ ```
+ {
+    success: true,
+  }
+ ```
+ or 
+ ```
+ {   
+    success:  false,
+    message: "Invalid credentials"
+  }
+  ```
+  
+4. **Corporate Trainee Log Out**
+   - Route `/api/corporateTrainee/logout`
+   - Request Type `GET`
+   - Response Body
+    ```
+    {
+       success: true,
+       msg: "You have logged out!" 
+    }
+    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 

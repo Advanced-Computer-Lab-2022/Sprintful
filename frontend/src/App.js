@@ -143,10 +143,10 @@ function App() {
             exact path="/api/courses/getCourse/:courseid/ITN/:traineeid"
             element={<CourseViewITN/>}/>
 
-            <Route
+            {/* <Route
               exact path="/api/subtitles/:subtitleid/Instructor"
               element={<SubtitlePageInst />}
-            />
+            /> */}
             <Route
               exact path="/api/courses/addPromotion/:courseid"
               element={<AddPromotionCourse />} />

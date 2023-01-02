@@ -70,7 +70,7 @@ const CourseViewITN=()=>{
        
            
             //Sending a get request to the server to get course
-               const response= await axios.get('http://localhost:5000/api/courses/',{params :{id:courseid}});
+               const response= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
                const coursedata=response.data;
                //setCourse(coursedata);
 
