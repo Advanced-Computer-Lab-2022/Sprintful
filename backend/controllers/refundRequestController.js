@@ -2,7 +2,7 @@
 const RefundRequest=require('../models/refundRequestModel')
 const IndividualTrainee=require('../models/individualTraineeModel')
 const Course = require('../models/courseModel')
-const Instructor = require('../models/instructorModel')
+const Instructor = require('../models/InstructorModel')
 const asyncHandler = require('express-async-handler')
 
 

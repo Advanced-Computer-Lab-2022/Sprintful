@@ -41,7 +41,7 @@
     "js-file-download": "^0.4.12",
     "jsonwebtoken": "^8.5.1",
     "jspdf": "^2.5.1",
-    "mongoose": "^6.7.3",
+    "mongoose": "^6.8.2",
     "nodemailer": "^6.8.0",
     "path": "^0.12.7",
     "pdf": "^0.1.0",
