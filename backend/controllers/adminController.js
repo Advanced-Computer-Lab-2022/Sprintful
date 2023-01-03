@@ -174,6 +174,7 @@ const generateToken =(id) =>{
 }
 
 const getStats = asyncHandler(async (req, res) => {
+    console.log("Stats working");
     var numInstructors = await Instructors.count();
     console.log("step1", numInstructors)
     const numCorporateTrainees = await CorporateTrainees.count();

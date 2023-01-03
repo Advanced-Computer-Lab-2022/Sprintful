@@ -266,6 +266,7 @@ const corporateGetCourses = asyncHandler(async (req, res) => {
 
 // search for all courses except for corporate
 const getCourses = asyncHandler(async (req, res) => {
+    console.log("hello")
     const courses = await Course.find({})
     if (courses) {
         res.json(courses)
