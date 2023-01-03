@@ -27,7 +27,7 @@ const HomeNavBar = () => {
                 <li><a href="/home" style= {{color: "black", left: "400px", background:"white"}} >Home</a></li>
                 <CountryGuest />
                 <li><a href=""  style= {{color: "black", left: "400px"}}>Contact Us</a></li>
-                <li><a href="/logme"  style= {{color: "black", left: "400px"}}>Log in</a></li>
+                <li><a href="/Logme"  style= {{color: "black", left: "400px"}}>Log in</a></li>
                 <li><a href="/Signup"  style= {{color: "black", left: "400px"}}>Sign up</a></li>
                 <li></li>
 

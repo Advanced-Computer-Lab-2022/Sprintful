@@ -111,8 +111,10 @@ export default function Promotion() {
                         {/* <button onClick={() => addPromotion()}> Add promotion </button> */}
                     </form>
 
-                    <button onClick={()=>handleAll()} style={{background:"maroon", width:"130px"}}>Set for All Courses</button>
-
+                    <button onClick={()=>handleAll()} style={{background:"maroon", width:"120px", height:"40px", color:"white"}}>Set for All Courses</button>
+                    <br/>
+                    <br/>
+                    <br/>
             {courses && (
                 <div className="Promotion">
                     {courses.map((course) => {

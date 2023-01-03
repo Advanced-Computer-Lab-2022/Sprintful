@@ -42,7 +42,7 @@ const handleSubmit= async (e)=>{
           gender: gender,
       },axiosConfig)
       .then(function (response) {
-          navigate('/Login')
+          navigate('/Logme')
       })
       .catch(function (error) {
       console.log(error);

@@ -61,29 +61,29 @@ export default function AdminHome(){
                 <ul className="nav" id="main-menu">
 	
                      <li>
-                        <a  onClick={()=>  navigate(`/adminViewReports?id=${id}`)} style={{  cursor: "pointer"}}><i className="fa fa-desktop fa-3x" style={{width: "140px"}}></i> User's Reports </a>
+                        <a  onClick={()=>  navigate(`/adminViewReports?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-desktop fa-3x" style={{width: "140px"}}></i> User's Reports </a>
                     </li>
                     
 						   <li  >
-                        <a   onClick={()=>  navigate(`/api/admin/createAdmin?id=${id}`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "139px"}}></i> Add an Admin</a>
+                        <a   onClick={()=>  navigate(`/api/admin/createAdmin?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-edit fa-3x" style={{width: "139px"}}></i> Add an Admin</a>
                     </li>	
                       <li  >
-                        <a  onClick={()=>  navigate(`/api/admin/createInstructor?id=${id}`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "132px"}}></i> Add an Instructor</a>
+                        <a  onClick={()=>  navigate(`/api/admin/createInstructor?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-edit fa-3x" style={{width: "132px"}}></i> Add an Instructor</a>
                     </li>
                     <li  >
-                        <a   onClick={()=>  navigate(`/api/admin/createCorporateTrainee?id=${id}`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "105px"}}></i> Add a Corporate Trainee </a>
+                        <a   onClick={()=>  navigate(`/api/admin/createCorporateTrainee?id=${id}`)} style={{  cursor: "pointer", fontSize:"9px"}}><i className="fa fa-edit fa-3x" style={{width: "105px"}}></i> Add a Corporate Trainee </a>
                     </li>
                     <li  >
-                        <a  onClick={()=>  navigate(`/api/admin/changePassword?id=${id}`)} style={{  cursor: "pointer"}}><i className="fa fa-edit fa-3x" style={{width: "115px"}}></i> Change My Password</a>
+                        <a  onClick={()=>  navigate(`/api/admin/changePassword?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-edit fa-3x" style={{width: "115px"}}></i> Change My Password</a>
                     </li>
                     <li>
-                        <a  onClick={()=>  navigate(`/api/admin/accessRequests?id=${id}`)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "135px"}}></i> Course Requests </a>
+                        <a  onClick={()=>  navigate(`/api/admin/accessRequests?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "135px"}}></i> Course Requests </a>
                     </li>
                     <li  >
-                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests`)} style={{  cursor: "pointer"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
+                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
                     </li>
                     <li  >
-                        <a   onClick={()=>  navigate(`/promotion`)} style={{  cursor: "pointer"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "137px"}}></i> Set a Promotion </a>
+                        <a   onClick={()=>  navigate(`/promotion`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "137px"}}></i> Set a Promotion </a>
                     </li>				
 					
                 </ul>
