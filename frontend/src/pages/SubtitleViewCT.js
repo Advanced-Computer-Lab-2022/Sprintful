@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import { shadows } from '@mui/system';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -15,6 +16,7 @@ import {Link} from 'react-router-dom';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 
 export default function SubtitleViewCT() {
+   const navigate = useNavigate();
       //states
     const  [subtitle,setSubtitle]=useState(null);
 
@@ -113,8 +115,8 @@ export default function SubtitleViewCT() {
              {subtitle&&subtitle.tasks.map((task)=>(
                     
                 <div key={task._id}>
-                    <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
-                         <CardContent>
+                    <Card  sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
+                         <CardContent onClick = { () => { navigate(`/quiz?taskid=${task._id}`)} }>
                             <Typography gutterBottom variant="h6" component="div">
                                    {task.title}
                             </Typography>
