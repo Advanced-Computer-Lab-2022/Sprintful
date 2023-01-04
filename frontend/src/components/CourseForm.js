@@ -25,23 +25,18 @@ const header = {
     const id = params.get('id');
      console.log(id)
 
+     let axiosConfig = {
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            "Access-Control-Allow-Origin": "*",
+        }
+    };
 
 const navigate=useNavigate();
 
 const handleSubmit= async (e)=>{
     e.preventDefault()
-
-    let axiosConfig = {
-      headers: {
-          'Content-Type': 'application/json;charset=UTF-8',
-          "Access-Control-Allow-Origin": "*",
-      }
-    };
-
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get('id');
-     console.log(id)
-    const response=  axios.post(`http://localhost:5000/api/courses?id=${id}`, { 
+    const response=  axios.post(`http://localhost:5000/api/courses/addCourse?id=${id}`, { 
         title: title ,
         subject: subject,
         price: price,
@@ -50,40 +45,42 @@ const handleSubmit= async (e)=>{
         instructor: id,
         previewvideolink: previewvideolink,
         discount: discount
-  
-      },axiosConfig)
-      .then(function (response) {
-        // console.log(response);
-        // console.log('Course added ',response.data)
-        console.log(response.data[0])
-        console.log(response.data[1])
-        // contract =response.data[1];
-        setContract(response.data[1])
-  
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
 
-      const json =await response[0].json()
-      if(response.ok){
-        const courseid=json._id;
-        console.log('Course added ',json)
-        setTitle('')
-        setPrice('')
-        setSubject('Computer Science')
-        setTotalHours('')
-        setShortSummary('')
-        setPreviewVideoLink('')
-        setDiscount('')
-     
-        navigate(`/addSubtitle/${courseid}`);
-       //  navigate('/api/admin/createInstructor');
-        navigate(0);
-       //  navigate(`/addSubtitle/${courseid}`);
-      };
+    },axiosConfig)
+    .then(function (response) {
+    console.log(response.data[0])
+    console.log(response.data[1])
+    const course=response.data[0]
+    navigate(`/addSubtitle/${course._id}`)
+    navigate(0)
+    // navigate(`/instructor?id=${id}`)
+    // navigate(0)
+    // const json = response[0].json()
+    // const courseid=json._id;
+    // console.log('Course added ',json)
+    })
+    .catch(function (error) {
+    // setContract(false)
+    navigate(`/contract?id=${id}`);
+    navigate(0)
+    console.log(error);
+    })
 
-    }
+    setTitle('')
+    setPrice('')
+    setSubject('Computer Science')
+    setTotalHours('')
+    setShortSummary('')
+    setPreviewVideoLink('')
+    setDiscount('')
+    // if(contract){
+      
+    // }
+    // else {
+        
+    // }
+
+}
     const style1 = { //.create input, .create textarea, .create select
       width: "100%",
       padding: "6px 10px",
