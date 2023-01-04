@@ -87,6 +87,9 @@ export default function IndividualProfileDropdownMenu() {
                 className="list-group list-group-flush"
                 style={{ margin: "0 -24px 0" }}
               >
+                <button className="list-group-item list-group-item-action px-4" onClick={() => window.location.href= `/addCourse?id=${id}`}>
+                  <small style={{color: "black", fontFamily: "Times New Roman"}}>Add a Course</small>
+                </button>
                 <button className="list-group-item list-group-item-action px-4" onClick={() => navigate(`/api/instructor/reportProblem?id=${id}`)}>
                   <small style={{color: "black", fontFamily: "Times New Roman"}}>Report a Problem</small>
                 </button>
