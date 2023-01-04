@@ -326,16 +326,32 @@ function App() {
               element={[<AdminViewReports />]}
             />
             <Route
-              exact path="/ViewReports"
-              element={[<UsersViewReports/> ]} 
+              exact path="/api/instructor/ViewReports"
+              element={<InstructorViewReports/> }
+            />
+             <Route
+              exact path="/api/individualTrainee/ViewReports"
+              element={<IndividualTraineeViewReports/> }
+            />
+             <Route
+              exact path="/api/corporateTrainee/ViewReports"
+              element={<CorporateTraineeViewReports/> }
             />
             <Route
               exact path="/ReportDetailsAdmin"
               element={[<ReportDetailsAdmin />]}
             />
             <Route
-              exact path="/ReportDetails"
-              element={[<ReportDetails/> ]}
+              exact path="/api/instructor/ReportDetails"
+              element={<InstructorReportDetails/> }
+            />
+            <Route
+              exact path="/api/individualTrainee/ReportDetails"
+              element={<IndividualTraineeReportDetails/> }
+            />
+            <Route
+              exact path="/api/corporateTrainee/ReportDetails"
+              element={<CorporateTraineeReportDetails/> }
             />
 
             <Route
