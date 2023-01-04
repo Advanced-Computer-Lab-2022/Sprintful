@@ -35,6 +35,7 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState(null);
+  const [showanswers, setShowAnswers] = useState(false);
 
   const params = new URLSearchParams(window.location.search);
   const taskid = params.get('taskid');
@@ -56,7 +57,9 @@ function Quiz() {
   }, []);
 
   // Helper Functions
-
+  const handleshowanswers = () => { 
+    setShowAnswers(true);
+  }
   /* A possible answer was clicked */
   const optionClicked = async (isCorrect, questionid, choiceindex) => {
     console.log("hello")
@@ -79,17 +82,7 @@ function Quiz() {
 
     console.log("answer test" + json);
     if (response.ok) {
-
-      // const taskId=json._id;
       console.log('Answer added', json)
-      // setQuestionTitle('')
-      // setChoice1('')
-      // setChoice2('')
-      // setChoice3('')
-      // setChoice4('')
-
-      //   navigate(`/addQuestion/${taskid}`);
-      //   navigate(0);
 
     }
     else {
@@ -136,6 +129,37 @@ function Quiz() {
                 {(score / questions.length) * 100}%)
               </h2>
               <button onClick={() => restartGame()}>Retake task</button>
+              <br />
+              <br />
+              <button onClick={handleshowanswers}>Show Answers</button>
+              {showanswers && (
+                <div>
+                  <h1>Answers</h1>
+                  <ul>
+                    {questions.map((question) => {
+                      return (
+                        <li>
+                          {question.title}
+                          <ul>
+                            {question.choices.map((choice) => {
+                              return (
+                                <li>
+                                  {choice.text} -
+                                  {choice.isCorrect ? (
+                                    <span>Correct</span>
+                                  ) : (
+                                    <span>Incorrect</span>
+                                  )}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  
+                </div>)}
             </div>
           ) : (
             /* 5. Question Card  */
