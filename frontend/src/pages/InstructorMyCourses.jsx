@@ -108,6 +108,7 @@ export default function InstructorMyCourses() {
            }
     }
     const fetchSubtitles =async () =>{
+        console.log(option)
         await axios.get(`http://localhost:5000/api/courses/getSubtitles?courseId=${option}`).then(
        (res) => { 
            const courses = res.data
@@ -255,6 +256,7 @@ export default function InstructorMyCourses() {
         setFilterData([])
         console.log(searchTerm)
     }
+    
 
    const mystyle = {
         color: "white",

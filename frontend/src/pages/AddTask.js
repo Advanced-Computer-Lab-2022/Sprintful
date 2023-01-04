@@ -45,6 +45,7 @@ const AddTaskMain = () => {
     }, [])
 
     const fetchSubtitles =async () =>{
+        console.log("option " +option)
         await axios.get(`http://localhost:5000/api/courses/getSubtitles?courseId=${option}`).then(
        (res) => { 
            const courses = res.data
@@ -152,7 +153,7 @@ return(
             placeholder= "View Options"
             value={option}
             onChange={(e) => setOption(e.target.value)}
-            onClick={()=>fetchSubtitles()}
+            
          > 
 
          <option selected disabled key="0"> Select a course</option>
@@ -171,6 +172,7 @@ return(
 
         <select
         // onClick={()=>getId()}
+        onClick={()=>fetchSubtitles()}
         onChange={(e) => setSubtitleOption(e.target.value)
         }
         >
