@@ -8,12 +8,22 @@ const Subtitle = require('../models/subtitleModel.js')
 const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 var mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
+const { dirname } = require('path')
 
 const emailCertificate =  asyncHandler(async (req, res) => {
     const id = req.params.traineeid;
     const courseId = req.params.courseid;
     const individual = (await IndividualTrainee.find({_id: id}));
-    const email = individual[0].email
+    let email;
+    if(individual[0]!=null){
+        const emailI = individual[0].email
+        email = emailI;
+    }
+    else{
+        const corporate = (await CorporateTrainee.find({_id: id}));
+        const emailC= corporate[0].email;
+        email =emailC;
+    }
     const course = (await Course.find({_id: courseId}));
      const courseTitle = course[0].title
     console.log("Email" +email);
@@ -60,7 +70,7 @@ const emailCertificate =  asyncHandler(async (req, res) => {
 )
 const downloadCertificate =  asyncHandler(async (req, res) => {
 
-    res.download("../backend/certificate.png")
+    res.download('./backend/controllers/certificate.png');
 })
 const addPromotionForCourses = asyncHandler(async (req, res) => {
     // get courses ids
