@@ -26,10 +26,11 @@ const
     addPromotionForCourses,
     mostPopular,
     payWithWallet,
-    getBalanceAndPrice, getCourserRatingnReviews,
+    getBalanceAndPrice,
+    getCourserRatingnReviews,
     downloadCertificate,
     emailCertificate} = require('../controllers/courseController')   //destructuring
-router.get('/emailCertificate', emailCertificate);
+router.get('/:traineeid/emailCertificate/:courseid/', emailCertificate);
 router.get('/', getCourses) // get all courses
 router.get('/download', downloadCertificate)
 router.get('/individual/:courseId/getBalanceAndPrice', getBalanceAndPrice)

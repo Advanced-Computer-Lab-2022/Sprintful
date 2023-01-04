@@ -184,7 +184,7 @@ const HomeSearchInstructor = () => {
             <div className="col-lg-3">
                 <fieldset>
                     {/* <button id="main-button" onClick={(e)=>handlePopular} >View Most Popular</button> */}
-                    <button id="main-button" onClick={(e) => handleFilter} style={styleFilterButton}> Apply</button>
+                    <button id="main-button" onClick={handleFilter} style={styleFilterButton}> Apply</button>
                 </fieldset>
             </div>
         </div>

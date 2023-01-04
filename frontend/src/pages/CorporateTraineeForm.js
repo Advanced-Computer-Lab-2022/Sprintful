@@ -21,12 +21,13 @@ const CorporateTraineeForm = () => {
     const [corporate, setCorporate] = useState("bahamas")
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
+    const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
 
-        const newUser = {username, password, corporate, firstName, lastName}
+        const newUser = {username, password, corporate, firstName, lastName, email}
         console.log(newUser)
         const response = await fetch('http://localhost:5000/api/corporateTrainee/createCorporateTrainee', {
             method: 'POST',
@@ -46,6 +47,7 @@ const CorporateTraineeForm = () => {
             setFirstName('')
             setLastName('')
             setError(null)
+            setEmail('')
             console.log('New corporate trainee was added', json)
         }
     }
@@ -98,6 +100,13 @@ const CorporateTraineeForm = () => {
                     type="text"
                     onChange={(e) => setLastName(e.target.value)}
                     value={lastName}
+                    required/>
+
+                <label>Email:</label>
+                    <input style={{width: 200 }}
+                    type="text"
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     required/>
 
                  <label>Password:</label>
