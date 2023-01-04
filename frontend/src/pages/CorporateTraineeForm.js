@@ -1,6 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from "react-router";
-
+import Alert from '@mui/material/Alert';
 
 const CorporateTraineeForm = () => {
     const params = new URLSearchParams(window.location.search);
@@ -23,6 +23,7 @@ const CorporateTraineeForm = () => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
+    const [clicked, setClicked] = useState(false)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -48,6 +49,7 @@ const CorporateTraineeForm = () => {
             setLastName('')
             setError(null)
             setEmail('')
+            setClicked(true)
             console.log('New corporate trainee was added', json)
         }
     }
@@ -150,6 +152,10 @@ const CorporateTraineeForm = () => {
                                                     minWidth: "50px",
                                                     position: "relative",
                                                     left: "200px"}}> Create </button> 
+                        <br/>
+            {clicked &&  <Alert style={{width: "350px", fontSize: "10px", color: "black"}}>
+                        A Corporate Trainee has been created successfully!
+                        </Alert>}
            {/* {error && <div className="error">{error}</div>} */}
         </form>
         </div>
