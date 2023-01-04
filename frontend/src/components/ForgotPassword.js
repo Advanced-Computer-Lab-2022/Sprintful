@@ -6,7 +6,9 @@ import "../pages/Signup.css"
 import HomeNavBar from "../components/HomeNavBar";
 
 
-export default function TestLogin() {
+
+
+export default function ForgotPassword() {
 const [isHovering, setIsHovering] = useState(false);
 const handleMouseEnter = () => {
   setIsHovering(true);
@@ -16,64 +18,24 @@ const handleMouseLeave = () => {
 };
 const navigate=useNavigate();
 
-const[username,setUsername]=useState('') 
-const [password ,setPassword]=useState('')
-const [display,setDisplay]=useState(false)
-let axiosConfig = {
-    headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-        "Access-Control-Allow-Origin": "*",
-    }
-};
+const[email, setEmail]=useState("");
 const handleSubmit= async (e)=>{
-    e.preventDefault()
-    let role;
-    let id;
-    let axiosConfig = {
+    e.preventDefault();
+    console.log(email)
+    fetch("http://localhost:5000/api/guest/forgotPassword",{
+        method:"POST",
+        crossDomain: true,
         headers: {
-            'Content-Type': 'application/json;charset=UTF-8',
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
             "Access-Control-Allow-Origin": "*",
-        }
-    };
-    axios.post('http://localhost:5000/api/guest/login',
-  {
-    username: username,
-    password: password
-  }, axiosConfig)
-
-  .then((res) => {
-      console.log(res.data.role)
-      role = res.data.role
-      id = res.data._id
-      if(role =="Corporate"){
-        navigate(`/corporate?id=${id}`)
-        navigate(0)
-      }
-      else if(role =="Instructor"){
-        if(res.data.policy== false){
-          navigate(`/PaymentPolicyInstructor?id=${id}`)
-          navigate(0)
-        }
-        else{
-          navigate(`/instructor?id=${id}`)
-          navigate(0)
-        }
-      }
-      else if(role =="Individual"){
-        navigate(`/individual?id=${id}`)
-        navigate(0)
-      }
-      else{
-        navigate(`/admin?id=${id}`)
-        navigate(0)
-      }
-  })
-  .catch((err) => {
-      console.log(err);
-  });
-  console.log(username)
-  console.log(password)
-  
+    }, 
+    body: JSON.stringify({email:email})
+    }).then(res=>res.json())
+    .then(data=>{
+        console.log(data, "userRegister");
+    }
+    );
 }
 
 const style10 ={ //.signup__input
@@ -149,20 +111,16 @@ return(
                 <br/>
     <body className="main"  >
     <form className="signup" onSubmit={handleSubmit} autoComplete="off" style={{boxShadow: "5px 10px 8px #888888"}}>
-    <h1 className="CreateAccount">Login</h1>
-
-    <div  className="signup__field">
-      <input  className="signup__input" style={style10} type="text" onChange={(e)=>setUsername(e.target.value)} value={username} name="username" id="username" required />
-      <label className="signup__label" htmlFor="username">Username</label>
-    </div>
+    <h1 className="CreateAccount">Forgot Password</h1>
+<br/>
     <div  className="pass">
-      <input className="pass2" type="password" style={style10} onChange={(e)=>setPassword(e.target.value)} value={password}  name="password" id="username" required />
-      <label className="signup__label" htmlFor="password">Password</label>
+      <input className="pass2" type="email" style={style10} onChange={(e)=>setEmail(e.target.value)} value={email}  name="email" id="username" required />
+      <label className="signup__label" htmlFor="password">Email address</label>
     </div>
-     
-    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Login</button> 
 
-  <label style={{display:"block",textDecoration:"Underline",alignSelf:"center"}} onClick={() => navigate(`/forgotPassword`)}>forgot password?</label>
+     
+    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Submit</button> 
+
   </form>
 
   
