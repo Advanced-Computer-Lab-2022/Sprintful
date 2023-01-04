@@ -61,14 +61,20 @@ const ViewReports = () => {
     height: "1000px",
   }}>
 
-<nav className="navbar navbar-default navbar-cls-top " role="navigation" style = {{marginBottom: '0'}}> 
+<nav className="navbar navbar-default navbar-cls-top " role="navigation" style = {{marginBottom: '0', background: "silver"}}> 
+<a class="salata" data-dark-logo="/upload/logo.png" syle={{position: "relative"}}>
+
+                                <img src="/upload/logo.png" alt="Homepage" style={{width: "140px", 
+                                                                                    height: "60px",
+                                                                                    marginRight: "900px"}}/>
+                            </a>
          
          {/* <div className="navbar-header"> */}
-             <a  style={{color: 'white',
+             {/* <a  style={{color: 'white',
                          fontWeight: "bold", 
                          float: "left",
                          fontSize: '25px',
-                         testAlign: "left"}}>Canadian Chamber of Commerce</a> 
+                         testAlign: "left"}}>Canadian Chamber of Commerce</a>  */}
          {/* </div> */}
  <div  style={{color: 'white', 
              padding: '15px 50px 5px 50px',
