@@ -148,6 +148,7 @@ export default function SubtitleViewCT() {
                          <span onClick={()=>{handleClickOnVideo(subtitle.youtubevideo)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
                          <Typography gutterBottom variant="h6" component="div">
                                 Video
+                                
                             </Typography>
                            </span>
                          {/* <a href={subtitle&&subtitle.youtubevideo}>
