@@ -227,7 +227,7 @@ const checkMyOwnCourse=asyncHandler(async(req,res)=>{
         coursedocument=coursesArray[i];
          //x=coursedocument.course.toString()==courseid;
         if(coursedocument.toString()==courseid){
-           found=true;
+           found=true; //he/she is registered to that course 
             break;
          }
      }
