@@ -190,10 +190,10 @@ const styleRating ={
         
         
                         if(found){
-                        navigate(`/api/courses/getCourse/${course._id}/CTN/${traineeid}`) }
+                        navigate(`/api/courses/getCourse/${course._id}/CTN/${id}`) }
     
                         else{
-                          navigate(`/api/courses/getCourse/${course._id}/CTR/${traineeid}`)  
+                          navigate(`/api/courses/getCourse/${course._id}/CTR/${id}`)  
     
                         }
     
