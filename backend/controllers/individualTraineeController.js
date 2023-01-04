@@ -197,6 +197,30 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
 
 )
 
+const checkMyOwnCourse=asyncHandler(async(req,res)=>{
+    const corporateTraineeid=req.params.individualTraineeid;
+    const courseid=req.params.courseid;
+    const coursesArray=(await IndividualTrainee.findById(corporateTraineeid)).courses;
+
+    let found=false;
+    let coursedocument;
+
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.toString()==courseid){
+           found=true; //he/she is registered to that course 
+            break;
+         }
+     }
+     
+     res.json({found:found})
+}
+
+)
 
 
-module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress,getProgressforCourse}
+
+
+
+module.exports = { changePassword, login, logout, viewMoney, getIndividualTraineeProfile,updateProgress,insertProgress,getProgressforCourse,checkMyOwnCourse}

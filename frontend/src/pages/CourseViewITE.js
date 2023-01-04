@@ -23,8 +23,9 @@ import { positions } from '@mui/system';
 
 const CourseViewITE=()=>{
 
-  let params = new URLSearchParams(document.location.search);
-  let id = params.get("id");
+  // let params = new URLSearchParams(document.location.search);
+  // let id = params.get("id");
+
 
   const navigate=useNavigate();
 
@@ -53,7 +54,7 @@ const CourseViewITE=()=>{
    });
     
     ///api/courses
-    const {courseid}=useParams();
+    const {courseid,traineeid}=useParams();
 
 
   
@@ -205,7 +206,7 @@ const CourseViewITE=()=>{
                            >
                             
                          <Button  style={{ maxHeight: '50px', maxWidth: '100px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }} 
-                           onClick ={ () => { navigate(`/api/${courseid}/payment?id=${id}`) }}>
+                           onClick ={ () => { navigate(`/api/${courseid}/payment?id=${traineeid}`) }}>
                          Enroll
                            </Button>
 

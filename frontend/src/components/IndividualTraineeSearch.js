@@ -172,7 +172,22 @@ export default function IndividualTraineeSearch() {
 { 
     <div className="card-container">
         {filterData  && filterData.map((course) =>( 
-              <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/ITE?id=${id}`)} }>
+              <div className="card" onClick = { async() => { 
+                const response=await axios.get(`http://localhost:5000/api/individualTrainee/checkmyownCourse/${id}/${course._id}`)
+                const found=response.data.found;
+
+
+                if(found){
+                navigate(`/api/courses/getCourse/${course._id}/ITN/${id}`) }
+
+                else{
+                  navigate(`/api/courses/getCourse/${course._id}/ITE/${id}`)  
+
+                }
+
+                
+                
+                } }>
               <img src="assets/images/courseCard.jpg"/>
               <div className="content">
                   <h3> {course.title} </h3>
@@ -193,7 +208,22 @@ export default function IndividualTraineeSearch() {
         
         <div className="card-container">
             {courses  && courses.map((course) =>( 
-                  <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/ITE?id=${id}`)} }>
+                  <div className="card" onClick = { async() => { 
+                    const response=await axios.get(`http://localhost:5000/api/individualTrainee/checkmyownCourse/${id}/${course._id}`)
+                    const found=response.data.found;
+    
+    
+                    if(found){
+                    navigate(`/api/courses/getCourse/${course._id}/ITN/${id}`) }
+    
+                    else{
+                      navigate(`/api/courses/getCourse/${course._id}/ITE/${id}`)  
+    
+                    }
+    
+                    
+                    
+                    } }>
                     {/* :courseid */}
                   <img src="assets/images/courseCard.jpg"/>
                   <div className="content">
