@@ -80,10 +80,10 @@ export default function AdminHome(){
                         <a  onClick={()=>  navigate(`/api/admin/accessRequests?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "135px"}}></i> Course Requests </a>
                     </li>
                     <li  >
-                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
+                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
                     </li>
                     <li  >
-                        <a   onClick={()=>  navigate(`/promotion`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "137px"}}></i> Set a Promotion </a>
+                        <a   onClick={()=>  navigate(`/promotion?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "137px"}}></i> Set a Promotion </a>
                     </li>				
 					
                 </ul>
