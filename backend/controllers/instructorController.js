@@ -433,9 +433,10 @@ const getAmount = asyncHandler(async (req, res) => {
 })
 
 const checkMyOwnCourse=asyncHandler(async(req,res)=>{
-    const instructorid=req.params.instructor;
+    const instructorid=req.params.instructorid;
     const courseid=req.params.courseid;
-    const coursesArray=(await Instructor.findById(instructorid)).courses;
+    //const coursesArray=(await Instructor.findById(instructorid)).courses;
+    const coursesArray=(await Instructor.findById(instructorid)).courses
 
     let found=false;
     let coursedocument;
@@ -443,13 +444,14 @@ const checkMyOwnCourse=asyncHandler(async(req,res)=>{
     for(let i=0;i<coursesArray.length;i++){
         coursedocument=coursesArray[i];
          //x=coursedocument.course.toString()==courseid;
-        if(coursedocument.course==courseid){
+        if(coursedocument.toString()==courseid){
            found=true;
             break;
          }
      }
      
      res.json({found:found})
+   // res.json(coursesArray);
 }
 
 )
