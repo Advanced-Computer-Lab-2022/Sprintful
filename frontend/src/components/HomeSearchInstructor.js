@@ -38,45 +38,45 @@ const HomeSearchInstructor = () => {
         setCourses([])
       }
 
-    // useEffect(() => {
+    useEffect(() => {
 
         
-    //     const response = async() =>{
+        const response = async() =>{
             
-    //         console.log("hello")
-    //         console.log(price +" " + subject + " " + rating)
-    //       await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
-    //       .then((res) => { 
-    //             const course = res.data
-    //             if(res.status===200){
-    //               console.log("check success")
-    //               console.log(course)
-    //               setFilterData(course)
-    //             }
-    //             else{
-    //               console.log("entered empty check")
-    //               setFilterData([])
-    //             }
+            console.log("hello")
+            console.log(price +" " + subject + " " + rating)
+          await axios.post(`http://localhost:5000/api/courses/filter?subject=${subject}&rating=${rating}&price=${price}`)
+          .then((res) => { 
+                const course = res.data
+                if(res.status===200){
+                  console.log("check success")
+                  console.log(course)
+                  setFilterData(course)
+                }
+                else{
+                  console.log("entered empty check")
+                  setFilterData([])
+                }
       
-    //         })
-    // }
-    //       response()
-    //       setPrice(null)
-    //       setSubject(null)
-    //       setRating(null)
-    //       setPopular(false)
+            })
+    }
+          response()
+          setPrice(null)
+          setSubject(null)
+          setRating(null)
+          setPopular(false)
 
-    //     axios.get(`http://localhost:5000/api/courses/search?searchTerm=${searchTerm}`)
-    //     .then((res) => {
-    //         console.log(res.data)
-    //         setCourses(res.data);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     });
-    //     setSearchTerm(null)
-    // }, 
-    //[searchTerm,searched,price,subject,rating,popular, filterData ]);
+        axios.get(`http://localhost:5000/api/courses/search?searchTerm=${searchTerm}`)
+        .then((res) => {
+            console.log(res.data)
+            setCourses(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+        setSearchTerm(null)
+    }, 
+    [searchTerm,searched,price,subject,rating,popular, filterData ]);
 
     const handleOnChange = async(e) =>{
         e.preventDefault()
@@ -184,7 +184,7 @@ const HomeSearchInstructor = () => {
             <div className="col-lg-3">
                 <fieldset>
                     {/* <button id="main-button" onClick={(e)=>handlePopular} >View Most Popular</button> */}
-                    <button id="main-button" onClick={(e) => handleFilter} style={styleFilterButton}> Apply</button>
+                    <button id="main-button" onClick={handleFilter} style={styleFilterButton}> Apply</button>
                 </fieldset>
             </div>
         </div>

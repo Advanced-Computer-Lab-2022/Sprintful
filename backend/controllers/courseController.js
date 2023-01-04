@@ -8,13 +8,26 @@ const Subtitle = require('../models/subtitleModel.js')
 const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 var mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
+const { dirname } = require('path')
 
 const emailCertificate =  asyncHandler(async (req, res) => {
-    const id = req.query.id;
-    const individualEmail = (await IndividualTrainee.findById(id)).email
-    const corporateEmail = (await CorporateTrainee.findById(id)).email
-    console.log(individualEmail);
-    console.log(corporateEmail);
+    const id = req.params.traineeid;
+    const courseId = req.params.courseid;
+    const individual = (await IndividualTrainee.find({_id: id}));
+    let email;
+    if(individual[0]!=null){
+        const emailI = individual[0].email
+        email = emailI;
+    }
+    else{
+        const corporate = (await CorporateTrainee.find({_id: id}));
+        const emailC= corporate[0].email;
+        email =emailC;
+    }
+    const course = (await Course.find({_id: courseId}));
+     const courseTitle = course[0].title
+    console.log("Email" +email);
+    console.log(courseTitle);
     const account ={
         user:"rosalyn.daniel@ethereal.email",
         pass: "cWgVkFvxJ9uZ2mDQ9c"
@@ -31,11 +44,17 @@ const emailCertificate =  asyncHandler(async (req, res) => {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Fred Foo " <foo@example.com>', // sender address
-    to: `bar@example.com, ${email}}`, // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    from: '"Canadian Cahmber of commerce" <canadianChamber@example.com>', // sender address
+    to: email, // list of receivers
+    subject: courseTitle, // Subject line
+    text: "Congratulations! You made it!", // plain text body
+    html: "<b>Congratulations! You made it!</b>", // html body
+    attachments: [
+        {
+            filename: "Certificate.png",
+            path : __dirname +'/certificate.png'
+        }
+    ]
   });
 
   console.log("Message sent: %s", info.messageId);
@@ -44,12 +63,14 @@ const emailCertificate =  asyncHandler(async (req, res) => {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  if(info)
+    res.status(200).json("success")
 }
 
 )
 const downloadCertificate =  asyncHandler(async (req, res) => {
 
-    res.download("../backend/certificate.png")
+    res.download('./backend/controllers/certificate.png');
 })
 const addPromotionForCourses = asyncHandler(async (req, res) => {
     // get courses ids

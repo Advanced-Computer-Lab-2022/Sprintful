@@ -14,10 +14,9 @@ const corporateTraineeSchema = mongoose.Schema({
         type: String,
         default: ""
     },
-    email: {
+    email:{
         type: String,
-        //required: [true, 'Please add an email'],
-        unique: true,      
+        default: ""
     },
     password: {
         type: String,

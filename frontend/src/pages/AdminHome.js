@@ -37,14 +37,20 @@ export default function AdminHome(){
     return (
         <body>
     <div id="wrapper">
-        <nav className="navbar navbar-default navbar-cls-top " role="navigation" style = {{marginBottom: '0'}}> 
+        <nav className="navbar navbar-default navbar-cls-top " role="navigation" style = {{marginBottom: '0', background: "silver"}}> 
+        <a class="salata" data-dark-logo="/upload/logo.png" syle={{position: "relative"}}>
+
+                                <img src="/upload/logo.png" alt="Homepage" style={{width: "140px", 
+                                                                                    height: "60px",
+                                                                                    marginRight: "900px"}}/>
+                            </a>
          
             {/* <div className="navbar-header"> */}
-                <a  style={{color: 'white',
+                {/* <a  style={{color: 'white',
                             fontWeight: "bold", 
                             float: "left",
                             fontSize: '25px',
-                            testAlign: "left"}}>Canadian Chamber of Commerce</a> 
+                            testAlign: "left"}}>Canadian Chamber of Commerce</a>  */}
             {/* </div> */}
     <div  style={{color: 'white', 
                 padding: '15px 50px 5px 50px',
@@ -80,10 +86,10 @@ export default function AdminHome(){
                         <a  onClick={()=>  navigate(`/api/admin/accessRequests?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "135px"}}></i> Course Requests </a>
                     </li>
                     <li  >
-                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
+                        <a  onClick={()=>  navigate(`/api/admin/RefundsRequests?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-table fa-3x" style={{width: "130px"}}></i> Refund Requests </a>
                     </li>
                     <li  >
-                        <a   onClick={()=>  navigate(`/promotion`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "137px"}}></i> Set a Promotion </a>
+                        <a   onClick={()=>  navigate(`/promotion?id=${id}`)} style={{  cursor: "pointer", fontSize:"10px"}}><i className="fa fa-bar-chart-o fa-3x" style={{width: "137px"}}></i> Set a Promotion </a>
                     </li>				
 					
                 </ul>

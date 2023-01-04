@@ -13,7 +13,7 @@ const generateToken =(id) =>{
     })
 }
 const createCorporateTrainee = asyncHandler(async (req, res) => { 
-     const { username, password, corporate, firstName, lastName } = req.body
+     const { username, password, corporate, firstName, lastName, email } = req.body
      const thisCorporate = await Corporates.find({ name: corporate });
      const traineeSubject = thisCorporate[0].subject
      console.log("itest2",traineeSubject)
@@ -34,7 +34,8 @@ const createCorporateTrainee = asyncHandler(async (req, res) => {
                 corporate: corporate,
                 courses: traineeCourses,
                 firstName,
-                lastName
+                lastName, 
+                email
             })
             
             if (corporateTrainee) {
@@ -44,7 +45,8 @@ const createCorporateTrainee = asyncHandler(async (req, res) => {
                     password: corporateTrainee.password,
                     corporate: corporateTrainee.corporate,
                     courses: corporateTrainee.courses,
-                    firstName: corporateTrainee.firstName
+                    firstName: corporateTrainee.firstName,
+                    email: corporateTrainee.email
                     // token: generateToken(corporateTrainee._id)
                 })
                 console.log("res")
@@ -205,13 +207,29 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
        }
 
        res.json({progress:progress})
-
-
-    
-    
-    
-       
     }
+
+)
+
+const checkMyOwnCourse=asyncHandler(async(req,res)=>{
+    const corporateTraineeid=req.params.corporateTraineeid;
+    const courseid=req.params.courseid;
+    const coursesArray=(await CorporateTrainee.findById(corporateTraineeid)).courses;
+
+    let found=false;
+    let coursedocument;
+
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.toString()==courseid){
+           found=true; //he/she is registered to that course 
+            break;
+         }
+     }
+     
+     res.json({found:found})
+}
 
 )
 
@@ -228,4 +246,4 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
 
 
 
-module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse}
+module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse,checkMyOwnCourse}
