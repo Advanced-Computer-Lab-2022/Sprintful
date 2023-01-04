@@ -80,10 +80,13 @@ const CourseViewCTN=()=>{
 
        const handleSubmit22= async(e)=>{
         e.preventDefault();
+
+        const id = await axios.get(`http://localhost:5000/api/instructor/getInstructorByCourse/${courseid}`)
+        console.log("if id:::::", id.data.instid)
         console.log("im alive22")
         const NewRate = {rating, comment}
     
-             const response = await fetch(`http://localhost:5000/api/instructor/review/${courseid}`, {
+             const response = await fetch(`http://localhost:5000/api/instructor/review?id=${id.data.instid}`, {
                  method: 'PUT',
                  body :JSON.stringify(NewRate),
                  headers: {

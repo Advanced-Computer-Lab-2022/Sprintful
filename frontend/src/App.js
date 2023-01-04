@@ -11,6 +11,8 @@ import GuestHome from './pages/GuestHome';
 import AHome from './pages/AdminHome';
 import About from './pages/About';
 import Video from "./pages/Video";
+import SubtitlesVideo from "./pages/SubtitlesVideo";
+
 import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
@@ -326,16 +328,32 @@ function App() {
               element={[<AdminViewReports />]}
             />
             <Route
-              exact path="/ViewReports"
-              element={[<UsersViewReports/> ]} 
+              exact path="/api/instructor/ViewReports"
+              element={<InstructorViewReports/> }
+            />
+             <Route
+              exact path="/api/individualTrainee/ViewReports"
+              element={<IndividualTraineeViewReports/> }
+            />
+             <Route
+              exact path="/api/corporateTrainee/ViewReports"
+              element={<CorporateTraineeViewReports/> }
             />
             <Route
               exact path="/ReportDetailsAdmin"
               element={[<ReportDetailsAdmin />]}
             />
             <Route
-              exact path="/ReportDetails"
-              element={[<ReportDetails/> ]}
+              exact path="/api/instructor/ReportDetails"
+              element={<InstructorReportDetails/> }
+            />
+            <Route
+              exact path="/api/individualTrainee/ReportDetails"
+              element={<IndividualTraineeReportDetails/> }
+            />
+            <Route
+              exact path="/api/corporateTrainee/ReportDetails"
+              element={<CorporateTraineeReportDetails/> }
             />
 
             <Route
@@ -412,6 +430,10 @@ function App() {
             <Route
               path="/Video/"
               element={<Video />}
+            />
+              <Route
+              path="/SubtitlesVideo/"
+              element={<SubtitlesVideo />}
             />
             <Route
               path="/Login"

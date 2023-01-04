@@ -66,21 +66,17 @@ const AccessRequests = () => {
      <hr/> 
      <br/>  
 
-    {/* <div style={{backgroundColor: "#999DA0", padding: "20px"}}>
-    <div style={header}> Courses' Access Requests </div>
-
-    </div> */}
     <div style={header}>Courses' Access Requests</div>
 
 <div className="card-container" >
                             {requests  && requests.map((request) =>( 
                                 <div className="card" style={{height: "20em", cursor: "pointer"}} >
                                 <div className="content">
-                                    <p style={{color: "black"}}>Corporate Trainee Username: {request.corporateTraineeUsername}</p>
+                                    <p style={{color: "black", fontFamily: "Times New Roman"}}>Corporate Trainee Username: {request.corporateTraineeUsername}</p>
                                     <br/>
-                                    <p style={{color: "black"}}>Course Title: {request.courseName}</p>
+                                    <p style={{color: "black", fontFamily: "Times New Roman"}}>Course Title: {request.courseName}</p>
                                     <br/>
-                                    <p style={{color: "black"}}>Corporate: {request.corporate}</p>
+                                    <p style={{color: "black", fontFamily: "Times New Roman"}}>Corporate: {request.corporate}</p>
                                     <br/>
                                     <br/>
                                     <button style={{backgroundColor:"#dc3545", 
@@ -97,6 +93,26 @@ const AccessRequests = () => {
                             ))}
                             
                          </div>
+                         <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
                          <div  onClick={()=> navigate(`/admin?id=${id}`)} style={{color: 'white', 
                             padding: '15px 50px 5px 50px',
                             float: 'left',
