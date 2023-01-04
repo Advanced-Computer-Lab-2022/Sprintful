@@ -215,6 +215,28 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
 
 )
 
+const checkMyOwnCourse=asyncHandler(async(req,res)=>{
+    const corporateTraineeid=req.params.corporateTraineeid;
+    const courseid=req.params.courseid;
+    const coursesArray=(await CorporateTrainee.findById(corporateTraineeid)).courses;
+
+    let found=false;
+    let coursedocument;
+
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.toString()==courseid){
+           found=true;
+            break;
+         }
+     }
+     
+     res.json({found:found})
+}
+
+)
+
 
 
 
