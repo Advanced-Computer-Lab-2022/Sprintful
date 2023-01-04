@@ -137,11 +137,11 @@ export default function SubtitleViewIT() {
 
                 <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
                          <CardContent>
-                         <a href={subtitle&&subtitle.youtubevideo}>
+                         <span onClick={() => window.location.href = `/SubtitlesVideo?link=${subtitle.youtubevideo}`} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
                             <Typography gutterBottom variant="h6" component="div">
                                 Video
                             </Typography>
-                            </a>
+                            </span>
                             <Typography gutterBottom variant="h6" component="div">
                                Video Description :{subtitle && subtitle.videoDescription}
                             </Typography>
