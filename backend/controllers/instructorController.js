@@ -138,25 +138,25 @@ const editBioEmailPassword= async(req, res) => {
         const instructor = await Instructor.findById(instructorId)
         console.log("instructor",instructor);
         const instructor2 = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography}, { new: true })
-        console.log("instructor 2",instructor2)
-        const oldPassword = instructor.password
-        const currentPassword = req.body.currentPassword
-        const auth = await bcrypt.compare(currentPassword, oldPassword);
-        console.log("authentication", auth);
+        // console.log("instructor 2",instructor2)
+        // const oldPassword = instructor.password
+        // const currentPassword = req.body.currentPassword
+        // const auth = await bcrypt.compare(currentPassword, oldPassword);
+        // console.log("authentication", auth);
 
-        if(auth){
-            const salt = await bcrypt.genSalt(10);
-            console.log("authentication2");
-            const hashedPassword = await bcrypt.hash(req.body.password, salt);
-            console.log("authentication26", hashedPassword);
-            const response = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography, password: hashedPassword}, { new: true })
+        // if(auth){
+            // const salt = await bcrypt.genSalt(10);
+            // console.log("authentication2");
+            // const hashedPassword = await bcrypt.hash(req.body.password, salt);
+            // console.log("authentication26", hashedPassword);
+            // const response = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography, password: hashedPassword}, { new: true })
             console.log(response)
             res.status(200).json(response);
-        }
-        else{
+        // }
+        // else{
             res.status(400).json({ error: 'Wrong password' });
 
-        }   
+        // }   
     }
     catch (error) {
         return res.status(400).json({ status: false, error: "Error Occured" });
@@ -326,30 +326,40 @@ const getInstructorIdByCourse = asyncHandler(async (req, res) => {
     console.log("workinggggg");
     const course = await Course.findById(req.params.courseid)
     console.log("course", course)
-    const insts = await Instructor.find({})
-    console.log("workinggggg", insts);
-    var l = 0
-    var g = 0
-    for (l;l<insts.length;l++){
-        let courses = insts[l].courses
-        for(g; g< courses.length; g++){
-            if(courses[g]._id == req.params.courseid){
-                console.log("wwwwwwwwwwwwwwwwwiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnn")
-                inst = insts[l];
-                return;
-            }
-        }
-    }
-    console.log("please", inst)
-    // const instid = inst._id
+    console.log("id",course.instructor._id.toString())
+    const instid = course.instructor._id.toString();
     
-    if (inst) {
-        res.status(200).json({ inst });
+    if (instid) {
+        res.status(200).json({ instid });
     }
     else {
-        res.status(400).json({ error: "No reviews found" });
+        res.status(400).json({ error: "No instructor found" });
     }
 })
+
+    // const insts = await Instructor.find({})
+    // // console.log("workinggggg", insts);
+    // var l = 0
+    // var g = 0
+    // for (l;l<insts.length;l++){
+    //     let courses = insts[l].courses
+    //     for(g; g< courses.length; g++){
+    //         if(courses[g]._id == req.params.courseid){
+    //             console.log("wwwwwwwwwwwwwwwwwiiiiiiiiiiiiiiiiiiiiiiiinnnnnnnnnnnnnnnnnnnnnn")
+               
+    //             inst = insts[l];
+    //             //console.log("please", inst)
+    //             const instidd = 
+    //             // console.log("please", instidd)
+    //             res.status(200).json({ instidd });
+    //             return;
+    //         }
+    //     }
+    // }
+    // //console.log("please", )
+    // // const instid = inst._id
+    
+    
 
 
 const getInstructorRating = asyncHandler(async (req, res) => {
