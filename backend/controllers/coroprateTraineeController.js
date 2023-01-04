@@ -215,6 +215,27 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
 
 )
 
+const checkMyOwnCourse=asyncHandler(async(req,res)=>{
+    const corporateTraineeid=req.params.corporateTraineeid;
+    const courseid=req.params.courseid;
+    const coursesArray=(await CorporateTrainee.findById(corporateTraineeid)).courses;
+
+    let found=false;
+    let coursedocument;
+
+    for(let i=0;i<coursesArray.length;i++){
+        coursedocument=coursesArray[i];
+         //x=coursedocument.course.toString()==courseid;
+        if(coursedocument.toString()==courseid){
+           found=true; //he/she is registered to that course 
+            break;
+         }
+     }
+     
+     res.json({found:found})
+}
+
+)
 
 
 
@@ -228,4 +249,5 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
 
 
 
-module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse}
+
+module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse,checkMyOwnCourse}

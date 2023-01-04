@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const CorporateTraineeSearch = () => {
+
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
     const navigate = useNavigate();
     const [courses,setCourses] = useState([])
     const [searchTerm,setSearchTerm] = useState(null)
@@ -148,7 +151,22 @@ const styleRating ={
     { 
         <div className="card-container">
             {filterData  && filterData.map((course) =>( 
-                  <div className="card"  onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTR`)} }>
+                  <div className="card"  onClick = { async() => { 
+                    const response=await axios.get(`http://localhost:5000/api/corporateTrainee/checkmyownCourse/${id}/${course._id}`)
+                    const found=response.data.found;
+    
+    
+                    if(found){
+                    navigate(`/api/courses/getCourse/${course._id}/CTN/${id}`) }
+
+                    else{
+                      navigate(`/api/courses/getCourse/${course._id}/CTR/${id}`)  
+
+                    }
+
+                    
+                    
+                    } }>
                   <img src="assets/images/courseCard.jpg"/>
                   <div className="content">
                       <h3> {course.title} </h3>
@@ -166,7 +184,22 @@ const styleRating ={
         { searched &&
             <div className="card-container">
                 {courses  && courses.map((course) =>( 
-                      <div className="card" onClick = { () => { navigate(`/api/courses/getCourse/${course._id}/CTR`)} }>
+                      <div className="card" onClick = { async() => { 
+                        const response=await axios.get(`http://localhost:5000/api/corporateTrainee/checkmyownCourse/${id}/${course._id}`)
+                        const found=response.data.found;
+        
+        
+                        if(found){
+                        navigate(`/api/courses/getCourse/${course._id}/CTN/${id}`) }
+    
+                        else{
+                          navigate(`/api/courses/getCourse/${course._id}/CTR/${id}`)  
+    
+                        }
+    
+                        
+                        
+                        } }>
                       <img src="assets/images/courseCard.jpg"/>
                       <div className="content">
                           <h3> {course.title} </h3>
