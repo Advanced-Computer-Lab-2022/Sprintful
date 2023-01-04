@@ -2,9 +2,35 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 
-//import "./Quiz.css";
+import "./Quiz.css";
+
 
 function Quiz() {
+  const style1 = {   //.question-card 
+    /* Center the div  */
+    margin: "0 auto",
+
+    /* Dimensions  */
+    width: "80%", /* Can be in percentage also. */
+    height: "auto",
+
+    /* Visual  */
+    backgroundColor: "gray",
+    padding: "16px",
+    borderRadius: "16px",
+    color: "white",
+    boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px",
+  }
+  const style2 = {
+    marginTop: "8px",
+    backgroundColor: "darkgray",
+    padding: "16px",
+    border: "3px solid white",
+    borderRadius: "20px",
+    fontSize: "20px"
+}
+
+
   // Properties
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -14,53 +40,6 @@ function Quiz() {
   const params = new URLSearchParams(window.location.search);
   const taskid = params.get('taskid');
 
-  //http://localhost:5000/api/questions/addQuestion?taskid=${taskid}
-  //http://localhost:5000/api/answers/addAnswer?questionid=${questionid}
-  // const handleNextSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const params = new URLSearchParams(window.location.search);
-  //   const questionid = params.get('questionid');
-  //   console.log(questionid);
-
-  //   const answer = {
-  //     question: questionid,
-  //     choiceindex
-  //   }
-  //   const question = {
-  //     title: questionTitle,
-  //     choices: choices,
-  //     task: taskid
-  //   }
-  //   console.log(taskid);
-
-  //   console.log("task defined");
-  //   const response = await fetch(`http://localhost:5000/api/questions/addQuestion?taskid=${taskid}`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(question),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-
-  //   const json = await response.json()
-  //   if (response.ok) {
-
-  //     // const taskId=json._id;
-  //     console.log('Question added', json)
-  //     setQuestionTitle('')
-  //     setChoice1('')
-  //     setChoice2('')
-  //     setChoice3('')
-  //     setChoice4('')
-
-  //     //   navigate(`/addQuestion/${taskid}`);
-  //     //   navigate(0);
-
-  //   }
-  //   else {
-  //     console.log("fail")
-  //   }
-  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -86,9 +65,9 @@ function Quiz() {
     const answer = {
       choiceindex: choiceindex,
     }
-    
+
     //console.log("answer" + answer)
-    console.log("qid= "+ questionid)
+    console.log("qid= " + questionid)
     const response = await fetch(`http://localhost:5000/api/answers/addAnswer?questionid=${questionid}&userid=63a6b5833f6eb59032850c0f`, {
       method: 'POST',
       body: JSON.stringify(answer),
@@ -138,10 +117,10 @@ function Quiz() {
   };
 
   return (
-    <div>
+    <div >
       {questions && (
 
-        <div className="Quiz">
+        <div style={{ textAlign: "center" }}>
 
           {/* 1. Header  */}
           <h1>Task </h1>
@@ -162,7 +141,7 @@ function Quiz() {
           ) : (
             /* 5. Question Card  */
 
-            <div className="question-card">
+            <div style={{ style1 }}>
               {/* Current Question  */}
               <h2>
                 Question: {currentQuestion + 1} out of {questions.length}
@@ -172,24 +151,25 @@ function Quiz() {
               {/* <h3 className="question-text">{questions[currentQuestion].title}</h3> */}
 
               {/* List of possible answers  */}
-              <ul>
-                {questions[currentQuestion].choices.map((choice) => {
-                  return (
-                    <li
-                      key={choice._id}
-                      onClick={() => optionClicked(choice.isCorrect, questions[currentQuestion]._id, choice._id)}
-                    >
-                      {choice.text}
-                    </li>
-                  );
-                })}
-              </ul>
-            </div>
-          )}
-
+              <ul styel={{ listStyle: "none"}}>
+              {questions[currentQuestion].choices.map((choice) => {
+                return (
+                  <li style={{style2}}
+                    key={choice._id}
+                    onClick={() => optionClicked(choice.isCorrect, questions[currentQuestion]._id, choice._id)}
+                  >
+                    {choice.text}
+                  </li>
+                );
+              })}
+            </ul>
         </div>
       )}
+
     </div>
+  )
+}
+    </div >
 
   );
 }
