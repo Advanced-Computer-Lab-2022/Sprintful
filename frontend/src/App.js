@@ -11,6 +11,8 @@ import GuestHome from './pages/GuestHome';
 import AHome from './pages/AdminHome';
 import About from './pages/About';
 import Video from "./pages/Video";
+import SubtitlesVideo from "./pages/SubtitlesVideo";
+
 import Login from "./pages/Login";
 import SideBar from './components/SideBar';
 import { ProSidebarProvider } from 'react-pro-sidebar';
@@ -428,6 +430,10 @@ function App() {
             <Route
               path="/Video/"
               element={<Video />}
+            />
+              <Route
+              path="/SubtitlesVideo/"
+              element={<SubtitlesVideo />}
             />
             <Route
               path="/Login"
