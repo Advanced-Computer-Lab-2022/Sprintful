@@ -5,7 +5,7 @@ import axios from 'axios'
 
 const ReportDetails = () => {
     const [report, setReport] = useState([])
-    const[status, setStatus] = useState(null)
+    const[status, setStatus] = useState("null")
     const[followups, setFollowups] = useState(false)
     const [submit, setSubmit] = useState(false)
     const params = new URLSearchParams(window.location.search);
@@ -19,6 +19,9 @@ const ReportDetails = () => {
                const response = res.data
                const stat=response.status
                setStatus(stat)
+               setReport(res.data)
+               console.log(res.data)
+               console.log(response)
                console.log("status: " +status)
            }
             );
@@ -99,8 +102,7 @@ const ReportDetails = () => {
                             </select>
                         </div>
                     <button style={{ width:"2%", background: "#8d99af", color: "#fff", border: "0",
-                        padding: "6px",borderRadius: "6px",cursor: "pointer" }}onClick={() => changeStatus(report._id)}> 
-                        Apply </button>      
+                        padding: "6px",borderRadius: "6px",cursor: "pointer" }}onClick={() => changeStatus(report._id)}> Apply </button>      
 
                         <br/>
 <br/>
