@@ -155,7 +155,9 @@ export default function InstructorMyCourses() {
         .then(function (response) {
         console.log(response.data[0])
         console.log(response.data[1])
-        setMess(true);
+        const course=response.data[0]
+        navigate(`/addSubtitle/${course._id}`)
+        navigate(0)
         // navigate(`/instructor?id=${id}`)
         // navigate(0)
         // const json = response[0].json()
@@ -529,10 +531,7 @@ export default function InstructorMyCourses() {
         
                                         </form>
                                     }
-                                    { mess && <strong style={{position:"relative", left: "25px",top: "-33px" ,marginTop: "10px", fontSize:"13px", color:"#4BB543"}}> Course added successfully!</strong>
-
-                                    }
-
+                                    
                                     
                             {/* </div> 
                             <div className="createTask"> */}
