@@ -182,7 +182,7 @@ const ReportProblem = () => {
         <br/>
         <br/>
 
-        <div  onClick={()=> navigate(`/api/corporate/getProfile?id=${id}`)} style={{color: 'white', 
+        <div  onClick={()=> navigate(`/corporate?id=${id}`)} style={{color: 'white', 
              padding: '15px 50px 5px 50px',
              float: 'left',
              fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
