@@ -138,18 +138,20 @@ const forgotPassword = asyncHandler(async (req, res) => {
         expiresIn: "1d",
     });
     res.status(200).json({token:token});
-       const link = `http://localhost:5000/api/guest/resetPassword/${oldUser._id}/${token}`;  
-       var transporter = nodemailer.createTransport({
+    const link = `http://localhost:5000/api/guest/resetPassword/${oldUser._id}/${token}`;  
+    console.log(link)
+
+       const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: 'somaya.elziady@student.guc.edu.eg',
-          pass: 'yourpassword'
+          user: 'sprintful.team@gmail.com',
+          pass: 'sprintfulacl2022'
         }
       });
       
-      var mailOptions = {
-        from: 'youremail@gmail.com',
-        to: 'somaya.elziady@student.guc.edu.eg',
+      const mailOptions = {
+        from: 'sprintful.team@gmail.com',
+        to: 'somayaelziady@gmail.com',
         subject: 'Password Reset Link',
         text: link
       };
@@ -161,7 +163,6 @@ const forgotPassword = asyncHandler(async (req, res) => {
           console.log('Email sent: ' + info.response);
         }
       });
-    console.log(link)
     //   res.status(200).json({status:"success"});
 }
 catch (error) {}
@@ -176,7 +177,8 @@ const resetPassword = asyncHandler(async (req, res) => {
         res.status(400).json({status:"User doesn't exist"});
     }
     try{
-        const verify = jwt.verify(token, process.env.JWT_SECRET + oldUser.password);
+        const secret = process.env.JWT_SECRET + oldUser.password
+        const verify = jwt.verify(token, secret );
         //res.send("verified");
         console.log("hello")
         res.render("index", {email: verify.email, status:"unverified"})
