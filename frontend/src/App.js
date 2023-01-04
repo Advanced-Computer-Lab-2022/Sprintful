@@ -84,7 +84,7 @@ import ChangeCorporateTraineePassword from './pages/ChangeCorporateTraineePasswo
 import ChangeAdminPassword from './pages/ChangeAdminPassword';
 import ChangeInstructorPassword from './pages/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/writeNotes';
+import WriteNotes from './components/WriteNotes';
 
 import TestLogin from './pages/TestLogin';
 import TestHome from './pages/TestHome';

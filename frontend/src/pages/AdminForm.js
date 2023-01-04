@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from "react-router";
+import Alert from '@mui/material/Alert';
 
 const AdminForm = () => {
     const params = new URLSearchParams(window.location.search);
@@ -18,6 +19,7 @@ const AdminForm = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
+    const [clicked, setClicked] = useState(false)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -43,6 +45,7 @@ const AdminForm = () => {
             setPassword('')
             setError(null)
             console.log('New admin was added', json)
+            setClicked(true)
         }
     }
 
@@ -78,6 +81,8 @@ const AdminForm = () => {
  </div>
      </nav>
      </div>
+   
+
 
      <hr/> 
      <br/>  
@@ -118,16 +123,24 @@ const AdminForm = () => {
                                 float: 'center',
                                 fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Create </a> 
                                 </div> */}
-                                  <button style={{backgroundColor:"#dc3545", 
-                                                    borderRadius:"3px", 
-                                                    color: 'white', 
-                                                    // padding: '15px 50px 5px 50px',
-                                                    float: 'center',
-                                                    fontSize: '10px',
-                                                    minHeight:"30px", 
-                                                    minWidth: "50px",
-                                                    position: "relative",
-                                                    left: "200px"}}> Create </button> 
+
+                       
+                            <button style={{backgroundColor:"#dc3545", 
+                                                                            borderRadius:"3px", 
+                                                                            color: 'white', 
+                                                                            // padding: '15px 50px 5px 50px',
+                                                                            float: 'center',
+                                                                            fontSize: '10px',
+                                                                            minHeight:"30px", 
+                                                                            minWidth: "50px",
+                                                                            position: "relative",
+                                                                            left: "200px"}}> Create </button> 
+                                                                            <br/>
+                      {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        An Admin has been created successfully!
+                        </Alert>}
+
+                                 
                     <br/>
                     <br/>
                     <br/>
