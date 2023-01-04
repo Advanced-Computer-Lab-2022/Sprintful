@@ -5,6 +5,7 @@ import axios from 'axios';
 import "../pages/Signup.css"
 import HomeNavBar from "../components/HomeNavBar";
 
+
 export default function TestLogin() {
 const [isHovering, setIsHovering] = useState(false);
 const handleMouseEnter = () => {
@@ -160,7 +161,10 @@ return(
     </div>
      
     <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Login</button> 
+
+  <label style={{display:"block",textDecoration:"Underline",alignSelf:"center"}}>forget password?</label>
   </form>
+
   
   </body>
   <br/>
