@@ -55,7 +55,9 @@ const CourseViewITN=()=>{
         isProgressLow:null
      });
     ///api/courses
-    const {courseid,traineeid}=useParams();
+    //const {courseid,traineeid}=useParams();
+    const courseid=useParams().courseid;
+    const traineeid=useParams().traineeid;
 
     const [completed,setCompleted]= useState(0);
     const [done,setDone]= useState(false);
