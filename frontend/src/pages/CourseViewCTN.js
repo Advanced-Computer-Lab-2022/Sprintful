@@ -5,6 +5,8 @@ import { makeStyles } from '@mui/styles';
 import {Typography} from '@mui/material';
 import { blue } from '@mui/material/colors';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
+import Alert from '@mui/material/Alert';
+import AlertTitle from '@mui/material/AlertTitle';
 import SubtitleCard from '../components/SubtitleCard'
 // import Card from '@mui/material/Card';
 // import CardActions from '@mui/material/CardActions';
@@ -16,6 +18,7 @@ import { positions } from '@mui/system';
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 
 import SubtitleCardClickableTraineeCT from '../components/SubtitleCardClickableTraineeCT';
+import FileDownload from 'js-file-download';
 
 
 
@@ -27,6 +30,8 @@ const CourseViewCTN=()=>{
     const [rating, setRating] = useState(0);
     const [comment, setReview] = useState("")
     const [hoverStar, setHoverStar] = useState(undefined);
+    const [sendCertificate, setSendCertificate] =useState(false);
+
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
@@ -51,6 +56,7 @@ const CourseViewCTN=()=>{
      });
     ///api/courses
     const {courseid,traineeid}=useParams();
+    const [done,setDone]= useState(false);
 
     //useNavigate
     const navigate=useNavigate();
@@ -195,32 +201,41 @@ const CourseViewCTN=()=>{
             const response3=await axios.get(`http://localhost:5000/api/corporateTrainee/getProgress/${traineeid}/${courseid}`)
             const progressdata=response3.data.progress
             const progressPercentage=Math.trunc(progressdata*100)
-
+            if(progressdata == 1)
+            {
+                setDone(true);
+                console.log("Done"+ done);
+            }
             setCourseStates({
                 course:coursedata,
                 coursePriceAfterDiscount:finalPrice,
                 courseSubtitles:subtitlesArray,
                 progress:progressPercentage
-
-
-
             })
-
-
-
-    
-    
-    
-    
             }
             //catching any request error
-            
-    
-          
-         
          getCourseanditsSubtitle()}  
-        ,[] );
-
+        ,[done] );
+        const handleOnCLick= async(e) =>{
+          e.preventDefault();
+          const config = {
+            method: "GET",
+            responseType: "blob"
+            
+          };
+         const response= await axios.get('http://localhost:5000/api/courses/download', config).
+          then((res) => {
+            console.log(res.data)
+            FileDownload(res.data,'Certificate.png')
+          })
+      }
+      const handleEmail= async(e) =>{
+        e.preventDefault();
+       const response= await axios.get(`http://localhost:5000/api/courses/${traineeid}/emailCertificate/${courseid}/`).
+        then((res) => {
+          setSendCertificate(true)
+        })
+    }
 
         const {course, coursePriceAfterDiscount,courseSubtitles,progress}=courseStates
 
@@ -253,6 +268,24 @@ const CourseViewCTN=()=>{
                          display="flex"
                         justifyContent="flex-start"
                         alignItems="flex-start">
+                      {  done &&   <Button   style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px', position: "relative", left:"120px" ,bottom: "80px"}} variant="contained"  sx={{ height: 40,ml:2 }}
+                            onClick={handleOnCLick}>
+                         Download My Certificate 
+                           </Button> },
+                      {done &&
+                            <Button   style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px', left:"130px" ,bottom: "80px"  }} variant="contained"  sx={{ height: 40,ml:2 }}
+                            onClick={handleEmail}>
+                        Receive My Certificate via Email
+                           </Button>
+                        }
+                      { sendCertificate &&
+                        <div style={{position:"relative", top:"-80px", left:"150px"}}>
+                          <Alert severity="success">
+                          <AlertTitle>Success</AlertTitle>
+                          Certificate was sent! — <strong>check your Inbox!</strong>
+                          </Alert>   
+                          </div>                    
+                        }
                     </Box>
 
               <div>

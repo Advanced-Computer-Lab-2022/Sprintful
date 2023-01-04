@@ -207,12 +207,6 @@ const getProgressforCourse=asyncHandler(async (req, res) =>
        }
 
        res.json({progress:progress})
-
-
-    
-    
-    
-       
     }
 
 )
