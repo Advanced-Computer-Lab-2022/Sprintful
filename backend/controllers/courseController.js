@@ -10,11 +10,14 @@ var mongoose = require('mongoose');
 const nodemailer = require("nodemailer");
 
 const emailCertificate =  asyncHandler(async (req, res) => {
-    const id = req.query.id;
-    const individualEmail = (await IndividualTrainee.findById(id)).email
-    const corporateEmail = (await CorporateTrainee.findById(id)).email
-    console.log(individualEmail);
-    console.log(corporateEmail);
+    const id = req.params.traineeid;
+    const courseId = req.params.courseid;
+    const individual = (await IndividualTrainee.find({_id: id}));
+    const email = individual[0].email
+    const course = (await Course.find({_id: courseId}));
+     const courseTitle = course[0].title
+    console.log("Email" +email);
+    console.log(courseTitle);
     const account ={
         user:"rosalyn.daniel@ethereal.email",
         pass: "cWgVkFvxJ9uZ2mDQ9c"
@@ -31,11 +34,17 @@ const emailCertificate =  asyncHandler(async (req, res) => {
 
   // send mail with defined transport object
   let info = await transporter.sendMail({
-    from: '"Fred Foo " <foo@example.com>', // sender address
-    to: `bar@example.com, ${email}}`, // list of receivers
-    subject: "Hello ✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
+    from: '"Canadian Cahmber of commerce" <canadianChamber@example.com>', // sender address
+    to: email, // list of receivers
+    subject: courseTitle, // Subject line
+    text: "Congratulations! You made it!", // plain text body
+    html: "<b>Congratulations! You made it!</b>", // html body
+    attachments: [
+        {
+            filename: "Certificate.png",
+            path : __dirname +'/certificate.png'
+        }
+    ]
   });
 
   console.log("Message sent: %s", info.messageId);
@@ -44,6 +53,8 @@ const emailCertificate =  asyncHandler(async (req, res) => {
   // Preview only available when sending through an Ethereal account
   console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+  if(info)
+    res.status(200).json("success")
 }
 
 )
