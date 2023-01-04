@@ -250,4 +250,4 @@ const checkMyOwnCourse=asyncHandler(async(req,res)=>{
 
 
 
-module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse}
+module.exports = {createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile,updateProgress,insertProgress,getProgressforCourse,checkMyOwnCourse}
