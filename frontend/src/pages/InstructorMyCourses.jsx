@@ -259,7 +259,7 @@ export default function InstructorMyCourses() {
         backgroundColor: "#8d99af",
         padding: "10px",
         position: "relative",
-        width: "130px",
+        width: "150px",
         height: "40px",
         fontSize: "13px",
         position:"relative",
@@ -303,7 +303,9 @@ export default function InstructorMyCourses() {
     
     const styleFilterButton ={
         height: "70px",
-        left:"70px"
+        left:"70px",
+        position: "relative",
+        width: "90px"
     }
     const stylePrice ={
         width : "100px",
@@ -356,7 +358,7 @@ export default function InstructorMyCourses() {
                                     </div>
                                     <div className="col-lg-3">
                                         <fieldset>
-                                            <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
+                                            <button id="main-button" onClick={handleOnChange} style={{width:"60px"}}><i className="fa fa-search"></i></button>
                                         </fieldset>
                                     </div>
                                 </div>

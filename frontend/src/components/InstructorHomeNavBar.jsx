@@ -27,10 +27,10 @@ const InstructorHomeNavBar = () => {
                   
                       
 
-                <li><a onClick={()=>window.location.href =`/instructor?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Home</a></li>
+                <li onClick={()=>navigate(`/instructor?id=${id}`)}><a  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Home</a></li>
                 <Country />
-                <li><a href=""  style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
-                <li><a onClick={() => window.location.href = `/MyTaughtCourses?id=${id}`} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+                <li><a href=""  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
+                <li onClick={() => navigate(`/MyTaughtCourses?id=${id}`)}><a  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
                 <li></li>     
                  <li></li>   
                  <li></li> 

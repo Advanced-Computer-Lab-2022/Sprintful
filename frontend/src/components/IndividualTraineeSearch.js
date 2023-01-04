@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import MostPopular from '../components/MostPopular';
+
 export default function IndividualTraineeSearch() {
 
     let params = new URLSearchParams(document.location.search);
@@ -78,7 +80,9 @@ export default function IndividualTraineeSearch() {
     
     const styleFilterButton ={
         height: "70px",
-        left:"70px"
+        left:"70px", 
+        position: "relative",
+        width: "90px"
     }
     const stylePrice ={
         width : "117px",
@@ -102,13 +106,13 @@ export default function IndividualTraineeSearch() {
     { <form id="search-form" name="gs" method="submit" role="search" action="#">
         <div className="row">
             <div className="col-lg-3 align-self-center">
-                <fieldset>
-                    <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or an instructor name" autocomplete="on" required />
+                <fieldset >
+                    <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title,subject or lecturer" autocomplete="on" required style={{width:"300px", textAlign:"left", alignContent:"left", alignItems:"flex-start"}}/>
                 </fieldset>
             </div>
             <div className="col-lg-3">
                 <fieldset>
-                    <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
+                    <button id="main-button" onClick={handleOnChange} style={{width:"60px"}}><i className="fa fa-search"></i></button>
                 </fieldset>
             </div>
         </div>
@@ -183,6 +187,8 @@ export default function IndividualTraineeSearch() {
 }
 </div> 
     </div>
+
+    <MostPopular/>
     { searched &&
         
         <div className="card-container">

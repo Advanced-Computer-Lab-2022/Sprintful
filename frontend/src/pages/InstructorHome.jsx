@@ -62,7 +62,7 @@ export default function InstructorHome() {
                 <div className="container">
                         <div className="col-lg-12">
                             <div className="top-text header-text">
-                                <h6>Over 500+ Courses</h6>
+                                {/* <h6>Over 500+ Courses</h6> */}
                                 <h2>Find Interesting Online Courses </h2>
                             </div>
                         </div>

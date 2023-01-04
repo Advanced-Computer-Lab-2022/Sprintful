@@ -35,7 +35,7 @@ const InstructorSearch = () => {
             <div className="row">
                 <div className="col-lg-3 align-self-center">
                     <fieldset>
-                        <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or an instructor name" autocomplete="on" required />
+                        <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or lecturer" autocomplete="on" required />
                     </fieldset>
                 </div>
                 <div className="col-lg-3">

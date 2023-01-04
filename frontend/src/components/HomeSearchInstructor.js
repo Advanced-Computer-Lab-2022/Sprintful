@@ -97,7 +97,8 @@ const HomeSearchInstructor = () => {
     
     const styleFilterButton ={
         height: "70px",
-        left:"70px"
+        left:"70px",
+        width:"110px"
     }
     const stylePrice ={
         width : "117px",
@@ -122,12 +123,12 @@ const HomeSearchInstructor = () => {
             <div className="row">
                 <div className="col-lg-3 align-self-center">
                     <fieldset>
-                        <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or an instructor name" autocomplete="on" required />
+                        <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or lecturer" autocomplete="on" required style={{width:"300px", alignItems:"start"}}/>
                     </fieldset>
                 </div>
                 <div className="col-lg-3">
                     <fieldset>
-                        <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
+                        <button id="main-button" onClick={handleOnChange} style={{width:"70px"}}><i className="fa fa-search"></i></button>
                     </fieldset>
                 </div>
             </div>
