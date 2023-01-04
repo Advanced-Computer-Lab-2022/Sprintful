@@ -196,6 +196,7 @@ export default function Promotion() {
                     {/* <button  style={{background:"maroon", width:"120px", height:"40px", color:"white"}}>Set for All Courses</button> */}
                     </form>
                     <br/>
+                    <label style={{color: "black", fontFamily: "Times New Roman", marginLeft: "30px", fontWeight: "bold", fontSize:"16px"}}>Please choose the course(s) to have the specified promotion:</label>
                     <br/>
                     <br/>
             {courses && (
