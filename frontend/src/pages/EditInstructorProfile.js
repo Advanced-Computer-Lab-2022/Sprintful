@@ -120,7 +120,7 @@ const EditInstructorProfile = () => {
          {/* <!-- ***** Header Area End ***** --> */}
         
          <div className="main-banner">
-         <div id="page-wrapper" style={{width: "1200px", height: "800px",left: "100px", margin: 70, background: "#DCDCDC"}} >
+         <div id="page-wrapper" style={{width: "1200px", height: "800px",left: "100px", margin: 70, background: "#DCDCDC" ,marginTop:"-200px"}} >
           <br/>
           <div id="page-inner" style={{width: "1100px", height: "700px", margin: 40, background: "white"}}>
              <br/>

@@ -87,7 +87,7 @@ import ChangeCorporateTraineePassword from './pages/ChangeCorporateTraineePasswo
 import ChangeAdminPassword from './pages/ChangeAdminPassword';
 import ChangeInstructorPassword from './pages/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/WriteNotes';
+import WriteNotes from './components/writeNotes';
 
 import TestLogin from './pages/TestLogin';
 import TestHome from './pages/TestHome';
@@ -98,6 +98,8 @@ import CorporateTraineeViewReports from './pages/CorporateTraineeViewReports'
 import InstructorReportDetails from './pages/InstructorReportDetails'
 import IndividualTraineeReportDetails from './pages/IndividualTraineeReportDetails'
 import CorporateTraineeReportDetails from './pages/CorporateTraineeReportDetails'
+
+import Country from './components/CountryCom';
 
 function App() {
   return (
@@ -286,6 +288,11 @@ function App() {
 
 
             {/* Ragaa */}
+
+            <Route
+              path="/country/"
+              element={<Country />}
+            />
 
             <Route
               path="/courses/"
