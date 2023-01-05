@@ -50,8 +50,6 @@ const InstructorHomeNavBar = () => {
                  <li></li>
                  <li></li>   
                  <li></li>
-                 <li></li>   
-                 <li></li>
                 <li style={{color: 'white', 
                 marginTop: "-4px", 
                 height: "7px",

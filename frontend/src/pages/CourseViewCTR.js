@@ -15,6 +15,7 @@ import { spacing } from '@mui/system';
 import { positions } from '@mui/system';
 import CorporateTraineeNavBarCom from '../components/CorporateTraineesNavBarCom'
 import {useNavigate} from "react-router";
+import Alert from '@mui/material/Alert';
 
 
 //stylings custom css
@@ -34,6 +35,7 @@ const CourseViewCTR=()=>{
     //const [coursePriceAfterDiscount,setPrice]=useState('');
     //const [courseSubtitles,setCourseSubtitles]=useState([]);
     //state as a document (key-value pairs)
+    const [clicked, setClicked] = useState(false)
     const [courseStates,setCourseStates]=useState({
       course:null,
       coursePriceAfterDiscount:'',
@@ -151,6 +153,7 @@ const CourseViewCTR=()=>{
              (res) => { 
                  const request = res.data
                  console.log(request)
+                 setClicked(true)
              }
               );
       }
@@ -238,6 +241,9 @@ const CourseViewCTR=()=>{
                                                     position: "relative",
                                                     left: "770px"}} variant="contained"  onClick={() => requestAccess(courseid)}>
                                                     Request Access </button> 
+                                                    {clicked &&  <Alert style={{width: "350px", fontSize: "10px", color: "black"}}>
+                        A request has been issued!
+                        </Alert>}   
 
 
                   

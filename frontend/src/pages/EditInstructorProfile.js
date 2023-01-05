@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import {useNavigate} from "react-router";
 import InstructorNavBarCom from '../components/InstructorNavBarCom';
 import './css/templatemo-plot-listing.css'
-
+import Alert from '@mui/material/Alert';
 
 const EditInstructorProfile = () => {
     const header = {
@@ -23,8 +23,9 @@ const EditInstructorProfile = () => {
     const [instructor, setInstructor] = useState("");
     const [email, setEmail] = useState(instructor.email);
     const [biography, setBiography] = useState(instructor.biography);
-    const [currentPassword, setCurrentPassword] = useState(instructor.currentPassword);
-    const [password, setPassword] = useState(instructor.password);
+   
+    const [clicked, setClicked] = useState(false)
+
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
@@ -56,9 +57,7 @@ const EditInstructorProfile = () => {
 
      axios.put(`http://localhost:5000/api/instructor/editProfile?id=${id}`, { //?id=${id}
         email: email,
-        biography: biography,
-        currentPassword: currentPassword,
-        password: password
+        biography: biography
    },axiosConfig)
 
    .then(function (response) {
@@ -66,6 +65,7 @@ const EditInstructorProfile = () => {
         console.log(response.data);
       console.log(response.data[0])
       console.log(response.data[1])
+      setClicked(true)
    })
    .catch(function (error) {
      console.log(error);
@@ -186,6 +186,9 @@ const EditInstructorProfile = () => {
                                                     minWidth: "50px",
                                                     position: "relative",
                                                     left: "200px"}}> Apply </button> 
+      {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                       Your profile has been updated successfully!
+                        </Alert>}
                     <br/>
                     <br/>
                     <br/>

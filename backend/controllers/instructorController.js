@@ -137,7 +137,7 @@ const editBioEmailPassword= async(req, res) => {
         console.log("instructorId",instructorId);
         const instructor = await Instructor.findById(instructorId)
         console.log("instructor",instructor);
-        const instructor2 = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography}, { new: true })
+        const response = await Instructor.findByIdAndUpdate(instructorId, {email: email, biography: biography}, { new: true })
         // console.log("instructor 2",instructor2)
         // const oldPassword = instructor.password
         // const currentPassword = req.body.currentPassword
@@ -154,7 +154,7 @@ const editBioEmailPassword= async(req, res) => {
             res.status(200).json(response);
         // }
         // else{
-            res.status(400).json({ error: 'Wrong password' });
+            //res.status(400).json({ error: 'Wrong password' });
 
         // }   
     }
