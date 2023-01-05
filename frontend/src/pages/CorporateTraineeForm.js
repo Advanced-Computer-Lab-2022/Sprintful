@@ -24,6 +24,7 @@ const CorporateTraineeForm = () => {
     const [email, setEmail] = useState('')
     const [error, setError] = useState(null)
     const [clicked, setClicked] = useState(false)
+    const [errored, setErrored] = useState(false)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -40,6 +41,7 @@ const CorporateTraineeForm = () => {
         const json = await response.json()
         if(!response.ok){
             setError(json.error)
+            setErrored(true)
         }
         if(response.ok){
             setUsername('')
@@ -156,6 +158,9 @@ const CorporateTraineeForm = () => {
             {clicked &&  <Alert style={{width: "350px", fontSize: "10px", color: "black"}}>
                         A Corporate Trainee has been created successfully!
                         </Alert>}
+                        {errored &&  <Alert variant="outlined" severity="error">
+                                This corporate trainee already exists!
+                                </Alert>}
            {/* {error && <div className="error">{error}</div>} */}
         </form>
         </div>

@@ -188,7 +188,7 @@ const EditInstructorProfile = () => {
                                                     left: "200px"}}> Apply </button> 
       {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
                        Your profile has been updated successfully!
-                        </Alert>}
+                        </Alert>}      
                     <br/>
                     <br/>
                     <br/>

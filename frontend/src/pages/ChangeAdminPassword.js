@@ -23,6 +23,7 @@ const ChangeAdminPassword = () => {
     const [currentPassword, setCurrentPassword] = useState(admin.currentPassword);
     const [password, setPassword] = useState(admin.password);
     const [clicked, setClicked] = useState(false)
+    const [errored, setErrored] = useState(false)
     
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -67,10 +68,10 @@ const ChangeAdminPassword = () => {
       setClicked(true)
    })
    .catch(function (error) {
+    setErrored(true)
      console.log(error);
    });
-
-    }
+}
     function myFunction() {
       var x = document.getElementById("myInput");
       if (x.type === "password") {
@@ -175,6 +176,9 @@ const ChangeAdminPassword = () => {
               {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
                         Your password has been updated successfully!
                         </Alert>}
+                 {errored &&  <Alert variant="outlined" severity="error">
+                 Wrong Password!
+                                </Alert>}           
                     <br/>
                     <br/>
                     <br/>

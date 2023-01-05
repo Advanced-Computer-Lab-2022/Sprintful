@@ -23,6 +23,7 @@ const ChangeIndividualTraineePassword = () => {
     const [currentPassword, setCurrentPassword] = useState(individualTrainee.currentPassword);
     const [password, setPassword] = useState(individualTrainee.password);
     const [clicked, setClicked] = useState(false)
+    const [errored, setErrored] = useState(false)
 
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -67,7 +68,9 @@ const ChangeIndividualTraineePassword = () => {
       setClicked(true)
    })
    .catch(function (error) {
+    setErrored(true)
      console.log(error);
+
    });
 
     }
@@ -187,6 +190,9 @@ const ChangeIndividualTraineePassword = () => {
                      {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
                         Your password has been updated successfully!
                         </Alert>}
+                        {errored &&  <Alert variant="outlined" severity="error">
+                        Wrong Password!
+                                </Alert>}     
                     <br/>
                     <br/>
                     <br/>

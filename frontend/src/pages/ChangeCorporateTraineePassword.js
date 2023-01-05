@@ -23,6 +23,7 @@ const ChangeCorporateTraineePassword = () => {
     const [currentPassword, setCurrentPassword] = useState(corporateTrainee.currentPassword);
     const [password, setPassword] = useState(corporateTrainee.password);
     const [clicked, setClicked] = useState(false)
+    const [errored, setErrored] = useState(false)
 
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -67,7 +68,9 @@ const ChangeCorporateTraineePassword = () => {
       setClicked(true)
    })
    .catch(function (error) {
+    setErrored(true)
      console.log(error);
+    
    });
 
     }
@@ -183,7 +186,10 @@ const ChangeCorporateTraineePassword = () => {
                                                     left: "200px"}}> Apply </button>
                      {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
                         Your password has been updated successfully!
-                        </Alert>}                                
+                        </Alert>}
+                        {errored &&  <Alert variant="outlined" severity="error">
+                        Wrong Password!
+                                </Alert>}                                   
                     <br/>
                     <br/>
                     <br/>

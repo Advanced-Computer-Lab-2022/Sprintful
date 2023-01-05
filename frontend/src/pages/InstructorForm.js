@@ -23,6 +23,7 @@ const InstructorForm = () => {
     const [lastName, setLastName] = useState('')
     const [clicked, setClicked] = useState(false)
     const [error, setError] = useState(null)
+    const [errored, setErrored] = useState(false)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -38,6 +39,7 @@ const InstructorForm = () => {
         const json = await response.json()
         if(!response.ok){
             setError(json.error)
+            setErrored(true)
         }
         if(response.ok){
             setUsername('')
@@ -145,6 +147,9 @@ const InstructorForm = () => {
             {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
                         An Instructor has been created successfully!
                         </Alert>}
+             {errored &&  <Alert variant="outlined" severity="error">
+                                This instructor already exists!
+                                </Alert>}            
            {/* {error && <div className="error">{error}</div>} */}
         </form>
         </div>

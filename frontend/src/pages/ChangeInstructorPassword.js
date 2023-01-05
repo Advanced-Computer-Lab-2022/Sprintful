@@ -8,7 +8,7 @@ import { styled } from '@mui/material/styles';
 import {useNavigate} from "react-router";
 import InstructorNavBarCom from '../components/InstructorNavBarCom';
 import './css/templatemo-plot-listing.css'
-
+import Alert from '@mui/material/Alert';
 
 const ChangeInstructorPassword = () => {
     const header = {
@@ -23,6 +23,8 @@ const ChangeInstructorPassword = () => {
     const [instructor, setInstructor] = useState("");
     const [currentPassword, setCurrentPassword] = useState(instructor.currentPassword);
     const [password, setPassword] = useState(instructor.password);
+    const [clicked, setClicked] = useState(false)
+    const [errored, setErrored] = useState(false)
     
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -64,8 +66,10 @@ const ChangeInstructorPassword = () => {
       console.log(response.data);
       console.log(response.data[0])
       console.log(response.data[1])
+      setClicked(true)
    })
    .catch(function (error) {
+    setErrored(true)
      console.log(error);
    });
 
@@ -182,6 +186,12 @@ const ChangeInstructorPassword = () => {
                                                     minWidth: "50px",
                                                     position: "relative",
                                                     left: "200px"}}> Apply </button> 
+     {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        Your password has been updated successfully!
+                        </Alert>}
+           {errored &&  <Alert variant="outlined" severity="error">
+                                Wrong Password!
+                                </Alert>}   
                     <br/>
                     <br/>
                     <br/>

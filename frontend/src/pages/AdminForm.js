@@ -20,6 +20,7 @@ const AdminForm = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
     const [clicked, setClicked] = useState(false)
+    const [errored, setErrored] = useState(false)
     
     const handleSubmit = async(e) => {
         e.preventDefault()
@@ -39,6 +40,7 @@ const AdminForm = () => {
 
         if(!response.ok){
             setError(json.error)
+            setErrored(true)
         }
         if(response.ok){
             setUsername('')
@@ -139,6 +141,9 @@ const AdminForm = () => {
                       {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
                         An Admin has been created successfully!
                         </Alert>}
+                        {errored &&  <Alert variant="outlined" severity="error">
+                                This admin already exists!
+                                </Alert>}
 
                                  
                     <br/>
