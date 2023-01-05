@@ -29,9 +29,10 @@ const insertATrainee=asyncHandler(async (req, res) => {
 
         const corporateid=req.params.traineeid;
         const watchedvideoid=req.body.watchedvideo;
+        const watchdedvideoString=watchedvideoid.toString();
           //getting old watched videos
           const traineewatchedvideos=(await CorporateWatchedVideos.findOne({corporateid:corporateid})).videosWatched
-          const partialwatchedvideos=[watchedvideoid]
+          const partialwatchedvideos=[watchdedvideoString]
           const newArray= traineewatchedvideos.concat(partialwatchedvideos)
 
 
@@ -43,7 +44,8 @@ const insertATrainee=asyncHandler(async (req, res) => {
         const checkifVideoWatched=asyncHandler(async (req, res) => {
 
             const corporateid=req.params.traineeid;
-            const videoid=req.body.videoid;
+            const videoid=req.body.videoid
+            const videoidstring=videoid.toString();
               //getting old watched videos
               const traineewatchedvideos=(await CorporateWatchedVideos.findOne({corporateid:corporateid})).videosWatched
               
@@ -56,7 +58,7 @@ const insertATrainee=asyncHandler(async (req, res) => {
             for(let i=0;i<traineewatchedvideos.length;i++){
                 video=traineewatchedvideos[i];
                  //x=coursedocument.course.toString()==courseid;
-                if(video==videoid){
+                if(video==videoidstring){
                    found=true; //he/she is registered to that course 
                     break;
                  }
