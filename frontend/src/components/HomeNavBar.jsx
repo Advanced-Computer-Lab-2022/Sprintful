@@ -2,8 +2,31 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 import CountryGuest from '../components/CountryGuest';
+import MostPopular from './MostPopular';
+import { useNavigate } from "react-router-dom";
+
 
 const HomeNavBar = () => {
+    const navigate = useNavigate();
+    const[popular, setPopular] = useState(false);
+    const [courses, setCourses] = useState([]);
+    const handleHome = () => {
+        console.log("handled home")
+        navigate(`/`)
+    }
+
+    const handlePopularClick = async () =>{
+        await axios.get(`http://localhost:5000/api/courses/popular`).then(
+           (res) => { 
+               const courses = res.data
+               //console.log(courses)
+               if(courses){
+               setCourses(courses);
+                setPopular(true);
+               }
+           }
+            );
+      }
 
     return (
         <div>
@@ -24,11 +47,21 @@ const HomeNavBar = () => {
                             </a>
                       
            
-                <li><a href="/home" style= {{color: "black", left: "400px", background:"white"}} >Home</a></li>
+                <li onClick={()=>handleHome()}><a onClick={()=>handleHome()} style= {{color: "black", background:"white"}} >Home</a></li>
                 <CountryGuest />
-                <li><a href=""  style= {{color: "black", left: "400px"}}>Contact Us</a></li>
-                <li><a href="/Logme"  style= {{color: "black", left: "400px"}}>Log in</a></li>
-                <li><a href="/Signup"  style= {{color: "black", left: "400px"}}>Sign up</a></li>
+                <li></li>
+                <MostPopular/>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li>
+                
+            {/* <label style={{color:"maroon", marginLeft:"10px", marginBottom:"50px"}}>Courses</label>      */}
+            </li>           
+                <li><a href="/Logme"  style= {{color: "black", left: "15px"}}>Log in</a></li>
+                <li><a href="/Signup"  style= {{color: "black", left: "15px"}}>Sign up</a></li>
                 <li></li>
 
             </ul>

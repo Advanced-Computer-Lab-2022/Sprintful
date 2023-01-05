@@ -4,6 +4,7 @@ import axios from 'axios';
 import Country from './Country';
 import CorporateProfileDropdownMenu from './CorporateProfileDropdownMenu';
 import {useNavigate} from "react-router";
+import MostPopular from "./MostPopular";
 
 const CorporateTraineeHomeNavBar = () => {
     const navigate = useNavigate();
@@ -27,10 +28,10 @@ const CorporateTraineeHomeNavBar = () => {
               
                   
 
-            <li><a onClick={()=> navigate(`/corporate?id=${id}`)} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Home</a></li>
+            <li><a onClick={()=> navigate(`/corporate?id=${id}`)} style= {{color: "black",  fontFamily: "Times New Roman"}}>Home</a></li>
             <Country />
-            <li><a href=""  style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
-            <li><a onClick={() => navigate(`/MyCourses?id=${id}`)} style= {{color: "black", left: "400px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+            <li><a onClick={() => navigate(`/MyCourses?id=${id}`)} style= {{color: "black",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+             <MostPopular/>
             <li></li>     
              <li></li>   
              <li></li> 

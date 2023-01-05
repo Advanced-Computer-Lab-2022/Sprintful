@@ -87,7 +87,7 @@ import ChangeCorporateTraineePassword from './pages/ChangeCorporateTraineePasswo
 import ChangeAdminPassword from './pages/ChangeAdminPassword';
 import ChangeInstructorPassword from './pages/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/WriteNotes';
+import WriteNotes from './components/writeNotes';
 
 import TestLogin from './pages/TestLogin';
 import TestHome from './pages/TestHome';
@@ -100,6 +100,7 @@ import IndividualTraineeReportDetails from './pages/IndividualTraineeReportDetai
 import CorporateTraineeReportDetails from './pages/CorporateTraineeReportDetails'
 
 import Country from './components/CountryCom';
+import PopularResults from './components/PopularResults';
 
 function App() {
   return (
@@ -383,6 +384,11 @@ function App() {
             <Route
               exact path="/forgotPassword"
               element={[<ForgotPassword/> ]}
+            />
+
+            <Route
+              exact path="/api/courses/popular"
+              element={[<PopularResults/> ]}
             />
 
 

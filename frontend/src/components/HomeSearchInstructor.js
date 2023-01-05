@@ -222,7 +222,7 @@ const HomeSearchInstructor = () => {
     }
     </div> 
         </div>
-        <MostPopular/>
+        {/* <MostPopular/> */}
         { searched &&
             
             <div className="card-container">
