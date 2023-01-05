@@ -3,12 +3,15 @@ import { useParams } from "react-router-dom";
 import {useNavigate} from "react-router";
 import axios from 'axios';
 import InstructorNavBarCom from '../components/InstructorNavBarCom';
+import Alert from '@mui/material/Alert';
+
 
 
 const SubtitleForm =()=>{
     const[title,setTitle]=useState('');
     const[totalHours,setTotalHours]= useState('')
     const[content,setContent]=useState('')
+    const[success,setSuccess]= useState(false)
     const {courseid}=useParams();
 
     const header = {
@@ -40,6 +43,7 @@ const SubtitleForm =()=>{
 console.log(subtitleid)
       if(response.ok){
         console.log("subtitle added",response.data)
+        setSuccess(true)
         //setTitle('');
         //setTotalHours('');
         //setContent('');
@@ -185,6 +189,11 @@ console.log(subtitleid)
                  </div>
             <br/>
             <br/>
+
+            {success &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        An Admin has been created successfully!
+                        </Alert>}
+
             <button style={{backgroundColor:"#dc3545", 
                                                     borderRadius:"3px", 
                                                     color: 'white', 

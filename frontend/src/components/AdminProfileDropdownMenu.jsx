@@ -11,7 +11,7 @@ export default function ProfileDropdownMenu() {
 
   const handleOnClick = async(e) =>{
     e.preventDefault()
-    axios.get(`http://localhost:5000/api/admin/logout`)
+    axios.get('http://localhost:5000/api/admin/logout')
     .then((res) => {
       navigate('/');
       navigate(0);

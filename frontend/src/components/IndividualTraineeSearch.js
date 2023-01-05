@@ -203,7 +203,7 @@ export default function IndividualTraineeSearch() {
 </div> 
     </div>
 
-    <MostPopular/>
+    {/* <MostPopular/> */}
     { searched &&
         
         <div className="card-container">
