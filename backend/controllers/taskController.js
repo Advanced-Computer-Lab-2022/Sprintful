@@ -42,7 +42,7 @@ const { log } = require('console')
 const addTask = asyncHandler(async(req,res) =>{
     const title = req.body.title;
     //const courseId = '638488aceed9d3bac959ba50'
-    const id = req.params.id;
+    const id = req.query.id;
     //const subtitleId = '635dac77833ecf164e898814'
     //const subtitleId = req.params.subtitle
     const course = await Course.findById(id)
@@ -58,7 +58,7 @@ const addTask = asyncHandler(async(req,res) =>{
 
     console.log(newTask)
     //course.tasks.push(newTask)
-    task.
+    
     console.log("course found task pushed")
     await course.save()
     console.log("new course" + course)

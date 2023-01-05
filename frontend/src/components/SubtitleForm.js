@@ -28,25 +28,28 @@ const SubtitleForm =()=>{
 
 
     //Handling adding another subtitle
-    const handleAddAnotherSubtitle=async()=>{
+    const handleAddAnotherSubtitle=async(e)=>{
       //getting the course id from the URL /:courseid  
-   
+    e.preventDefault();
 
       const subtitle={title:title ,totalHours:totalHours,course:courseid,content:content}
      
 
       const response=await axios.post(`http://localhost:5000/api/subtitles/addSubtitle/${courseid}`,subtitle)
-
+      const subtitleid=response.data._id;
+console.log(subtitleid)
       if(response.ok){
         console.log("subtitle added",response.data)
-        setTitle('');
-        setTotalHours('');
-        setContent('');
-      }
+        //setTitle('');
+        //setTotalHours('');
+        //setContent('');
+    }
+    navigate(`/addTaskSubtitle?id=${subtitleid}`)
 
      /* else{
         console.log("ERROR")
       } */
+
 
     }
 
@@ -66,12 +69,12 @@ const SubtitleForm =()=>{
       // }
  
       console.log("subtitle added",response.data)
-      setTitle('');
-        setTotalHours('');
-        setContent('');
+
+      //setTitle('');
+        //setTotalHours('');
+        //setContent('');
 
      //Redirecting to the course view page  //take course id from url params in order to redirect to the course view page 
-       // navigate()
 
     }
 
@@ -191,7 +194,7 @@ const SubtitleForm =()=>{
                                                     minHeight:"30px", 
                                                     width: "130px",
                                                     position: "relative",
-                                                    left: "200px"}}> Add Another Subtitle </button>
+                                                    left: "200px"}}> Add Task </button>
 
            </form>
            </div> 
