@@ -29,7 +29,8 @@ import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
 import SubtitlePageInst from './pages/SubtitlePageInst';
 import React from "react";
 import FilterPrice from './components/Filter.js';
-import AddTaskMain from './pages/AddTask';
+import AddTaskSubtitle from './pages/AddTaskSubtitle';
+import AddTaskCourse from './pages/AddTaskCourse';
 import AddQuestion from './pages/AddQuestion';
 import CorporateTraineeHome from './pages/CorporateTraineeHome';
 import IndividualTraineeHome from './pages/IndividualTraineeHome';
@@ -313,8 +314,13 @@ function App() {
             />
 
             <Route
-              path="/addTask"
-              element={<AddTaskMain />}
+              path="/addTaskSubtitle"
+              element={<AddTaskSubtitle />}
+            />
+
+            <Route
+              path="/addTaskCourse"
+              element={<AddTaskCourse />}
             />
 
             <Route

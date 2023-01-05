@@ -28,54 +28,54 @@ const AddTaskMain = () => {
      const id = params.get('id');
 
 
-     useEffect( ()=>{
-        const fetchCourses =async () =>{
-            await axios.get(`http://localhost:5000/api/courses/instructor/?id=${id}`).then(
-           (res) => { 
-               const courses = res.data
-               setCourses(courses)
-               console.log(courses)
+    //  useEffect( ()=>{
+    //     const fetchCourses =async () =>{
+    //         await axios.get(`http://localhost:5000/api/courses/instructor/?id=${id}`).then(
+    //        (res) => { 
+    //            const courses = res.data
+    //            setCourses(courses)
+    //            console.log(courses)
 
-           }
-            );
-        }
+    //        }
+    //         );
+    //     }
         
-        fetchCourses()
-       // fetchSubtitles()
-    }, [])
+    //     fetchCourses()
+    //    // fetchSubtitles()
+    // }, [])
 
-    const fetchSubtitles =async () =>{
-        console.log("option " +option)
-        await axios.get(`http://localhost:5000/api/courses/getSubtitles?courseId=${option}`).then(
-       (res) => { 
-           const courses = res.data
-           //console.log(courses)
-           setSubtitles(courses)
-       }
-        );
-        //getId();
-    }
+    // const fetchSubtitles =async () =>{
+    //     console.log("option " +option)
+    //     await axios.get(`http://localhost:5000/api/courses/getSubtitles?courseId=${option}`).then(
+    //    (res) => { 
+    //        const courses = res.data
+    //        //console.log(courses)
+    //        setSubtitles(courses)
+    //    }
+    //     );
+    //     //getId();
+    // }
     //let subId=0;
-    const getId = async () =>{
-        console.log("option " + option )
-        if(subtitleOption=="option"){
-            setSubId(option)
-            console.log("subId set for final exam")
-            setCourseRef(true)
-        }
-       else{ await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
-            (res) => { 
-                const subIdArr = res.data
-                //console.log("1"+subId)
-                //setSubtitles(courses)
-                setSubId( subIdArr.reduce((acc, curr) => `${acc}${curr._id}` ,''))
+//     const getId = async () =>{
+//         console.log("option " + option )
+//         if(subtitleOption=="option"){
+//             setSubId(option)
+//             console.log("subId set for final exam")
+//             setCourseRef(true)
+//         }
+//        else{ await axios.get(`http://localhost:5000/api/courses/getSubtitleId?title=${subtitleOption}`).then(
+//             (res) => { 
+//                 const subIdArr = res.data
+//                 //console.log("1"+subId)
+//                 //setSubtitles(courses)
+//                 setSubId( subIdArr.reduce((acc, curr) => `${acc}${curr._id}` ,''))
 
-                //console.log("inside "+subId)
-            }
-             );
-    }
-    console.log("sub Id " +subId)
-}
+//                 //console.log("inside "+subId)
+//             }
+//              );
+//     }
+//     console.log("sub Id " +subId)
+// }
 //console.log("out"+ subId)
 
     // useEffect( ()=>{
@@ -91,27 +91,27 @@ const AddTaskMain = () => {
     //     fecthSubtitles()
     // }, [])
 
-    console.log("outside "+subId)
-    //console.log(courses)
-    const navigate=useNavigate();
+    // console.log("outside "+subId)
+    // //console.log(courses)
+     const navigate=useNavigate();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        if(courseRef){
-        setTask({
-            title: title, 
-            course: subId
-        })
-    }
-    else{
-        setTask({
-            title: title, 
-            subtitle: subId
-        })
+    const handleSubmit = async () => {
+        console.log("hello from handle submit");
+        //e.preventDefault();
         
-    }
-    console.log("id in handleSubmit: "+subId)
-        const response = await fetch(`http://localhost:5000/api/tasks/addTask/${subId}`,{
+        setTask({
+            title: title, 
+            course: id
+        })
+    
+        // setTask({
+        //     title: title, 
+        //     subtitle: id
+        // })
+         console.log(task)
+        console.log("title: "+title)
+    //console.log("id in handleSubmit: "+subId)
+        const response = await fetch(`http://localhost:5000/api/tasks/addTask?id=${id}`,{
             method:'POST',
             body :JSON.stringify(task),
             headers :{
@@ -120,6 +120,7 @@ const AddTaskMain = () => {
            })
 
            const json =await response.json()
+           console.log("res: "+ json)
            if(response.ok){
        
           const taskId=json._id;
@@ -146,9 +147,9 @@ return(
         <li>The result will be declared at the end of the quiz.</li>
     </ol> */}
 
-      <form id="form" onSubmit={handleSubmit}>
+      {/* <form id="form" onSubmit={handleSubmit}>
          {/* <input ref={inputRef} className="userid" type="text" placeholder='Task Title' />  */}
-         <p>Choose course</p>
+         {/* <p>Choose course</p>
           <select
             placeholder= "View Options"
             value={option}
@@ -165,9 +166,9 @@ return(
 
          </select> 
 
-         {/* {console.log("courseId "+option)}
+          {console.log("courseId "+option)}
          {console.log("subtitles for course " +subtitles)}
- */}
+ 
          <p>Choose Subtitle</p>
 
         <select
@@ -182,20 +183,20 @@ return(
             <option key={sub.id} value={sub.title}> {sub} </option>
             ))}   
             <option key="1" value="option"> Final Exam </option>
-        </select> 
+        </select>  */} 
 
         <p>Task title</p>
         <input 
             id = "title"
             type="text"
             onChange={(e)=>setTitle(e.target.value)}
-            onClick={()=>getId()}
+            //onClick={()=>getId()}
             value={title}
         />
         <br/>
-        <button>Continue</button>
+        <button onClick={()=>handleSubmit()}>Continue</button>
 
-    </form>  
+    {/* </form>   */}
     {/* <Link to={`/addTask/${option}/${subtitleOption}`} className="btn btn-primary">Start Quiz</Link> */}
 
     {/* <div className='start'>
