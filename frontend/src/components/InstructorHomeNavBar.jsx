@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 import Country from './Country';
+import MostPopular from './MostPopular';
 import InstructorProfileDropdownMenu from './InstructorProfileDropdownMenu'
 import {useNavigate} from "react-router";
 
@@ -11,7 +12,7 @@ const InstructorHomeNavBar = () => {
     const id = params.get('id');
 
     return (
-        <nav className="main-nav" style={{background: "white", height: "20px"}}>
+        <nav className="main-nav" style={{background: "white", height: "30px"}}>
             <br/>
             {/* <!-- ***** Logo Start ***** --> */}
             <div id="salata" style={{right: "100px"}}>
@@ -27,17 +28,19 @@ const InstructorHomeNavBar = () => {
                   
                       
 
-                <li onClick={()=>navigate(`/instructor?id=${id}`)}><a  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Home</a></li>
+                <li onClick={()=>navigate(`/instructor?id=${id}`)}><a   style= {{color: "black",  fontFamily: "Times New Roman"}}>Home</a></li>
                 <Country />
-                <li><a href=""  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
-                <li onClick={() => navigate(`/MyTaughtCourses?id=${id}`)}><a  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+                {/* <li><a href=""  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Contact Us</a></li> */}
+                <li ><a  onClick={() => navigate(`/MyTaughtCourses?id=${id}`)} style= {{color: "black",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+               
+                 <MostPopular/>
                 <li></li>     
                  <li></li>   
                  <li></li> 
                  <li></li> 
+
                  <li></li> 
                  <li></li>
-                 <li></li> 
                 
                   
                 <InstructorProfileDropdownMenu />

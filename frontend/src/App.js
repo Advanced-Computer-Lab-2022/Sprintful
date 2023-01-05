@@ -100,6 +100,7 @@ import IndividualTraineeReportDetails from './pages/IndividualTraineeReportDetai
 import CorporateTraineeReportDetails from './pages/CorporateTraineeReportDetails'
 
 import Country from './components/CountryCom';
+import PopularResults from './components/PopularResults';
 
 function App() {
   return (
@@ -383,6 +384,11 @@ function App() {
             <Route
               exact path="/forgotPassword"
               element={[<ForgotPassword/> ]}
+            />
+
+            <Route
+              exact path="/api/courses/popular"
+              element={[<PopularResults/> ]}
             />
 
 
