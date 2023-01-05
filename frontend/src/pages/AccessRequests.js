@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from "react";
 import {useNavigate} from "react-router";
-
+import Alert from '@mui/material/Alert';
 
 
 const AccessRequests = () => {
@@ -21,6 +21,7 @@ const AccessRequests = () => {
         const navigate=useNavigate();
 
         const [requests, setRequests] = useState([])  
+        const [clicked, setClicked] = useState(false)
         useEffect( ()=>{
             const fetchRequests =async () =>{
                 await axios.get('http://localhost:5000/api/requestAccess/getRequestAccess').then(
@@ -40,6 +41,7 @@ const AccessRequests = () => {
                (res) => { 
                    const request = res.data
                    console.log(request)
+                   setClicked(true)
                }
                 );
         }
@@ -102,6 +104,9 @@ const AccessRequests = () => {
                                                     minHeight:"30px", 
                                                     minWidth: "80px",
                                                     position: "relative"}} onClick={() => grantAccess(request._id)}> Grant Access </button> 
+                                                    {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                                                    Granted access successfully!
+                                                    </Alert>}
                                 </div>
                                 </div>
                             ))}

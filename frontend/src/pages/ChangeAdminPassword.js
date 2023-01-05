@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';  
 //const { useState } = require("react");
 import {useNavigate} from "react-router";
+import Alert from '@mui/material/Alert';
 
 
 const ChangeAdminPassword = () => {
@@ -21,6 +22,7 @@ const ChangeAdminPassword = () => {
     const [admin, setAdmin] = useState("");
     const [currentPassword, setCurrentPassword] = useState(admin.currentPassword);
     const [password, setPassword] = useState(admin.password);
+    const [clicked, setClicked] = useState(false)
     
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
@@ -62,6 +64,7 @@ const ChangeAdminPassword = () => {
       console.log(response.data);
       console.log(response.data[0])
       console.log(response.data[1])
+      setClicked(true)
    })
    .catch(function (error) {
      console.log(error);
@@ -169,6 +172,9 @@ const ChangeAdminPassword = () => {
                                                     minWidth: "50px",
                                                     position: "relative",
                                                     left: "200px"}}> Apply </button> 
+              {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        Your password has been updated successfully!
+                        </Alert>}
                     <br/>
                     <br/>
                     <br/>
