@@ -2,6 +2,7 @@ import {useState, useEffect } from 'react'
 import React from 'react'
 import axios from 'axios'
 import {useNavigate} from "react-router";
+import Alert from '@mui/material/Alert';
 
 const ReportDetails = () => {
 
@@ -19,6 +20,7 @@ const ReportDetails = () => {
     const[status, setStatus] = useState("UnSeen")
     const[followups, setFollowups] = useState(false)
     const [submit, setSubmit] = useState(false)
+    const [clicked, setClicked] = useState(false)
     const params = new URLSearchParams(window.location.search);
     const id = params.get('reportid');
 
@@ -38,7 +40,7 @@ const ReportDetails = () => {
             );
         }
         fetchReport()
-    }, [status])
+    }, [])
 
     const handleSubmit = async (e) => {
         //.preventDefault();
@@ -66,6 +68,7 @@ const ReportDetails = () => {
         }, axiosConfig)
         .then(function (response){
             console.log(response)
+            setClicked(true)
         })
         .catch(function (error){
             console.log(error);
@@ -74,11 +77,14 @@ const ReportDetails = () => {
            (res) => {
                const report = res.data
                console.log(report)
+               setClicked(true)
            }
             );
-            if(response.ok){
+            if(response){
                 console.log(response)
                 setStatus("")
+                setClicked(true)
+               
             }
     }
     
@@ -165,7 +171,10 @@ const ReportDetails = () => {
                                                     minHeight:"30px", 
                                                     minWidth: "50px",
                                                     position: "relative",
-                                                    left: "1100px"}}> Apply </button>     
+                                                    left: "1100px"}} onClick={() => changeStatus(report._id)}> Apply </button>  
+                                                    {clicked &&  <Alert style={{width: "350px", fontSize: "10px", color: "black"}}>
+                        Status' has been changed successfully!
+                        </Alert>}   
 <br/>
 <br/>
 <br/>
@@ -186,15 +195,7 @@ const ReportDetails = () => {
                          </div>
                          </div>
 
-                {/* <div className="followup">
-                <ul >
-                    { report.followups && report.followups.map((followup) => (
-                        <li style={{fontSize: "14px"}}>
-                           - {followup}
-                        </li>
-                    ))}
-                </ul>
-            </div> */}
+
             <br/>
                          <br/>
                          <br/>

@@ -22,7 +22,7 @@ export default function MostPopular() {
     <div>
       <button onClick={()=>handleClick()}>
             <img src="https://cdn-icons-png.flaticon.com/512/1946/1946432.png" alt="avatar"
-                     className="rounded-circle img-fluid" style={{width: "25px", height: "25px", float: "left",marginLeft: "0px", marginTop:"17px"}}/>
+                     className="rounded-circle img-fluid" style={{width: "25px", height: "25px", float: "left",marginLeft: "0px", marginTop:"14px"}}/>
             </button>
             <label style={{color:"maroon", marginLeft:"10px", marginBottom:"50px"}}>Courses</label>
       {/* <button onClick={()=>handleClick()}>View Most Popular</button> */}

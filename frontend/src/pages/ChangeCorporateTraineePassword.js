@@ -7,6 +7,7 @@ import { styled } from '@mui/material/styles';
 //const { useState } = require("react");
 import {useNavigate} from "react-router";
 import CorporateTraineesNavBarCom from '../components/CorporateTraineesNavBarCom';
+import Alert from '@mui/material/Alert';
 
 const ChangeCorporateTraineePassword = () => {
     const header = {
@@ -21,7 +22,8 @@ const ChangeCorporateTraineePassword = () => {
     const [corporateTrainee, setCorporateTrainee] = useState("");
     const [currentPassword, setCurrentPassword] = useState(corporateTrainee.currentPassword);
     const [password, setPassword] = useState(corporateTrainee.password);
-    
+    const [clicked, setClicked] = useState(false)
+
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     console.log(id);
@@ -62,6 +64,7 @@ const ChangeCorporateTraineePassword = () => {
       console.log(response.data);
       console.log(response.data[0])
       console.log(response.data[1])
+      setClicked(true)
    })
    .catch(function (error) {
      console.log(error);
@@ -102,7 +105,7 @@ const ChangeCorporateTraineePassword = () => {
          
          {/* <!-- ***** Header Area Start ***** --> */}
          <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
-             <div className="container">
+             <div className="container" >
                  <div className="row">
                   <div className="col-12" style={{height: "50px"}}>
                          <CorporateTraineesNavBarCom />
@@ -177,7 +180,10 @@ const ChangeCorporateTraineePassword = () => {
                                                     minHeight:"30px", 
                                                     minWidth: "50px",
                                                     position: "relative",
-                                                    left: "200px"}}> Apply </button> 
+                                                    left: "200px"}}> Apply </button>
+                     {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        Your password has been updated successfully!
+                        </Alert>}                                
                     <br/>
                     <br/>
                     <br/>

@@ -11,7 +11,7 @@ import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 import CardActions from '@mui/material/CardActions';
 import Button from '@mui/material/Button';
 import { useEffect, useState } from 'react';
-
+import Alert from '@mui/material/Alert';
 
 
 const AdminRefundsPage=()=>{
@@ -33,7 +33,7 @@ const AdminRefundsPage=()=>{
         
 
     const [RefundsRequests,setRefundsRequests]=useState([]);
-
+    const [clicked, setClicked] = useState(false)
     
 
     const handleAccept=async(traineeid,courseid,refundid)=>{
@@ -41,6 +41,7 @@ const AdminRefundsPage=()=>{
         const response2=await axios.get(`http://localhost:5000/api/refund/AcceptRefund/${refundid}/`,{params:{traineeid:traineeid,courseid:courseid}})
          const allRefunds=response2.data
          setRefundsRequests(allRefunds);
+         setClicked(true)
     
        }
 
@@ -133,6 +134,9 @@ return (
                                 </div>
                                 </div>
                             ))}
+                            {clicked &&  <Alert style={{width: "350px", fontSize: "10px", color: "black"}}>
+                        Amount has been refunded successfully!
+                        </Alert>}
                             
                          </div>
                          <br/>

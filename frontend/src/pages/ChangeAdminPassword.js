@@ -123,8 +123,8 @@ const ChangeAdminPassword = () => {
             <label style={{fontSize:"16px", color:"black", textAlign: "center", fontFamily: "Times New Roman"}}>User name: </label>
             <label style={{fontSize:"16px", color:"black", textAlign: "center", fontFamily: "Times New Roman"}}>{admin.username}</label>
             </p>
-        <form className="create" onSubmit={handleSubmit}> 
-      <div className="ChangeAdminPassword">
+        <form className="create" onSubmit={handleSubmit} > 
+      <div className="ChangeAdminPassword" >
          
           <div>
         <br/>

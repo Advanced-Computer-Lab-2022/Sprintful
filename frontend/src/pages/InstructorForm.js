@@ -90,7 +90,7 @@ const InstructorForm = () => {
      <br/>
      <br/>
      <div>
-        <form className="create" onSubmit={handleSubmit}> 
+        <form className="create" onSubmit={handleSubmit} style={{boxShadow: "5px 10px 8px #888888"}}> 
             
 
             <label style={{color: "black", fontFamily: "Times New Roman"}}>Username:</label>

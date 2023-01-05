@@ -90,7 +90,7 @@ const AdminForm = () => {
      <br/>
      <br/>
      <div>
-            <form className="create" onSubmit={handleSubmit} style={{color: "#000000"}}>
+            <form className="create" onSubmit={handleSubmit} style={{color: "#000000", boxShadow: "5px 10px 8px #888888"}}>
                 {/* , textAlign: "center", left: "100px"}}>  */}
             
          
