@@ -157,7 +157,7 @@ return (
   <hr/>
   {/* <!-- ***** Header Area End ***** --> */}
   <div className="main-banner">
-  <div id="page-wrapper" style={{width: "1200px", height: "1400px",left: "100px", margin: 70, background: "#DCDCDC"}} >
+  <div id="page-wrapper" style={{width: "1200px", height: "1400px",left: "100px",marginTop:"-200px", margin: 70, background: "#DCDCDC"}} >
              <br/>
              <div id="page-inner" style={{width: "1050px", height: "1300px", margin: 40, background: "white"}}>
                 <br/>
