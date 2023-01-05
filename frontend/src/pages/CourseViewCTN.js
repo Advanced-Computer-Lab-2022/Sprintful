@@ -31,7 +31,6 @@ const CourseViewCTN=()=>{
     const [comment, setReview] = useState("")
     const [hoverStar, setHoverStar] = useState(undefined);
     const [sendCertificate, setSendCertificate] =useState(false);
-
     // const useStyles=makeStyles({
     //     courseTitle:{
     //         fontSize:60,
