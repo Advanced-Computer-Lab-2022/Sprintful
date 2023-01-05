@@ -11,31 +11,14 @@ import SubtitleCard from '../components/SubtitleCard'
 // import CardContent from '@mui/material/CardContent';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-
-
+import InstructorNavBarCom from '../components/InstructorNavBarCom'
+import {useNavigate} from "react-router";
 //stylings custom css
 
 
 
 const CourseViewInstructor2=()=>{
-    // const useStyles=makeStyles({
-    //     courseTitle:{
-    //         fontSize:60,
-    //         color:blue,
-    
-    
-    
-    //     }
-    // })
-
-    //styles
-    // const classes=useStyles();
-
-    // const [course,setCourse]=useState(null);
-    // const [coursePriceAfterDiscount,setPrice]=useState('');
-    // const [courseSubtitles,setCourseSubtitles]=useState([]);
-    
-
+   
     //state document 
     const [courseStates,setCourseStates]=useState({
       course:null,
@@ -45,6 +28,20 @@ const CourseViewInstructor2=()=>{
 
     ///api/courses
     const {courseid}=useParams();
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('id');
+    console.log(id);
+    
+        const header = {
+          color: "darkRed",
+          fontFamily: "Times New Roman",
+          fontSize: "28px",
+          textAlign: "left",
+          fontWeight: "bold",
+          
+        };
+
+        const navigate=useNavigate();
 
 
   
@@ -142,15 +139,7 @@ const CourseViewInstructor2=()=>{
               coursePriceAfterDiscount:finalPrice,
               courseSubtitles:subtitlesArray
 
-
-
-          })
-
-    
-    
-    
-    
-            }
+          })}
             //catching any request error
             catch (error){
     
@@ -170,83 +159,132 @@ const CourseViewInstructor2=()=>{
 
         <div>
             <div>
-               {/* we check that course is not null before getting its attributes using boolean operator && AND
-                <Typography
-                variant="h5"
-                color="primary">{course&&course.title}
-                </Typography>
-                <Typography
-                variant="h6"
-                color="secondary"
-                >Total Hours :{course&&course.totalhours}
-                </Typography>
-
-                <Typography
-                variant="h6"
-                color="primary"
-                >Price:  {course&&coursePriceAfterDiscount}
-                </Typography> */}
-               < StyledCourseHeader>
-               <h3>{course && course.title}</h3>
-               <h6>Total Hours:{course && course.totalhours}</h6>
-               <h6>Price:{course && coursePriceAfterDiscount}</h6>
+            <div id="topbar" class="">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 p-0 text-center">
+                            <ul class="top-menu">
+                                <li><a href="tel:+201001004070">Phone:
+                                        +201001004070</a></li>
+                                <li><a href="mailto:info@cancham.org.eg">Email:
+                                        info@cancham.org.eg</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 hidden-sm hidden-xs">
+                            <div class="social-icons social-icons-colored-hover">
+                                <ul>
+                                    <li class="social-facebook"><a href="https://www.facebook.com/CanCham/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                    <li class="social-youtube"><a href="https://www.youtube.com/channel/UC1ykoFKsMjVQCx3TeLIXDbg" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                                    <li class="social-gplus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                    <li class="social-linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            
+            {/* <!-- ***** Header Area Start ***** --> */}
+            <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+                <div className="container">
+                    <div className="row">
+                     <div className="col-12" style={{height: "50px"}}>
+                            <InstructorNavBarCom />
+                        </div>
+                    </div>
+                </div>
+            </header>
+              <hr/>
+      <div className="main-banner">
+        <div id="page-wrapper" style={{width: "1200px", height: "1000px",left: "100px", margin: 70, background: "#DCDCDC", marginTop: "-200px"}} >
+         <br/>
+         <div id="page-inner" style={{width: "1100px", height: "900px", margin: 40, background: "white"}}>
+            <br/>
+            <div className="container">
+            <div style={header}> {course && course.title} </div>
+                <div className="row">
                
-               </StyledCourseHeader>
+              
+               <p style={{color: "black", fontFamily: "Times New Roman"}}>Total Hours: {course && course.totalhours}</p>
+               <p style={{color: "black", fontFamily: "Times New Roman"}}>Price: {course && coursePriceAfterDiscount}</p>
+               
+           
                 
 
              </div>
-
-
-             <Box
-                         //margin
-                        mt={1}
-                        ml={0}
-                        pl={0}
-                       
-                          
-
-                        
-                         display="flex"
-                        justifyContent="flex-start"
-                        alignItems="flex-start"
-                          
-                           >
-                            
-                         <Button  style={{ maxHeight: '50px', maxWidth: '200px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 }}>
-                          Watch a preview video 
-                           </Button>
-                    </Box>
-
-
-             
-
-              <div>
-                 {/* subtitles */}
-                 
-    
-                 
-
-
-                      {course && courseSubtitles.map((subtitle)=>(
-                        <SubtitleCard key={subtitle._id} subtitle={subtitle}/> 
-                         ))}
-                        
-
+             <button style={{backgroundColor:"#dc3545", 
+                                                    borderRadius:"3px", 
+                                                    color: 'white', 
+                                                    // padding: '15px 50px 5px 50px',
+                                                    float: 'center',
+                                                    fontSize: '10px',
+                                                    minHeight:"30px", 
+                                                    width: "150px",
+                                                    position: "relative",
+                                                    left: "750px"}} variant="contained" onClick={() => window.location.href = `/Video?link=${course.previewvideolink}`}> Watch the preview video </button> 
 
                   
-
-
-                 
-
-
-
-
-
-
-
+<hr/>
+<br/>
+            <p style={{color: "black", fontFamily: "Times New Roman", fontSize: "16px"}}>Course Subtitles: </p>
+            <br/>
+            <br/>
+              <div >
+                 {/* subtitles */}
+                      {course && courseSubtitles.map((subtitle)=>(
+                        <SubtitleCard key={subtitle._id} subtitle={subtitle} /> 
+                         ))}
+                        
              </div>
+             </div>
+             <br/>
+             <br/>
+             <div  onClick={()=> navigate(`/instructor?id=${id}`)} style={{color: 'white', 
+         padding: '15px 50px 5px 50px',
+         float: 'left',
+         fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
+         </div>
+                    </div>
 
+         </div>
+        </div>
+        </div>
 
+        <footer style={{height: "100px"}}>
+            <div className="container" style={{height: "20px"}}>
+                <div className="row">
+                <div className="col-lg-4">
+                        <div className="about">
+                                <img src="/upload/logo.png" alt="Homepage" style={{width: "180px", 
+                                                                                height: "70px"}}/>
+                        </div>
+                    </div>
+                    <div className="col-lg-4">
+                    <div className="contact-us">
+                            <h4 style= {{color: "black",  fontFamily: "Times New Roman"}}>Contact Us</h4>
+                            <p style={{ fontFamily: "Times New Roman"}}>If you have any suggestions email us on info@cancham.org.eg</p>
+                            <p style={{ fontFamily: "Times New Roman"}}>Call us +201001004070 from 9 AM to 4 PM</p>
+                        </div>
+                    </div>
+                    <div className="col-lg-4">
+                        <div className="contact-us">
+                            <h4 style= {{color: "black",  fontFamily: "Times New Roman"}}>Location</h4>
+                            <p style={{ fontFamily: "Times New Roman"}}>Villa 25 Mourad street off Orouba, Heliopolis، Almazah, Heliopolis, Cairo Governorate 11475</p>
+                        </div>
+                    </div>
+                    <div className="col-lg-12">
+                        <div className="sub-footer">
+                            <label>© 2023 CANADIAN CHAMBER OF COMMERCE. ALL RIGHTS RESERVED.</label>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </footer>
 
     </div>
     )
