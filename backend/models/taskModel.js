@@ -21,6 +21,11 @@ const taskSchema = mongoose.Schema({
         ref: 'Course',
     },
 
+    grade: {
+        type: Number,
+        default: 0,
+    }
+
 
 }, {
     timestamps: true

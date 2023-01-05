@@ -3,14 +3,14 @@ const router = express.Router();
 const { createCorporateTrainee, changePassword, logout, getCorporateTraineeProfile ,updateProgress, insertProgress, getProgressforCourse,checkMyOwnCourse} = require('../controllers/coroprateTraineeController')
 const {requireAuth} = require('../middleware/authMiddleware')
 
-router.post("/createCorporateTrainee", createCorporateTrainee)
-router.put('/changePassword',changePassword);
-router.get('/logout', logout)
-router.get('/profile', getCorporateTraineeProfile)
-router.patch('/updateProgress/:traineeid/:courseid',updateProgress)
-router.patch('/insertProgress/:traineeid/:courseid',insertProgress)
-router.get('/getProgress/:traineeid/:courseid',getProgressforCourse)
-router.get('/checkmyownCourse/:corporateTraineeid/:courseid',checkMyOwnCourse)
+router.post("/createCorporateTrainee",requireAuth, createCorporateTrainee)
+router.put('/changePassword',requireAuth, changePassword);
+router.get('/logout',requireAuth, logout)
+router.get('/profile',requireAuth, getCorporateTraineeProfile)
+router.patch('/updateProgress/:traineeid/:courseid',requireAuth, updateProgress)
+router.patch('/insertProgress/:traineeid/:courseid',requireAuth, insertProgress)
+router.get('/getProgress/:traineeid/:courseid',requireAuth, getProgressforCourse)
+router.get('/checkmyownCourse/:corporateTraineeid/:courseid',requireAuth, checkMyOwnCourse)
 
 module.exports = router;
 

@@ -11,6 +11,7 @@ function Quiz() {
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState(null);
   const [showanswers, setShowAnswers] = useState(false);
+  const [previousscore, setPreviousScore] = useState(score);
 
   const params = new URLSearchParams(window.location.search);
   const taskid = params.get('taskid');
@@ -78,6 +79,7 @@ function Quiz() {
   /* Resets the game back to default */
   const restartGame = () => {
     setScore(0);
+    setPreviousScore(score);
     setCurrentQuestion(0);
     setShowResults(false);
   };
@@ -93,7 +95,9 @@ function Quiz() {
           <br />
           <br />
           {/* 2. Current Score  */}
-          <h1 className="">Score: {score}</h1>
+
+          <h1 className="">Current Score: {score}</h1>
+          <h1 className="">Previous Score: {previousscore}</h1>
           {/* 3. Show results or show the question game  */}
           <br />
 
