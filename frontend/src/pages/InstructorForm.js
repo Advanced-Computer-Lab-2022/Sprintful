@@ -1,5 +1,6 @@
 import { useState } from "react"
 import {useNavigate} from "react-router";
+import Alert from '@mui/material/Alert';
 
 const InstructorForm = () => {
     const params = new URLSearchParams(window.location.search);
@@ -20,7 +21,7 @@ const InstructorForm = () => {
     const [email, setEmail] = useState('')
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-
+    const [clicked, setClicked] = useState(false)
     const [error, setError] = useState(null)
     
     const handleSubmit = async(e) => {
@@ -45,6 +46,7 @@ const InstructorForm = () => {
             setFirstName('')
             setLastName('')
             setError(null)
+            setClicked(true)
             console.log('New instructor was added', json)
         }
     }
@@ -139,6 +141,10 @@ const InstructorForm = () => {
                                                     minWidth: "50px",
                                                     position: "relative",
                                                     left: "200px"}}> Create </button> 
+                                                     <br/>
+            {clicked &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        An Instructor has been created successfully!
+                        </Alert>}
            {/* {error && <div className="error">{error}</div>} */}
         </form>
         </div>

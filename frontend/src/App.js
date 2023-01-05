@@ -29,7 +29,9 @@ import AddVideoLinkSubtitle from './pages/AddVideoLinkSubtitle';
 import SubtitlePageInst from './pages/SubtitlePageInst';
 import React from "react";
 import FilterPrice from './components/Filter.js';
-import AddTaskMain from './pages/AddTask';
+import AddTaskSubtitle from './pages/AddTaskSubtitle';
+import AddTaskCourse from './pages/AddTaskCourse';
+import AddQuestionFinal from './pages/AddQuestionFinal'
 import AddQuestion from './pages/AddQuestion';
 import CorporateTraineeHome from './pages/CorporateTraineeHome';
 import IndividualTraineeHome from './pages/IndividualTraineeHome';
@@ -77,6 +79,7 @@ import QuizAnswers from './components/QuizAnswers';
 import Promotion from './pages/Promotion';
 
 import MostPopular from './components/MostPopular';
+import ForgotPassword from './components/ForgotPassword';
 
 import AccessRequests from './pages/AccessRequests';
 import ChangeIndividualTraineePassword from './pages/ChangeIndividualTraineePassword';
@@ -84,7 +87,7 @@ import ChangeCorporateTraineePassword from './pages/ChangeCorporateTraineePasswo
 import ChangeAdminPassword from './pages/ChangeAdminPassword';
 import ChangeInstructorPassword from './pages/ChangeInstructorPassword';
 import RateCourse from './components/RateCourse';
-import WriteNotes from './components/writeNotes';
+import WriteNotes from './components/WriteNotes';
 
 import TestLogin from './pages/TestLogin';
 import TestHome from './pages/TestHome';
@@ -313,12 +316,21 @@ function App() {
             />
 
             <Route
-              path="/addTask"
-              element={<AddTaskMain />}
+              path="/addTaskSubtitle/:courseid"
+              element={<AddTaskSubtitle />}
             />
 
             <Route
-              path="/addQuestion"
+              path="/addTaskCourse/:courseid"
+              element={<AddTaskCourse />}
+            />
+            <Route
+              path="/addQuestionFinal/:courseid"
+              element={<AddQuestionFinal />}
+            />
+
+            <Route
+              path="/addQuestion/:courseid"
               element={<AddQuestion />}
             />
 
@@ -359,6 +371,11 @@ function App() {
             <Route
               exact path="/mostPopular"
               element={[<MostPopular/> ]}
+            />
+            
+            <Route
+              exact path="/forgotPassword"
+              element={[<ForgotPassword/> ]}
             />
 
 

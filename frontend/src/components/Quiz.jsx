@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 
-//import "./Quiz.css";
+
 
 function Quiz() {
   // Properties
@@ -10,57 +10,11 @@ function Quiz() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [questions, setQuestions] = useState(null);
+  const [showanswers, setShowAnswers] = useState(false);
 
   const params = new URLSearchParams(window.location.search);
   const taskid = params.get('taskid');
 
-  //http://localhost:5000/api/questions/addQuestion?taskid=${taskid}
-  //http://localhost:5000/api/answers/addAnswer?questionid=${questionid}
-  // const handleNextSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const params = new URLSearchParams(window.location.search);
-  //   const questionid = params.get('questionid');
-  //   console.log(questionid);
-
-  //   const answer = {
-  //     question: questionid,
-  //     choiceindex
-  //   }
-  //   const question = {
-  //     title: questionTitle,
-  //     choices: choices,
-  //     task: taskid
-  //   }
-  //   console.log(taskid);
-
-  //   console.log("task defined");
-  //   const response = await fetch(`http://localhost:5000/api/questions/addQuestion?taskid=${taskid}`, {
-  //     method: 'POST',
-  //     body: JSON.stringify(question),
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     }
-  //   })
-
-  //   const json = await response.json()
-  //   if (response.ok) {
-
-  //     // const taskId=json._id;
-  //     console.log('Question added', json)
-  //     setQuestionTitle('')
-  //     setChoice1('')
-  //     setChoice2('')
-  //     setChoice3('')
-  //     setChoice4('')
-
-  //     //   navigate(`/addQuestion/${taskid}`);
-  //     //   navigate(0);
-
-  //   }
-  //   else {
-  //     console.log("fail")
-  //   }
-  // }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -78,7 +32,9 @@ function Quiz() {
   }, []);
 
   // Helper Functions
-
+  const handleshowanswers = () => {
+    setShowAnswers(true);
+  }
   /* A possible answer was clicked */
   const optionClicked = async (isCorrect, questionid, choiceindex) => {
     console.log("hello")
@@ -86,9 +42,8 @@ function Quiz() {
     const answer = {
       choiceindex: choiceindex,
     }
-    
-    //console.log("answer" + answer)
-    console.log("qid= "+ questionid)
+
+    console.log("qid= " + questionid)
     const response = await fetch(`http://localhost:5000/api/answers/addAnswer?questionid=${questionid}&userid=63a6b5833f6eb59032850c0f`, {
       method: 'POST',
       body: JSON.stringify(answer),
@@ -101,17 +56,7 @@ function Quiz() {
 
     console.log("answer test" + json);
     if (response.ok) {
-
-      // const taskId=json._id;
       console.log('Answer added', json)
-      // setQuestionTitle('')
-      // setChoice1('')
-      // setChoice2('')
-      // setChoice3('')
-      // setChoice4('')
-
-      //   navigate(`/addQuestion/${taskid}`);
-      //   navigate(0);
 
     }
     else {
@@ -138,44 +83,95 @@ function Quiz() {
   };
 
   return (
-    <div>
+    <div >
       {questions && (
 
-        <div className="Quiz">
+        <div style={{ textAlign: "center" }}>
 
           {/* 1. Header  */}
           <h1>Task </h1>
-
+          <br />
+          <br />
           {/* 2. Current Score  */}
-          <h2>Score: {score}</h2>
+          <h1 className="">Score: {score}</h1>
           {/* 3. Show results or show the question game  */}
+          <br />
+
+
+          <br />
           {showResults ? (
             /* 4. Final Results */
             <div className="final-results">
               <h1>Final Results</h1>
-              <h2>
+              <h1>
                 {score} out of {questions.length} correct - (
                 {(score / questions.length) * 100}%)
-              </h2>
-              <button onClick={() => restartGame()}>Retake task</button>
+              </h1>
+              <br />
+              <br />
+              <br />
+
+
+              <button className="question-button" onClick={() => restartGame()}>Retake task</button>
+              <br />
+              <br />
+
+              <br />
+              <button className="question-button" onClick={handleshowanswers}>Show Answers</button>
+              {showanswers && (
+                <div>
+                  <br />
+                  <br />
+                  <br />
+                  <ul style={{ listStyle: "none" }}>
+                    {questions.map((question) => {
+                      return (
+                        <li className="question-card">
+                          <br />
+
+                          <h3 className="question-text"> {question.title}</h3>
+                          {/* {question.title} */}
+                          <ul styel={{ listStyle: "none" }}>
+                            {question.choices.map((choice) => {
+                              return (
+                                <li className="question-option">
+
+                                  {choice.isCorrect ? (
+                                    <span style={{ color: "green" }}>{choice.text}</span>
+                                  ) : (
+                                    <span>{choice.text}</span>
+                                  )}
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <br />
+                  <br />
+
+                </div>)}
             </div>
           ) : (
             /* 5. Question Card  */
 
             <div className="question-card">
               {/* Current Question  */}
-              <h2>
+              <h1>
                 Question: {currentQuestion + 1} out of {questions.length}
-              </h2>
+              </h1>
+              <br />
 
               <h3 className="question-text">{questions[currentQuestion].title}</h3>
               {/* <h3 className="question-text">{questions[currentQuestion].title}</h3> */}
 
               {/* List of possible answers  */}
-              <ul>
+              <ul style={{ listStyle: "none" }}>
                 {questions[currentQuestion].choices.map((choice) => {
                   return (
-                    <li
+                    <li className="question-option"
                       key={choice._id}
                       onClick={() => optionClicked(choice.isCorrect, questions[currentQuestion]._id, choice._id)}
                     >
@@ -188,8 +184,9 @@ function Quiz() {
           )}
 
         </div>
-      )}
-    </div>
+      )
+      }
+    </div >
 
   );
 }

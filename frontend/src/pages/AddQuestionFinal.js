@@ -210,7 +210,6 @@ const AddQuestion = () => {
             setChoice2('')
             setChoice3('')
             setChoice4('')
-            navigate(`/addTaskCourse/${courseid}`)
 
             //   navigate(`/addQuestion/${taskid}`);
             //   navigate(0);
@@ -350,18 +349,6 @@ const AddQuestion = () => {
                                                     marginLeft: "190px"}} onClick={handleNextSubmit}>Next Question</button>
             </form>
         </div>
-
-
-                 <button style={{backgroundColor:"#dc3545", 
-                                                    borderRadius:"3px", 
-                                                    color: 'white', 
-                                                    // padding: '15px 50px 5px 50px',
-                                                    float: 'center',
-                                                    fontSize: '10px',
-                                                    minHeight:"30px", 
-                                                    width: "90px",
-                                                    position: "relative",
-                                                    marginLeft: "190px"}}  onClick= {anotherSubtitle} >Add Another Subtitle</button> 
  
 
         </div>
@@ -374,7 +361,7 @@ const AddQuestion = () => {
                                                     minHeight:"30px", 
                                                     width: "90px",
                                                     position: "relative",
-                                                    marginLeft: "190px"}}  onClick={ addFinal} >Add a Final Exam</button>
+                                                    marginLeft: "190px"}}  onClick={ addFinal} >Publish </button>
 
 
 

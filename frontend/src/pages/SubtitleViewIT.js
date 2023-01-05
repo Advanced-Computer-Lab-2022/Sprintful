@@ -15,6 +15,8 @@ import {Link} from 'react-router-dom';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 
 export default function SubtitleViewIT() {
+   const navigate = useNavigate();
+
       //states
     const  [subtitle,setSubtitle]=useState(null);
 
@@ -113,7 +115,7 @@ export default function SubtitleViewIT() {
                     
                 <div key={task._id}>
                     <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
-                         <CardContent>
+                         <CardContent onClick = { () => { navigate(`/quiz?taskid=${task._id}`)} }>
                             <Typography gutterBottom variant="h6" component="div">
                                    {task.title}
                             </Typography>

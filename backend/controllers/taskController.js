@@ -3,6 +3,7 @@ const { builtinModules } = require('module')
 const Subtitle = require('../models/subtitleModel')
 const Task = require('../models/taskModel')
 const Course = require('../models/courseModel')
+const { log } = require('console')
 
 // const addTask = asyncHandler(async (req, res) => {
 //     const Instructorid = '635a591011ecdc081ce890f7'
@@ -41,18 +42,28 @@ const Course = require('../models/courseModel')
 const addTask = asyncHandler(async(req,res) =>{
     const title = req.body.title;
     //const courseId = '638488aceed9d3bac959ba50'
-    const id = req.params.id;
+    const id = req.query.id;
     //const subtitleId = '635dac77833ecf164e898814'
     //const subtitleId = req.params.subtitle
     const course = await Course.findById(id)
     const subtitle= await Subtitle.findById(id)
     if (course) {
+        console.log("course found")
+        console.log("old course"+ course)
     const newTask = await Task.create({
         title: title,
         course: id
     });
+    console.log("course found"),
+
+    console.log(newTask)
     //course.tasks.push(newTask)
+    
+    console.log("course found task pushed")
     await course.save()
+    console.log("new course" + course)
+    console.log("course found, course saved")
+
     res.status(201).json(newTask)
     }
     else if(subtitle) {
