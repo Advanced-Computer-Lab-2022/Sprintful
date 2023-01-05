@@ -44,7 +44,7 @@ console.log(subtitleid)
         //setTotalHours('');
         //setContent('');
     }
-    navigate(`/addTaskSubtitle?id=${subtitleid}`)
+    navigate(`/addTaskSubtitle/${courseid}?id=${subtitleid}`)
 
      /* else{
         console.log("ERROR")
@@ -194,7 +194,7 @@ console.log(subtitleid)
                                                     minHeight:"30px", 
                                                     width: "130px",
                                                     position: "relative",
-                                                    left: "200px"}}> Add Task </button>
+                                                    left: "200px"}}> Add Subtitle's Exercise </button>
 
            </form>
            </div> 
@@ -202,7 +202,7 @@ console.log(subtitleid)
                 <br/>
               
   
-             <button style={{backgroundColor:"#dc3545", 
+             {/* <button style={{backgroundColor:"#dc3545", 
                                                     borderRadius:"3px", 
                                                     color: 'white', 
                                                     // padding: '15px 50px 5px 50px',
@@ -211,7 +211,7 @@ console.log(subtitleid)
                                                     minHeight:"30px", 
                                                     width: "70px",
                                                     position: "relative",
-                                                    left: "800px"}} onClick={handleDone}>Done</button>  
+                                                    left: "800px"}} onClick={handleDone}>Done</button>   */}
 
 
              <br/>

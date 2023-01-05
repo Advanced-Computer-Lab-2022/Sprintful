@@ -52,7 +52,7 @@ const handleSubmit= async (e)=>{
     console.log(response.data[1])
     const course=response.data[0]
     navigate(`/addSubtitle/${course._id}`)
-    navigate(0)
+   // navigate(0)
     // navigate(`/instructor?id=${id}`)
     // navigate(0)
     // const json = response[0].json()

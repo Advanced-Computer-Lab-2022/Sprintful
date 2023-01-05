@@ -31,6 +31,7 @@ import React from "react";
 import FilterPrice from './components/Filter.js';
 import AddTaskSubtitle from './pages/AddTaskSubtitle';
 import AddTaskCourse from './pages/AddTaskCourse';
+import AddQuestionFinal from './pages/AddQuestionFinal'
 import AddQuestion from './pages/AddQuestion';
 import CorporateTraineeHome from './pages/CorporateTraineeHome';
 import IndividualTraineeHome from './pages/IndividualTraineeHome';
@@ -314,17 +315,21 @@ function App() {
             />
 
             <Route
-              path="/addTaskSubtitle"
+              path="/addTaskSubtitle/:courseid"
               element={<AddTaskSubtitle />}
             />
 
             <Route
-              path="/addTaskCourse"
+              path="/addTaskCourse/:courseid"
               element={<AddTaskCourse />}
+            />
+            <Route
+              path="/addQuestionFinal/:courseid"
+              element={<AddQuestionFinal />}
             />
 
             <Route
-              path="/addQuestion"
+              path="/addQuestion/:courseid"
               element={<AddQuestion />}
             />
 
