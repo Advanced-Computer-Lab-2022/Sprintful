@@ -38,6 +38,12 @@ app.use('/api/questions',requireAuth, require('./routes/questionRoutes'))
 app.use('/api/report', requireAuth,require('./routes/reportRoutes'))
 app.use('/api/requestAccess',requireAuth, require('./routes/requestAccessRoutes'))
 app.use('/api/refund', requireAuth,require('./routes/refundRequestRoutes'))
+
+
+app.use('/api/watchedVideo/corporate',require('./routes/CorporateWatchedVideosRoutes'))
+app.use('/api/watchedVideo/individual',require('./routes/IndividualWatchedVideosRoutes'))
+
+
 app.post("/payment", async (req, res) => {
 	let { amount, id } = req.body
 	try {
