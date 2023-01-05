@@ -10,7 +10,7 @@ const requireAuth = (req, res, next) => {
         // console.log('You are not logged in.');
         // res send status 401 you are not logged in
         res.status(401).json({message:"You are not logged in."})
-        res.redirect('/login');
+        res.redirect('/logme');
       } else {
         console.log(decodedToken);
         next();

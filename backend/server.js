@@ -9,7 +9,6 @@ const cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser')
 const stripe = require("stripe")(process.env.STRIPE_S_KEY)
 connectDB()
-const {requireAuth} = require('./middleware/authMiddleware')
  
 
 const app = express();
@@ -25,19 +24,19 @@ app.use(express.urlencoded({ extended: true })) // This is a middleware function
 // app.use(express.params) // This is a middleware function that allows us to accept params
 app.use(cookieParser());
 app.use(bodyParser.json())
-app.use('/api/admin', requireAuth,require('./routes/adminRoutes'))
-app.use('/api/courses',requireAuth, require('./routes/courseRoutes'))
-app.use('/api/instructor', requireAuth,require('./routes/instructorRoutes'))
+app.use('/api/admin',require('./routes/adminRoutes'))
+app.use('/api/courses', require('./routes/courseRoutes'))
+app.use('/api/instructor',require('./routes/instructorRoutes'))
 app.use('/api/guest', require('./routes/guestRoutes'))
-app.use('/api/corporateTrainee', requireAuth,require('./routes/corporateTraineeRoutes'))
-app.use('/api/individualTrainee',requireAuth, require('./routes/individualTraineeRoutes'))
-app.use('/api/subtitles', requireAuth,require('./routes/subtitleRoutes'))
-app.use('/api/tasks', requireAuth,require('./routes/taskRoutes'))
-app.use('/api/answers', requireAuth, require('./routes/answerRoutes'))
-app.use('/api/questions',requireAuth, require('./routes/questionRoutes'))
-app.use('/api/report', requireAuth,require('./routes/reportRoutes'))
-app.use('/api/requestAccess',requireAuth, require('./routes/requestAccessRoutes'))
-app.use('/api/refund', requireAuth,require('./routes/refundRequestRoutes'))
+app.use('/api/corporateTrainee',require('./routes/corporateTraineeRoutes'))
+app.use('/api/individualTrainee', require('./routes/individualTraineeRoutes'))
+app.use('/api/subtitles',require('./routes/subtitleRoutes'))
+app.use('/api/tasks',require('./routes/taskRoutes'))
+app.use('/api/answers', require('./routes/answerRoutes'))
+app.use('/api/questions', require('./routes/questionRoutes'))
+app.use('/api/report',require('./routes/reportRoutes'))
+app.use('/api/requestAccess', require('./routes/requestAccessRoutes'))
+app.use('/api/refund',require('./routes/refundRequestRoutes'))
 
 
 app.use('/api/watchedVideo/corporate',require('./routes/CorporateWatchedVideosRoutes'))
