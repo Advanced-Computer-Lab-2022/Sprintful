@@ -99,6 +99,8 @@ import InstructorReportDetails from './pages/InstructorReportDetails'
 import IndividualTraineeReportDetails from './pages/IndividualTraineeReportDetails'
 import CorporateTraineeReportDetails from './pages/CorporateTraineeReportDetails'
 
+import Country from './components/CountryCom';
+
 function App() {
   return (
     <div className="App">
@@ -286,6 +288,11 @@ function App() {
 
 
             {/* Ragaa */}
+
+            <Route
+              path="/country/"
+              element={<Country />}
+            />
 
             <Route
               path="/courses/"
