@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import axios from 'axios';
 import Country from './Country';
+import MostPopular from './MostPopular';
 import InstructorProfileDropdownMenu from './InstructorProfileDropdownMenu'
 import {useNavigate} from "react-router";
 
@@ -27,17 +28,19 @@ const InstructorHomeNavBar = () => {
                   
                       
 
-                <li onClick={()=>navigate(`/instructor?id=${id}`)}><a  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Home</a></li>
+                <li onClick={()=>navigate(`/instructor?id=${id}`)}><a   style= {{color: "black", left: "300px",  fontFamily: "Times New Roman"}}>Home</a></li>
                 <Country />
-                <li><a href=""  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Contact Us</a></li>
-                <li onClick={() => navigate(`/MyTaughtCourses?id=${id}`)}><a  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+                {/* <li><a href=""  style= {{color: "black", left: "200px",  fontFamily: "Times New Roman"}}>Contact Us</a></li> */}
+                <li ><a  onClick={() => navigate(`/MyTaughtCourses?id=${id}`)} style= {{color: "black", left: "300px",  fontFamily: "Times New Roman"}}>My Courses</a></li>
+               
                 <li></li>     
                  <li></li>   
                  <li></li> 
                  <li></li> 
+
                  <li></li> 
+                 <MostPopular/>
                  <li></li>
-                 <li></li> 
                 
                   
                 <InstructorProfileDropdownMenu />

@@ -95,7 +95,8 @@ const HomeSearch = () => {
     
     const styleFilterButton ={
         height: "70px",
-        left:"70px"
+        left:"70px", 
+        width: "100px"
     }
     const stylePrice ={
         width : "117px",
@@ -120,7 +121,7 @@ const HomeSearch = () => {
             <div className="row">
                 <div className="col-lg-3 align-self-center">
                     <fieldset>
-                        <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or an instructor name" autocomplete="on" required />
+                        <input id={'input'} type="address" value={searchTerm} name="address" className="searchText" placeholder="Enter a course title, subject or lecturer" autocomplete="on" required />
                     </fieldset>
                 </div>
                 <div className="col-lg-3">
@@ -135,7 +136,7 @@ const HomeSearch = () => {
                                                     minWidth: "50px",
                                                     position: "relative",
                                                     left: "200px"}}> Create </button>  */}
-                        <button id="main-button" onClick={handleOnChange}><i className="fa fa-search"></i></button>
+                        <button id="main-button" style={{width:"70px"}} onClick={handleOnChange}><i className="fa fa-search"></i></button>
                     </fieldset>
                 </div>
             </div>
@@ -214,7 +215,7 @@ const HomeSearch = () => {
     }
     </div> 
         </div>
-        <MostPopular/>
+        {/* <MostPopular/> */}
         { searched &&
             
             <div className="card-container">
