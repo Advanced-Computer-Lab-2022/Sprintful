@@ -41,26 +41,40 @@ export default function SubtitleViewCT() {
 
 
 
-      const addedProgress=(subtitledata.totalHours-0.5)/coursehours;
-
-        const update ={addedprogress:addedProgress}
-         
-        const response3=await axios.patch(`http://localhost:5000/api/corporateTrainee/updateProgress/${traineeid}/${courseid}`,update);
-
-
         }
         getSubtitle();
     },[]);
 
 
-    const handleClickOnVideo=async(youtubevideo)=>{
-      const response2= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
-      const coursehours=response2.data.totalhours
-      const addedProgress=0.5/coursehours
-      const update ={addedprogress:addedProgress}
-      const response=await axios.patch(`http://localhost:5000/api/corporateTrainee/updateProgress/${traineeid}/${courseid}`,update);
-      window.location.href = `/SubtitlesVideo?link=${youtubevideo}`
+    const handleClickOnVideo=async(video,traineeid,courseid)=>{
+           //checking if he has watched this video before 
+           console.log("mmmmmmmmmmmmmmmmmmmmmmmmmmr")
+         const response3=await axios.post(`http://localhost:5000/api/watchedVideo/corporate/checkifVideoWatched/${traineeid}`,{videoid:video._id})
+         const found=response3.data.found
+         console.log("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+         if(!found) {   //Never Watched 
+         const response4=await axios.patch(`http://localhost:5000/api/watchedVideo/corporate/addwatchedvideo/${traineeid}`,{watchedvideo:video._id})
+         //getting course total hours 
+         const response2= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
+         const coursehours=response2.data.totalhours
+         //updating progress
+         const videoHours=video.totalNoofHours;
+         const addedProgress=videoHours/coursehours
+         const update ={addedprogress:addedProgress}
+          const response=await axios.patch(`http://localhost:5000/api/corporateTrainee/updateProgress/${traineeid}/${courseid}`,update);
 
+
+
+
+         window.location.href = `/SubtitlesVideo?link=${video.youtubevideo}`
+
+           }
+
+
+   else{
+           window.location.href = `/SubtitlesVideo?link=${video.youtubevideo}`
+   }
+   //window.location.href = `/SubtitlesVideo?link=${video.youtubevideo}`
 
     }
 
@@ -151,7 +165,7 @@ export default function SubtitleViewCT() {
                     <div key={video._id}>
                 <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
                          <CardContent>
-                         <span onClick={()=>{handleClickOnVideo(video.youtubevideo)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
+                         <span onClick={()=>{handleClickOnVideo(video,traineeid,courseid)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
                          <Typography gutterBottom variant="h6" component="div">
                                 Video
                                 
