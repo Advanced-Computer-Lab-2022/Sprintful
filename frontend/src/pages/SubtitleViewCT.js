@@ -145,9 +145,13 @@ export default function SubtitleViewCT() {
                 <h5>Video:</h5>
                 </StyledCourseHeader>
 
+
+
+                {subtitle && subtitle.videos.map((video)=>(
+                    <div key={video._id}>
                 <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
                          <CardContent>
-                         <span onClick={()=>{handleClickOnVideo(subtitle.youtubevideo)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
+                         <span onClick={()=>{handleClickOnVideo(video.youtubevideo)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
                          <Typography gutterBottom variant="h6" component="div">
                                 Video
                                 
@@ -159,13 +163,18 @@ export default function SubtitleViewCT() {
                             </Typography>
                             </a> */}
                             <Typography gutterBottom variant="h6" component="div">
-                               Video Description :{subtitle && subtitle.videoDescription}
+                               Video Description :{subtitle && video.videoDescription}
                             </Typography>
 
                             <br></br>
+                            <Typography gutterBottom variant="h6" component="div">
+                               Hours :{subtitle && video.totalNoofHours}
+                            </Typography>
                             <br></br>
                             </CardContent>
                     </Card>
+                    </div>   
+))}
 
              </div >
                 

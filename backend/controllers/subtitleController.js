@@ -43,16 +43,62 @@ const addYoutubeLinkAndDescript =asyncHandler(async (req,res)=>{
  const subtitle_id=req.params.subtitleid  ;
   const videoLink =req.body.youtubevideo;
   const videoDescription=req.body.videoDescription;
-  const update ={youtubevideo:videoLink ,videoDescription:videoDescription};
+  const videohours=parseInt(req.body.videohours);
+  console.log('heree')
+  //finding No.of hours of that video =No.of hours of subtitle/No of videos in that subtitle 
+     //finding the subtitle 
+     const subtitle=await Subtitle.findById(subtitle_id)
+     const subtitleshours=subtitle.totalHours
+     const videoArray=subtitle.videos;
+     const videosArrayLength=subtitle.videos.length
+     const newVideo={youtubevideo :videoLink , videoDescription :videoDescription ,totalNoofHours :videohours  }
+     const PartialVideoArray=[newVideo]
 
-  const subtitleupdated=await Subtitle.findOneAndUpdate({_id :subtitle_id },update,{new : true});
-  if(subtitleupdated){
-  res.json(subtitleupdated);
-  }
+     //getting total number of video hours in subtitle and adding to them new video hours then checking if it is possible to 
+      // add the new video 
+      //let totalnumberofVideoHours ;
+      let videohoursSum=0;
+      //let videodocument;
+      for(  i=0; i<videosArrayLength;i++){
+       
+        videohoursSum=videohoursSum+subtitle.videos[i].totalNoofHours
+        }
+
+        videohoursSum=videohoursSum+videohours;
+        console.log(videohoursSum)
+        console.log(!(videohoursSum > subtitleshours))
+        if(!(videohoursSum > subtitleshours)){
+            const newVideoArray=subtitle.videos.concat(PartialVideoArray)
+            const updatingvideos=await Subtitle.findOneAndUpdate({_id:subtitle_id},{videos:newVideoArray},{new:true});
+            if(updatingvideos){
+               res.json(updatingvideos);
+
+            }
+            else{
+             res.json({message:"error"})
+            }
+    
+
+        }
+        else{
+            res.json({message:"Sorry cannot add Video"})
+        }
+
+
+
+     //Finding Past video array and concatenating to it newVideoArray
+     
+
+
+
+
+
+  //const newvideo ={youtubevideo:videoLink ,videoDescription:videoDescription};
+
+//   const subtitleupdated=await Subtitle.findOneAndUpdate({_id :subtitle_id },update,{new : true});
   
-  else{
-    res.json({message:"This subtitle is not found"})
-  }
+  
+  
 })
 
 const getSubtitle=asyncHandler(async(req,res)=>{

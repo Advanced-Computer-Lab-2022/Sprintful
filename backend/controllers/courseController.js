@@ -118,6 +118,17 @@ const payCredit = asyncHandler(async (req, res)  => {
 		console.log("Payment", payment)
         const newCoursesList = ((await IndividualTrainee.findById(individualId)).courses).concat(courseId)
         const response =await IndividualTrainee.findByIdAndUpdate(individualId,{courses: newCoursesList }).exec()
+        
+
+    //Updating progressArray
+       //update
+       const addedProgress=0; 
+       const newcourseProgress={course:courseId,progressvalue:addedProgress}
+       const partialprogressarray=[newcourseProgress]
+       const newProgressArray = (await IndividualTrainee.findById(individualId)).progress.concat(partialprogressarray)
+       const updatingprogress=await IndividualTrainee.findOneAndUpdate({_id:individualId},{progress:newProgressArray},{new:true});
+
+      
 		res.status(200).json({
 			message: "Payment successful",
 			success: true,

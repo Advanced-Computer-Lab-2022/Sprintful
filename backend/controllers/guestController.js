@@ -10,6 +10,8 @@ const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken');
 const { Server } = require('http')
 require('dotenv').config()
+var nodemailer = require('nodemailer');
+
 
 //Generate JWT
 const generateToken =(id) =>{
@@ -137,21 +139,26 @@ const forgotPassword = asyncHandler(async (req, res) => {
       });
       //res.status(200).json({token:token});
          const link = `http://localhost:5000/api/guest/resetPassword/${oldUser._id}/${token}`;  
-         console.log(link)
+         //console.log(link)
          var transporter = nodemailer.createTransport({
-          service: 'gmail',
-          auth: {
-            user: 'somaya.elziady@student.guc.edu.eg',
-            pass: 'yourpassword'
+            service: 'gmail',
+            auth: {
+            user: 'sprintful.team@gmail.com',
+            pass: 'fsssjvddgyeestsg'
+            
           }
         });
+
+        console.log("transporter is ready")
   
         var mailOptions = {
-          from: 'youremail@gmail.com',
-          to: 'somaya.elziady@student.guc.edu.eg',
+          from: 'sprintful.team@gmail.com',
+          to: email,
           subject: 'Password Reset Link',
           text: link
         };
+
+        console.log("mail is prepared")
   
         transporter.sendMail(mailOptions, function(error, info){
           if (error) {
@@ -177,7 +184,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
       try{
           const verify = jwt.verify(token, process.env.JWT_SECRET + oldUser.password);
           //res.send("verified");
-          console.log("hello")
+          console.log("hello get reset password")
           res.render("index", {email: verify.email, status:"unverified"})
       }
       catch(error){
@@ -195,15 +202,19 @@ const forgotPassword = asyncHandler(async (req, res) => {
       const corporateTrainee = await CorporateTrainee.findById(id)
       const individualTrainee = await IndividualTrainee.findById(id)
       const instructor = await Instructor.findById(id)
+      let verify;
+      let encryptedPassword;
   
       //const oldUser= await Admin.findById(id) || await CorporateTrainee.findById(id) || await IndividualTrainee.findById(id) || await Instructor.findById(id)
       if(!admin && !corporateTrainee && !individualTrainee && !instructor) {
           res.status(400).json({status:"User doesn't exist"});
       }
       try{
+        console.log("hello post reset password");
           if(admin){
-              const verify = jwt.verify(token, process.env.JWT_SECRET + admin.password);
-              const encryptedPassword = await bcrypt.hash(password, 10);
+            console.log("admin checked");
+              verify = jwt.verify(token, process.env.JWT_SECRET + admin.password);
+              encryptedPassword = await bcrypt.hash(password, 10);
               await Admin.updateOne(
                   {
                       _id: id,
@@ -216,8 +227,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
               );
           }
           else if(corporateTrainee){
-              const verify = jwt.verify(token, process.env.JWT_SECRET + corporateTrainee.password);
-              const encryptedPassword = await bcrypt.hash(password, 10);
+            console.log("corporateTrainee checked");
+              verify = jwt.verify(token, process.env.JWT_SECRET + corporateTrainee.password);
+              encryptedPassword = await bcrypt.hash(password, 10);
   
               await CorporateTrainee.updateOne(
                   {
@@ -231,8 +243,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
               );
           }
           else if(individualTrainee){
-              const verify = jwt.verify(token, process.env.JWT_SECRET + individualTrainee.password);
-              const encryptedPassword = await bcrypt.hash(password, 10);
+            console.log("individualTrainee checked");
+              verify = jwt.verify(token, process.env.JWT_SECRET + individualTrainee.password);
+              encryptedPassword = await bcrypt.hash(password, 10);
   
               await IndividualTrainee.updateOne(
                   {
@@ -246,8 +259,9 @@ const forgotPassword = asyncHandler(async (req, res) => {
               );
           }
           else{
-              const verify = jwt.verify(token, process.env.JWT_SECRET + instructor.password);
-              const encryptedPassword = await bcrypt.hash(password, 10);
+            console.log("instructor checked");
+              verify = jwt.verify(token, process.env.JWT_SECRET + instructor.password);
+              encryptedPassword = await bcrypt.hash(password, 10);
   
               await Instructor.updateOne(
                   {
@@ -260,8 +274,10 @@ const forgotPassword = asyncHandler(async (req, res) => {
                   }
               );
           }
-          res.json({status: "password updated"});
-          res.render("index", {email: verify.email, status: "verified"})
+            console.log("out of checks")
+          res.render("index", { email: verify.email, status: "verified"});
+         // res.json({status: "password updated"});
+          //res.render("index", {email: verify.email, status: "verified"})
       }
       catch(error){
           console.log(error);

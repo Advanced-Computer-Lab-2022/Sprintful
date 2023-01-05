@@ -10,6 +10,7 @@ const AddVideoLinkSubtitle=()=>{
          //youtubevideo -> video Link
         const[youtubeVideo,setYoutubeVideo]=useState("");
         const[videoDescription,setVideoDescription]=useState("");
+        const[videohours,setVideoHours]=useState(0);
         //const{subtitleid}=useParams(); //{subtitleid}-->destructuring
         const subtitleid=useParams().subtitleid;
         //useNavigate
@@ -19,7 +20,7 @@ const AddVideoLinkSubtitle=()=>{
           //functions
         const handleSubmit=async(e)=>{
             e.preventDefault();
-            const update ={youtubevideo:youtubeVideo ,videoDescription:videoDescription}
+            const update ={youtubevideo:youtubeVideo ,videoDescription:videoDescription ,videohours:videohours}
          
             const response=await axios.patch(`http://localhost:5000/api/subtitles/addVideoLink/${subtitleid}`,update);
             console.log("subtitle Updated",response.data)
@@ -48,6 +49,13 @@ const AddVideoLinkSubtitle=()=>{
                     type="text"
                     onChange={(e)=>setVideoDescription(e.target.value)}
                     value={videoDescription}
+                     />
+
+                 < label>Video Hours:</label>
+                    <input
+                    type="number"
+                    onChange={(e)=>setVideoHours(e.target.value)}
+                    value={videohours}
                      />
 
                      <button onClick={handleSubmit}>Done</button>

@@ -4,12 +4,15 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import "../pages/Signup.css"
 import HomeNavBar from "../components/HomeNavBar";
+import Alert from '@mui/material/Alert';
+
 
 
 
 
 export default function ForgotPassword() {
 const [isHovering, setIsHovering] = useState(false);
+const [submit, setSubmit] = useState(false);
 const handleMouseEnter = () => {
   setIsHovering(true);
 };
@@ -119,7 +122,11 @@ return(
     </div>
 
 
-    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>Submit</button> 
+    <button className="sign" style={style13} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onClick={()=>setSubmit(true)}>Submit</button> 
+
+    {submit &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        Email has been sent successfully!
+                        </Alert>}
 
   </form>
 

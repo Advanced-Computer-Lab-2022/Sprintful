@@ -28,14 +28,25 @@ const subtitleSchema = mongoose.Schema({
         default :[],
     }],
    
-    youtubevideo :{ type :String,
-                    default :"",
-    },
     
-    videoDescription :{type :String ,
-                       default:"",
 
-    }
+    videos :[{
+        youtubevideo :{ 
+            type :String,
+            default :"",
+                          },
+
+        videoDescription :{
+            type :String ,
+            default:"",
+                          },
+
+          totalNoofHours :{
+            type :Number ,
+            default:0,
+        } ,               
+       
+    }],
     
          
     }, {timestamps: true
