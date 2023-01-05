@@ -6,7 +6,7 @@ const {requireAuth} = require('../middleware/authMiddleware')
 
 router.post('/insertATrainee/:traineeid',insertATrainee);
 router.patch('/addwatchedvideo/:traineeid',addwatchedvideo);
-router.get('/checkifVideoWatched/:traineeid',checkifVideoWatched);
+router.post('/checkifVideoWatched/:traineeid',checkifVideoWatched);
 
 
 
