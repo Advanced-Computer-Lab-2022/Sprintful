@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import "./AddQuestion.css"
 import InstructorNavBarCom from '../components/InstructorNavBarCom'
 import { useParams } from "react-router-dom";
+import Alert from '@mui/material/Alert';
+
 
 const AddQuestion = () => {
     const [questionTitle, setQuestionTitle] = useState('')
@@ -17,6 +19,7 @@ const AddQuestion = () => {
     const [correct3, setCorrect3] = useState(false)
     const [correct4, setCorrect4] = useState(false)
     const {courseid}=useParams();
+    const[success,setSuccess]= useState(true)
 
     const header = {
         color: "darkRed",
@@ -80,6 +83,7 @@ const AddQuestion = () => {
 
             //const taskId=json._id;
             console.log('Question added', json)
+            setSuccess(true)
             setQuestionTitle('')
             setChoice1('')
             setChoice2('')
@@ -142,6 +146,7 @@ const AddQuestion = () => {
 
             //const taskId=json._id;
             console.log('Question added', json)
+            setSuccess(true)
             setQuestionTitle('')
             setChoice1('')
             setChoice2('')
@@ -205,6 +210,7 @@ const AddQuestion = () => {
 
             //const taskId=json._id;
             console.log('Question added', json)
+            setSuccess(true)
             setQuestionTitle('')
             setChoice1('')
             setChoice2('')
@@ -338,6 +344,9 @@ const AddQuestion = () => {
                 <br />
                 <br />
                 <br />
+                {success &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        Question added successfully!
+                        </Alert>}
                 <button style={{backgroundColor:"#dc3545", 
                                                     borderRadius:"3px", 
                                                     color: 'white', 

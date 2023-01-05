@@ -2,6 +2,9 @@ import { useState } from "react"
 import {useNavigate} from "react-router";
 import axios from 'axios';
 import InstructorNavBarCom from '../components/InstructorNavBarCom';
+import Alert from '@mui/material/Alert';
+import { set } from "mongoose";
+
 const CourseForm =() =>{
 
 const[title,setTitle]=useState('') 
@@ -12,6 +15,7 @@ const[previewvideolink,setPreviewVideoLink]=useState('')
 const [discount,setDiscount]=useState('')
 const [subject,setSubject]=useState('Computer Science')
 const [contract,setContract] =useState(true)
+const [success,setSuccess]= useState(false)
 
 const header = {
     color: "darkRed",
@@ -51,6 +55,7 @@ const handleSubmit= async (e)=>{
     console.log(response.data[0])
     console.log(response.data[1])
     const course=response.data[0]
+    setSuccess(true);
     navigate(`/addSubtitle/${course._id}`)
    // navigate(0)
     // navigate(`/instructor?id=${id}`)
@@ -281,6 +286,10 @@ return (
                                                     width: "80px",
                                                     position: "relative",
                                                     left: "200px"}}> Add Subtitles </button> 
+
+{success &&  <Alert style={{width: "300px", fontSize: "10px", color: "black"}}>
+                        Course Added successfully!
+                        </Alert>}
     </form>}
 
     </div> 
