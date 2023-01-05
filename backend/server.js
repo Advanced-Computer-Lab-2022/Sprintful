@@ -39,6 +39,7 @@ app.use('/api/refund', require('./routes/refundRequestRoutes'))
 
 
 app.use('/api/watchedVideo/corporate',require('./routes/CorporateWatchedVideosRoutes'))
+app.use('/api/watchedVideo/individual',require('./routes/IndividualWatchedVideosRoutes'))
 
 
 app.post("/payment", async (req, res) => {
