@@ -5,31 +5,6 @@ import axios from 'axios';
 
 
 function Quiz() {
-  const style1 = {   //.question-card 
-    /* Center the div  */
-    margin: "0 auto",
-
-    /* Dimensions  */
-    width: "80%", /* Can be in percentage also. */
-    height: "auto",
-
-    /* Visual  */
-    backgroundColor: "gray",
-    padding: "16px",
-    borderRadius: "16px",
-    color: "white",
-    boxShadow: "rgba(50, 50, 93, 0.25) 0px 30px 60px -12px",
-  }
-  const style2 = {
-    marginTop: "8px",
-    backgroundColor: "darkgray",
-    padding: "16px",
-    border: "3px solid white",
-    borderRadius: "20px",
-    fontSize: "20px"
-}
-
-
   // Properties
   const [showResults, setShowResults] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -57,7 +32,7 @@ function Quiz() {
   }, []);
 
   // Helper Functions
-  const handleshowanswers = () => { 
+  const handleshowanswers = () => {
     setShowAnswers(true);
   }
   /* A possible answer was clicked */
@@ -68,7 +43,6 @@ function Quiz() {
       choiceindex: choiceindex,
     }
 
-    //console.log("answer" + answer)
     console.log("qid= " + questionid)
     const response = await fetch(`http://localhost:5000/api/answers/addAnswer?questionid=${questionid}&userid=63a6b5833f6eb59032850c0f`, {
       method: 'POST',
@@ -116,39 +90,56 @@ function Quiz() {
 
           {/* 1. Header  */}
           <h1>Task </h1>
-
+          <br />
+          <br />
           {/* 2. Current Score  */}
-          <h2>Score: {score}</h2>
+          <h1 className="">Score: {score}</h1>
           {/* 3. Show results or show the question game  */}
+          <br />
+
+
+          <br />
           {showResults ? (
             /* 4. Final Results */
             <div className="final-results">
               <h1>Final Results</h1>
-              <h2>
+              <h1>
                 {score} out of {questions.length} correct - (
                 {(score / questions.length) * 100}%)
-              </h2>
-              <button onClick={() => restartGame()}>Retake task</button>
+              </h1>
               <br />
               <br />
-              <button onClick={handleshowanswers}>Show Answers</button>
+              <br />
+
+
+              <button className="question-button" onClick={() => restartGame()}>Retake task</button>
+              <br />
+              <br />
+
+              <br />
+              <button className="question-button" onClick={handleshowanswers}>Show Answers</button>
               {showanswers && (
                 <div>
-                  <h1>Answers</h1>
-                  <ul>
+                  <br />
+                  <br />
+                  <br />
+                  <ul style={{ listStyle: "none" }}>
                     {questions.map((question) => {
                       return (
-                        <li>
-                          {question.title}
-                          <ul>
+                        <li className="question-card">
+                          <br />
+
+                          <h3 className="question-text"> {question.title}</h3>
+                          {/* {question.title} */}
+                          <ul styel={{ listStyle: "none" }}>
                             {question.choices.map((choice) => {
                               return (
-                                <li>
-                                  {choice.text} -
+                                <li className="question-option">
+
                                   {choice.isCorrect ? (
-                                    <span>Correct</span>
+                                    <span style={{ color: "green" }}>{choice.text}</span>
                                   ) : (
-                                    <span>Incorrect</span>
+                                    <span>{choice.text}</span>
                                   )}
                                 </li>
                               );
@@ -158,40 +149,43 @@ function Quiz() {
                       );
                     })}
                   </ul>
-                  
+                  <br />
+                  <br />
+
                 </div>)}
             </div>
           ) : (
             /* 5. Question Card  */
 
-            <div style={{ style1 }}>
+            <div className="question-card">
               {/* Current Question  */}
-              <h2>
+              <h1>
                 Question: {currentQuestion + 1} out of {questions.length}
-              </h2>
+              </h1>
+              <br />
 
               <h3 className="question-text">{questions[currentQuestion].title}</h3>
               {/* <h3 className="question-text">{questions[currentQuestion].title}</h3> */}
 
               {/* List of possible answers  */}
-              <ul styel={{ listStyle: "none"}}>
-              {questions[currentQuestion].choices.map((choice) => {
-                return (
-                  <li style={{style2}}
-                    key={choice._id}
-                    onClick={() => optionClicked(choice.isCorrect, questions[currentQuestion]._id, choice._id)}
-                  >
-                    {choice.text}
-                  </li>
-                );
-              })}
-            </ul>
-        </div>
-      )}
+              <ul style={{ listStyle: "none" }}>
+                {questions[currentQuestion].choices.map((choice) => {
+                  return (
+                    <li className="question-option"
+                      key={choice._id}
+                      onClick={() => optionClicked(choice.isCorrect, questions[currentQuestion]._id, choice._id)}
+                    >
+                      {choice.text}
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
 
-    </div>
-  )
-}
+        </div>
+      )
+      }
     </div >
 
   );
