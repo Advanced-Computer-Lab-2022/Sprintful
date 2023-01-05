@@ -120,8 +120,8 @@ const payCredit = asyncHandler(async (req, res)  => {
         const response =await IndividualTrainee.findByIdAndUpdate(individualId,{courses: newCoursesList }).exec()
         
 
-    //Updating progressArray
-       //update
+    // Updating progressArray
+      // update
        const addedProgress=0; 
        const newcourseProgress={course:courseId,progressvalue:addedProgress}
        const partialprogressarray=[newcourseProgress]
