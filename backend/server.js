@@ -15,6 +15,10 @@ const app = express();
 // added this line to overcome a connction error with axios.get()
 app.use(cors()) // Use this after the variable declaration
 
+app.set('view engine', 'ejs')
+app.use(express.urlencoded({extended: false}))
+var nodemailer = require('nodemailer');
+
 app.use(express.json()) // This is a middleware function that allows us to accept JSON data in the body
 app.use(express.urlencoded({ extended: true })) // This is a middleware function that allows us to accept form data
 // app.use(express.params) // This is a middleware function that allows us to accept params

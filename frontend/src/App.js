@@ -79,6 +79,7 @@ import QuizAnswers from './components/QuizAnswers';
 import Promotion from './pages/Promotion';
 
 import MostPopular from './components/MostPopular';
+import ForgotPassword from './components/ForgotPassword';
 
 import AccessRequests from './pages/AccessRequests';
 import ChangeIndividualTraineePassword from './pages/ChangeIndividualTraineePassword';
@@ -370,6 +371,11 @@ function App() {
             <Route
               exact path="/mostPopular"
               element={[<MostPopular/> ]}
+            />
+            
+            <Route
+              exact path="/forgotPassword"
+              element={[<ForgotPassword/> ]}
             />
 
 

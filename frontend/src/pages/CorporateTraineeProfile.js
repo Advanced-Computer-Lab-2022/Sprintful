@@ -212,6 +212,15 @@ export default function CorporateProfile() {
                    </div>
                    <hr/>
                    <div className="row">
+                   <div className="col-sm-3">
+                       <p className="mb-0" style={{color: "black", fontFamily: "Times New Roman"}}>Email</p>
+                     </div>
+                     <div className="col-sm-9">
+                       <p className="text-muted mb-0">{trainee.email}</p>
+                       </div>
+                   </div>
+                    <hr/>
+                    <div className="row">
                      <div className="col-sm-3">
                        <p className="mb-0" style={{color: "black", fontFamily: "Times New Roman"}}>Corporate</p>
                      </div>
