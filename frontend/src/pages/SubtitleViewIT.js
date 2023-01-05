@@ -15,6 +15,8 @@ import {Link} from 'react-router-dom';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 
 export default function SubtitleViewIT() {
+   const navigate = useNavigate();
+
       //states
     const  [subtitle,setSubtitle]=useState(null);
 
@@ -52,7 +54,16 @@ export default function SubtitleViewIT() {
 
 
 
+    const handleClickOnVideo=async(youtubevideo)=>{
+      const response2= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
+      const coursehours=response2.data.totalhours
+      const addedProgress=0.5/coursehours
+      const update ={addedprogress:addedProgress}
+      const response=await axios.patch(`http://localhost:5000/api/individualTrainee/updateProgress/${traineeid}/${courseid}`,update);
+      window.location.href = `/SubtitlesVideo?link=${youtubevideo}`
 
+
+    }
 
 
 
@@ -104,7 +115,7 @@ export default function SubtitleViewIT() {
                     
                 <div key={task._id}>
                     <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
-                         <CardContent>
+                         <CardContent onClick = { () => { navigate(`/quiz?taskid=${task._id}`)} }>
                             <Typography gutterBottom variant="h6" component="div">
                                    {task.title}
                             </Typography>
@@ -137,11 +148,11 @@ export default function SubtitleViewIT() {
 
                 <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
                          <CardContent>
-                         <a href={subtitle&&subtitle.youtubevideo}>
+                         <span  onClick={()=>{handleClickOnVideo(subtitle.youtubevideo)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
                             <Typography gutterBottom variant="h6" component="div">
                                 Video
                             </Typography>
-                            </a>
+                            </span>
                             <Typography gutterBottom variant="h6" component="div">
                                Video Description :{subtitle && subtitle.videoDescription}
                             </Typography>

@@ -123,6 +123,31 @@ export default function SubtitlePageInstructorNew() {
                    ))}
              </div>
 
+             <div>
+             < StyledCourseHeader>
+                <h5>Video:</h5>
+                </StyledCourseHeader>
+
+                <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
+                         <CardContent>
+                         <span onClick={() => window.location.href = `/Video?link=${subtitle.youtubevideo}`} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
+                            <Typography gutterBottom variant="h6" component="div">
+                                Video
+                            </Typography>
+                            </span>
+                            <Typography gutterBottom variant="h6" component="div">
+                               Video Description :{subtitle && subtitle.videoDescription}
+                            </Typography>
+
+                            <br></br>
+                            <br></br>
+                            </CardContent>
+                    </Card>
+
+             </div >
+
+
+
 
              <div>
              <Button  onClick={handleAddVideoLink} style={{ maxHeight: '50px', maxWidth: '300px', minHeight: '50px',  }} variant="contained"  sx={{ height: 40 ,mt:4 }}>

@@ -7,7 +7,8 @@ import Typography from '@mui/material/Typography';
 import { shadows } from '@mui/system';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
 
 
 
@@ -15,6 +16,7 @@ import {Link} from 'react-router-dom';
 import {StyledCourseHeader} from '../components/styles/CourseHeader.style'
 
 export default function SubtitleViewCT() {
+   const navigate = useNavigate();
       //states
     const  [subtitle,setSubtitle]=useState(null);
 
@@ -51,6 +53,16 @@ export default function SubtitleViewCT() {
     },[]);
 
 
+    const handleClickOnVideo=async(youtubevideo)=>{
+      const response2= await axios.get('http://localhost:5000/api/courses/getCourse/',{params :{id:courseid}});
+      const coursehours=response2.data.totalhours
+      const addedProgress=0.5/coursehours
+      const update ={addedprogress:addedProgress}
+      const response=await axios.patch(`http://localhost:5000/api/corporateTrainee/updateProgress/${traineeid}/${courseid}`,update);
+      window.location.href = `/SubtitlesVideo?link=${youtubevideo}`
+
+
+    }
 
 
 
@@ -103,8 +115,8 @@ export default function SubtitleViewCT() {
              {subtitle&&subtitle.tasks.map((task)=>(
                     
                 <div key={task._id}>
-                    <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
-                         <CardContent>
+                    <Card  sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
+                         <CardContent onClick = { () => { navigate(`/quiz?taskid=${task._id}`)} }>
                             <Typography gutterBottom variant="h6" component="div">
                                    {task.title}
                             </Typography>
@@ -135,9 +147,10 @@ export default function SubtitleViewCT() {
 
                 <Card sx={{ maxWidth: 400 ,maxHeight:60, mb:2}}  style={{boxShadow: "3"}}>
                          <CardContent>
-                         <span onClick={() => window.location.href = `/SubtitlesVideo?link=${subtitle.youtubevideo}`} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
+                         <span onClick={()=>{handleClickOnVideo(subtitle.youtubevideo)}} style={{textDecoration: "underline",cursor: "pointer", color: "#a4243b"}}>
                          <Typography gutterBottom variant="h6" component="div">
                                 Video
+                                
                             </Typography>
                            </span>
                          {/* <a href={subtitle&&subtitle.youtubevideo}>

@@ -71,6 +71,7 @@ const SubtitleForm =()=>{
         setContent('');
 
      //Redirecting to the course view page  //take course id from url params in order to redirect to the course view page 
+       // navigate()
 
     }
 

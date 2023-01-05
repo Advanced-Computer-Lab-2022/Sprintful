@@ -63,13 +63,13 @@ const addRefundRequest=asyncHandler(async(req,res)=>{
                         finalPrice=course.price;
                           }
 
-
+      const finalprice2=finalPrice*0.7
 
     const request=new RefundRequest({
         traineeid:traineeid,
         traineeName:traineeName,
         course:courseid,
-        amount:finalPrice
+        amount:finalprice2
     })
 
     request.save(function (err) {
