@@ -153,7 +153,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
   
         var mailOptions = {
           from: 'sprintful.team@gmail.com',
-          to: 'somayaelziady.14@gmail.com',
+          to: email,
           subject: 'Password Reset Link',
           text: link
         };
