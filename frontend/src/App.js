@@ -166,7 +166,7 @@ function App() {
             /> */}
             <Route
               exact path="/api/courses/addPromotion/:courseid"
-              element={<AddPromotionCourse />} />
+              element={<AddPromotionCourse />}/>
 
             {/* <Route
               exact path="api/courses/getCourse/:courseid"

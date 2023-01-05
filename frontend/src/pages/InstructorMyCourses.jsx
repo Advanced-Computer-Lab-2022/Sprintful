@@ -4,14 +4,21 @@ import React, { useState } from "react";
 import {useNavigate} from "react-router";
 import { useEffect } from 'react';
 import axios from 'axios';
-
 import Button from '@mui/material/Button';
-
 import {render} from 'react-dom';
 import { fontSize } from '@mui/system';
-
+import InstructorNavBarCom from '../components/InstructorNavBarCom';
 
 export default function InstructorMyCourses() {
+
+    const header = {
+        color: "darkRed",
+        fontFamily: "Times New Roman",
+        fontSize: "28px",
+        textAlign: "center",
+        fontWeight: "bold"
+        
+      };
     
     const [courses,setCourses] = useState([])
     const [courses2,setCourses2] = useState([])
@@ -60,6 +67,7 @@ export default function InstructorMyCourses() {
     //   render(<PopUp/>)
 
     const handleFilter =  async(e) =>{
+        
         e.preventDefault()
         var b = document.getElementById('subject').value  ;
         setFilterSubject(b)
@@ -322,7 +330,35 @@ export default function InstructorMyCourses() {
         left:"20px"
     }
     return (
-        <div>
+<div>
+        <div id="topbar" class="">
+             <div class="container">
+                 <div class="row">
+                     <div class="col-md-6 p-0 text-center">
+                         <ul class="top-menu">
+                             <li><a href="tel:+201001004070">Phone:
+                                     +201001004070</a></li>
+                             <li><a href="mailto:info@cancham.org.eg">Email:
+                                     info@cancham.org.eg</a></li>
+                         </ul>
+                     </div>
+                     <div class="col-md-6 hidden-sm hidden-xs">
+                         <div class="social-icons social-icons-colored-hover">
+                             <ul>
+                                 <li class="social-facebook"><a href="https://www.facebook.com/CanCham/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                 <li class="social-twitter"><a href="#" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                 <li class="social-youtube"><a href="https://www.youtube.com/channel/UC1ykoFKsMjVQCx3TeLIXDbg" target="_blank"><i class="fa fa-youtube"></i></a></li>
+                                 <li class="social-gplus"><a href="#" target="_blank"><i class="fa fa-google-plus"></i></a></li>
+                                 <li class="social-linkedin"><a href="#" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                             </ul>
+                         </div>
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <br/>
+         <br/>
+         <br/>
             {/* <!-- ***** Preloader Start ***** --> */}
             <div id="js-preloader" className="js-preloader">
                 <div className="preloader-inner">
@@ -349,11 +385,24 @@ export default function InstructorMyCourses() {
             {/* <!-- ***** Header Area End ***** --> */}
 
             <div className="main-banner">
+            <div id="page-wrapper" style={{width: "1200px", height: "1000px",left: "100px", margin: 70, background: "#DCDCDC", marginTop: "-200px"}} >
+          <br/>
+          <div id="page-inner" style={{width: "1100px", height: "900px", margin: 20, background: "white"}}>
+             <br/>
                 <div className="container">
+                <div style={header}>My Courses</div>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+
                     <div className="row">
                         <div className="col-lg-12">
                             { 
-                            <form id="search-form" name="gs" method="submit" role="search" action="#" style={{position:"relative",top:"-40px", left:"10px"}}>
+                            <form id="search-form" name="gs" method="submit" role="search" action="#" style={{position:"relative",top:"-40px", left:"10px", boxShadow: "5px 10px 8px #888888"}}>
                                 <div className="row">
                                     <div className="col-lg-3 align-self-center">
                                         <fieldset>
@@ -369,7 +418,7 @@ export default function InstructorMyCourses() {
 
                             </form>
                             }
-                            { <form id="search-form" name="gs" method="submit" role="search" action="#"  style={styleFilterForm}>
+                            { <form id="search-form" name="gs" method="submit" role="search" action="#"  style={{position:"relative",top:"-40px", left:"370px", boxShadow: "5px 10px 8px #888888", styleFilterForm}}>
                                 <div className="row">
                                     <div className="col-lg-3 align-self-center">
                                         <fieldset>
@@ -408,24 +457,25 @@ export default function InstructorMyCourses() {
                             }
                         </div>
                     </div>
-                </div>
-            </div>   
 
-            <div className="popular-categories">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <div className="section-heading">
-                                <h2 style={{fontSize: "30px", position:"relative",left:"-450px", top: "-40px"}}>My Courses</h2>
-                            </div>
-                            <div>
-                                <button id="main-button" onClick={() => setAdd(!add)} style={mystyle}> Add a new Course</button>
-                            
-                                <button id="main-button" onClick={() => setAddTask(!addTask)} style={mystyle}> Add a task</button>
-                            </div>
 
-                        </div>
-                        <div className="col-lg-12">
+
+        <br/>  
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+        <br/>
+<div>
+
+<div className="col-lg-12">
                             { filtered &&
                                 <div className="card-container"  style={{position:"relative", top:"-160px"}}>
                                     {filterData  && filterData.map((course) =>( 
@@ -594,64 +644,54 @@ export default function InstructorMyCourses() {
                                 </div> 
                               
                         </div>   
-                    </div> 
+
+
+
+
+</div>
+        <div  onClick={()=> navigate(`/instructor?id=${id}`)} style={{color: 'white', 
+                            padding: '15px 50px 5px 50px',
+                            float: 'left',
+                            fontSize: '16px'}}> &nbsp; <a className="btn btn-danger square-btn-adjust"> Back </a> 
+             </div>
+
+
+
+
+
+
                 </div>
-            </div>        
-            <footer>
-                <div className="container">
+            </div> 
+                  </div>
+                  </div>
+            <footer style={{height: "100px"}}>
+                <div className="container" style={{height: "20px"}}>
                     <div className="row">
-                        <div className="col-lg-4">
+                    <div className="col-lg-4">
                             <div className="about">
-                                <div className="logo">
-                                    <img src="assets/images/black-logo.png" alt="Plot Listing" />
-                                </div>
-                                <p>If you consider that <a rel="nofollow" href="https://templatemo.com/tm-564-plot-listing" target="_parent">Plot Listing template</a> is useful for your website, please <a rel="nofollow" href="https://www.paypal.me/templatemo" target="_blank">support us</a> a little via PayPal.</p>
+                                    <img src="/upload/logo.png" alt="Homepage" style={{width: "180px", 
+                                                                                    height: "70px"}}/>
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <div className="helpful-links">
-                                <h4>Helpful Links</h4>
-                                <div className="row">
-                                    <div className="col-lg-6 col-sm-6">
-                                        <ul>
-                                            <li><a href="#">Categories</a></li>
-                                            <li><a href="#">Reviews</a></li>
-                                            <li><a href="#">Listing</a></li>
-                                            <li><a href="#">Contact Us</a></li>
-                                        </ul>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <ul>
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">Awards</a></li>
-                                            <li><a href="#">Useful Sites</a></li>
-                                            <li><a href="#">Privacy Policy</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        <div className="contact-us">
+                                <h4 style= {{color: "black",  fontFamily: "Times New Roman"}}>Contact Us</h4>
+                                <p style={{ fontFamily: "Times New Roman"}}>If you have any suggestions email us on info@cancham.org.eg</p>
+                                <p style={{ fontFamily: "Times New Roman"}}>Call us +201001004070 from 9 AM to 4 PM</p>
                             </div>
                         </div>
                         <div className="col-lg-4">
                             <div className="contact-us">
-                                <h4>Contact Us</h4>
-                                <p>27th Street of New Town, Digital Villa</p>
-                                <div className="row">
-                                    <div className="col-lg-6">
-                                        <a href="#">010-020-0340</a>
-                                    </div>
-                                    <div className="col-lg-6">
-                                        <a href="#">090-080-0760</a>
-                                    </div>
-                                </div>
+                                <h4 style= {{color: "black",  fontFamily: "Times New Roman"}}>Location</h4>
+                                <p style={{ fontFamily: "Times New Roman"}}>Villa 25 Mourad street off Orouba, Heliopolis، Almazah, Heliopolis, Cairo Governorate 11475</p>
                             </div>
                         </div>
                         <div className="col-lg-12">
                             <div className="sub-footer">
-                                <p>Copyright © 2021 Plot Listing Co., Ltd. All Rights Reserved.
-                                    <br />
-                                    Design: <a rel="nofollow" href="https://templatemo.com" title="CSS Templates">TemplateMo</a></p>
+                                <label>© 2023 CANADIAN CHAMBER OF COMMERCE. ALL RIGHTS RESERVED.</label>
                             </div>
                         </div>
+                       
                     </div>
                 </div>
             </footer>
