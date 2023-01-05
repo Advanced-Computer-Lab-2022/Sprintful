@@ -5,6 +5,22 @@ const Task = require('../models/taskModel')
 const Course = require('../models/courseModel')
 const { log } = require('console')
 
+const addGrade = asyncHandler(async (req, res) => { 
+    const taskid = req.body.taskid
+    const grade = req.body.grade
+    const task = await Task.findById(taskid)
+    if (task) {
+        task.grade = grade
+        await task.save()
+        res.json(task)
+    }
+    else {
+        res.status(404)
+        throw new Error('Task not found')
+    }
+
+})
+
 // const addTask = asyncHandler(async (req, res) => {
 //     const Instructorid = '635a591011ecdc081ce890f7'
 
@@ -82,4 +98,4 @@ const addTask = asyncHandler(async(req,res) =>{
 });
 
 
-module.exports = { addTask}
+module.exports = { addTask, addGrade}
