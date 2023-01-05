@@ -47,20 +47,18 @@ const HomeNavBar = () => {
                             </a>
                       
            
-                <li onClick={()=>handleHome()}><a onClick={()=>handleHome()} style= {{color: "black", left: "400px", background:"white"}} >Home</a></li>
+                <li onClick={()=>handleHome()}><a onClick={()=>handleHome()} style= {{color: "black", background:"white"}} >Home</a></li>
                 <CountryGuest />
                 <li></li>
+                <MostPopular/>
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
                 <li></li>
                 <li>
-                <button onClick={()=>handlePopularClick()}>
-            <img src="https://cdn-icons-png.flaticon.com/512/1946/1946432.png" alt="avatar"
-                     className="rounded-circle img-fluid" style={{width: "25px", height: "25px", float: "left", left: "400px", marginTop:"17px"}}/>
-            </button>
-            <label style={{color:"maroon", marginLeft:"10px", marginBottom:"50px"}}>Courses</label>     
+                
+            {/* <label style={{color:"maroon", marginLeft:"10px", marginBottom:"50px"}}>Courses</label>      */}
             </li>           
                 <li><a href="/Logme"  style= {{color: "black", left: "15px"}}>Log in</a></li>
                 <li><a href="/Signup"  style= {{color: "black", left: "15px"}}>Sign up</a></li>

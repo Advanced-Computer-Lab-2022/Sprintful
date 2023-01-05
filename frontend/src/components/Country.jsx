@@ -5,7 +5,7 @@ import axios from 'axios';
 const Country = () => {
 
     return (
-        <li><a href=""  style= {{color: "black",  left: "300px",  fontFamily: "Times New Roman"}}>Country</a></li>
+        <li><a href=""  style= {{color: "black",  fontFamily: "Times New Roman"}}>Country</a></li>
     )
 }
 
