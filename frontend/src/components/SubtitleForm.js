@@ -169,7 +169,7 @@ console.log(subtitleid)
                   <br/>
 
 
-              <label>Content: </label>
+              <label  style={{color: "black", fontFamily: "Times New Roman"}}>Content: </label>
                <textarea style = {{ //.create input, .create textarea, .create select
                     padding: "6px 10px",
                     margin: "10px 0",

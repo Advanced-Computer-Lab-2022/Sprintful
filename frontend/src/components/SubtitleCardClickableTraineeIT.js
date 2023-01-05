@@ -12,11 +12,11 @@ export default function  SubtitleCardClickableTraineeIT({subtitle:{_id,title ,to
         <StyleCard>
             <div >
              <Link to={`/api/subtitles/getSubtitle/${_id}/ITE/${traineeid}/${courseid}`}> 
-            <h5 >{title}</h5>
+            <h5 style={{color: "black", fontFamily: "Times New Roman", fontSize: "12px", fontWeight: "bold"}}>{title}</h5>
              </Link> 
-            <h6>total hours :{totalHours}</h6>
+            <h6 style={{color: "black", fontFamily: "Times New Roman", fontSize: "12px", fontWeight: "bold"}}>Total Hours :{totalHours}</h6>
             <br></br>
-            <h6>Exercises:</h6>
+            <h6 style={{color: "black", fontFamily: "Times New Roman", fontSize: "12px", fontWeight: "bold"}}>Exercises:</h6>
             {tasks.map((task)=>(
                     
                         <div key={task._id}>
