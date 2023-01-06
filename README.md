@@ -662,7 +662,7 @@ The following is a set of guidelines for contributing to Sprintful.
 
  ### How Can I Contribute?
 
-   - Reporting Bugs or Suggesting Enhancements via via 'sprintful.team@gmail.com' 
+   - Reporting Bugs or Suggesting Enhancements via 'sprintful.team@gmail.com' 
    - Pull Requests on GitHub
     
 
