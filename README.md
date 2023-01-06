@@ -203,6 +203,51 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 
 ## Tests
 [This is the section where you mention all the different tests that can be performed with code examples]
+1. Get instructor profile
+![image](https://user-images.githubusercontent.com/95309665/211105156-5fd934f7-21c4-42a7-832c-578b49d23aff.png)
+
+2. Adding new instructor
+![image](https://user-images.githubusercontent.com/95309665/211105248-057bf175-a485-4901-bbad-2d42887a8794.png)
+
+3. Adding review to instructor
+![image](https://user-images.githubusercontent.com/95309665/211105338-3450d577-1a58-4052-bc92-822f303cf64d.png)
+
+4. Instructor login
+![image](https://user-images.githubusercontent.com/95309665/211105405-6abf583d-0480-482f-803c-265fdc68eae9.png)
+
+5. Instructor log in with wrong password
+![image](https://user-images.githubusercontent.com/95309665/211105537-a8dc859a-2f43-46c0-bee1-2237cc8e5421.png)
+
+6. Instructor logout
+![image](https://user-images.githubusercontent.com/95309665/211105604-086ccc6b-6b25-4666-874c-0f02b14ad87d.png)
+
+7. Instructor viewing his/her ratings/reviews
+![image](https://user-images.githubusercontent.com/95309665/211105746-75bab155-6f30-4db7-b77c-b8d8dd367aa5.png)
+
+8. get amount owned for instrutor
+![image](https://user-images.githubusercontent.com/95309665/211105854-23a8f1af-83f9-461a-b471-21942596646b.png)
+
+9. Instructor change password with wrong data in body
+![image](https://user-images.githubusercontent.com/95309665/211105939-43db580c-1172-49ac-975c-f215e138f1e3.png)
+
+10. Instructor change password with wrong current password
+![image](https://user-images.githubusercontent.com/95309665/211106014-522236a2-a05e-43b5-8e7b-c8626aed56d9.png)
+
+11. Adding grade for an Exam/Exercise
+![image](https://user-images.githubusercontent.com/95309665/211106094-1af4d074-7650-4e1c-9640-9ad4583992c3.png)
+
+12. Adding a new exam/exercise for course/subtitle
+![image](https://user-images.githubusercontent.com/95309665/211106216-0c59d644-bfa0-4c83-adf7-213deb21338d.png)
+
+13. Adding new subtitle
+![image](https://user-images.githubusercontent.com/95309665/211106265-2a90b0d1-e4e5-4797-a39d-cbd41974ab33.png)
+
+14. Adding video for a subtitle
+![image](https://user-images.githubusercontent.com/95309665/211106422-a24eb461-ed91-4b88-b0b8-7c58e1357c15.png)
+
+15. Get Questions for a task
+![image](https://user-images.githubusercontent.com/95309665/211106508-a7bec650-fa75-4bfd-8351-7766ebc5a97f.png)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
