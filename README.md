@@ -637,7 +637,7 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 40. Testing Trainee reviews a course ![traineeReviewCourse](https://user-images.githubusercontent.com/83478991/211106410-34d612c7-1d2f-4581-a7ff-3a4299280434.PNG)
 41. Testing User adds a followup ![userAddsFollowup](https://user-images.githubusercontent.com/83478991/211106418-12efcf3e-80f1-4733-be7a-280387193e54.PNG)
 42. Testing User adds a report ![userAddsReport](https://user-images.githubusercontent.com/83478991/211106430-b19fe095-59c4-489f-a882-682dad02060e.PNG)
-43. Testing User gets all of their reports ![userGetsHisReports](https://user-images.githubusercontent.com/83478991/211106439-49281da4-b2d8-4958-9867-df7b4bf8d19a.PNG)
+43. Testing Admin gets all of the reports ![userGetsHisReports](https://user-images.githubusercontent.com/83478991/211106439-49281da4-b2d8-4958-9867-df7b4bf8d19a.PNG)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
