@@ -565,7 +565,6 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Tests
-[This is the section where you mention all the different tests that can be performed with code examples]
 1. Get instructor profile
 ![image](https://user-images.githubusercontent.com/95309665/211105156-5fd934f7-21c4-42a7-832c-578b49d23aff.png)
 
