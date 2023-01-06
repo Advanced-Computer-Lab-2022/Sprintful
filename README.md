@@ -54,6 +54,8 @@ assing them to vars for consistency with other vars.
 ![Home Page](https://user-images.githubusercontent.com/67105668/211094928-78cadfd7-fae1-4728-9d6c-59e06503d443.jpeg)
 ### Search Results
 ![search](https://user-images.githubusercontent.com/67105668/211098959-2e12ecd7-56e7-4bc5-8bc0-0b677ca24877.jpeg)
+### Admin Dashboard
+![admin hom](https://user-images.githubusercontent.com/67105668/211105572-f4f09b3d-3862-41b3-ba09-5336d22afb27.jpeg)
 ### Instructor Profile
 ![batates](https://user-images.githubusercontent.com/67105668/211095131-344b8e60-f54d-4a9a-a9f4-ec847a0c6b92.jpeg)
 
@@ -503,6 +505,60 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
     "contract": true,
     "policy": true
  }
+  ```
+  10. **Add Course**
+   - Route `/api/courses/getSubtitles?courseId=63b6ebe785156d9053f9328f`
+   - Request Type `GET`
+   - Response Body
+  ``` 
+  [
+    {
+        "_id": "63b6ec0585156d9053f93294",
+        "title": "WEEK1",
+        "totalHours": 12,
+        "course": "63b6ebe785156d9053f9328f",
+        "content": "this is batates",
+        "tasks": [
+            "63b6ec1585156d9053f932a0"
+        ],
+        "videos": [],
+        "createdAt": "2023-01-05T15:25:57.840Z",
+        "updatedAt": "2023-01-05T15:26:13.791Z",
+        "__v": 1
+    }
+]
+  ```
+  11. **Get Subtitles**
+   - Route `/api/subtitles/63b6ec0585156d9053f93294`
+   - Request Type `GET`
+   - Response Body
+  ``` 
+  {
+    "_id": "63b6ec0585156d9053f93294",
+    "title": "WEEK1",
+    "totalHours": 12,
+    "course": "63b6ebe785156d9053f9328f",
+    "content": "this is batates",
+    "tasks": [
+        {
+            "_id": "63b6ec1585156d9053f932a0",
+            "title": "task1",
+            "questions": [
+                "63b6ec3f85156d9053f932a5",
+                "63b6ec7b85156d9053f932d6"
+            ],
+            "subtitle": "63b6ec0585156d9053f93294",
+            "grade": 0,
+            "createdAt": "2023-01-05T15:26:13.670Z",
+            "updatedAt": "2023-01-05T15:27:55.485Z",
+            "__v": 2
+        }
+    ],
+    "videos": [],
+    "createdAt": "2023-01-05T15:25:57.840Z",
+    "updatedAt": "2023-01-05T15:26:13.791Z",
+    "__v": 1
+  }
   ```
   
 
