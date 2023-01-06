@@ -50,7 +50,14 @@ assing them to vars for consistency with other vars.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Screenshots
-[visual representation of what the project is about.  Can be snapshots of the project or a video of the functioning of the project]
+### Home Page
+![Home Page](https://user-images.githubusercontent.com/67105668/211094928-78cadfd7-fae1-4728-9d6c-59e06503d443.jpeg)
+### Search Results
+![search](https://user-images.githubusercontent.com/67105668/211098959-2e12ecd7-56e7-4bc5-8bc0-0b677ca24877.jpeg)
+### Instructor Profile
+![batates](https://user-images.githubusercontent.com/67105668/211095131-344b8e60-f54d-4a9a-a9f4-ec847a0c6b92.jpeg)
+
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -89,6 +96,96 @@ const logout = async (req, res) => {
     res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
     res.status(200).json({message: "You have logged out!"})
 }
+```
+
+```jsx
+const addGrade = asyncHandler(async (req, res) => { 
+    const taskid = req.body.taskid
+    const grade = req.body.grade
+    const task = await Task.findById(taskid)
+    if (task) {
+        task.grade = grade
+        await task.save()
+        res.json(task)
+    }
+    else {
+        res.status(404)
+        throw new Error('Task not found')
+    }
+})
+```
+
+```jsx
+useEffect(() => {
+    const fetchData = async () => {
+      await axios.get(`http://localhost:5000/api/questions/getQuestions?taskid=${taskid}`)
+
+        .then((res) => {
+          console.log(res.data);
+          setQuestions(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    fetchData();
+  }, []);
+```
+
+```jsx
+   // Increment the score
+    if (isCorrect) {
+      setScore(score + 1);
+    }
+
+    if (currentQuestion + 1 < questions.length) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      setShowResults(true);
+    }
+  };
+```
+
+```jsx
+export default function MostPopular() {
+  const [courses, setCourses] = useState([])
+  const navigate = useNavigate();
+  useEffect(() => {
+    const fecthPopular = async () => {
+      await axios.get(`http://localhost:5000/api/courses/popular`).then(
+        (res) => {
+          const courses = res.data
+          if (courses) {
+            setCourses(courses)
+            console.log("courses in fetch:" + courses)
+          }
+          else
+            console.log("no courses")
+        }
+      );
+    }
+    fecthPopular()
+  }, [])
+``` 
+
+```jsx
+const addContent = asyncHandler(async(req,res)=>{
+
+    const subtitle_id = req.params.subtitleid  ;
+    const idArray = subtitle_id.split("\n")
+    const newid = idArray[0];
+    const content = req.body.content;
+   
+    const update = {content:content};
+  
+    const subtitleupdated = await Subtitle.findOneAndUpdate({_id :newid},update,{new : true});
+    if(subtitleupdated){
+    res.json(subtitleupdated);
+    }
+    else{
+      res.json({message:"This subtitle is not found"})
+    }
+})
 ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
