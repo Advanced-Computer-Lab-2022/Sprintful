@@ -71,7 +71,25 @@ You can view the full project requirements from [**here**](https://docs.google.c
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Code Examples
-[]
+```jsx
+const getCourses = asyncHandler(async (req, res) => {
+    const courses = await Course.find({})
+    if (courses) {
+        res.json(courses)
+    } else {
+        res.status(404)
+        throw new Error('Courses not found')
+    }
+})
+```
+
+```jsx
+const logout = async (req, res) => {
+    const token = generateToken ("");
+    res.cookie('jwt', token, { httpOnly: true, maxAge: 1 });
+    res.status(200).json({message: "You have logged out!"})
+}
+```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -207,7 +225,41 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## How to Use?
-[how to use your project. A step-by-step guide is best suited for this purpose. It is better to explain the steps as detailed as possible because it might be a beginner who is reading it.]
+Open http://localhost:3000 to view **the guest homepage**.
+![Guest Home Page](https://user-images.githubusercontent.com/67105668/211089660-88be5df4-600b-4733-8d5a-7c5a567fe7d5.jpeg)
+### Sign up
+![Sign up](https://user-images.githubusercontent.com/67105668/211089931-05453d3c-6782-443d-9058-8787b2205a08.jpeg)
+### Log in
+![Log in](https://user-images.githubusercontent.com/67105668/211090011-75d97eeb-e431-46b9-a2d3-4655cc2c7e23.jpeg)
+### Trainee / Instructor Home Page
+![trainee inst home page](https://user-images.githubusercontent.com/67105668/211093439-ae84a053-574e-4429-8bb5-ce1dfc3006dd.jpeg)
+#### My Courses Page
+![my courses](https://user-images.githubusercontent.com/67105668/211093728-576681ad-a4b0-4afd-a85e-765045b58275.jpeg)
+#### Course Page
+![course page](https://user-images.githubusercontent.com/67105668/211093608-64e241f7-8428-45a6-8539-4672effd4592.jpeg)
+#### Subtitle Page
+![sub](https://user-images.githubusercontent.com/67105668/211093648-3a3efca4-0713-4b55-bdfe-40e0fffb5043.jpeg)
+
+### Admin Home Page
+You can navigate to all admin functionalities through **the side nav bar** in Admin Home Page.
+![admin home page](https://user-images.githubusercontent.com/67105668/211089513-c44cc68f-2220-4f82-a1d7-7b0a6b043a94.jpeg)
+#### User's reports
+![reports](https://user-images.githubusercontent.com/67105668/211090772-e433818b-1c5e-4339-8708-419e8eda6799.jpeg)
+#### Add New Admin
+![new admin](https://user-images.githubusercontent.com/67105668/211091018-d1a26574-e2d3-4847-b6df-3a05d5966bb8.jpeg)
+#### Add New Instructor
+![NEW INSTRUC](https://user-images.githubusercontent.com/67105668/211091162-68b43547-305f-425b-8d4c-dac79fb852df.jpeg)
+#### Add New Coporate Trainee
+![coep trainee](https://user-images.githubusercontent.com/67105668/211091276-7415c01f-a007-4c90-a9bf-6cf1539dc8b0.jpeg)
+#### Admin Change Password
+![WhatsApp Image 2023-01-06 at 9 51 46 PM](https://user-images.githubusercontent.com/67105668/211091434-73696d7e-06f0-411e-a7ba-43f313a793de.jpeg)
+#### Courses Requests
+![WhatsApp Image 2023-01-06 at 9 51 43 PM](https://user-images.githubusercontent.com/67105668/211091643-a85ba032-3fe5-48ec-ae17-15aa6172877f.jpeg)
+#### Refund Requests
+![WhatsApp Image 2023-01-06 at 9 51 44 PM](https://user-images.githubusercontent.com/67105668/211091917-5b9feee8-dc14-4f01-8609-d1a83a7c63ed.jpeg)
+
+
+#### 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -232,6 +284,7 @@ The following is a set of guidelines for contributing to Sprintful.
 Useful resources and yotube channels helped us building our project:
 - https://www.youtube.com/watch?v=-0exw-9YJBo&list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm
 - https://www.youtube.com/@NetNinja
+- https://blog.loginradius.com/engineering/guest-post/nodejs-authentication-guide/
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
