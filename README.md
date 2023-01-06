@@ -610,6 +610,35 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
 15. Get Questions for a task
 ![image](https://user-images.githubusercontent.com/95309665/211106508-a7bec650-fa75-4bfd-8351-7766ebc5a97f.png)
 
+16. Testing Admin creates a Corporate Trainee ![adminAddsCorporate](https://user-images.githubusercontent.com/83478991/211105232-dd1e595b-080c-4972-8f3f-8bfecdf3d946.PNG)
+17. Testing Admin creates an admin ![adminChangeReportStatus](https://user-images.githubusercontent.com/83478991/211105933-e8a8d26a-ab49-4de2-aaa1-71667ee49344.PNG)
+18. Testing Admin view all the reports  ![adminGetsAllReports](https://user-images.githubusercontent.com/83478991/211105941-8f47d378-24d0-4a6d-be79-943f78d7319f.PNG)
+19. Testing Admin view all the access requests ![adminGetsAllRequestAccess](https://user-images.githubusercontent.com/83478991/211105954-6cb2e912-ad6d-4a5e-b0dc-192820ec5847.PNG)
+20. Testing Admin gets his profile ![adminGetsHisProfile](https://user-images.githubusercontent.com/83478991/211105982-a765a0b5-ff6e-4f63-906f-2008b738efdf.PNG)
+21. Testing Admin gets the website stats ![adminGetStats](https://user-images.githubusercontent.com/83478991/211105999-ab2e2ed0-e523-4da8-acfd-4eb83f62802f.PNG)
+22. Testing Admin grants access to a course ![adminGrantsCourseAccess](https://user-images.githubusercontent.com/83478991/211106007-9da021cf-5fd9-409d-8fb5-d84cacbd72ec.PNG)
+23. Testing Admin logs in ![adminLogsIn](https://user-images.githubusercontent.com/83478991/211106019-cdbbb331-9cf6-4612-879d-73a8f469054b.PNG)
+24. Testing Corporate Trainee changes their password ![corporateChangePassword](https://user-images.githubusercontent.com/83478991/211106096-bff7ec69-fc4f-4459-ab7c-dc2e4f7145ba.PNG)
+25. Testing Corporate Trainee changes their password (Error Handling) ![corporateChangePassword1](https://user-images.githubusercontent.com/83478991/211106114-12e72c1a-3337-4af6-9268-2a4787f8a44f.PNG)
+26. Testing Corporate Trainee view his course ![corporateChecksHisCourse](https://user-images.githubusercontent.com/83478991/211106132-da8bc225-4d80-405d-9337-4ae456ae5b8e.PNG)
+27. Testing Corporate Trainee gets their profile ![corporateGetProfile](https://user-images.githubusercontent.com/83478991/211106165-96226ba2-5685-494f-a9fc-54ea6fdff9bd.PNG)
+28. Testing Corporate Trainee gets his courses ![corporateGetsHisCourses](https://user-images.githubusercontent.com/83478991/211106171-f1cb6a3a-7758-488e-ac38-da761f598705.PNG)
+29. Testing Corporate Trainee logs out ![corporateLogsOut](https://user-images.githubusercontent.com/83478991/211106190-5273f673-19d0-4439-a9b0-a357e5212571.PNG)
+30. Testing Corporate Trainee view a single course ![getCourseById](https://user-images.githubusercontent.com/83478991/211106230-bbfa1f6c-1d16-464d-a6d3-56440052d7c6.PNG)
+31. ![getCourseSubtitles](https://user-images.githubusercontent.com/83478991/211106243-1fb0ee7f-2007-4d65-92b3-dde250cdae4f.PNG)
+32. ![getCourseSubtitles1](https://user-images.githubusercontent.com/83478991/211106293-aab40a52-f802-49c6-b7a3-2472049e04e1.PNG)
+33. ![getPopularCourses](https://user-images.githubusercontent.com/83478991/211106302-6c12283f-1d18-4f19-bdae-03bf1298a20c.PNG)
+34. ![getReportbyId](https://user-images.githubusercontent.com/83478991/211106314-4f5c6b7a-2b54-4ab0-8425-5e714ad3e090.PNG)
+35. ![individualTraineeGetsHisProfile](https://user-images.githubusercontent.com/83478991/211106340-3a821571-84c7-4a96-a1f4-7292267ecf99.PNG)
+36. ![individualTraineeViewHisWalletPNG](https://user-images.githubusercontent.com/83478991/211106356-65f8c17c-314f-4994-a88e-994cc3e430fc.PNG)
+37. ![instructorAddCourse](https://user-images.githubusercontent.com/83478991/211106366-4503de6d-1605-4468-b3ca-7b936f548698.PNG)
+38. ![instructorGetCourseReviews](https://user-images.githubusercontent.com/83478991/211106379-902c934b-bd31-49ad-af0d-bd94c56c9291.PNG)
+39. ![instructorViewHisCourses](https://user-images.githubusercontent.com/83478991/211106401-e25cf782-a76f-44d5-a549-1e32bbfd5b42.PNG)
+40. ![traineeReviewCourse](https://user-images.githubusercontent.com/83478991/211106410-34d612c7-1d2f-4581-a7ff-3a4299280434.PNG)
+41. ![userAddsFollowup](https://user-images.githubusercontent.com/83478991/211106418-12efcf3e-80f1-4733-be7a-280387193e54.PNG)
+42. ![userAddsReport](https://user-images.githubusercontent.com/83478991/211106430-b19fe095-59c4-489f-a882-682dad02060e.PNG)
+43. ![userGetsHisReports](https://user-images.githubusercontent.com/83478991/211106439-49281da4-b2d8-4958-9867-df7b4bf8d19a.PNG)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
