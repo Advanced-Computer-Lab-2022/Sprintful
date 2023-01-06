@@ -278,7 +278,7 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
   }
   ```
   
-3- **Admin Login**
+3. **Admin Login**
  - Route `/api/admin/loginAdmin`
  - Request Type `POST`
  - Request Body
@@ -313,6 +313,198 @@ Backend is divided into different routes, and each route has a set of **APIs**, 
        msg: "You have logged out!" 
     }
     ```
+5. **Get Report By ID**
+ - Route `/api/report/63a48f7cf31cb909b00acfe4`
+   - Request Type `GET`
+   - Response Body
+    ```
+   {
+    "_id": "63a87323dc654a91b0db3dfc",
+    "subject": "you",
+    "body": "me",
+    "status": "resolved",
+    "type": "Other",
+    "instructorId": "63a80e444837f02169da6da5",
+    "__v": 3,
+    "followups": [
+        "workkk",
+        "resolve it now"
+    ]
+   }
+    ```
+6. **Instructor Review Ratings**
+ - Route `/api/instructor/reviewsnratings?id=63abfeb254c7c7d8f72cc2b6`
+   - Request Type `GET`
+   - Response Body
+    ```
+    { 
+      "rating" : 141.66666666666666,
+      "allReviews":["too","",null,null,null,"rtyui","","","","","",null]
+    }
+
+    ```
+7. **Admin Add Corporate**
+ - Route `/api/admin/addCorporate/`
+ - Request Type `POST`
+ - Request Body
+ ```
+{
+    "name": "hopaa",
+    "subject": "Physics"
+}
+ ```
+- Response Body
+ ```
+{
+    "_id": "63b8886efb7ab4d53675c03d",
+    "name": "hopaa",
+    "subject": "Physics"
+}
+ ```
+8. **Instructor Edit Profile**
+   - Route `/api/instructor/editProfile?id=639a3e79453a18405648e8cb`
+   - Request Type `PUT`
+   - Request Body 
+  ``` 
+ {
+  "email": "gege@gmail.com"
+ }
+  ```
+   - Response Body
+  ``` 
+{
+    "firstName": "",
+    "lastName": "",
+    "_id": "639a3e79453a18405648e8cb",
+    "username": "Gerizmann",
+    "password": "$2a$10$QZyZ2k8ussE0ILataCuWC.jidAP7ev.aicliNPyjCDiuyqnXDeVCe",
+    "email": "gege@gmail.com",
+    "rating": 0,
+    "ratingsArray": [],
+    "courses": [
+        "6383d46a6d33730b4cfece29",
+        "6385c9f46f6bb55a030163d4",
+        "63a43a046ff5971f842dafd4",
+        "63a43a066ff5971f842dafd8",
+        "63a43a066ff5971f842dafdc",
+        "63a43a076ff5971f842dafdf",
+        "63a43a076ff5971f842dafe3",
+        "63a43a076ff5971f842dafe7",
+        "63a43a106ff5971f842dafec",
+        "63a4c60967f7793f16cdb40f",
+        "63a4c6f667f7793f16cdb413",
+        "63a4c85a67f7793f16cdb433",
+        "63a4d35d67f7793f16cdb46b",
+        "63a60fc09541bfc68a6017e2",
+        "63a623077e4f73ca2837c7d6",
+        "63a62491b59f7565817f4aef",
+        "63a629b927f2c563366f19ae",
+        "63a633427fbd245488274a4e",
+        "63a634b57fbd245488274aa7",
+        "63a637f57fbd245488274ce8",
+        "63a74edb317263b1c7f4ffef",
+        "63a8359440ab36a05ecb4069",
+        "63a85122b701bb9b6e222d0d",
+        "63a85129b701bb9b6e222d11",
+        "63b59f3f3e59ccdc64290295",
+        "63b59f433e59ccdc64290299",
+        "63b5e9e93dc6c3d7f204a018",
+        "63b609e64f918637464a0b82",
+        "63b60b49df6234929072aded",
+        "63b60f3e8646f603f75e82cd",
+        "63b6117539e56e413385997d",
+        "63b61548fc7e0737289aac17",
+        "63b62ddf027ef91946b85d16",
+        "63b6354d2a42de50479bbafd",
+        "63b65e6468c3a395507382c5",
+        "63b65fde9eadd0bff377cf71",
+        "63b665760944c339dffd2094",
+        "63b6ebe785156d9053f9328f",
+        "63b6fca9cd77a7348d0c14fa"
+    ],
+    "reviews": [],
+    "money": 0,
+    "biography": "ana batates m7amamra",
+    "createdAt": "2022-12-14T21:22:01.804Z",
+    "updatedAt": "2023-01-06T21:29:52.822Z",
+    "__v": 0,
+    "contract": true,
+    "policy": true
+}
+```
+9. **Instructor Change Password**
+   - Route `/api/instructor/changePassword?id=639a3e79453a18405648e8cb`
+   - Request Type `PUT`
+   - Request Body 
+  ``` 
+{
+    "currentPassword": "123456789",
+    "password": "1234"
+}
+  ```
+   - Response Body
+  ``` 
+{
+    "firstName": "",
+    "lastName": "",
+    "_id": "639a3e79453a18405648e8cb",
+    "username": "Gerizmann",
+    "password": "$2a$10$hdz0axlbFe3OsAZEVyBUn.I/vfHyy4rSbcVbTEcZbpX2HM7CwSpLK",
+    "email": "gege@gmail.com",
+    "rating": 0,
+    "ratingsArray": [],
+    "courses": [
+        "6383d46a6d33730b4cfece29",
+        "6385c9f46f6bb55a030163d4",
+        "63a43a046ff5971f842dafd4",
+        "63a43a066ff5971f842dafd8",
+        "63a43a066ff5971f842dafdc",
+        "63a43a076ff5971f842dafdf",
+        "63a43a076ff5971f842dafe3",
+        "63a43a076ff5971f842dafe7",
+        "63a43a106ff5971f842dafec",
+        "63a4c60967f7793f16cdb40f",
+        "63a4c6f667f7793f16cdb413",
+        "63a4c85a67f7793f16cdb433",
+        "63a4d35d67f7793f16cdb46b",
+        "63a60fc09541bfc68a6017e2",
+        "63a623077e4f73ca2837c7d6",
+        "63a62491b59f7565817f4aef",
+        "63a629b927f2c563366f19ae",
+        "63a633427fbd245488274a4e",
+        "63a634b57fbd245488274aa7",
+        "63a637f57fbd245488274ce8",
+        "63a74edb317263b1c7f4ffef",
+        "63a8359440ab36a05ecb4069",
+        "63a85122b701bb9b6e222d0d",
+        "63a85129b701bb9b6e222d11",
+        "63b59f3f3e59ccdc64290295",
+        "63b59f433e59ccdc64290299",
+        "63b5e9e93dc6c3d7f204a018",
+        "63b609e64f918637464a0b82",
+        "63b60b49df6234929072aded",
+        "63b60f3e8646f603f75e82cd",
+        "63b6117539e56e413385997d",
+        "63b61548fc7e0737289aac17",
+        "63b62ddf027ef91946b85d16",
+        "63b6354d2a42de50479bbafd",
+        "63b65e6468c3a395507382c5",
+        "63b65fde9eadd0bff377cf71",
+        "63b665760944c339dffd2094",
+        "63b6ebe785156d9053f9328f",
+        "63b6fca9cd77a7348d0c14fa"
+    ],
+    "reviews": [],
+    "money": 0,
+    "biography": "ana batates m7amamra",
+    "createdAt": "2022-12-14T21:22:01.804Z",
+    "updatedAt": "2023-01-06T21:31:51.765Z",
+    "__v": 0,
+    "contract": true,
+    "policy": true
+ }
+  ```
+  
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
