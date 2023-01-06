@@ -626,10 +626,10 @@ The following is a set of guidelines for contributing to Sprintful.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Credits
-Useful resources and yotube channels helped us building our project:
-- https://www.youtube.com/watch?v=-0exw-9YJBo&list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm
-- https://www.youtube.com/@NetNinja
-- https://blog.loginradius.com/engineering/guest-post/nodejs-authentication-guide/
+Useful resources and youtube channels helped us building our project:
+- [MERN Stack Playlist](https://www.youtube.com/watch?v=-0exw-9YJBo&list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm)
+- [Frontend Tutorials](https://www.youtube.com/@NetNinja)
+- [Authentication Guide](https://blog.loginradius.com/engineering/guest-post/nodejs-authentication-guide/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
