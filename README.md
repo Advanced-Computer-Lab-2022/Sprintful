@@ -229,7 +229,9 @@ The following is a set of guidelines for contributing to Sprintful.
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Credits
-[Mention any links/repos which helped you or inspired you to build this project. It can be a blog, another open source project, or just people who have contributed to building this project.]
+Useful resources and yotube channels helped us building our project:
+- https://www.youtube.com/watch?v=-0exw-9YJBo&list=PLillGF-RfqbbQeVSccR9PGKHzPJSWqcsm
+- https://www.youtube.com/@NetNinja
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
